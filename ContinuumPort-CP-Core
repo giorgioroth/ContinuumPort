@@ -1,0 +1,380 @@
+
+```
+ContinuumPort-CP-Core/
+├─ cp-core/
+│  ├─ schema.json
+│  ├─ examples/
+│  │   ├─ minimal.json
+│  │   ├─ full-example.json
+│  │   └─ extended-with-hints.json
+│  └─ reference/
+│     └─ validator.py
+├─ docs/
+│  ├─ SPECIFICATION.md
+│  ├─ INTEGRATION.md
+│  └─ EXAMPLES.md
+├─ assets/
+│  └─ logo.svg
+├─ LICENSE
+├─ README.md
+└─ .gitignore
+```
+
+---
+
+### 1. `README.md`
+
+````markdown
+# ContinuumPort — CP-Core v1.0
+**Hybrid Semantic Continuity Layer for Multi-Agent AI**
+
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)  
+[![Spec Version](https://img.shields.io/badge/CP--Core-v1.0-brightgreen)](cp-core/schema.json)
+
+ContinuumPort (CP-Core) is an open-source semantic portability layer designed to transfer non-sensitive conversational context across sessions, models, platforms, and devices — without storing personal data and without requiring accounts, cloud services, or centralized infrastructure.
+
+## Overview
+
+CP-Core defines a minimal, privacy-preserving container format that captures the high-level intent, summary, style, and task progression of a multi-session AI interaction. It enables continuity between different LLMs and agents without relying on proprietary memory systems or user tracking.
+
+The container is human-readable, machine-verifiable, cryptographically protected, and interoperable across any AI system that adopts the specification.
+
+## Why CP-Core?
+
+- Preserves user intent, style, and task state across sessions and agents  
+- 100% privacy-by-design (zero PII, zero tokens, zero tracking)  
+- Compatible with any LLM / agent / application  
+- Human-readable format, machine-verifiable schema  
+- Stable versioned specification  
+- Apache 2.0 for code, CC-BY-4.0 for documentation  
+
+## Goals
+
+1. Enable semantic continuity without storing personal data or requiring identity.  
+2. Standardize cross-agent context portability in a simple JSON structure.  
+3. Ensure deterministic validation via canonicalization + SHA-256 checksum.  
+4. Offer a stable, long-lived reference schema for agent interoperability.  
+5. Allow forward-compatible extensions through a permissive `ext` namespace.
+
+## Quick Start
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/username/ContinuumPort-CP-Core.git
+cd ContinuumPort-CP-Core
+
+# 2. Validate an existing CP-Core container
+python cp-core/reference/validator.py path/to/container.json
+
+# 3. Explore examples
+cat cp-core/examples/minimal.json
+````
+
+Full documentation:
+
+* `/docs/SPECIFICATION.md`
+* `/docs/INTEGRATION.md`
+* `/docs/EXAMPLES.md`
+
+## Contributing
+
+Pull Requests are welcome. For significant schema modifications, please open an Issue first.
+
+## Author
+
+**Giorgio Roth • 2025**
+
+Licensed under **Apache License 2.0** (code)
+Documentation licensed under **Creative Commons BY 4.0**
+
+````
+
+---
+
+### 2. `LICENSE`
+
+```text
+Copyright 2025 Giorgio Roth
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+````
+
+---
+
+### 3. `cp-core/schema.json`
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://continuumport.org/schema/cp-core-v1.0.json",
+  "title": "ContinuumPort CP-Core v1.0",
+  "description": "Portable semantic continuity container — strictly non-sensitive data only.",
+  "type": "object",
+  "required": [
+    "cp_core",
+    "session_intent",
+    "conversation_summary",
+    "user_style_profile",
+    "task_state",
+    "agent_guidance",
+    "checksum"
+  ],
+  "properties": {
+    "cp_core": {"const":"1.0","description":"Version of the CP-Core specification"},
+    "session_intent":{"type":"string","maxLength":512,"description":"High-level purpose of the ongoing multi-session activity"},
+    "conversation_summary":{"type":"string","maxLength":4000,"description":"Condensed semantic history (non-sensitive)"},
+    "user_style_profile":{
+      "type":"object",
+      "required":["tone","formality"],
+      "properties":{
+        "tone":{"type":"string","maxLength":256},
+        "formality":{"type":"string","enum":["very-low","low","low-to-medium","medium","medium-to-high","high","very-high"],"default":"medium"},
+        "preferences":{"type":"string","maxLength":1024}
+      },
+      "additionalProperties": false
+    },
+    "task_state":{
+      "type":"object",
+      "required":["current_task","progress"],
+      "properties":{
+        "current_task":{"type":"string","maxLength":512},
+        "progress":{"type":"string","maxLength":1024},
+        "next_required_actions":{"type":"string","maxLength":1024}
+      },
+      "additionalProperties": false
+    },
+    "agent_guidance":{
+      "type":"object",
+      "required":["do","avoid"],
+      "properties":{
+        "do":{"type":"string","maxLength":1024},
+        "avoid":{"type":"string","maxLength":1024}
+      },
+      "additionalProperties": false
+    },
+    "checksum":{"type":"string","pattern":"^[a-f0-9]{64}$","description":"SHA-256 hex digest of the canonical JSON (excluding cp_core & checksum fields)"},
+    "ext":{"type":"object","description":"Optional extension namespace (implementation-specific, ignored during core validation)","additionalProperties": true}
+  },
+  "additionalProperties": false
+}
+```
+
+---
+
+### 4. `cp-core/reference/validator.py`
+
+```python
+#!/usr/bin/env python3
+import json
+import sys
+import hashlib
+from pathlib import Path
+
+def compute_checksum(obj: dict) -> str:
+    fields = [
+        "session_intent",
+        "conversation_summary",
+        "user_style_profile",
+        "task_state",
+        "agent_guidance"
+    ]
+    data = {k: obj.get(k) for k in fields if k in obj}
+    # Ensure ext does not affect core checksum
+    if "ext" in data:
+        data.pop("ext", None)
+    canonical = json.dumps(
+        data,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(',', ':')
+    )
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+def validate_file(path: Path):
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"JSON error: {e}")
+        return False
+
+    if data.get("cp_core") != "1.0":
+        print("Invalid or missing cp_core version")
+        return False
+
+    expected = compute_checksum(data)
+    if data.get("checksum") != expected:
+        print(
+            f"Checksum mismatch!\n"
+            f"  expected: {expected}\n"
+            f"  got:      {data.get('checksum','<missing>')}"
+        )
+        return False
+
+    print(f"Valid CP-Core v1.0 container\nChecksum OK: {expected}")
+    return True
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python validator.py <path-to-container.json>")
+        sys.exit(1)
+
+    path = Path(sys.argv[1])
+    if not path.exists():
+        print("File not found")
+        sys.exit(1)
+
+    validate_file(path) or sys.exit(1)
+```
+
+---
+
+### 5. `cp-core/examples/minimal.json`
+
+```json
+{
+  "cp_core":"1.0",
+  "session_intent":"Develop an open semantic portability layer for AI agents.",
+  "conversation_summary":"User is creating the ContinuumPort specification and reference implementation.",
+  "user_style_profile":{
+    "tone":"encouraging",
+    "formality":"low-to-medium",
+    "preferences":"future-oriented, concise, empathetic"
+  },
+  "task_state":{
+    "current_task":"Finalize public v1.0 release",
+    "progress":"Specification and validator completed",
+    "next_required_actions":"Publish on GitHub, write integration guides"
+  },
+  "agent_guidance":{
+    "do":"Maintain continuity, encourage progress, stay technical but friendly",
+    "avoid":"Never ask for or store personal data"
+  },
+  "checksum":"0000000000000000000000000000000000000000000000000000000000000000"
+}
+```
+
+---
+
+### 6. `docs/SPECIFICATION.md`
+
+```markdown
+# CP-Core Specification v1.0
+
+## Purpose
+CP-Core is a minimal JSON container format that carries non-sensitive semantic information to enable continuity across AI sessions, models, and agents.
+
+## Core fields
+- cp_core: string, constant "1.0"
+- session_intent: string, max 512
+- conversation_summary: string, max 4000
+- user_style_profile: object { tone, formality, preferences }
+- task_state: object { current_task, progress, next_required_actions }
+- agent_guidance: object { do, avoid }
+- checksum: string, SHA-256 hex of canonicalized core fields (excluding cp_core and checksum)
+- ext: optional object for extensions (ignored by validator)
+
+## Canonicalization rules
+1. Select only the core fields used in checksum: session_intent, conversation_summary, user_style_profile, task_state, agent_guidance.
+2. Remove any `ext` content before canonicalization.
+3. Serialize to UTF-8 JSON with `ensure_ascii=false`, `sort_keys=true`, separators `(',', ':')`.
+4. Compute SHA-256 over the resulting bytes and encode as lowercase hex.
+
+## Validation
+- Implementations MUST check cp_core == "1.0".
+- Implementations MUST verify checksum matches computed value.
+- Implementations MUST reject containers containing PII or personal identifiers (usernames, emails, phone numbers, government IDs).
+
+## Privacy model
+- CP-Core is explicitly **non-sensitive**. It is the implementer's responsibility to ensure no personal data is included.
+- Fields are text-limited to discourage dumping long transcripts or data.
+
+## Extensibility
+- `ext` may contain implementation-specific metadata and MUST be ignored by reference validators.
+- Versioning must use the `cp_core` field for forward/backward compatibility.
+
+## Example
+See `/cp-core/examples/minimal.json` for a sample container.
+```
+
+---
+
+### 7. `docs/INTEGRATION.md`
+
+```markdown
+# Integration Guide
+
+## Overview
+This guide shows how to add CP-Core support to your agent or service.
+
+## Inbound (ingest)
+1. Receive a CP-Core JSON container from client or agent.
+2. Validate structure and checksum (use validator.py).
+3. Map `session_intent` and `task_state` into your session memory model.
+4. Optionally read `user_style_profile` to adapt tone and formality.
+
+## Outbound (export)
+1. Collect non-sensitive state from the session.
+2. Populate CP-Core fields (respecting max lengths).
+3. Generate canonical JSON and compute checksum.
+4. Provide container to downstream agent or allow client to download.
+
+## Best practices
+- Never include PII or secrets (e.g., API keys, proprietary model weights, internal endpoints).
+- Log validation failures for debugging but do not log container contents containing user data.
+- Use `ext` for implementation metadata, not for core continuity data.
+
+## CI Integration
+- Add a GitHub Actions workflow that runs `python cp-core/reference/validator.py` against examples to ensure checksum and format remain valid on changes.
+```
+
+---
+
+### 8. `docs/EXAMPLES.md`
+
+```markdown
+# Examples and Use Cases
+
+## Simple handoff
+User works with Agent A on a draft. Agent A exports a CP-Core container and shares it with Agent B. Agent B ingests, validates, and resumes work.
+
+## Multi-device continuity
+User starts a task on a mobile app, exports CP-Core to local storage, and imports it later in a desktop app.
+
+## Agent swap
+When switching LLM providers, CP-Core provides enough semantic context (intent, style, progress) for the new agent to continue with minimal friction.
+```
+
+---
+
+### 9. `assets/logo.svg`
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="80" fill="#4CAF50"/>
+  <text x="50%" y="50%" font-size="40" text-anchor="middle" fill="#fff" dy=".3em">CP</text>
+</svg>
+```
+
+---
+
+### 10. `.gitignore`
+
+```
+*.pyc
+__pycache__/
+.DS_Store
+.env
+```
+
+---
