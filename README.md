@@ -32,7 +32,7 @@ python cp-core/reference/validator.py validate path/to/container.json
 cat cp-core/examples/minimal.json
 Documentation
 Full specification: docs/SPECIFICATION.md
-
+ContinuumPort CP-Core is designed to be engine-agnostic and fully interoperable with both open-source and proprietary AI systems. It can be integrated into any multi-agent architecture that implements the CP-Core specification, including external or private engines such as Regen Engine, without exposing internal logic, code, or proprietary algorithms.
 Integration guide: docs/INTEGRATION.md
 
 Examples: docs/EXAMPLES.md
