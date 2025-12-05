@@ -1,20 +1,25 @@
 # ContinuumPort — CP-Core v1.0
 **Hybrid Semantic Continuity Layer for Multi-Agent AI**
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)  
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Spec Version](https://img.shields.io/badge/CP--Core-v1.0-brightgreen)](cp-core/schema.json)
+[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 
-ContinuumPort (CP-Core) is an open-source semantic portability layer designed to transfer **non-sensitive conversational context** across sessions, models, platforms, and devices — without storing personal data or relying on central servers or accounts.
+**ContinuumPort: semantic continuity made simple — powered by Regen Engine**
 
 ---
 
-## Why CP-Core?
+## Overview
+ContinuumPort (CP-Core) is an open-source semantic portability layer designed to transfer **non-sensitive conversational context** between sessions, models, platforms, and devices — without storing personal data and without relying on central servers.
 
-- Preserves user intent, style, and task state  
-- 100% privacy-by-design (zero PII, zero tokens, zero tracking)  
-- Works across any LLM / agent / application implementing the specification  
-- Human-readable and machine-validated format  
-- Licensed under **Apache 2.0 (code)** + **CC-BY-4.0 (documentation)**  
+---
+
+## Key Features
+- Maintains user intent, style, and task state
+- 100% privacy-by-design (zero PII, zero tokens, zero tracking)
+- Works across any LLM / agent / app implementing the spec
+- Human-readable + machine-verifiable format
+- Licensed under Apache 2.0 (code) + CC-BY-4.0 (documentation)
 
 ---
 
@@ -22,35 +27,37 @@ ContinuumPort (CP-Core) is an open-source semantic portability layer designed to
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/giorgioroth/ContinuumPort.git
-cd ContinuumPort
+git clone https://github.com/username/ContinuumPort-CP-Core.git
+cd ContinuumPort-CP-Core
 
-# 2. Validate an existing container
+# 2. Validate an existing CP-Core container
 python cp-core/reference/validator.py validate path/to/container.json
 
-# 3. View examples
+# 3. Explore examples
 cat cp-core/examples/minimal.json
-## Documentation
+For full documentation and integration guides:
 
-Full specification: docs/SPECIFICATION.md
+Specification: /docs/SPECIFICATION.md
 
-Integration guide: docs/INTEGRATION.md
+Integration: /docs/INTEGRATION.md
 
-Examples: docs/EXAMPLES.md
+Examples
+The repository includes example CP-Core containers for testing and reference:
 
-## Ecosystem Compatibility
+minimal.json – simplest valid container
 
-ContinuumPort CP-Core is designed to be engine-agnostic and fully interoperable with both open-source and proprietary AI systems. It can be integrated into any multi-agent architecture that implements the CP-Core specification, including external or private engines such as Regen Engine, without exposing internal logic, code, or proprietary algorithms.
+full-example.json – fully populated example
 
-## Contributing
+extended-with-hints.json – includes memory hints and agent guidance
 
-Any PR is welcome! For major schema changes, please open an Issue first.
+Contributing
+Any PR is welcome!
 
-## Author & License
+For major schema changes, open an Issue first.
 
+Keep contributions consistent with privacy-by-design principles.
+
+Author & License
 Author: Giorgio Roth • 2025
-
-Code: Apache License 2.0 (LICENSE
-)
-
+License: Apache License 2.0 (code) + Creative Commons BY 4.0 (documentation)
 Documentation: Creative Commons BY 4.0
