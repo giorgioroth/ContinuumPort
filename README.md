@@ -1,7 +1,7 @@
 # ContinuumPort — CP-Core v1.0
 **Hybrid Semantic Continuity Layer for Multi-Agent AI**
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)  
 [![Spec Version](https://img.shields.io/badge/CP--Core-v1.0-brightgreen)](cp-core/schema.json)
 
 ContinuumPort (CP-Core) is an open-source semantic portability layer designed to transfer **non-sensitive conversational context** across sessions, models, platforms, and devices — without storing personal data or relying on central servers or accounts.
@@ -10,11 +10,11 @@ ContinuumPort (CP-Core) is an open-source semantic portability layer designed to
 
 ## Why CP-Core?
 
-- Preserves user intent, style, and task state
-- 100% privacy-by-design (zero PII, zero tokens, zero tracking)
-- Works across any LLM / agent / application implementing the specification
-- Human-readable and machine-validated format
-- Licensed under **Apache 2.0 (code)** + **CC-BY-4.0 (documentation)**
+- Preserves user intent, style, and task state  
+- 100% privacy-by-design (zero PII, zero tokens, zero tracking)  
+- Works across any LLM / agent / application implementing the specification  
+- Human-readable and machine-validated format  
+- Licensed under **Apache 2.0 (code)** + **CC-BY-4.0 (documentation)**  
 
 ---
 
@@ -30,19 +30,27 @@ python cp-core/reference/validator.py validate path/to/container.json
 
 # 3. View examples
 cat cp-core/examples/minimal.json
-Documentation
+## Documentation
+
 Full specification: docs/SPECIFICATION.md
-ContinuumPort CP-Core is designed to be engine-agnostic and fully interoperable with both open-source and proprietary AI systems. It can be integrated into any multi-agent architecture that implements the CP-Core specification, including external or private engines such as Regen Engine, without exposing internal logic, code, or proprietary algorithms.
+
 Integration guide: docs/INTEGRATION.md
 
 Examples: docs/EXAMPLES.md
 
-Contributing
+## Ecosystem Compatibility
+
+ContinuumPort CP-Core is designed to be engine-agnostic and fully interoperable with both open-source and proprietary AI systems. It can be integrated into any multi-agent architecture that implements the CP-Core specification, including external or private engines such as Regen Engine, without exposing internal logic, code, or proprietary algorithms.
+
+## Contributing
+
 Any PR is welcome! For major schema changes, please open an Issue first.
 
-Author & License
+## Author & License
+
 Author: Giorgio Roth • 2025
 
-Code: Apache License 2.0 (LICENSE)
+Code: Apache License 2.0 (LICENSE
+)
 
 Documentation: Creative Commons BY 4.0
