@@ -23,6 +23,11 @@ ContinuumPort (CP-Core) is an open-source semantic portability layer designed to
 
 ---
 
+## Security & Engine Disclaimer
+
+ContinuumPort provides the CP-Core specification, examples, and validation tools for semantic portability. The underlying **Regen Engine** is proprietary and **not included** in this repository. This repository does **not** expose any secret code or functionality of Regen Engine — it only demonstrates the structure and usage of CP-Core containers. Users can safely explore, test, and integrate CP-Core without access to Regen Engine internals.
+
+
 ## Quick Start
 
 ```bash
