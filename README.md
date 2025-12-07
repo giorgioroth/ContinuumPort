@@ -62,6 +62,12 @@ For major schema changes, open an Issue first.
 
 Keep contributions consistent with privacy-by-design principles.
 
+## Early Adopters
+
+First 20 spots opening soon for private/local AI builders.
+
+Watch this space • DM @continuumport
+
 Author & License
 Author: Giorgio Roth • 2025
 License: Apache License 2.0 (code) + Creative Commons BY 4.0 (documentation)
