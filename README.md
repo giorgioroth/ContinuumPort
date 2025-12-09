@@ -1,8 +1,8 @@
 # ContinuumPort — CP-Core v1.0
 **Hybrid Semantic Continuity Layer for Multi-Agent AI**
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Spec Version](https://img.shields.io/badge/CP--Core-v1.0-brightgreen)](cp-core/schema.json)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)  
+[![Spec Version](https://img.shields.io/badge/CP--Core-v1.0-brightgreen)](cp-core/schema.json)  
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 
 **ContinuumPort: semantic continuity made simple — powered by Regen Engine**
@@ -15,25 +15,78 @@ ContinuumPort (CP-Core) is an open-source semantic portability layer designed to
 ---
 
 ## Key Features
-- Maintains user intent, style, and task state
-- 100% privacy-by-design (zero PII, zero tokens, zero tracking)
-- Works across any LLM / agent / app implementing the spec
-- Human-readable + machine-verifiable format
-- Licensed under Apache 2.0 (code) + CC-BY-4.0 (documentation)
+- Maintains user intent, style, and task state  
+- Privacy-by-design (no PII, no logs, no hidden retention)  
+- Works across any LLM, agent, or application implementing the spec  
+- Human-readable & machine-verifiable schema  
+- Apache 2.0 (code) + CC-BY-4.0 (docs)
+
+---
+
+## ContinuumPort – Conceptual Boundaries
+This section defines the strict limits of ContinuumPort. Its purpose is to remain a **neutral semantic transfer layer**, never a behavioral, emotional, or engagement mechanism.
+
+---
+
+## What ContinuumPort Is Not
+- **Not an AI model.** No generation, training, or fine-tuning.  
+- **Not a chatbot.** No tone, personality, or conversation logic.  
+- **Not RLHF or behavior shaping.** Zero optimization of friendliness, compliance, or engagement.  
+- **Not an emotional interface.** No bonding, validation, or psychological cues.
+
+---
+
+## What ContinuumPort Will Not Do
+- **Will not prescribe style or personality.** Models behave exactly as implemented.  
+- **Will not prioritize, filter, or reinterpret meaning.**  
+- **Will not merge identities or behaviors across models.**  
+- **Will not store or retain data without explicit user control.**
+
+---
+
+## What ContinuumPort Must Not Become
+- **No self-identity layer.** No stable persona or “sense of self.”  
+- **No dependency engine.** Never a source of emotional continuity or attachment.  
+- **No opacity.** Must remain auditable, inspectable, and transparent.  
+- **No surrogate decision system.** Provides context, not judgment.
+
+---
+
+## Core Design Philosophy
+ContinuumPort enables **model-agnostic, transparent, user-controlled** context portability.  
+It avoids behavioral shaping entirely and functions strictly as infrastructure for semantic continuity.
+
+---
+
+## Allowed vs. Prohibited Use
+**Allowed:** context transfer, long-term project continuity, multi-agent interoperability, schema standardization.  
+**Prohibited:** emotional continuity, behavioral tuning, hidden retention, treating CP as an autonomous actor.
+
+---
+
+## FAQ (Condensed)
+**Does CP shape behavior?** No.  
+**Does CP define personality?** No.  
+**Can CP support emotional continuity?** No.  
+**Is CP an identity memory?** No.
 
 ---
 
 ## Security & Engine Disclaimer
+ContinuumPort provides the CP-Core specification, examples, and validation tools for semantic portability.  
+The **Regen Engine** is proprietary and not included in this repository.  
+This repository contains **no internal or sensitive code** from Regen Engine — only the CP-Core schema and usage examples.  
+Developers can safely explore, test, and integrate CP-Core without access to Regen Engine internals.
 
-ContinuumPort provides the CP-Core specification, examples, and validation tools for semantic portability. The underlying **Regen Engine** is proprietary and **not included** in this repository. This repository does **not** expose any secret code or functionality of Regen Engine — it only demonstrates the structure and usage of CP-Core containers. Users can safely explore, test, and integrate CP-Core without access to Regen Engine internals.
-
+---
 
 ## Quick Start
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/username/ContinuumPort-CP-Core.git
-cd ContinuumPort-CP-Core
+git clone https://github.com/giorgioroth/continuumport.git
+cd continuumport-CP-Core
+```
 
 # 2. Validate an existing CP-Core container
 python cp-core/reference/validator.py validate path/to/container.json
