@@ -1,0 +1,41 @@
+{
+  "cp_version": "1.0",
+  "timestamp": "2025-12-09T15:00:00Z",
+  "source": "example_agent",
+  "context": {
+    "tasks": [
+      {
+        "id": "task-001",
+        "description": "Summarize user notes",
+        "status": "pending",
+        "metadata": {
+          "priority": "normal"
+        }
+      },
+      {
+        "id": "task-002",
+        "description": "Translate last session summary to English",
+        "status": "pending",
+        "metadata": {
+          "priority": "low"
+        }
+      }
+    ],
+    "conversation": [
+      {
+        "role": "user",
+        "text": "Please summarize my notes from the last session."
+      },
+      {
+        "role": "assistant",
+        "text": "Sure, I can summarize your notes once you provide them."
+      },
+      {
+        "role": "user",
+        "text": "Also, translate it to English."
+      }
+    ]
+  },
+  "schema_version": "v1.0",
+  "tags": ["example", "demo", "minimal"]
+}
