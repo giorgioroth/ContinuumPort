@@ -119,7 +119,7 @@ Keep contributions consistent with privacy-by-design principles.
 
 First 20 spots opening soon for private/local AI builders.
 
-Watch this space • DM @continuumport
+Watch this space • DM DM [@continuumport](https://x.com/continuumport)
 
 Author & License
 Author: Giorgio Roth • 2025
