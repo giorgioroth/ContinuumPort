@@ -150,7 +150,7 @@ Follow updates or reach out via
 
 ## Author & License
 
-Author: **Giorgio Roth**
+Author: **Giorgio Roth** **(Gh. Rotaru)**
 © 2025 — Released under the **MIT License**
 
 ```
