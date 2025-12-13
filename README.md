@@ -1,25 +1,37 @@
 # ContinuumPort — CP-Core v1.0
 **Hybrid Semantic Continuity Layer for Multi-Agent AI**
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)  
-[![Spec Version](https://img.shields.io/badge/CP--Core-v1.0-brightgreen)](cp-core/schema.json)  
+## Overview
+
+ContinuumPort (CP-Core) is an open, specification-driven semantic portability layer that enables the transfer of **non-sensitive conversational context** across sessions, models, platforms, and devices.
+
+It is designed to be:
+- privacy-first (zero PII by design),
+- model-agnostic,
+- user-owned,
+- independent of any central service.
+
+ContinuumPort intentionally separates **open semantic state transport** (CP-Core) from **high-fidelity context regeneration** (Regen Engine), enabling both open interoperability and commercially viable performance.
+
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Spec Version](https://img.shields.io/badge/CP--Core-v1.0-brightgreen)](cp-core/schema.json)
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 
-**ContinuumPort: semantic continuity made simple — powered by Regen Engine**
-
----
-
-## Overview
-ContinuumPort (CP-Core) is an open-source semantic portability layer designed to transfer **non-sensitive conversational context** between sessions, models, platforms, and devices — without storing personal data and without relying on central servers.
+**ContinuumPort: semantic continuity made simple.**  
+*CP-Core is open. Regen Engine is proprietary.*
 
 ---
 
 ## Key Features
-- Maintains user intent, style, and task state  
+
+- Portable semantic context across models, agents, and sessions  
+- Preservation of user intent, task state, and conversational direction  
 - Privacy-by-design (no PII, no logs, no hidden retention)  
-- Works across any LLM, agent, or application implementing the spec  
-- Human-readable & machine-verifiable schema  
-- Apache 2.0 (code) + CC-BY-4.0 (docs)
+- Fully model-agnostic and implementation-independent  
+- Human-readable, machine-verifiable open schema  
+- MIT licensed open standard (CP-Core)
+
+
 
 ---
 
