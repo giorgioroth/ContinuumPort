@@ -1,5 +1,3 @@
----
-
 # **The Stack Problem: Why ContinuumPort Isn't Building Altered Carbon's Memory System**
 
 *A manifesto on semantic continuity, ethical boundaries, and why some science fiction warnings should stay warnings*
