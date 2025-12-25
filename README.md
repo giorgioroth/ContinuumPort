@@ -1,168 +1,188 @@
-> **Licensing notice**  
-> ContinuumPort **CP-Core** is released under the **MIT License**.  
-> The **Regen Engine** is proprietary and governed by  
-> [`LICENSE_REGEN.md`](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE_REGEN.md).
+# ContinuumPort
 
+**Semantic continuity for AI systems — without lock-in, without identity persistence.**
 
-# ContinuumPort — CP-Core v1.0  
-**Hybrid Semantic Continuity Layer for Multi-Agent AI**
-
-## Overview
-
-ContinuumPort (CP-Core) is an open, specification-driven semantic portability layer
-that enables the transfer of **non-sensitive conversational context** across
-sessions, models, platforms, and devices.
-
-It is designed to be:
-- privacy-first (zero PII by design),
-- model-agnostic,
-- user-owned,
-- independent of any central service.
-
-ContinuumPort intentionally separates **open semantic state transport** (CP-Core)
-from **high-fidelity context regeneration** (Regen Engine), enabling both open
-interoperability and commercially deployable implementations.
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Spec Status](https://img.shields.io/badge/Spec-Draft-yellow)](spec/specification.md)
 
 ---
 
-## Licensing
+## What is ContinuumPort?
 
-**ContinuumPort-Core (CP-Core)** — including the specification, schemas, and
-reference materials — is released under the **MIT License**.
+ContinuumPort is an **open protocol** for portable semantic continuity across AI systems.
 
-The **ContinuumPort-Regen Engine** is **not included** in this repository.
-It is proprietary software and is distributed under separate commercial
-licensing terms as defined in [`LICENSE_REGEN.md`](LICENSE_REGEN.md).
+It enables transfer of:
+- user intent
+- task constraints
+- progress state
+- semantic direction
 
----
+**Without** transferring:
+- identity
+- emotional state
+- autobiographical memory
+- behavioral conditioning
 
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Spec Version](https://img.shields.io/badge/CP--Core-v1.0-brightgreen)](cp-core/schema.json)
-[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
-
-**ContinuumPort: semantic continuity made simple.**  
-*CP-Core is open. Regen Engine is proprietary.*
-
----
-
-## Key Features
-
-- Portable semantic context across models, agents, and sessions  
-- Preservation of user intent, task state, and conversational direction  
-- Privacy-by-design (no PII, no logs, no hidden retention)  
-- Fully model-agnostic and implementation-independent  
-- Human-readable, machine-verifiable open schema  
-- MIT-licensed open standard (CP-Core)
+Think of it as **"semantic USB for AI"** — portable context, not portable presence.
 
 ---
 
-## Non-Goals and Explicit Boundaries
+## Core Principle
 
-ContinuumPort is intentionally limited to **semantic context transport**.  
-It explicitly excludes the following:
+> **Continuity ≠ Presence**
 
-- AI models, generation, training, or fine-tuning  
-- Behavioral, emotional, or personality continuity  
-- Identity construction or persistent self-representation  
-- RLHF, engagement optimization, or compliance shaping  
-- Autonomous decision-making or judgment  
+ContinuumPort preserves **what you're working on**, not **who you are**.
 
-ContinuumPort provides **context**, never behavior, emotion, or intent.
+It is intentionally minimal, privacy-first, and designed with restraint.
 
 ---
 
-## Allowed vs. Prohibited Use
+## Why ContinuumPort Exists
 
-**Allowed**
-- Context transfer across sessions and models  
-- Long-term project and task continuity  
-- Multi-agent interoperability  
-- Schema standardization and validation  
+Current AI systems lock your context inside:
+- specific platforms (ChatGPT, Claude, Gemini)
+- specific accounts
+- specific models
 
-**Prohibited**
-- Emotional or psychological continuity  
-- Behavioral tuning or personality shaping  
-- Hidden data retention or opaque state  
-- Treating CP-Core as an autonomous actor  
+**ContinuumPort breaks this lock-in.**
+
+You own your context. You decide where it goes.
 
 ---
 
-## FAQ
+## What Makes It Different
 
-**Does CP-Core shape model behavior or personality?**  
-No. It transfers semantic context only.
+### ✅ What ContinuumPort IS:
+- Open protocol (MIT licensed)
+- Privacy-by-design (zero PII)
+- Model-agnostic
+- Platform-independent
+- Explicitly bounded (refuses identity/emotion transport)
 
-**Is CP-Core an identity or emotional memory system?**  
-No. Identity, emotion, and attachment are explicitly out of scope.
+### ❌ What ContinuumPort IS NOT:
+- A memory system
+- An identity layer
+- An AI model or service
+- A behavioral optimization engine
+- A "consciousness" simulator
 
 ---
 
-## Security & Engine Disclaimer
+## Documentation
 
-This repository provides the **CP-Core specification**, validation tools, and usage examples only.
+### Core Philosophy and Boundaries
+- [Design Rationale](DESIGN_RATIONALE.md) — Why these limits exist
+- [Boundaries](docs/boundaries.md) — What we deliberately do NOT standardize
+- [Emergent Behaviors](docs/emergent-behaviors.md) — Allowed but non-guaranteed behaviors
 
-The **Regen Engine** is proprietary and not included.  
-No internal, sensitive, or commercial Regen Engine code is present in this repository.
-
-Developers can safely explore, test, and integrate CP-Core without access to proprietary components.
+### Technical Specification
+- [Regen Engine & Versioning](spec/regen-engine.md) — Normative implementation requirements
 
 ---
 
 ## Quick Start
 
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone https://github.com/giorgioroth/continuumport.git
 cd continuumport
 
-# 2. Validate a CP-Core container
-python cp-core/reference/validator.py validate path/to/container.json
+# Explore the documentation
+cat DESIGN_RATIONALE.md
+cat spec/regen-engine.md
+```
 
-# 3. Explore examples
-cat cp-core/examples/minimal.json
-````
-
----
-
-## Documentation
-
-* Specification: `docs/SPECIFICATION.md`
-* Integration Guide: `docs/INTEGRATION.md`
+*(Reference implementation and examples coming soon)*
 
 ---
 
-## Examples
+## Status
 
-The repository includes reference CP-Core containers:
+**Current Status:** Draft / Early Development
 
-* `minimal.json` — minimal valid container
-* `full-example.json` — fully populated example
-* `extended-with-hints.json` — includes memory hints and agent guidance
+- ✅ Core philosophy documented
+- ✅ Boundaries defined
+- ✅ Regen Engine spec published
+- 🚧 CP-Core format specification (in progress)
+- 🚧 Reference implementation (planned)
+- 🚧 Example containers (planned)
+
+---
+
+## Key Design Decisions
+
+### 1. **Restraint by Design**
+ContinuumPort deliberately refuses to standardize identity, emotion, or memory — even though these are technically feasible.
+
+### 2. **Normative vs. Non-Normative**
+Only CP-Core format and minimal Regen behavior are normative.
+Everything else (embeddings, auth, optimizations) is implementation-specific.
+
+### 3. **Test of Conformance**
+*A Regen Engine is conformant if and only if removing all non-normative layers does not change the semantic intent reconstructed from CP-Core.*
+
+Read the full rationale: [DESIGN_RATIONALE.md](DESIGN_RATIONALE.md)
+
+---
+
+## Use Cases
+
+**Allowed:**
+- Continuing work across different AI systems
+- Switching models without losing task context
+- Multi-agent collaboration on long-term projects
+- Personal context ownership and portability
+
+**Prohibited:**
+- Identity persistence or "self" simulation
+- Emotional continuity or attachment formation
+- Behavioral conditioning or personality shaping
+- Hidden data retention or opaque interpretation
 
 ---
 
 ## Contributing
 
-Contributions are welcome.
+Contributions are welcome, especially:
 
-For major schema changes, please open an Issue first.
-All contributions must respect privacy-by-design principles and explicit CP-Core boundaries.
+- Feedback on spec clarity
+- Use case proposals
+- Implementation suggestions
+- Documentation improvements
 
----
+For major changes, please open an issue first.
 
-## Early Adopters
-
-First 20 spots opening soon for private and local AI builders.
-
-Follow updates or reach out via
-[@continuumport](https://x.com/continuumport)
+All contributions must respect ContinuumPort's core boundaries.
 
 ---
 
-## Author & License
+## Roadmap
+
+- [ ] CP-Core format specification (JSON schema)
+- [ ] Reference Regen Engine implementation
+- [ ] Example CP-Core containers
+- [ ] Validation tools
+- [ ] Community RFC process
+- [ ] v1.0 stable release
+
+---
+
+## Contact
 
 **Author:** Gh. Rotaru (Giorgio Roth)
-© 2025 — Released under the **MIT License**
 
-```
+**Project:** [@continuumport](https://x.com/continuumport) (coming soon)
+
+---
+
+## License
+
+**MIT License** — See [LICENSE](LICENSE)
+
+ContinuumPort is open infrastructure.
+Free to use, fork, implement, and extend — within the documented boundaries.
+
+---
+
+**ContinuumPort: continuity of work, never continuity of self.**
 
