@@ -183,7 +183,7 @@ All contributions must respect ContinuumPort's core boundaries.
 
 [LICENSE](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE.md)
 
-]([/LICENSE_REGEN.md](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE_REGEN.md)
+[/LICENSE_REGEN.md](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE_REGEN.md)
 
 
 ContinuumPort is open infrastructure.
