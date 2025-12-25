@@ -1,5 +1,3 @@
----
-
 # ContinuumPort Boundaries
 
 **Normative Constraints on Semantic Continuity**
@@ -7,13 +5,12 @@
 **Status:** Normative
 **Applies to:** CP-Core, Regen Engines, and all compliant implementations
 
----
+1. Purpose of This Document
+This document defines the non-negotiable boundaries of the ContinuumPort protocol.
 
-## 1. Purpose of This Document
+ContinuumPort is a system for semantic continuity of work, not for personal continuity, identity persistence, or simulated presence.
 
-This document defines the **non-negotiable boundaries** of the ContinuumPort protocol.
-
-ContinuumPort is a system for **semantic continuity of work**, not for personal continuity, identity persistence, or simulated presence.
+...
 
 These boundaries are **intentional design decisions**, not technical limitations.
 They exist to ensure ethical safety, privacy, portability, and long-term interoperability.
