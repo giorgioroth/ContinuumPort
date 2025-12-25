@@ -1,9 +1,17 @@
-# ContinuumPort — CP-Core v1.0
+> **Licensing notice**  
+> ContinuumPort **CP-Core** is released under the **MIT License**.  
+> The **Regen Engine** is proprietary and governed by  
+> [`LICENSE_REGEN.md`](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE_REGEN.md).
+
+
+# ContinuumPort — CP-Core v1.0  
 **Hybrid Semantic Continuity Layer for Multi-Agent AI**
 
 ## Overview
 
-ContinuumPort (CP-Core) is an open, specification-driven semantic portability layer that enables the transfer of **non-sensitive conversational context** across sessions, models, platforms, and devices.
+ContinuumPort (CP-Core) is an open, specification-driven semantic portability layer
+that enables the transfer of **non-sensitive conversational context** across
+sessions, models, platforms, and devices.
 
 It is designed to be:
 - privacy-first (zero PII by design),
@@ -11,17 +19,20 @@ It is designed to be:
 - user-owned,
 - independent of any central service.
 
-ContinuumPort intentionally separates **open semantic state transport** (CP-Core) from **high-fidelity context regeneration** (Regen Engine), enabling both open interoperability and commercially viable performance.
+ContinuumPort intentionally separates **open semantic state transport** (CP-Core)
+from **high-fidelity context regeneration** (Regen Engine), enabling both open
+interoperability and commercially deployable implementations.
 
 ---
 
 ## Licensing
 
-ContinuumPort-Core (CP-Core specification and reference implementations)  
-are released under the **MIT License**.
+**ContinuumPort-Core (CP-Core)** — including the specification, schemas, and
+reference materials — is released under the **MIT License**.
 
-The proprietary **ContinuumPort-Regen Engine** is not included in this repository  
-and is distributed under separate commercial licensing terms.
+The **ContinuumPort-Regen Engine** is **not included** in this repository.
+It is proprietary software and is distributed under separate commercial
+licensing terms as defined in [`LICENSE_REGEN.md`](LICENSE_REGEN.md).
 
 ---
 
