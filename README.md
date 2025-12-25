@@ -171,13 +171,16 @@ All contributions must respect ContinuumPort's core boundaries.
 
 **Author:** Gh. Rotaru (Giorgio Roth)
 
-**Project:** [@continuumport](https://x.com/continuumport) (coming soon)
+**Email:** continuumport@gmail.com
+
+**X/Twitter:** [@continuumport](https://x.com/continuumport)
 
 ---
 
 ## License
 
 **MIT License** — See [LICENSE](LICENSE)
+See [Regen Engine License Philosophy](/LICENSE_REGEN.md) for details.
 
 ContinuumPort is open infrastructure.
 Free to use, fork, implement, and extend — within the documented boundaries.
