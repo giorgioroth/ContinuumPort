@@ -198,4 +198,4 @@ The choice depends on repository structure and documentation philosophy.
 
 **Document Status**: Draft  
 **Last Updated**: 2025-12-25  
-**Author**: ContinuumPort Project
+**Author**: Gh.Rotaru (Giorgio Roth)
