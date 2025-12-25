@@ -1,5 +1,7 @@
 # Regen Engine Specification and Protocol Versioning
 
+This specification intentionally favors restraint over capability, as described in DESIGN_RATIONALE.md.
+
 > **Status:** Draft  
 > This document is normative for Regen Engine conformance, but subject to revision during early adoption.
 
@@ -193,6 +195,8 @@ This specification SHOULD be integrated as:
 - **Option 3**: New top-level `SPECIFICATION.md` with both sections
 
 The choice depends on repository structure and documentation philosophy.
+
+A Regen Engine implementation is compliant if and only if removing all non-normative layers (authentication, embeddings, adapters, scoring) does not change the semantic intent reconstructed from CP-Core.
 
 ---
 
