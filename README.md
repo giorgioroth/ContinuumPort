@@ -179,8 +179,11 @@ All contributions must respect ContinuumPort's core boundaries.
 
 ## License
 
-**MIT License** — See [LICENSE](LICENSE)
-See [Regen Engine License Philosophy](/LICENSE_REGEN.md) for details.
+**MIT License**
+
+[LICENSE](LICENSE)
+
+[Regen Engine License Philosophy](/LICENSE_REGEN.md) for details.
 
 ContinuumPort is open infrastructure.
 Free to use, fork, implement, and extend — within the documented boundaries.
