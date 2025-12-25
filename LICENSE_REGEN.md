@@ -118,8 +118,8 @@ the laws of **[Jurisdiction to be specified]**.
 
 For licensing inquiries, commercial agreements, or permissions:
 
-**Giorgio Roth**  
-Contact: *[to be added]*
+**Gh. Rotaru (Giorgio Roth)**  
+Contact: *[continuumport@gmail.com]*
 
 ---
 
