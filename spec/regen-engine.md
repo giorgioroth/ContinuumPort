@@ -1,6 +1,6 @@
 # Regen Engine Specification and Protocol Versioning
 
-This specification intentionally favors restraint over capability, as described in DESIGN_RATIONALE.md.
+This specification intentionally favors restraint over capability, as described in [DESIGN_RATIONALE.md](https://github.com/giorgioroth/ContinuumPort/blob/main/DESIGN_RATIONALE.md)
 
 > **Status:** Draft  
 > This document is normative for Regen Engine conformance, but subject to revision during early adoption.
