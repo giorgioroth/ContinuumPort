@@ -1,0 +1,307 @@
+# ContinuumPort Regen Engine License
+
+**(Proprietary License — Production Version)**
+
+**Copyright © 2025 Gh. Rotaru (Giorgio Roth)**  
+All rights reserved.
+
+---
+
+## 1. Scope of This License
+
+This license applies **exclusively** to the **ContinuumPort Regen Engine** (the "Regen Engine").
+
+The Regen Engine is **not part of the ContinuumPort standard**.  
+It is an **implementation**, not a protocol.
+
+The ContinuumPort CP-Core specification, schemas, and normative documents are licensed separately under open-source terms and are **explicitly excluded** from this license.
+
+---
+
+## 2. Grant of License
+
+Subject to the terms of this license, the Author grants you a **limited, non-exclusive, non-transferable, revocable license** to use the Regen Engine.
+
+### 2.1 Evaluation & Development Use (Beta)
+
+During the **Beta period** (end date to be announced), the Regen Engine may be used **at no cost** for:
+
+* evaluation,
+* research,
+* non-commercial development,
+* internal testing.
+
+No uptime, availability, or performance guarantees are provided during the Beta period.
+
+### 2.2 Production Use
+
+Production use may require a separate commercial license.
+
+**Indicative tiers** (non-binding, subject to change):
+
+* **Individual / Experimental Use**: terms to be defined
+* **Commercial Use**: requires written agreement
+* **Enterprise / On-Premises**: custom licensing agreement
+
+**Commercial use** is defined as use in a product or service that is:
+
+* monetized directly or indirectly, or
+* offered to third parties as part of a commercial offering.
+
+---
+
+## 3. Restrictions
+
+You **MUST NOT**:
+
+* reverse engineer, decompile, or disassemble the Regen Engine;
+* offer the Regen Engine as a competing service;
+* sublicense, resell, or redistribute it without written permission;
+* represent the Regen Engine as part of the ContinuumPort standard;
+* use the Regen Engine to violate ContinuumPort normative boundaries.
+
+---
+
+## 4. Separation from the ContinuumPort Standard
+
+Use of the Regen Engine **does not grant** any exclusive rights to:
+
+* the ContinuumPort protocol,
+* CP-Core containers,
+* or the ContinuumPort ecosystem.
+
+You are free to:
+
+* build your own Regen Engine,
+* use alternative open-source implementations,
+* migrate away at any time.
+
+---
+
+## 5. Data Processing & Privacy
+
+### 5.1 Data Ownership
+
+All CP-Core containers remain the **exclusive property** of the submitting user.
+
+### 5.2 Processing
+
+The Regen Engine processes CP-Core containers **solely** to perform regeneration.
+
+No data is retained beyond the duration of processing, except:
+
+* anonymized performance metrics (opt-out available),
+* transient error logs (retained for a maximum of 30 days).
+
+### 5.3 No Training Use
+
+Data submitted to the Regen Engine will **never** be used to train models or improve algorithms **without explicit written consent**.
+
+### 5.4 Compliance
+
+The Author commits to compliance with applicable data protection regulations (including GDPR and CCPA), where applicable.
+
+---
+
+## 6. Service Level & Support
+
+### 6.1 Availability
+
+**During Beta:**
+
+* Best-effort availability only.
+* No uptime guarantees.
+* Service may be interrupted without notice.
+
+**Post-Beta:** Service level agreements available under commercial licenses.
+
+### 6.2 Support
+
+* **Community support:** GitHub Discussions (best effort)
+* **Priority support:** available under commercial agreements
+* **Enterprise SLA:** subject to separate agreement
+
+### 6.3 Rate Limits
+
+During Beta, rate limits may be applied to ensure fair usage.  
+Current limits are subject to change without notice.
+
+**Indicative limits:** 10,000 regenerations/month for evaluation use.
+Rate limits are enforced at the Author’s discretion.
+
+---
+
+## 7. Attribution & Branding
+
+### 7.1 Attribution
+
+If the Regen Engine is used in a publicly accessible product or service, attribution is required:
+
+> "Powered by ContinuumPort Regen Engine"
+
+### 7.2 White-Label Use
+
+White-label use (removal of attribution) requires:
+
+* a written enterprise license,
+* explicit permission from the Author.
+
+### 7.3 Trademarks
+
+"ContinuumPort" and "Regen Engine" are trademarks of the Author.  
+They may not be used to imply endorsement without permission.
+
+---
+
+## 8. Compliance with ContinuumPort Boundaries
+
+By using the Regen Engine, you agree to comply with:
+
+* [**ContinuumPort Boundaries**](docs/boundaries.md) (normative)
+* [**Regen Engine Compliance Framework**](docs/regen_compliance.md) (normative)
+* All normative boundary documents in the repository
+
+### 8.1 Prohibited Use
+
+You **MUST NOT** use the Regen Engine to:
+
+* synthesize identity or personality continuity,
+* encode emotional persistence or affective continuity,
+* construct Stack-adjacent or identity-preserving systems,
+* violate the "What is NOT standardized" categories.
+
+Violation results in **immediate license termination**.
+
+### 8.2 Compliance Certification
+
+The Regen Engine may undergo periodic internal compliance reviews to verify adherence to ContinuumPort Boundaries.
+
+Audit summaries are published at [continuumport.com/compliance](https://continuumport.com/compliance).
+
+---
+
+## 9. Alternatives & Interoperability
+
+### 9.1 No Lock-In
+
+* You are **not required** to use the Regen Engine.
+* Alternative implementations are explicitly encouraged.
+* CP-Core containers remain fully portable across implementations.
+
+### 9.2 Migration Rights
+
+You may migrate from Regen Engine to alternatives at any time:
+
+* No exit fees
+* No technical barriers
+* Export tools provided
+* No retention of user-specific data post-migration
+
+**This guarantee is irrevocable.**
+
+---
+
+## 10. Termination
+
+This license terminates **automatically** upon violation.
+
+Upon termination, you must:
+
+* cease all use of the Regen Engine,
+* destroy all copies in your possession or control,
+* notify affected users if termination impacts services you provide.
+
+**Termination does not affect portability of CP-Core containers.**
+
+---
+
+## 11. No Warranty
+
+THE REGEN ENGINE IS PROVIDED **"AS IS"**, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:
+
+* MERCHANTABILITY
+* FITNESS FOR A PARTICULAR PURPOSE
+* NON-INFRINGEMENT
+
+The entire risk as to performance and results lies with the user.
+
+---
+
+## 12. Limitation of Liability
+
+**To the maximum extent permitted by law:**
+
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM OR IN CONNECTION WITH:
+
+* the use of the Regen Engine,
+* inability to use the Regen Engine,
+* loss of data, profit, or business interruption.
+
+**Maximum liability:** Fees paid in the preceding 12 months (or zero during Beta).
+
+---
+
+## 13. Governing Law & Dispute Resolution
+
+### 13.1 Governing Law
+
+This license is governed by the laws of the jurisdiction
+in which the Author is legally established.
+
+### 13.2 Dispute Resolution
+
+Disputes shall be resolved through:
+
+1. Informal negotiation (30 days good faith effort)
+2. Mediation (if negotiation fails)
+3. Binding arbitration (final resort)
+
+---
+
+## 14. Amendments
+
+The Author may update this license.  
+Material changes will be announced publicly with **90 days notice**.
+
+Continued use after notice period constitutes acceptance.
+
+---
+
+## 15. Severability
+
+If any provision is held unenforceable, the remaining provisions remain in full force and effect.
+
+---
+
+## 16. Entire Agreement
+
+This document constitutes the entire agreement regarding the Regen Engine.
+
+It supersedes all prior or contemporaneous understandings, written or oral.
+
+---
+
+## 17. Contact
+
+**For licensing inquiries, commercial agreements, or permissions:**
+
+* Email: **continuumport@gmail.com**
+* Website: **continuumport.com**
+* GitHub: **@giorgioroth**
+
+**For security issues:** security@continuumport.com
+
+---
+
+## 18. Document Status
+
+**Status:** Production (v2.0)  
+**Last Updated:** 2025-12-26  
+**Effective Date:** 2026-01-01  
+**Review Schedule:** Quarterly
+
+---
+
+**END OF LICENSE**
+
+*This license is designed for clarity and enforceability. If any ambiguity exists, contact the Author for clarification before use.*
