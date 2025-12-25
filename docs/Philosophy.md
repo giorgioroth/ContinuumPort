@@ -1,196 +1,163 @@
-ContinuumPort Philosophy
+# ContinuumPort Philosophy
 
-Continuity, Not Memory
+## Continuity, Not Memory
 
-ContinuumPort is not a memory system.
+**ContinuumPort is not a memory system.**
 
-It does not preserve conversations, transcripts, personalities, or behavioral states.
-It preserves continuity of intent.
+It does not preserve conversations, transcripts, personalities, or behavioral states.  
+It preserves **continuity of intent**.
 
 The core principle is simple:
 
-Cognitive continuity is not achieved by storing more data,
-but by preserving the direction of thought.
+**Cognitive continuity is not achieved by storing more data, but by preserving the direction of thought.**
 
-Human cognition is not an archive. It is a state continuously reconstructed from intent, constraints, and context.
-ContinuumPort formalizes this principle for AI-assisted cognition.
+Human cognition is not an archive. It is a state continuously reconstructed from intent, constraints, and context.  
+**ContinuumPort formalizes this principle for AI-assisted cognition.**
 
-1. Continuity vs. Memory
+### Continuity vs. Memory
 
 Traditional AI persistence treats continuity as a storage problem:
 
-save conversations
+- save conversations  
+- replay history  
+- accumulate context  
 
-replay history
+This confuses **memory** with **continuity**.
 
-accumulate context
+**Memory is passive. Continuity is active.**
 
-This confuses memory with continuity.
+A transcript preserves *what was said*.  
+Continuity preserves *what was meant*.
 
-Memory is passive. Continuity is active.
-
-A transcript preserves what was said.
-Continuity preserves what was meant.
-
-ContinuumPort intentionally rejects full transcript fidelity. Instead, it preserves a minimal semantic core from which context can be regenerated.
+**ContinuumPort intentionally rejects full transcript fidelity.**  
+Instead, it preserves a **minimal semantic core** from which context can be regenerated.
 
 This mirrors human cognition: we do not replay past thoughts verbatim; we reconstruct them from intent and situation.
 
-2. Cognitive State, Not Accumulated History
+### Cognitive State, Not Accumulated History
 
-Continuity is a state, not a sum.
+**Continuity is a state, not a sum.**
 
 Accumulating history does not guarantee understanding. In many cases, it collapses interpretation into a rigid past.
 
-ContinuumPort treats semantic state as:
+**ContinuumPort treats semantic state as:**
 
-compressed
-
-incomplete by design
-
-intentionally open to regeneration
+- compressed  
+- incomplete by design  
+- intentionally open to regeneration  
 
 This allows the same core to adapt to new models, sessions, devices, and constraints.
 
-Preserving state over history keeps cognition alive, not frozen.
+**Preserving state over history keeps cognition alive, not frozen.**
 
-3. Intent as the Primary Artifact
+### Intent as the Primary Artifact
 
-The primary artifact in ContinuumPort is intent.
+**The primary artifact in ContinuumPort is intent.**
 
 Intent includes:
 
-goals
+- goals  
+- constraints  
+- boundaries  
+- ethical limits  
+- direction of exploration  
 
-constraints
-
-boundaries
-
-ethical limits
-
-direction of exploration
-
-Intent is portable. Transcripts are not.
+**Intent is portable. Transcripts are not.**
 
 ContinuumPort containers are designed to be:
 
-minimal
+- minimal  
+- human-readable  
+- model-agnostic  
+- resilient to context collapse  
 
-human-readable
+They carry **why**, not everything.
 
-model-agnostic
+The semantic core **explicitly excludes** personal data, inferred traits, and historical reconstruction beyond intent-level abstraction.
 
-resilient to context collapse
+### AI as Infrastructure
 
-They carry why, not everything.
+**ContinuumPort does not treat AI as:**
 
-The semantic core explicitly excludes personal data, inferred traits, and historical reconstruction beyond intent-level abstraction.
+- a companion  
+- a personality  
+- a persistent identity  
 
-4. AI as Infrastructure
+**AI is infrastructure for cognition.**
 
-ContinuumPort does not treat AI as:
+Models are interchangeable. Sessions are disposable.  
+**Continuity must outlive both.**
 
-a companion
+Regeneration engines may reinterpret intent, but **must not introduce** new goals or constraints not present in the ContinuumPort core.
 
-a personality
+**Human cognition remains the source of meaning. Responsibility remains human.**
 
-a persistent identity
+### Portability as Cognitive Autonomy
 
-AI is infrastructure for cognition.
-
-Models are interchangeable. Sessions are disposable.
-Continuity must outlive both.
-
-Regeneration engines may reinterpret intent, but must not introduce new goals or constraints not present in the ContinuumPort core.
-
-Human cognition remains the source of meaning.
-Responsibility remains human.
-
-5. Portability as Cognitive Autonomy
-
-Without portability, cognition becomes platform-bound.
+**Without portability, cognition becomes platform-bound.**
 
 When context cannot move:
 
-thinking fragments
+- thinking fragments  
+- exploration resets  
+- insight decays  
 
-exploration resets
+**ContinuumPort defines a semantic transport layer** independent of vendors, login state, and memory policies.
 
-insight decays
+**Portability is not convenience. It is autonomy.**
 
-ContinuumPort defines a semantic transport layer independent of vendors, login state, and memory policies.
+### Transparency Over Hidden Persistence
 
-Portability is not convenience.
-It is autonomy.
-
-6. Transparency Over Hidden Persistence
-
-Hidden persistent memory breaks trust.
+**Hidden persistent memory breaks trust.**
 
 If continuity exists, it must be:
 
-explicit
-
-inspectable
-
-user-controlled
+- explicit  
+- inspectable  
+- user-controlled  
 
 All ContinuumPort artifacts are:
 
-user-owned
+- user-owned  
+- user-editable  
+- structurally validated  
 
-user-editable
+**There is no hidden persistent state.**
 
-structurally validated
+### CP-Core and Regeneration
 
-There is no hidden persistent state.
+**ContinuumPort separates concerns intentionally:**
 
-7. CP-Core and Regeneration
-
-ContinuumPort separates concerns intentionally:
-
-CP-Core
-An open, minimal semantic container specification defining what is preserved.
-
-Regeneration Engines
-Model-specific or proprietary systems that re-express continuity from CP-Core.
+- **CP-Core** – An open, minimal semantic container specification defining what is preserved.  
+- **Regeneration Engines** – Model-specific or proprietary systems that re-express continuity from CP-Core.  
 
 This separation keeps the standard open while allowing multiple interpretations and implementations.
 
-These principles are normative for CP-Core–compliant implementations.
+**These principles are normative for CP-Core–compliant implementations.**
 
-8. What ContinuumPort Is Not
+### What ContinuumPort Is Not
 
-ContinuumPort is not:
+**ContinuumPort is not:**
 
-memory replay
+- memory replay  
+- personality persistence  
+- user profiling  
+- emotional state storage  
+- behavioral cloning  
 
-personality persistence
+**It does not promise sameness. It promises directional coherence.**
 
-user profiling
+### Why This Exists
 
-emotional state storage
+**ContinuumPort emerged from practice, not theory.**
 
-behavioral cloning
+From multi-model collaboration. From session resets. From device switching. From real work across discontinuous AI instances.
 
-It does not promise sameness.
-It promises directional coherence.
+The problem appeared naturally. The solution followed.
 
-9. Why This Exists
+### Closing
 
-ContinuumPort emerged from practice, not theory.
+**ContinuumPort preserves freedom of thought across artificial systems.**
 
-From multi-model collaboration.
-From session resets.
-From device switching.
-From real work across discontinuous AI instances.
-
-The problem appeared naturally.
-The solution followed.
-
-10. Closing
-
-ContinuumPort preserves freedom of thought across artificial systems.
-
-Not by remembering everything,
-but by remembering what matters.
+Not by remembering everything,  
+but by remembering **what matters**.
