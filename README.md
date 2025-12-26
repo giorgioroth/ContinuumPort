@@ -1,89 +1,46 @@
+
+
+
 # ContinuumPort
 
 **Semantic continuity for AI systems — without lock-in, without identity persistence.**
 
-# CP-Core is not a prompting strategy. 
-# It is a transport container for task state that remains agnostic to how prompts are constructed.
+ContinuumPort is an **open protocol** for portable semantic context. It enables the transfer of user intent, task constraints, and progress state between AI systems, while explicitly refusing to transport identity, emotion, or behavioral conditioning.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Spec Status](https://img.shields.io/badge/Spec-Draft-yellow)](spec/specification.md)
+## 🗺️ How to Read This Repository
 
----
-
-## What is ContinuumPort?
-
-ContinuumPort is an **open protocol** for portable semantic continuity across AI systems.
-
-It enables transfer of:
-- user intent
-- task constraints
-- progress state
-- semantic direction
-
-**Without** transferring:
-- identity
-- emotional state
-- autobiographical memory
-- behavioral conditioning
-
-Think of it as **"semantic USB for AI"** — portable context, not portable presence.
+* **The Big Picture**: Start with this `README.md` for a high-level overview.
+* **Philosophy & Ethics**: Read `DESIGN_RATIONALE.md` and `docs/boundaries.md` to understand the "why".
+* **Deep Theory**: Explore `docs/essays/` for the foundational concepts behind the protocol.
+* **Technical Rules**: Check the `spec/` folder for normative implementation requirements.
+* **Live Examples**: See `examples/quickstart/` for a Python-based reference of CP-Core in action.
 
 ---
 
-## Core Principle
+## 🧠 The Philosophy
 
-> **Continuity ≠ Presence**
-
-ContinuumPort preserves **what you're working on**, not **who you are**.
-
-It is intentionally minimal, privacy-first, and designed with restraint.
-
----
-
-## Why ContinuumPort Exists
-
-Current AI systems lock your context inside:
-- specific platforms (ChatGPT, Claude, Gemini)
-- specific accounts
-- specific models
-
-**ContinuumPort breaks this lock-in.**
-
-You own your context. You decide where it goes.
-
----
-
-## What Makes It Different
-
-### ✅ What ContinuumPort IS:
-- Open protocol (MIT licensed)
-- Privacy-by-design (zero PII)
-- Model-agnostic
-- Platform-independent
-- Explicitly bounded (refuses identity/emotion transport)
-
-### ❌ What ContinuumPort IS NOT:
-- A memory system
-- An identity layer
-- An AI model or service
-- A behavioral optimization engine
-- A "consciousness" simulator
-
----
-
-# ContinuumPort
-Semantic continuity for AI systems — without lock-in, without identity persistence.
-
-**CP-Core is not a prompting strategy.** It is a transport container for task state that remains agnostic to how prompts are constructed.
-
----
-
-## The Philosophy
-
-ContinuumPort is built on the principle that **Continuity ≠ Presence**. 
+ContinuumPort is built on the principle that **Continuity ≠ Presence**.
 We believe that transporting dialogue history is a bottleneck for both privacy and performance.
 
-* **[Why We Don't Move the Dialogue](docs/essays/why-we-dont-move-the-dialogue.md)** — Understanding the "Extractable Core" vs. "Conversation Noise".
+* **[Why We Don't Move the Dialogue](https://www.google.com/search?q=docs/essays/why-we-dont-move-the-dialogue.md)** — Understanding the "Extractable Core" vs. "Conversation Noise".
+* **Restraint by Design**: We deliberately refuse to standardize identity or emotion, focusing strictly on task-related semantic state.
+
+---
+
+## ✅ What It IS / ❌ What It IS NOT
+
+### ContinuumPort IS:
+
+* An **Open protocol** (MIT licensed).
+* **Privacy-by-design** (standardized exclusion of identity).
+* **Model-agnostic** and platform-independent.
+* A **Transport container** for task state (CP-Core).
+
+### ContinuumPort IS NOT:
+
+* **NOT a prompting strategy**: Prompt construction is explicitly out of scope.
+* **NOT a memory system** or an identity layer.
+* **NOT a behavioral optimization engine** or a "consciousness" simulator.
 
 ---
 
@@ -200,6 +157,9 @@ All contributions must respect ContinuumPort's core boundaries.
 ## License
 
 **MIT License**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Spec Status](https://img.shields.io/badge/Spec-Draft-yellow)](spec/specification.md)
 
 [LICENSE](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE.md)
 
