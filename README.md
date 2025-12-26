@@ -79,7 +79,7 @@ You own your context. You decide where it goes.
 - [Emergent Behaviors](docs/emergent-behaviors.md) — Allowed but non-guaranteed behaviors
 
 ### Technical Specification
-- [Regen Engine & Versioning](spec/regen-engine.md) — Normative implementation requirements
+- [Regen Engine & Versioning](spec/regen-engine.md) — Normative implementation requirements.
 
 ---
 
