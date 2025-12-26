@@ -80,7 +80,7 @@ You own your context. You decide where it goes.
 
 ### Technical Specification
 
-[Regen Engine & Versioning](spec/regen-engine.md) — Normative implementation requirements
+[Protocol Specification](spec/regen-engine.md) — Implementation and versioning rules
 
 ---
 
