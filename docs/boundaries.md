@@ -1,8 +1,8 @@
-What ContinuumPort Deliberately Does NOT Standardize
+## What ContinuumPort Deliberately Does NOT Standardize
 
 (Normative Section)
 
-Motivation: Empirical Boundary Discovery
+# Motivation: Empirical Boundary Discovery
 
 During early exploratory experiments across multiple AI systems, we observed a recurring pattern when conversational context was transferred in an unconstrained manner.
 
@@ -41,37 +41,38 @@ optional task-related artifacts.
 ContinuumPort explicitly refuses to standardize — and actively discourages the inclusion of — the categories listed below.
 
 What Is Deliberately NOT Standardized
-1. Persistent Identity or Simulated Personality
+
+# 1. Persistent Identity or Simulated Personality
 
 No representation of a fixed “self,” persona profile, character backstory, or persistent personality is permitted.
 
 ContinuumPort does not transport, preserve, or enable the regeneration of any form of simulated identity.
 
-2. Emotional or Affective State
+# 2. Emotional or Affective State
 
 No encoding of mood, emotional history, affective valence, attachment signals, or continuity of emotional stance is allowed.
 
 Emotional states are inherently situational and emerge only within the present interaction. They cannot be ethically or meaningfully ported across systems.
 
-3. Behavioral Modeling or Preference Conditioning
+# 3. Behavioral Modeling or Preference Conditioning
 
 No mechanisms for reward shaping, engagement optimization, compliance signaling, or implicit behavioral conditioning (including RLHF-style traces).
 
 The standard remains neutral with respect to model alignment and user influence.
 
-4. Subjective Memory or Autobiographical Narrative
+# 4. Subjective Memory or Autobiographical Narrative
 
 No storage or transfer of personal anecdotes, lived-experience narratives, or conversational “memories” framed as a continuous personal history.
 
 ContinuumPort preserves direction, not biography.
 
-5. Autonomous Agency or Decision Authority
+# 5. Autonomous Agency or Decision Authority
 
 No delegation of judgment, initiative, or independent goal-setting is permitted.
 
 ContinuumPort contains only user-directed intent and task state. It never implies, encodes, or permits autonomous actor status.
 
-6. Personally Identifiable Information (PII)
+# 6. Personally Identifiable Information (PII)
 
 By design, the format provides no fields suitable for storing names, locations, biometric data, or any information that could identify a natural person.
 
@@ -81,7 +82,7 @@ These exclusions are non-negotiable.
 
 Any extension, implementation, or derivative system that introduces any of the above categories violates the foundational principles of ContinuumPort and must not be considered compliant with the standard.
 
-Design Principle
+# Design Principle
 
 Responsibility in AI infrastructure begins with knowing what not to carry.
 
