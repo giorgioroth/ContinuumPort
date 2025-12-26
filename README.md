@@ -71,6 +71,22 @@ You own your context. You decide where it goes.
 
 ---
 
+# ContinuumPort
+Semantic continuity for AI systems — without lock-in, without identity persistence.
+
+**CP-Core is not a prompting strategy.** It is a transport container for task state that remains agnostic to how prompts are constructed.
+
+---
+
+## The Philosophy
+
+ContinuumPort is built on the principle that **Continuity ≠ Presence**. 
+We believe that transporting dialogue history is a bottleneck for both privacy and performance.
+
+* **[Why We Don't Move the Dialogue](docs/essays/why-we-dont-move-the-dialogue.md)** — Understanding the "Extractable Core" vs. "Conversation Noise".
+
+---
+
 ## Documentation
 
 ### Core Philosophy and Boundaries
@@ -199,7 +215,7 @@ Free to use, fork, implement, and extend — within the documented boundaries.
 
 ---
 
-## 🛡️ Defensible Architecture (FAQ for Skeptics)
+## Defensible Architecture (FAQ for Skeptics)
 
 ### 1. "Isn't this just a glorified JSON summary?"
 **Yes.** And that is its greatest strength. ContinuumPort does not aim for structural complexity, but for **normative restriction**. While a standard "summary" is informal and often contaminated with behavioral instructions or persona drift, CP-Core is a strictly defined transport layer. It standardizes the *data*, not the *formatting*.
@@ -215,3 +231,5 @@ A protocol is a contract, not a product. TCP/IP doesn't send emails; it moves pa
 
 ### 5. "What prevents vendors from adding their own 'tracking' fields?"
 The specification allows for extensions, but they are marked as **Non-Normative**. Any compliant ContinuumPort implementation is instructed to prioritize the Core fields and ignore behavioral extensions. We provide the first standard that allows users to detect and strip away vendor lock-in.
+
+
