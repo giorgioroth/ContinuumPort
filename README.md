@@ -215,7 +215,7 @@ Free to use, fork, implement, and extend — within the documented boundaries.
 
 ---
 
-## 🛡️ Defensible Architecture (FAQ for Skeptics)
+## Defensible Architecture (FAQ for Skeptics)
 
 ### 1. "Isn't this just a glorified JSON summary?"
 
@@ -236,5 +236,11 @@ A protocol is a contract, not a product. TCP/IP doesn't send emails; it moves pa
 ### 5. "What prevents vendors from adding their own 'tracking' fields?"
 
 The specification allows for extensions, but they are marked as **Non-Normative**. A Regen Engine is conformant **if and only if** removing all non-normative layers (tracking, embeddings, proprietary metadata) does not change the reconstructed semantic intent. We provide the standard that allows users to detect and strip away vendor lock-in.
+
+---
+
+**Documentation is the product. CP-Core is the contract.**
+
+**ContinuumPort: continuity of work, never continuity of self.**
 
 ---
