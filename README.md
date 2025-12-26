@@ -2,6 +2,9 @@
 
 **Semantic continuity for AI systems — without lock-in, without identity persistence.**
 
+# CP-Core is not a prompting strategy. 
+# It is a transport container for task state that remains agnostic to how prompts are constructed.
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Spec Status](https://img.shields.io/badge/Spec-Draft-yellow)](spec/specification.md)
 
