@@ -54,7 +54,7 @@ We believe that transporting dialogue history is a bottleneck for both privacy a
 
 ### Technical Specification
 
-[Protocol Specification](spec/regen-engine.md) — Implementation and versioning rules
+[Protocol Specification Versioning](spec/regen-engine.md) — Implementation and versioning rules
 
 ---
 
