@@ -88,3 +88,7 @@ Responsibility in AI infrastructure begins with knowing what not to carry.
 
 ContinuumPort provides continuity for work —
 never continuity of presence, identity, or simulated selfhood.
+
+---
+
+Note: By maintaining these boundaries, ContinuumPort effectively needlecasts the "Digital Human Freight" (the task) without the lossy noise of model identity.
