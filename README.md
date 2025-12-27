@@ -3,7 +3,7 @@
 
 **Semantic continuity for AI systems — without lock-in, without identity persistence.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 [![Spec Status](https://img.shields.io/badge/docs-Draft-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/SPECIFICATION.md)
 
 ContinuumPort is an **open protocol** for portable semantic context. It enables the transfer of user intent, task constraints, and progress state between AI systems, while explicitly refusing to transport identity, emotion, or behavioral conditioning.
@@ -15,6 +15,12 @@ ContinuumPort is an **open protocol** for portable semantic context. It enables 
 * **Deep Theory**: Explore `docs/essays/` for the foundational concepts behind the protocol.
 * **Technical Rules**: Check the `spec/` folder for normative implementation requirements.
 * **Live Examples**: See `examples/quickstart/` for a Python-based reference of CP-Core in action.
+
+---
+
+- [Project Roadmap →](Roadmap.md)
+- [Full CP-Core v1.0 Specification (Draft)](docs/SPECIFICATION.md)
+- [Validation Tools](tools/validator.py)
 
 ---
 
