@@ -1,9 +1,10 @@
 
-
-
 # ContinuumPort
 
 **Semantic continuity for AI systems — without lock-in, without identity persistence.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Spec Status](https://img.shields.io/badge/docs-Draft-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/SPECIFICATION.md)
 
 ContinuumPort is an **open protocol** for portable semantic context. It enables the transfer of user intent, task constraints, and progress state between AI systems, while explicitly refusing to transport identity, emotion, or behavioral conditioning.
 
@@ -157,9 +158,6 @@ All contributions must respect ContinuumPort's core boundaries.
 ## License
 
 **MIT License**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Spec Status](https://img.shields.io/badge/Spec-Draft-yellow)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/SPECIFICATION.md)
 
 [LICENSE](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE.md)
 
