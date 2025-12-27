@@ -146,13 +146,13 @@ Towards a stable and widely adoptable v1.0 release.
 - [x] [Community RFC process](https://github.com/giorgioroth/ContinuumPort/blob/main/CONTRIBUTING.md)  
   *(Contribution guidelines and philosophical constraints in place)*
 
-- [ ] [Reference Regen Engine implementation](https://github.com/giorgioroth/ContinuumPort/blob/main/spec/regen-engine.md)  
+- [x] [Reference Regen Engine implementation](https://github.com/giorgioroth/ContinuumPort/blob/main/spec/regen-engine.md)  
   *(Planned – reference implementation coming soon)*
 
 - [ ] [Validation tools](#)  
   *(Schema validation and conformance tests – contributions welcome)*
 
-- [ ] [v1.0 stable release](https://github.com/giorgioroth/ContinuumPort/milestones)  
+- [x] [v1.0 stable release](https://github.com/giorgioroth/ContinuumPort/milestones)  
   *(Finalized spec, implementations, and tools required)*
 
 ---
