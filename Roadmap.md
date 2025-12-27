@@ -1,0 +1,21 @@
+# ContinuumPort Roadmap
+
+**Towards a stable and widely adoptable v1.0 release.**
+
+- [x] Core philosophy & boundaries documented
+- [x] [CP-Core format specification](docs/SPECIFICATION.md)  
+  *(Full JSON format with normative constraints and boundaries)*
+- [x] [Example CP-Core containers](examples/)  
+  *(Multiple varied examples + quickstart guide available)*
+- [x] [Validation tools](https://github.com/giorgioroth/ContinuumPort/blob/main/tools/validator.py))  
+  *(Automated schema validation, PII detection, and non-anthropomorphic constraint enforcement)*
+- [x] [Regen Engine specification](spec/regen-engine.md)  
+  *(Normative requirements for conformant engines)*
+- [x] [Community RFC process](CONTRIBUTING.md)  
+  *(Formal guidelines with philosophical alignment)*
+
+- [ ] Reference Regen Engine implementation  
+  *(Planned – minimal conformant engine to demonstrate interoperability; non-optimized, focused on correctness)*
+
+- [ ] v1.0 stable release  
+  *(Frozen specification, production-tested tools, and multi-model interoperability validation)*
