@@ -1,0 +1,39 @@
+{
+  "cp_core_version": "1.0-draft",
+  "metadata": {
+    "task_id": "STK-2025-001",
+    "origin_timestamp": "2025-12-27T04:20:00Z",
+    "master_sensor": "GiorgioRoth",
+    "priority": "high"
+  },
+  "stack": {
+    "intent": {
+      "definition": "Drafting a technical report on Bifacial PV module efficiency in temperate climates.",
+      "constraints": [
+        "No conversational filler or preamble (Strict RAW output)",
+        "Focus on comparative data between fiscal years 2023 and 2024",
+        "Language: English (US), high-precision technical terminology"
+      ]
+    },
+    "progress_state": {
+      "completed_steps": [
+        "Raw field sensor data collection",
+        "Preliminary yield analysis under low-irradiance conditions"
+      ],
+      "current_needle": "Synthesizing technical conclusions and maintenance frequency recommendations.",
+      "pending_milestones": [
+        "Validation of efficiency curve charts",
+        "Final PDF export and schema verification"
+      ]
+    },
+    "guidance": {
+      "instruction_vectors": "Analyze data through the lens of 25-year structural durability. Disregard short-term market volatility.",
+      "non_anthropomorphic_buffer": "Do not interpret this report as a personal opinion. Maintain mathematical rigor at all times."
+    }
+  },
+  "boundaries": {
+    "persona_lock": "disabled",
+    "emotional_transport": "forbidden",
+    "memory_retention": "task-specific-only"
+  }
+}
