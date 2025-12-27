@@ -18,6 +18,9 @@ ContinuumPort is an **open protocol** for portable semantic context. It enables 
 
 ---
 
+- ### Essays & Philosophy
+
+- [The Semantic RAW](docs/essays/semantic_raw.md) — Why CP-Core is a digital negative of intent
 - [Project Roadmap →](Roadmap.md)
 - [Full CP-Core v1.0 Specification (Draft)](docs/SPECIFICATION.md)
 - [Validation Tools](tools/validator.py)
