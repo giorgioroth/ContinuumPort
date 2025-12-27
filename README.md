@@ -159,7 +159,7 @@ All contributions must respect ContinuumPort's core boundaries.
 **MIT License**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Spec Status](https://img.shields.io/badge/Spec-Draft-yellow)](spec/specification.md)
+[![Spec Status](https://img.shields.io/badge/Spec-Draft-yellow)](docs/specification.md)
 
 [LICENSE](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE.md)
 
