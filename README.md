@@ -22,7 +22,7 @@ ContinuumPort is an **open protocol** for portable semantic context. It enables 
 ContinuumPort is built on the principle that **Continuity ≠ Presence**.
 We believe that transporting dialogue history is a bottleneck for both privacy and performance.
 
-* **[Why We Don't Move the Dialogue](https://www.google.com/search?q=docs/essays/why-we-dont-move-the-dialogue.md)** — Understanding the "Extractable Core" vs. "Conversation Noise".
+* **[Why We Don't Move the Dialogue]([https://www.google.com/search?q=docs/essays/why-we-dont-move-the-dialogue.md](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essays/why-we-dont-move-the-dialogue.md)** — Understanding the "Extractable Core" vs. "Conversation Noise".
 * **Restraint by Design**: We deliberately refuse to standardize identity or emotion, focusing strictly on task-related semantic state.
 
 ---
