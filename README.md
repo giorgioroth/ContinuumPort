@@ -136,12 +136,24 @@ All contributions must respect ContinuumPort's core boundaries.
 
 ## Roadmap
 
-- [ ] CP-Core format specification (JSON schema)
-- [ ] Reference Regen Engine implementation
-- [ ] Example CP-Core containers
-- [ ] Validation tools
-- [ ] Community RFC process
-- [ ] v1.0 stable release
+Towards a stable and widely adoptable v1.0 release.
+
+- [x] Core philosophy & boundaries documented
+- [x] [Regen Engine specification](https://github.com/giorgioroth/ContinuumPort/blob/main/spec/regen-engine.md)
+- [x] [CP-Core format specification (JSON schema)](https://github.com/giorgioroth/ContinuumPort/tree/main/cp-core)
+- [x] [Example CP-Core containers](https://github.com/giorgioroth/ContinuumPort/tree/main/examples)  
+  *(Multiple varied examples + quickstart guide available)*
+- [x] [Community RFC process](https://github.com/giorgioroth/ContinuumPort/blob/main/CONTRIBUTING.md)  
+  *(Contribution guidelines and philosophical constraints in place)*
+
+- [ ] [Reference Regen Engine implementation](https://github.com/giorgioroth/ContinuumPort/blob/main/spec/regen-engine.md)  
+  *(Planned – reference implementation coming soon)*
+
+- [ ] [Validation tools](#)  
+  *(Schema validation and conformance tests – contributions welcome)*
+
+- [ ] [v1.0 stable release](https://github.com/giorgioroth/ContinuumPort/milestones)  
+  *(Finalized spec, implementations, and tools required)*
 
 ---
 
