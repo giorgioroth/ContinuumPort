@@ -108,7 +108,7 @@ Everything else (embeddings, auth, optimizations) is implementation-specific.
 ### 3. **Test of Conformance**
 *A Regen Engine is conformant if and only if removing all non-normative layers does not change the semantic intent reconstructed from CP-Core.*
 
-Read the full rationale: [DESIGN_RATIONALE.md](DESIGN_RATIONALE.md)
+Read the full rationale: [DESIGN_RATIONALE.md]([DESIGN_RATIONALE.md](https://github.com/giorgioroth/ContinuumPort/blob/main/DESIGN_RATIONALE.md))
 
 ---
 
