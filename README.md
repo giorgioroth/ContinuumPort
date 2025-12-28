@@ -180,10 +180,11 @@ Towards a stable and widely adoptable v1.0 release.
 
 **MIT License**
 
-[LICENSE](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE.md)
+[LICENSE](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE)
 
 [LICENSE_REGEN.md](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE_REGEN.md)
 
+---
 
 ContinuumPort is open infrastructure.
 Free to use, fork, implement, and extend — within the documented boundaries.
