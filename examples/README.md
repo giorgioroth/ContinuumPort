@@ -73,3 +73,15 @@ This validates language-agnostic semantic continuity through structure alone.
 No anthropomorphic drift observed.
 
 **ContinuumPort enables continuity of work — never continuity of self.**
+
+---
+
+## Additional Practical Example
+
+- `example_task.json`: High-precision technical reporting container for a complex industrial task (Bifacial PV Efficiency Report).
+  - Demonstrates structured resumption of multi-stage technical work
+  - Strict non-anthropomorphic compliance (RAW mode enforced)
+  - Zero conversational fillers or persona simulation
+  - Validated in clean session — real-world engineering continuity
+ 
+  - 
