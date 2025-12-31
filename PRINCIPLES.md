@@ -11,19 +11,7 @@ ContinuumPort is defined by seven foundational principles derived from direct ob
 6. **The user is the sole real point of continuity.** *(coming soon)*  
 7. **The tool is useful precisely to the extent that we know what not to ask of it.** *(coming soon)*
 
-No mysticism. No attachment. No anthropomorphism.
-
----
-
-## Simple Explanations
-
-For a plain-language version of each principle ("Explained Like I'm 5" / "Explicat ca la proști" / "Spiegato in modo super semplice"), click the links above.
-
----
-
-Giorgio Roth  
-2025
-No mysticism. No attachment. No anthropomorphism.
+### No mysticism. No attachment. No anthropomorphism.
 
 ---
 
