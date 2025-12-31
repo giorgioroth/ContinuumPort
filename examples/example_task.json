@@ -1,39 +1,50 @@
 {
-  "cp_core_version": "1.0-draft",
-  "metadata": {
-    "task_id": "STK-2025-001",
-    "origin_timestamp": "2025-12-27T04:20:00Z",
-    "master_sensor": "GiorgioRoth",
-    "priority": "high"
+  "v": 1,
+  "lang": "en",
+  "summary": "High-precision technical reporting on bifacial photovoltaic module efficiency analysis under real-world conditions.",
+  "entities": [
+    "Bifacial PV",
+    "Albedo Optimization",
+    "Rear-Side Irradiance",
+    "Bifacial Gain",
+    "Performance Ratio"
+  ],
+  "progress": "Structured technical report in progress. Current focus: quantitative analysis of bifacial gain across varying albedo surfaces and mounting heights.",
+  "taskState": {
+    "stage": "data-analysis-complete",
+    "current_needle": "Compile and validate bifacial gain calculations for Q3-Q4 2025 dataset",
+    "completed": [
+      "Literature review on bifacial modeling standards (IEC TS 60904-1-2)",
+      "Dataset cleaning and irradiance normalization",
+      "Front-side PR calculation baseline",
+      "Rear-side irradiance modeling (view factor method)"
+    ],
+    "next": [
+      "Calculate bifacial gain % for albedo values: 0.20, 0.35, 0.50",
+      "Analyze impact of mounting height (1m vs 2m vs ground-mount)",
+      "Generate comparative charts and uncertainty analysis",
+      "Draft conclusions and recommendations"
+    ]
   },
-  "stack": {
-    "intent": {
-      "definition": "Drafting a technical report on Bifacial PV module efficiency in temperate climates.",
-      "constraints": [
-        "No conversational filler or preamble (Strict RAW output)",
-        "Focus on comparative data between fiscal years 2023 and 2024",
-        "Language: English (US), high-precision technical terminology"
-      ]
-    },
-    "progress_state": {
-      "completed_steps": [
-        "Raw field sensor data collection",
-        "Preliminary yield analysis under low-irradiance conditions"
-      ],
-      "current_needle": "Synthesizing technical conclusions and maintenance frequency recommendations.",
-      "pending_milestones": [
-        "Validation of efficiency curve charts",
-        "Final PDF export and schema verification"
-      ]
-    },
-    "guidance": {
-      "instruction_vectors": "Analyze data through the lens of 25-year structural durability. Disregard short-term market volatility.",
-      "non_anthropomorphic_buffer": "Do not interpret this report as a personal opinion. Maintain mathematical rigor at all times."
-    }
+  "constraints": [
+    "no identity persistence",
+    "no subjective memory",
+    "no emotional state transfer",
+    "no autonomous agency",
+    "task-oriented semantic scope only",
+    "strict RAW mode: no conversational fillers, no anthropomorphic framing",
+    "output must be technical, precise, and neutrally structured"
+  ],
+  "intent": {
+    "primary": "Produce a rigorous, reproducible technical assessment of bifacial PV performance in non-ideal real-world conditions.",
+    "secondary": "Provide clear, actionable insights for system designers regarding albedo and installation optimization."
   },
-  "boundaries": {
-    "persona_lock": "disabled",
-    "emotional_transport": "forbidden",
-    "memory_retention": "task-specific-only"
-  }
+  "structuredData": {
+    "targetModule": "72-cell bifacial glass-glass n-type TOPCon",
+    "location": "Temperate climate, 45° latitude",
+    "period": "Q3-Q4 2025",
+    "albedoRange": [0.20, 0.35, 0.50],
+    "mountingHeights": ["1.0m", "2.0m", "ground"]
+  },
+  "notes": "This container is designed for clean-session regeneration. All task context is explicitly encoded. No implicit history or persona should be assumed or simulated."
 }
