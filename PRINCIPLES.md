@@ -9,7 +9,7 @@ ContinuumPort is defined by seven foundational principles derived from direct ob
 4. **[We use the model as a tool, not as a mirror.](https://gi0rgioroth.blogspot.com/2025/12/principle-4-explained-like-im-5.html)**  
 5. **[Continuity resides in portable structure, not in the running model.](https://gi0rgioroth.blogspot.com/2025/12/principle-5-explained-like-im-5.html)**  
 6. **[The user is the sole real point of continuity.](https://gi0rgioroth.blogspot.com/2025/12/principle-6-explained-like-im-5.html)**  
-7. **The tool is useful precisely to the extent that we know what not to ask of it.** *(coming soon)*
+7. **[The tool is useful precisely to the extent that we know what not to ask of it.](https://gi0rgioroth.blogspot.com/2025/12/principle-7-explained-like-im-5.html)**
 
 ### No mysticism. No attachment. No anthropomorphism.
 
