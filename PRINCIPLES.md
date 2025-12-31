@@ -1,15 +1,28 @@
+
 # ContinuumPort Core Principles
 
 ContinuumPort is defined by seven foundational principles derived from direct observation of current large language model architecture.
 
-1. **Model inference is ephemeral. Semantic meaning can be portable.**  
-2. **We transport only intention and working state.**  
-3. **We explicitly exclude identity, emotion, or persistent self-representation.**  
-4. **We use the model as a tool, not as a mirror.**  
-5. **Continuity resides in portable structure, not in the running model.**  
-6. **The user is the sole real point of continuity.**  
-7. **The tool is useful precisely to the extent that we know what not to ask of it.**
+1. **[Model inference is ephemeral. Semantic meaning can be portable.](https://gi0rgioroth.blogspot.com/2025/12/principle-1-explained-like-im-5.html)**  
+2. **[We transport only intention and working state.](https://gi0rgioroth.blogspot.com/2025/12/principle-2-explained-like-im-5.html)**  
+3. **[We explicitly exclude identity, emotion, or persistent self-representation.](https://gi0rgioroth.blogspot.com/2025/12/principle-3-explained-like-im-5.html)**  
+4. **[We use the model as a tool, not as a mirror.](https://gi0rgioroth.blogspot.com/2025/12/principle-4-explained-like-im-5.html)**  
+5. **[Continuity resides in portable structure, not in the running model.](https://gi0rgioroth.blogspot.com/2025/12/principle-5-explained-like-im-5.html)**  
+6. **The user is the sole real point of continuity.** *(coming soon)*  
+7. **The tool is useful precisely to the extent that we know what not to ask of it.** *(coming soon)*
 
+No mysticism. No attachment. No anthropomorphism.
+
+---
+
+## Simple Explanations
+
+For a plain-language version of each principle ("Explained Like I'm 5" / "Explicat ca la proști" / "Spiegato in modo super semplice"), click the links above.
+
+---
+
+Giorgio Roth  
+2025
 No mysticism. No attachment. No anthropomorphism.
 
 ---
