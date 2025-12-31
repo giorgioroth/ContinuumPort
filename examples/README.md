@@ -84,4 +84,3 @@ No anthropomorphic drift observed.
   - Zero conversational fillers or persona simulation
   - Validated in clean session — real-world engineering continuity
  
-  - 
