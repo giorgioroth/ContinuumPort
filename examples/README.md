@@ -27,7 +27,7 @@ It does **not** include identity, memory, emotion, or persona data.
 
 ---
 
-**[ContinuumPort: Needlecasting Proof of Concept](https://youtu.be/4hFJ8tZUeHc)**
+**[ContinuumPort: Needlecasting Proof of Concept](https://youtu.be/4hFJ8tZUeHc)** (Video YT)
 
 To observe this JSON being processed in real time by an unauthenticated,
 non-logged-in LLM session, see the validation video:
@@ -46,5 +46,30 @@ non-logged-in LLM session, see the validation video:
 - **Portability**  
   Validation is performed in a clean session with no prior user history,
   demonstrating that the protocol carries all required task context.
+
+  ---
+
+  ## ContinuumPort Examples
+
+These examples demonstrate empirical cross-model regeneration of CP-Core containers in clean sessions.
+
+## Cross-Model & Cross-Language Validation
+
+- `cp-core_en.json`: English version of a validated CP-Core container.
+- `cp-core_ro.json`: Romanian version (semantically identical, different language).
+
+### Observation
+
+The same semantic snapshot was successfully regenerated and advanced across:
+- Grok
+- Claude
+- Gemini
+- ChatGPT
+
+All instances resumed the task at the correct stage, respected constraints, and produced equivalent progress — without any identity, memory, or emotional persistence.
+
+This validates language-agnostic semantic continuity through structure alone.
+
+No anthropomorphic drift observed.
 
 **ContinuumPort enables continuity of work — never continuity of self.**
