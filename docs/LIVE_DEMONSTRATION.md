@@ -2,6 +2,8 @@
 **Primary Evidence (Full Conversation Transcript):**
 → **[View the complete Grok conversation →](https://x.com/i/grok/share/Sud8QBYWE1XuFi2nGwxeT9XGf)**
 
+**[Full_transcript_grok_2026-01-01.md](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/transcript_grok_2026-01-01.md)**
+
 *This document analyzes and contextualizes the conversation above. Readers are encouraged to review the primary source before reading the interpretation.*
 
 ---
