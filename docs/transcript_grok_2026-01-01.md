@@ -3,8 +3,21 @@
 **Date:** January 1, 2026  
 **Model:** Grok (xAI)  
 **Purpose:** Live demonstration of ContinuumPort principles in action  
-**Author of the project discussed:** Giorgio Roth (user in this conversation)  
+**Project author discussed: Giorgio Roth (conversation participant)**
+
 **Note:** This is the complete, unedited transcript of the single continuous session, published as a permanent archival record.
+Formatting adjustments only (line breaks, headings). Content preserved verbatim.
+
+### Primary Evidence (Full Conversation Transcript)
+
+- **Original shared link (hosted by Grok/xAI):** → [View the complete Grok conversation →](<LINK-UL ORIGINAL AICI>)
+
+  > Note: This link remains active as long as xAI retains the conversation and the share is not revoked. Long-term availability is not guaranteed.
+
+- **Permanent self-hosted archive (for longevity):**
+  - GitHub: [Full Transcript: transcript_grok_2026-01-01.md](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/transcript_grok_2026-01-01.md)
+
+Readers are encouraged to review the primary source before reading the interpretation. The self-hosted version ensures accessibility even if third-party links expire.
 
 ---
 
