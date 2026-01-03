@@ -125,6 +125,8 @@ Read the full rationale: [DESIGN_RATIONALE.md]([DESIGN_RATIONALE.md](https://git
 - Emotional continuity or attachment formation
 - Behavioral conditioning or personality shaping
 - Hidden data retention or opaque interpretation
+ 
+- ContinuumPort includes mandatory non-abuse constraints. See [/normative/NON_ABUSE.md](/normative/NON_ABUSE.md).
 
 ---
 
