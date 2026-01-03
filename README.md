@@ -124,10 +124,9 @@ Read the full rationale: [DESIGN_RATIONALE.md]([DESIGN_RATIONALE.md](https://git
 - Identity persistence or "self" simulation
 - Emotional continuity or attachment formation
 - Behavioral conditioning or personality shaping
-- Hidden data retention or opaque interpretation
- 
-- ContinuumPort includes mandatory non-abuse constraints. See [/normative/NON_ABUSE.md](/normative/NON_ABUSE.md).
-
+- Hidden data retention or opaque interpretation 
+- ContinuumPort is subject to mandatory non-abuse normative constraints. See [/normative/NON_ABUSE.md](/normative/NON_ABUSE.md).
+  
 ---
 
 ## Contributing
