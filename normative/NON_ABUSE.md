@@ -1,8 +1,8 @@
 # ContinuumPort — Non-Abuse Normative Constraints
 
-## Mandatory limitations on illicit and harmful use
+## Mandatory normative constraints on prohibited use
 
-ContinuumPort containers (**CP-Core**) and associated tools MUST NOT be used for:
+ContinuumPort semantic containers (CP-Core) and associated tools MUST NOT be used for:
 
 - Development, deployment, or operation of autonomous weapons systems
 - Creation or distribution of child sexual abuse material (real or synthetic)
