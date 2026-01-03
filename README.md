@@ -15,6 +15,7 @@ ContinuumPort is an **open protocol** for portable semantic context. It enables 
 * **Deep Theory**: Explore `docs/essays/` for the foundational concepts behind the protocol.
 * **Technical Rules**: Check the `spec/` folder for normative implementation requirements.
 * **Live Examples**: See `examples/quickstart/` for a Python-based reference of CP-Core in action.
+* **For a deeper discussion on why continuity matters more than raw compute,** see [docs/AI_Cognitive_Reconstruction_Cost.md](docs/AI_Cognitive_Reconstruction_Cost.md)
 
 ---
 
