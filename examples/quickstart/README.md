@@ -72,7 +72,7 @@ The container does NOT preserve:
 ## Next Steps
 - Read 0_context.md for scenario framing
 - Run 1_create_cp_core.py to see container creation
-- Explore the full protocol in future updates or [contact me](continuumport@gmail.com) for details
+- Explore the full protocol in future updates or contact me - continuumport@gmail.com for details
 
 ## License
 Apache 2.0  
