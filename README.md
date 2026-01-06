@@ -6,19 +6,19 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
 [![Spec Status](https://img.shields.io/badge/docs-Draft-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/SPECIFICATION.md)
 
-ContinuumPort is an **open protocol** for portable semantic context. It enables the transfer of user intent, task constraints, and progress state between AI systems, while explicitly refusing to transport identity, emotion, or behavioral conditioning.
+### ContinuumPort is an **open protocol** for portable semantic context. It enables the transfer of user intent, task constraints, and progress state between AI systems, while explicitly refusing to transport identity, emotion, or behavioral conditioning.
 
 ## 🗺️ How to Read This Repository
 
 
-- **The Big Picture:** Start with this [README.md](README.md) for a high-level overview.
-- **Philosophy & Ethics:** Read [DESIGN_RATIONALE.md](DESIGN_RATIONALE.md) and
-  [docs/boundaries.md](docs/boundaries.md) to understand the "why".
-- **Deep Theory:** Explore [docs/essays/](docs/essays/) for the foundational concepts behind the protocol.
-- **Technical Rules:** Check the [spec/](spec/) folder for normative implementation requirements.
-- **Live Examples:** See [examples/quickstart/](examples/quickstart/) for a Python-based reference of CP-Core in action.
-- **For a deeper discussion on why continuity matters more than raw compute, see**
-  [AI_Cognitive_Reconstruction_Cost.md](docs/AI_Cognitive_Reconstruction_Cost.md).
+- **The Big Picture: Start this [README.md](README.md) for a high-level overview.**
+- **Philosophy & Ethics: Read [DESIGN_RATIONALE.md](DESIGN_RATIONALE.md) and
+  [docs/boundaries.md](docs/boundaries.md) to understand the "why".**
+- **Deep Theory: Explore [docs/essays/](docs/essays/) for the foundational concepts behind the protocol.**
+- **Technical Rules: Check the [spec/](spec/) folder for normative implementation requirements.**
+- **Live Examples: See [examples/quickstart/](examples/quickstart/) for a Python-based reference of CP-Core in action.**
+- **For a deeper discussion on why continuity matters more than raw compute, see
+  [AI_Cognitive_Reconstruction_Cost.md](docs/AI_Cognitive_Reconstruction_Cost.md).**
 
 ---
 
