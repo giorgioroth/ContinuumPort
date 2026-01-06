@@ -8,6 +8,42 @@
 
 ### ContinuumPort is an **open protocol** for portable semantic context. It enables the transfer of user intent, task constraints, and progress state between AI systems, while explicitly refusing to transport identity, emotion, or behavioral conditioning.
 
+---
+
+## Canonical Description
+
+
+
+**ContinuumPort** is a normative and architectural framework for continuity of work with AI systems, which strictly separates semantic task continuity from any form of identity, memory, or presence continuity.
+
+ContinuumPort is **not**:
+
+- a company or organization;
+- a commercial product;
+- a data interoperability protocol;
+- a conversation storage system;
+- a semantic web or knowledge-graph standard.
+
+ContinuumPort defines a single restrictive principle:
+
+**Only intention and working state are portable.  
+Identity, emotion, and persistent self-representation are explicitly excluded.**
+
+Within this framework:
+
+- AI models are treated as **ephemeral, interchangeable tools**;
+- continuity does not belong to the model, the session, or the vendor;
+- the human user is the **sole real point of continuity**;
+- portable structure (task state + intent) enables resumption of work without recreating presence, relationship, or identity.
+
+ContinuumPort is a proposal for the **correct limitation** of AI, not its expansion.  
+Its value derives precisely from what it refuses to carry.
+
+**ContinuumPort: semantic continuity without identity continuity.  
+Tools remain tools. Humans remain the only continuity.**
+
+---
+
 ## 🗺️ How to Read This Repository
 
 
