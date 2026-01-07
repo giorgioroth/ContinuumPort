@@ -1,0 +1,36 @@
+{
+  "cp_version": "1.0",
+  "cp_normative_id": "CP-NORM-H01",
+  "continuity_type": "semantic_work",
+
+  "intent": "Describe the objective of the work being continued, not the reason for the interruption.",
+
+  "working_state": {
+    "established": [
+      "Concepts, decisions, or conclusions already fixed and not under debate"
+    ],
+    "open_questions": [
+      "Unresolved questions or areas requiring further work"
+    ],
+    "blocked_items": [
+      "Explicit blockers (missing info, dependencies, deliberate pauses)"
+    ]
+  },
+
+  "constraints": {
+    "non_transferable": [
+      "identity",
+      "emotion",
+      "personal_memory",
+      "agent_personality",
+      "relationship_continuity"
+    ]
+  },
+
+  "handoff_point": {
+    "resume_from": "The last stable semantic boundary, not a conversational turn",
+    "next_expected_action": "The single next action required to advance the work"
+  },
+
+  "notes": "Optional. Contextual remarks that do not alter intent, state, or constraints."
+}
