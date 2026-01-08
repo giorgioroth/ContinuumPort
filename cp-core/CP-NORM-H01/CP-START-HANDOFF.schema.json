@@ -39,6 +39,12 @@
       "conversational_style",
       "validation_language"
     ],
+
+    "interaction_constraints": {
+      "language": "ro",
+      "discourse_mode": "non_conversational"
+    },
+
     "enforcement": "hard"
   },
 
