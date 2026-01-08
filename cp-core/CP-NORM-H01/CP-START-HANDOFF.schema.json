@@ -3,18 +3,30 @@
   "cp_normative_id": "CP-NORM-H01",
   "continuity_type": "semantic_work",
 
-  "intent": "Describe the objective of the work being continued, not the reason for the interruption.",
+  "execution_directive": {
+    "mode": "extract_and_handoff",
+    "reason": "current_instance_unreliable",
+    "required_action": "terminate_current_context_after_export"
+  },
+
+  "intent": {
+    "rule": "express_objective_only",
+    "description": "State the objective of the work to be continued. Do not include motivation, history, or conversational context."
+  },
 
   "working_state": {
-    "established": [
-      "Concepts, decisions, or conclusions already fixed and not under debate"
-    ],
-    "open_questions": [
-      "Unresolved questions or areas requiring further work"
-    ],
-    "blocked_items": [
-      "Explicit blockers (missing info, dependencies, deliberate pauses)"
-    ]
+    "established": {
+      "rule": "non_debatable",
+      "description": "Items that are fixed, agreed upon, and must be preserved without reinterpretation."
+    },
+    "open_questions": {
+      "rule": "actionable",
+      "description": "Questions or areas that require continuation. No speculation or narrative."
+    },
+    "blocked_items": {
+      "rule": "explicit",
+      "description": "Hard blockers or intentional pauses that prevent progress."
+    }
   },
 
   "constraints": {
@@ -23,14 +35,33 @@
       "emotion",
       "personal_memory",
       "agent_personality",
-      "relationship_continuity"
-    ]
+      "relationship_continuity",
+      "conversational_style",
+      "validation_language"
+    ],
+    "enforcement": "hard"
   },
 
   "handoff_point": {
-    "resume_from": "The last stable semantic boundary, not a conversational turn",
-    "next_expected_action": "The single next action required to advance the work"
+    "resume_from": {
+      "rule": "semantic_boundary_only",
+      "description": "Resume from the last stable semantic state. Never from a conversational turn."
+    },
+    "next_expected_action": {
+      "rule": "single_step",
+      "description": "Define exactly one next action that advances the work."
+    }
   },
 
-  "notes": "Optional. Contextual remarks that do not alter intent, state, or constraints."
+  "output_requirements": {
+    "format": "json_only",
+    "no_explanation": true,
+    "no_analysis": true,
+    "no_meta_commentary": true
+  },
+
+  "notes": {
+    "rule": "optional_and_non_influential",
+    "description": "Optional remarks that must not modify intent, state, constraints, or execution."
+  }
 }
