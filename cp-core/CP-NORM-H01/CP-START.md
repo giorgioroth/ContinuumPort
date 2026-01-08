@@ -3,9 +3,14 @@
 
 ## Status
 
-**NORMATIVE — CANONICAL — MACHINE-EXECUTABLE**
+NORMATIVE — CANONICAL — MACHINE-EXECUTABLE BY DESIGNATED ENGINES
 
 This document defines a normative, canonical, and machine-executable mechanism for initiating semantic handoff across execution contexts.
+
+---
+
+## Normative Clarification — Executability
+The CP-START schema is declarative and normative only; execution, validation, and correctness of handoff require a Regen Engine and cannot be inferred from the schema itself.
 
 ---
 
