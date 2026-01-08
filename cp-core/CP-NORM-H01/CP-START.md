@@ -67,3 +67,19 @@ CP-NORM-H01 does **NOT** define:
 
 It defines **only** the condition under which semantic work may be **safely and correctly handed off**.
 
+---
+
+## Provenance
+
+ContinuumPort is developed through a human-led, model-assisted iterative process.  
+All normative decisions, scope delimitations, and final formulations are established by the human author(s).
+
+Language models are used as non-persistent tools for exploration, drafting, stress-testing, and semantic compression.  
+They do not retain memory across sessions, do not possess authorship, and do not hold agency over the resulting work.
+
+Continuity within the project is achieved exclusively through explicit, versioned artifacts and schemas.  
+No conversational history, identity, emotional state, or relational context is preserved or transferred.
+
+Each normative document represents a stable semantic checkpoint and may be continued, revised, or forked solely through explicit human action.
+
+
