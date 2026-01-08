@@ -3,7 +3,9 @@
 
 ## Status
 
-**NORMATIVE — CANONICAL**
+**NORMATIVE — CANONICAL — MACHINE-EXECUTABLE**
+
+This document defines a normative, canonical, and machine-executable mechanism for initiating semantic handoff across execution contexts.
 
 ---
 
