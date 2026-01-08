@@ -1,4 +1,5 @@
 
+
 # CP-NORM-H01 — Semantic Handoff Initiation (CP-START)
 
 ## Status
@@ -10,6 +11,7 @@ This document defines a normative, canonical, and machine-executable mechanism f
 ---
 
 ## Normative Clarification — Executability
+
 The **CP-START** schema is declarative and normative only; execution, validation, and correctness of handoff require a **Regen Engine** and cannot be inferred from the schema itself.
 
 ---
@@ -40,6 +42,29 @@ The purpose of **CP-NORM-H01** is to ensure that:
 A ContinuumPort-compliant system **MUST** initiate any semantic handoff exclusively through the CP-START procedure as defined in this document.
 
 Any attempt to resume, continue, or reconstruct semantic work **without** CP-START is **NON-COMPLIANT**, regardless of apparent functional success.
+
+---
+
+## Constraint Semantics
+
+CP-START MAY impose **explicit semantic constraints** that govern agent behavior **without introducing identity, memory, or relational continuity**.
+
+Such constraints are treated as **structural parameters of the work**, not as user preferences or conversational context.
+
+Constraint semantics MAY include, but are not limited to:
+
+* **Language invariance** (e.g., a fixed working language);
+* **Discourse mode** (e.g., non-conversational, non-explanatory);
+* **Output restrictions** (e.g., JSON-only, no meta-commentary);
+* **Execution posture** (e.g., extract-and-handoff, terminate-after-export).
+
+These constraints:
+
+* **MUST NOT** be inferred from prior interaction;
+* **MUST NOT** rely on user identity, account state, or session memory;
+* **MUST** be honored solely because they are present in the CP-START structure.
+
+This establishes that **behavioral consistency can be achieved through semantic structure alone**, independent of login state, conversational history, or relational continuity.
 
 ---
 
@@ -76,13 +101,13 @@ It defines **only** the condition under which semantic work may be **safely and 
 
 ## Provenance
 
-ContinuumPort is developed through a human-led, model-assisted iterative process.  
+ContinuumPort is developed through a human-led, model-assisted iterative process.
 All normative decisions, scope delimitations, and final formulations are established by the human author(s).
 
-Language models are used as non-persistent tools for exploration, drafting, stress-testing, and semantic compression.  
+Language models are used as non-persistent tools for exploration, drafting, stress-testing, and semantic compression.
 They do not retain memory across sessions, do not possess authorship, and do not hold agency over the resulting work.
 
-Continuity within the project is achieved exclusively through explicit, versioned artifacts and schemas.  
+Continuity within the project is achieved exclusively through explicit, versioned artifacts and schemas.
 No conversational history, identity, emotional state, or relational context is preserved or transferred.
 
 Each normative document represents a stable semantic checkpoint and may be continued, revised, or forked solely through explicit human action.
