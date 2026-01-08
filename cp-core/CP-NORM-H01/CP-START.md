@@ -3,14 +3,14 @@
 
 ## Status
 
-NORMATIVE — CANONICAL — MACHINE-EXECUTABLE BY DESIGNATED ENGINES
+**NORMATIVE — CANONICAL — MACHINE-EXECUTABLE BY DESIGNATED ENGINES**
 
 This document defines a normative, canonical, and machine-executable mechanism for initiating semantic handoff across execution contexts.
 
 ---
 
 ## Normative Clarification — Executability
-The CP-START schema is declarative and normative only; execution, validation, and correctness of handoff require a Regen Engine and cannot be inferred from the schema itself.
+The **CP-START** schema is declarative and normative only; execution, validation, and correctness of handoff require a **Regen Engine** and cannot be inferred from the schema itself.
 
 ---
 
@@ -26,7 +26,7 @@ No other handoff mechanism is considered valid within `cp-core`.
 
 ## Purpose
 
-The purpose of CP-NORM-H01 is to ensure that:
+The purpose of **CP-NORM-H01** is to ensure that:
 
 * semantic continuity is **explicitly initiated**, not inferred;
 * continuity is preserved **without relying on memory, identity, or relational persistence**;
@@ -45,7 +45,7 @@ Any attempt to resume, continue, or reconstruct semantic work **without** CP-STA
 
 ## Position Within `cp-core`
 
-CP-NORM-H01 is a **core normative component** of `cp-core`.
+**CP-NORM-H01** is a **core normative component** of `cp-core`.
 
 Without CP-NORM-H01:
 
@@ -86,5 +86,4 @@ Continuity within the project is achieved exclusively through explicit, versione
 No conversational history, identity, emotional state, or relational context is preserved or transferred.
 
 Each normative document represents a stable semantic checkpoint and may be continued, revised, or forked solely through explicit human action.
-
 
