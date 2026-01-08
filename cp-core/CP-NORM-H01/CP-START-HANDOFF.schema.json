@@ -11,21 +11,21 @@
 
   "intent": {
     "rule": "express_objective_only",
-    "description": "State the objective of the work to be continued. Do not include motivation, history, or conversational context."
+    "description": "State the objective of the work to be continued. Do not include motivation, history, personal context, or conversational references."
   },
 
   "working_state": {
     "established": {
       "rule": "non_debatable",
-      "description": "Items that are fixed, agreed upon, and must be preserved without reinterpretation."
+      "description": "Concepts, decisions, or conclusions that are fixed and must be preserved without reinterpretation or revalidation."
     },
     "open_questions": {
-      "rule": "actionable",
-      "description": "Questions or areas that require continuation. No speculation or narrative."
+      "rule": "actionable_only",
+      "description": "Unresolved questions or tasks that require continuation. No speculation, narrative, or commentary."
     },
     "blocked_items": {
-      "rule": "explicit",
-      "description": "Hard blockers or intentional pauses that prevent progress."
+      "rule": "explicit_only",
+      "description": "Hard blockers or intentional pauses that prevent progress. Absence means no blockers."
     }
   },
 
@@ -39,23 +39,21 @@
       "conversational_style",
       "validation_language"
     ],
-
     "interaction_constraints": {
       "language": "ro",
       "discourse_mode": "non_conversational"
     },
-
     "enforcement": "hard"
   },
 
   "handoff_point": {
     "resume_from": {
       "rule": "semantic_boundary_only",
-      "description": "Resume from the last stable semantic state. Never from a conversational turn."
+      "description": "Resume from the last stable semantic state of the work, never from a conversational turn or message."
     },
     "next_expected_action": {
       "rule": "single_step",
-      "description": "Define exactly one next action that advances the work."
+      "description": "Define exactly one concrete next action that advances the work."
     }
   },
 
@@ -68,6 +66,6 @@
 
   "notes": {
     "rule": "optional_and_non_influential",
-    "description": "Optional remarks that must not modify intent, state, constraints, or execution."
+    "description": "Optional contextual remarks that must not modify intent, state, constraints, or execution behavior."
   }
 }
