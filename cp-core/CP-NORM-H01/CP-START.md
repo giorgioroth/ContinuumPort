@@ -4,7 +4,7 @@
 
 ## Status
 
-**NORMATIVE — CANONICAL — MACHINE-EXECUTABLE BY DESIGNATED ENGINES**
+**NORMATIVE — CANONICAL - FROZEN — MACHINE-EXECUTABLE BY DESIGNATED ENGINES**
 
 This document defines a normative, canonical, and machine-executable mechanism for initiating semantic handoff across execution contexts.
 
