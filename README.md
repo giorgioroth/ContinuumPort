@@ -61,7 +61,7 @@ For explicit boundaries and category errors, see [`NON_GOALS.md`](NON_GOALS.md).
 ## 🗺️ How to Read This Repository
 
 
-- **The Big Picture: Start this [README.md](README.md) for a high-level overview.**
+- **The Big Picture: Start this [README.md](https://github.com/giorgioroth/ContinuumPort/blob/main/README.md) for a high-level overview.**
 - **Philosophy & Ethics: Read [DESIGN_RATIONALE.md](DESIGN_RATIONALE.md) and
   [docs/boundaries.md](docs/boundaries.md) to understand the "why".**
 - **Deep Theory: Explore [docs/essays/](docs/essays/) for the foundational concepts behind the protocol.**
