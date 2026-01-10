@@ -46,6 +46,18 @@ Tools remain tools. Humans remain the only continuity.**
 
 ---
 
+### TL;DR — Non-Goals
+
+ContinuumPort is **not** a system for preserving people, presence, or conversations.
+
+It does **not** store identity, emotion, memory, or relationships.  
+It does **not** create persistent agents or digital selves.  
+It exists **only** to preserve the minimum semantic structure required to continue work *after presence is no longer possible*.
+
+For explicit boundaries and category errors, see [`NON_GOALS.md`](NON_GOALS.md).
+
+---
+
 ## 🗺️ How to Read This Repository
 
 
