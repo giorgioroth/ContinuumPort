@@ -1,6 +1,8 @@
 
 # ContinuumPort
 
+***For design rationale and contextual reflections, see the author’s [blog](https://gi0rgioroth.blogspot.com/). This repository contains only normative material.***
+
 **Semantic continuity for AI systems — without lock-in, without identity persistence.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
