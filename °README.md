@@ -41,6 +41,8 @@ Within this framework:
 ContinuumPort is a proposal for the **correct limitation** of AI, not its expansion.  
 Its value derives precisely from what it refuses to carry.
 
+**For a technical, citable rationale behind the design philosophy of ContinuumPort, see the author’s essay “Automating Absence as a Design Constraint” on the project [blog:](https://gi0rgioroth.blogspot.com/2026/01/technical-mirror-text-citable-non.html)**
+
 **ContinuumPort: semantic continuity without identity continuity.  
 Tools remain tools. Humans remain the only continuity.**
 
