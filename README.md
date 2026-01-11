@@ -69,8 +69,10 @@ The documents below serve different purposes and should be read accordingly.
 - **Canonical reference [Terminology & Positioning](https://github.com/giorgioroth/ContinuumPort/blob/main/normative/TERMINOLOGY_AND_POSITIONING.md)**  
   *(Normative definitions and fixed terminology; authoritative)*
 
+
 - **Normative rationale (informative, non-authoritative) [CP-NORM-H01: Not a Storm in a Teacup](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/cp-norm-h01-not-a-storm-in-a-teacup.md)**  
   *(Explains why the norm is proportionate and necessary; addresses common objections)*
+- **[Defensible Architecture (FAQ for Skeptics)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essays/Defensible_Architecture_(FAQ_for_Skeptics).md) Addresses common objections and category errors.**
   
 - **Philosophy & Ethics: Read [DESIGN_RATIONALE.md](DESIGN_RATIONALE.md) and
   [docs/boundaries.md](docs/boundaries.md) to understand the "why".**
@@ -257,32 +259,6 @@ Free to use, fork, implement, and extend — within the documented boundaries.
 ---
 
 **ContinuumPort: continuity of work, never continuity of self.**
-
----
-
-## Defensible Architecture (FAQ for Skeptics)
-
-### 1. "Isn't this just a glorified JSON summary?"
-
-**Yes.** And that is its greatest strength. ContinuumPort does not aim for structural complexity, but for **normative restriction**. While a standard "summary" is informal and often contaminated with behavioral instructions or persona drift, CP-Core is a strictly defined transport layer. It standardizes the *data*, not the *formatting*.
-
-### 2. "Why not just use a well-crafted system prompt?"
-
-System prompts are model-dependent, fragile, and constitute a "prompting trick" rather than a robust architecture. ContinuumPort separates the **Semantic State** (the *what*) from the **Regen Engine** (the *how*). By treating task continuity as a data serialization problem, we achieve true multimodel portability. **Prompt construction is explicitly out of scope for the protocol.**
-
-### 3. "Does this really protect privacy if the state is plain text?"
-
-Its primary privacy contribution is the **Prevention of Identity Leakage**. By explicitly forbidding the storage of user style, emotional tone, or personal history, the protocol ensures that even if a container is intercepted, it contains only "work in progress," not a "psychological profile" of the user. We standardize the exclusion of identity.
-
-### 4. "Without the 'Regen Engine', isn't the protocol useless?"
-
-A protocol is a contract, not a product. TCP/IP doesn't send emails; it moves packets. ContinuumPort moves semantic state. By separating the **Transport Layer (CP-Core)** from the **Interpretation Layer (Regen Engine)**, we allow the ecosystem to build diverse, conformant engines that all speak the same semantic language.
-
-### 5. "What prevents vendors from adding their own 'tracking' fields?"
-
-The specification allows for extensions, but they are marked as **Non-Normative**. A Regen Engine is conformant **if and only if** removing all non-normative layers (tracking, embeddings, proprietary metadata) does not change the reconstructed semantic intent. We provide the standard that allows users to detect and strip away vendor lock-in.
-
----
 
 **Documentation is the product. CP-Core is the contract.**
 
