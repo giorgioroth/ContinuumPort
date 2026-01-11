@@ -10,7 +10,7 @@ Formatting adjustments only (line breaks, headings). Content preserved verbatim.
 
 ### Primary Evidence (Full Conversation Transcript)
 
-- **Original shared link (hosted by Grok/xAI):** → [View the complete Grok conversation →](<LINK-UL ORIGINAL AICI>)
+- **Original shared link (hosted by Grok/xAI):** → [View the complete Grok conversation →]([<LINK-UL ORIGINAL AICI>](https://x.com/i/grok/share/Sud8QBYWE1XuFi2nGwxeT9XGf))
 
   > Note: This link remains active as long as xAI retains the conversation and the share is not revoked. Long-term availability is not guaranteed.
 
