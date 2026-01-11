@@ -58,8 +58,23 @@ For explicit boundaries and category errors, see [`NON_GOALS.md`](NON_GOALS.md).
 
 ---
 
-## 🗺️ How to Read This Repository
+## 🗺️ How to Approach This Repository
 
+ContinuumPort is defined by a fixed normative boundary, not by features or workflows.
+The documents below serve different purposes and should be read accordingly.
+
+### Start here
+- **[Why CP Is a Boundary, Not a Feature](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/why-cp-is-a-boundary-not-a-feature.md)**  
+  *(Conceptual essay explaining the core design decision)*
+
+### Canonical reference
+- **[Terminology & Positioning](https://github.com/giorgioroth/ContinuumPort/blob/main/normative/TERMINOLOGY_AND_POSITIONING.md)**  
+  *(Normative definitions and fixed terminology; authoritative)*
+
+### Normative rationale
+- **[CP-NORM-H01: Not a Storm in a Teacup](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/cp-norm-h01-not-a-storm-in-a-teacup.md)**  
+  *(Explains why the norm is proportionate and necessary; addresses common objections)*
+  
 
 - **The Big Picture: Start this [README.md](https://github.com/giorgioroth/ContinuumPort/blob/main/README.md) for a high-level overview.**
 - **Philosophy & Ethics: Read [DESIGN_RATIONALE.md](DESIGN_RATIONALE.md) and
