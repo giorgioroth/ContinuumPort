@@ -1,4 +1,4 @@
-# Why CP Is a Boundary, Not a Feature
+# Why CP (ContinuumPort) Is a Boundary, Not a Feature
 
 
 In recent years, continuity in human–AI interaction has become a desirable property.  
