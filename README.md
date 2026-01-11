@@ -63,20 +63,17 @@ For explicit boundaries and category errors, see [`NON_GOALS.md`](NON_GOALS.md).
 ContinuumPort is defined by a fixed normative boundary, not by features or workflows.
 The documents below serve different purposes and should be read accordingly.
 
-### Start here
-- **[Why CP Is a Boundary, Not a Feature](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/why-cp-is-a-boundary-not-a-feature.md)**  
+- **Start here [Why CP Is a Boundary, Not a Feature](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/why-cp-is-a-boundary-not-a-feature.md)**  
   *(Conceptual essay explaining the core design decision)*
 
-### Canonical reference
-- **[Terminology & Positioning](https://github.com/giorgioroth/ContinuumPort/blob/main/normative/TERMINOLOGY_AND_POSITIONING.md)**  
+- **Canonical reference [Terminology & Positioning](https://github.com/giorgioroth/ContinuumPort/blob/main/normative/TERMINOLOGY_AND_POSITIONING.md)**  
   *(Normative definitions and fixed terminology; authoritative)*
+  
+- **The Big Picture: Start this [README.md](https://github.com/giorgioroth/ContinuumPort/blob/main/README.md) for a high-level overview.**
 
-### Normative rationale
-- **[CP-NORM-H01: Not a Storm in a Teacup](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/cp-norm-h01-not-a-storm-in-a-teacup.md)**  
+- **Normative rationale (informative, non-authoritative) [CP-NORM-H01: Not a Storm in a Teacup](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/cp-norm-h01-not-a-storm-in-a-teacup.md)**  
   *(Explains why the norm is proportionate and necessary; addresses common objections)*
   
-
-- **The Big Picture: Start this [README.md](https://github.com/giorgioroth/ContinuumPort/blob/main/README.md) for a high-level overview.**
 - **Philosophy & Ethics: Read [DESIGN_RATIONALE.md](DESIGN_RATIONALE.md) and
   [docs/boundaries.md](docs/boundaries.md) to understand the "why".**
 - **Deep Theory: Explore [docs/essays/](docs/essays/) for the foundational concepts behind the protocol.**
