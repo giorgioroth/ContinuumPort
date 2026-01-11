@@ -68,8 +68,6 @@ The documents below serve different purposes and should be read accordingly.
 
 - **Canonical reference [Terminology & Positioning](https://github.com/giorgioroth/ContinuumPort/blob/main/normative/TERMINOLOGY_AND_POSITIONING.md)**  
   *(Normative definitions and fixed terminology; authoritative)*
-  
-- **The Big Picture: Start this [README.md](https://github.com/giorgioroth/ContinuumPort/blob/main/README.md) for a high-level overview.**
 
 - **Normative rationale (informative, non-authoritative) [CP-NORM-H01: Not a Storm in a Teacup](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/cp-norm-h01-not-a-storm-in-a-teacup.md)**  
   *(Explains why the norm is proportionate and necessary; addresses common objections)*
