@@ -45,6 +45,7 @@ Its value derives precisely from what it refuses to carry.
 
 **ContinuumPort: semantic continuity without identity continuity.  
 Tools remain tools. Humans remain the only continuity.**
+ _Project scope and status: see [PROJECT_STATUS.md.](https://github.com/giorgioroth/ContinuumPort/blob/main/PROJECT_STATUS.md)_
 
 ---
 
