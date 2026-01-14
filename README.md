@@ -254,7 +254,7 @@ Towards a stable and widely adoptable v1.0 release.
 
 [LICENSE](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE)
 
-[LICENSE_REGEN.md](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE_REGEN.md)
+[LICENSE_REGEN.md](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
 
 ---
 
