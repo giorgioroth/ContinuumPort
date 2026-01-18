@@ -23,6 +23,7 @@ This canon is considered soft-frozen:
 
 - normative/**
 - docs/academic-foundations.md
+- docs/CONTINUUMPORT_TECHNICAL_SUMMARY.md — final conceptual synthesis (version 1.0, soft-frozen)
 - docs/PRINCIPLES.md
 - docs/Philosophy.md
 - docs/DESIGN_RATIONALE.md
@@ -31,6 +32,7 @@ This canon is considered soft-frozen:
 - README.md
 - examples/README.md
 - schemas and example containers
+
 
 ### Canon Rule
 
