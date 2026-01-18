@@ -1,25 +1,28 @@
 {
   "v": 1,
   "lang": "en",
-  "summary": "Cross-model validation of ContinuumPort demonstrating task-oriented semantic continuity without memory, identity, or emotional persistence.",
+  "summary": "Validation of ContinuumPort demonstrating task-oriented semantic continuity without memory, identity, or emotional persistence.",
   "entities": [
     "ContinuumPort",
     "CP-Core",
-    "Semantic Continuity",
-    "Needlecasting"
+    "Semantic Continuity"
   ],
   "progress": "A structured CP-Core container was successfully regenerated across multiple clean LLM sessions, preserving task intent and progress while enforcing strict non-anthropomorphic boundaries.",
   "taskState": {
-    "stage": "validation-complete",
+    "stage": "core-complete-dissemination-active",
     "completed": [
+      "Core design validation",
       "Clean-session regeneration test",
       "Cross-model comparison",
       "Boundary integrity verification"
     ],
+    "current": [
+      "Academic positioning (anticipatory systems)",
+      "Public documentation (philosophy.md)",
+      "Validated examples publication"
+    ],
     "next": [
-      "Publish concise philosophy.md",
-      "Commit validated examples",
-      "Academic anchoring (anticipatory systems)"
+      "Freeze at v1.0 after dissemination complete"
     ]
   },
   "constraints": [
