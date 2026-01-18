@@ -1,25 +1,28 @@
 {
   "v": 1,
   "lang": "ro",
-  "summary": "Validare cross-model a ContinuumPort care demonstrează continuitatea semantică orientată pe sarcină, fără memorie, identitate sau persistență emoțională.",
+  "summary": "Validare a ContinuumPort care demonstrează continuitatea semantică orientată pe sarcină, fără memorie, identitate sau persistență emoțională.",
   "entities": [
     "ContinuumPort",
     "CP-Core",
-    "Continuitate Semantică",
-    "Needlecasting"
+    "Continuitate Semantică"
   ],
   "progress": "Un container CP-Core structurat a fost regenerat cu succes în sesiuni curate pe mai multe modele LLM, păstrând intenția și progresul sarcinii și respectând strict granițele non-antropomorfe.",
   "taskState": {
-    "stage": "validare-finalizată",
+    "stage": "nucleu-complet-diseminare-activă",
     "completed": [
+      "Validarea design-ului de bază",
       "Test de regenerare în sesiune curată",
       "Comparație cross-model",
       "Verificarea integrității granițelor"
     ],
+    "current": [
+      "Poziționare academică (sisteme anticipative)",
+      "Documentație publică (philosophy.md)",
+      "Publicarea exemplelor validate"
+    ],
     "next": [
-      "Publicarea philosophy.md concis",
-      "Commiterea exemplelor validate",
-      "Ancorare academică (sisteme anticipative)"
+      "Înghețare la v1.0 după finalizarea diseminării"
     ]
   },
   "constraints": [
