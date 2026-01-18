@@ -1,272 +1,138 @@
+# 🧭 ContinuumPort
 
-# ContinuumPort
-
-***For design rationale and contextual reflections, see the author’s [blog](https://gi0rgioroth.blogspot.com/). This repository contains only normative material.***
-
-**Semantic continuity for AI systems — without lock-in, without identity persistence.**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
-[![Spec Status](https://img.shields.io/badge/docs-Draft-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/SPECIFICATION.md)
-
-### ContinuumPort is an **open protocol** for portable semantic context. It enables the transfer of user intent, task constraints, and progress state between AI systems, while explicitly refusing to transport identity, emotion, or behavioral conditioning.
+**Normative framework for semantic continuity of work across AI systems**
 
 ---
 
 ## Canonical Description
 
+ContinuumPort is a normative and architectural framework for the continuity of work when using AI systems.
 
+It defines how semantic work state can be transferred across sessions, models, languages, and environments **without relying on memory, identity, presence, or conversational history**.
 
-**ContinuumPort** is a normative and architectural framework for continuity of work with AI systems, which strictly separates semantic task continuity from any form of identity, memory, or presence continuity.
+Continuity is achieved exclusively through explicit, portable structure.
+
+---
+
+## Core Principle
+
+**Only intention and working state are portable.**  
+Identity, emotion, presence, relationship continuity, and behavioral memory are explicitly excluded.
+
+Semantic continuity is treated as a structural property of work, not as a behavioral property of an AI system.
+
+---
+
+## What ContinuumPort Is
+
+ContinuumPort provides:
+
+* a normative definition of semantic work continuity;
+* a minimal structural container (CP-Core) for capturing work state;
+* explicit constraints on what must *not* be transferred;
+* a handoff primitive that enables work to resume without author presence.
+
+AI models are treated as ephemeral, interchangeable tools.  
+Continuity does not belong to the model, the session, or the vendor.
+
+---
+
+## What ContinuumPort Is Not
 
 ContinuumPort is **not**:
 
-- a company or organization;
-- a commercial product;
-- a data interoperability protocol;
-- a conversation storage system;
-- a semantic web or knowledge-graph standard.
+* a memory system;
+* a conversation archive;
+* an identity or personality persistence mechanism;
+* a user profiling framework;
+* a semantic web or data interoperability standard;
+* a commercial product or service.
 
-ContinuumPort defines a single restrictive principle:
-
-**Only intention and working state are portable.  
-Identity, emotion, and persistent self-representation are explicitly excluded.**
-
-Within this framework:
-
-- AI models are treated as **ephemeral, interchangeable tools**;
-- continuity does not belong to the model, the session, or the vendor;
-- the human user is the **sole real point of continuity**;
-- portable structure (task state + intent) enables resumption of work without recreating presence, relationship, or identity.
-
-ContinuumPort is a proposal for the **correct limitation** of AI, not its expansion.  
-Its value derives precisely from what it refuses to carry.
-
-**For a technical, citable rationale behind the design philosophy of ContinuumPort, see the author’s essay “Automating Absence as a Design Constraint” on the project [blog:](https://gi0rgioroth.blogspot.com/2026/01/technical-mirror-text-citable-non.html)**
-
-**ContinuumPort: semantic continuity without identity continuity.  
-Tools remain tools. Humans remain the only continuity.**
-
-
- _Project scope and status: see [PROJECT_STATUS.md.](https://github.com/giorgioroth/ContinuumPort/blob/main/PROJECT_STATUS.md)_
+It intentionally refuses to carry anything that would simulate presence or self.
 
 ---
 
-### TL;DR — Non-Goals
+## CP-Core
 
-ContinuumPort is **not** a system for preserving people, presence, or conversations.
+The core artifact defined by ContinuumPort is **CP-Core**: a structured, human-readable container representing the semantic state of work.
 
-It does **not** store identity, emotion, memory, or relationships.  
-It does **not** create persistent agents or digital selves.  
-It exists **only** to preserve the minimum semantic structure required to continue work *after presence is no longer possible*.
+A CP-Core may include:
 
-For explicit boundaries and category errors, see [`NON_GOALS.md`](NON_GOALS.md).
+* intent (objective of the work);
+* established decisions or conclusions;
+* open questions requiring continuation;
+* explicit constraints and exclusions;
+* a single next expected action.
 
----
+A CP-Core explicitly excludes:
 
-## 🗺️ How to Approach This Repository
-
-ContinuumPort is defined by a fixed normative boundary, not by features or workflows.
-The documents below serve different purposes and should be read accordingly.
-
-- **Start here [Why CP Is a Boundary, Not a Feature](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/why-cp-is-a-boundary-not-a-feature.md)**  
-  *(Conceptual essay explaining the core design decision)*
-
-- **Canonical reference [Terminology & Positioning](https://github.com/giorgioroth/ContinuumPort/blob/main/normative/TERMINOLOGY_AND_POSITIONING.md)**  
-  *(Normative definitions and fixed terminology; authoritative)*
-
-
-- **Normative rationale (informative, non-authoritative) [CP-NORM-H01: Not a Storm in a Teacup](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essay/cp-norm-h01-not-a-storm-in-a-teacup.md)**  
-  *(Explains why the norm is proportionate and necessary; addresses common objections)*
-- **[Defensible Architecture (FAQ for Skeptics)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essays/Defensible_Architecture_(FAQ_for_Skeptics).md) Addresses common objections and category errors.**
-  
-- **Philosophy & Ethics: Read [DESIGN_RATIONALE.md](DESIGN_RATIONALE.md) and
-  [docs/boundaries.md](docs/boundaries.md) to understand the "why".**
-- **Deep Theory: Explore [docs/essays/](docs/essays/) for the foundational concepts behind the protocol.**
-- **Technical Rules: Check the [spec/](spec/) folder for normative implementation requirements.**
-- **Live Examples: See [examples/quickstart/](examples/quickstart/) for a Python-based reference of CP-Core in action.**
-- **For a deeper discussion on why continuity matters more than raw compute, see
-  [AI_Cognitive_Reconstruction_Cost.md](docs/AI_Cognitive_Reconstruction_Cost.md).**
+* chat transcripts;
+* autobiographical or relational context;
+* implicit assumptions tied to a specific agent;
+* emotional or behavioral state.
 
 ---
 
-- ### Essays & Philosophy
+## Normative Constraint: Author Absence Invariance
 
-- [The Semantic RAW](docs/essays/semantic_raw.md) — Why CP-Core is a digital negative of intent
-- [Project Roadmap →](Roadmap.md)
-- [Full CP-Core v1.0 Specification (Draft)](docs/SPECIFICATION.md)
-- [Validation Tools](tools/validator.py)
+A ContinuumPort-compliant system **must not** require the ongoing presence, availability, or authority of the original author in order to function or continue semantic work.
 
----
-
-## 🧠 The Philosophy
-
-ContinuumPort is built on the principle that **Continuity ≠ Presence**.
-We believe that transporting dialogue history is a bottleneck for both privacy and performance.
-
-* **[Why We Don't Move the Dialogue](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/essays/why-we-dont-move-the-dialogue.md)** — Understanding the "Extractable Core" vs. "Conversation Noise".
-* **Restraint by Design**: We deliberately refuse to standardize identity or emotion, focusing strictly on task-related semantic state.
+Continuity must derive solely from explicit structure and constraints.
 
 ---
 
-## ✅ What It IS / ❌ What It IS NOT
+## Repository Scope
 
-### ContinuumPort IS:
+This repository contains:
 
-* An **Open protocol** (MIT licensed).
-* **Privacy-by-design** (standardized exclusion of identity).
-* **Model-agnostic** and platform-independent.
-* A **Transport container** for task state (CP-Core).
+* the CP-Core normative definitions;
+* frozen normative constraints (e.g. CP-NORM-H01);
+* schemas and reference examples;
+* documentation explaining design boundaries.
 
-### ContinuumPort IS NOT:
-
-* **NOT a prompting strategy**: Prompt construction is explicitly out of scope.
-* **NOT a memory system** or an identity layer.
-* **NOT a behavioral optimization engine** or a "consciousness" simulator.
+Project scope and status are defined in `PROJECT_STATUS.md`.
 
 ---
 
-## Documentation
+## Implementations
 
-### Core Philosophy and Boundaries
-- [Design Rationale](DESIGN_RATIONALE.md) — Why these limits exist
-- [Boundaries](docs/boundaries.md) — What we deliberately do NOT standardize
-- [Emergent Behaviors](docs/emergent-behaviors.md) — Allowed but non-guaranteed behaviors
+ContinuumPort defines **normative structure**, not implementation behavior.
 
-### Technical Specification
+Independent implementations may exist that consume CP-Core artifacts and regenerate working context. Such implementations are **not required** for understanding or using the normative framework.
 
-[Protocol Specification Versioning](spec/regen-engine.md) — Implementation and versioning rules
+**Regen Engine** is a proprietary implementation maintained separately under its own license. It is one possible implementation of CP-Core, not a requirement.
 
----
-
-## Quick Start
-
-```bash
-# Clone the repository
-git clone https://github.com/giorgioroth/continuumport.git
-cd continuumport
-
-# Explore the documentation
-cat DESIGN_RATIONALE.md
-cat spec/regen-engine.md
-```
-
-*(Reference implementation and examples coming soon)*
+This repository does not mandate, bundle, or privilege any specific implementation.
 
 ---
 
 ## Status
 
-**Current Status:** Draft / Early Development
+ContinuumPort is an exploratory, non-commercial research project.
 
-- ✅ Core philosophy documented
-- ✅ Boundaries defined
-- ✅ Regen Engine spec published
-- 🚧 CP-Core format specification (in progress)
-- 🚧 Reference implementation (planned)
-- 🚧 Example containers (planned)
-
----
-
-## Key Design Decisions
-
-### 1. **Restraint by Design**
-ContinuumPort deliberately refuses to standardize identity, emotion, or memory — even though these are technically feasible.
-
-### 2. **Normative vs. Non-Normative**
-Only CP-Core format and minimal Regen behavior are normative.
-Everything else (embeddings, auth, optimizations) is implementation-specific.
-
-### 3. **Test of Conformance**
-*A Regen Engine is conformant if and only if removing all non-normative layers does not change the semantic intent reconstructed from CP-Core.*
-
-Read the full rationale: [DESIGN_RATIONALE.md]([DESIGN_RATIONALE.md](https://github.com/giorgioroth/ContinuumPort/blob/main/DESIGN_RATIONALE.md))
-
----
-
-## Use Cases
-
-**Allowed:**
-- Continuing work across different AI systems
-- Switching models without losing task context
-- Multi-agent collaboration on long-term projects
-- Personal context ownership and portability
-
-**Prohibited:**
-- Identity persistence or "self" simulation
-- Emotional continuity or attachment formation
-- Behavioral conditioning or personality shaping
-- Hidden data retention or opaque interpretation 
-- ContinuumPort is subject to mandatory non-abuse normative constraints. See [/normative/NON_ABUSE.md](/normative/NON_ABUSE.md).
-  
----
-
-## Contributing
-
-Contributions are welcome, especially:
-
-- Feedback on spec clarity
-- Use case proposals
-- Implementation suggestions
-- Documentation improvements
-
-For major changes, please open an issue first.
-
-All contributions must respect ContinuumPort's core boundaries.
-
----
-
-## Roadmap
-
-Towards a stable and widely adoptable v1.0 release.
-
-- [x] Core philosophy & boundaries documented
-- [x] [Regen Engine specification](https://github.com/giorgioroth/ContinuumPort/blob/main/spec/regen-engine.md)
-- [x] [CP-Core format specification (JSON schema)](https://github.com/giorgioroth/ContinuumPort/tree/main/cp-core)
-- [x] [Example CP-Core containers](https://github.com/giorgioroth/ContinuumPort/tree/main/examples)  
-  *(Multiple varied examples + quickstart guide available)*
-- [x] [Community RFC process](https://github.com/giorgioroth/ContinuumPort/blob/main/CONTRIBUTING.md)  
-  *(Contribution guidelines and philosophical constraints in place)*
-
-- [x] [Reference Regen Engine implementation](https://github.com/giorgioroth/ContinuumPort/blob/main/spec/regen-engine.md)  
-  *(Planned – reference implementation coming soon)*
-
-- [ ] [Validation tools](#)  
-  *(Schema validation and conformance tests – contributions welcome)*
-
-- [x] [v1.0 stable release](https://github.com/giorgioroth/ContinuumPort/milestones)  
-  *(Finalized spec, implementations, and tools required)*
-
----
-
-## Contact
-
-**Author:** Gh. Rotaru (Giorgio Roth)
-
-**Email:** continuumport@gmail.com
-
-**X/Twitter:** [@continuumport](https://x.com/continuumport)
+Normative content marked as **FROZEN** is stable and will not be modified.  
+Any future changes require new normative identifiers.
 
 ---
 
 ## License
 
-**MIT License**
-
-[LICENSE](https://github.com/giorgioroth/ContinuumPort/blob/main/LICENSE)
-
-[LICENSE_REGEN.md](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-normative-orange)](PROJECT_STATUS.md)
 
 ---
 
-ContinuumPort is open infrastructure.
-Free to use, fork, implement, and extend — within the documented boundaries.
+## Author
+
+Gh. Rotaru (Giorgio Roth)
+
+Independent researcher
 
 ---
 
-**ContinuumPort: continuity of work, never continuity of self.**
+## Closing Note
 
-**Documentation is the product. CP-Core is the contract.**
+ContinuumPort is a proposal for the **correct limitation** of AI systems, not their expansion.
 
-**ContinuumPort: continuity of work, never continuity of self.**
+Its value derives precisely from what it refuses to carry.
 
----
