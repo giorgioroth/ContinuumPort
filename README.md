@@ -94,6 +94,18 @@ Project scope and status are defined in `PROJECT_STATUS.md`.
 
 ---
 
+## Technical Overview
+
+For a concise, academic-oriented description of ContinuumPort’s current conceptual and normative state, see:
+
+- **ContinuumPort Technical Summary (Canonical, Soft-Frozen)**  
+  [`docs/CONTINUUMPORT_TECHNICAL_SUMMARY.md`](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/CONTINUUMPORT_TECHNICAL_SUMMARY.md)
+
+This document summarizes the protocol’s scope, boundaries, residual properties, and transition from exploratory development to custodial maintenance.
+
+
+---
+
 ## Implementations
 
 ContinuumPort defines **normative structure**, not implementation behavior.
