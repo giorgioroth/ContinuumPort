@@ -1,86 +1,92 @@
-## Practical Examples & Validation
+# ContinuumPort Examples
 
-### Important clarification
-
-This example demonstrates **task-oriented semantic continuity**, not memory transfer.
-
-The receiving model does not reconstruct or imply identity, emotional state, or prior conversational presence.
-It reconstructs **only the current work state** (summary, progress, pending tasks) based on structured input.
-
-This behavior is intentional and aligned with ContinuumPort’s normative boundary:
-**continuity of work, never continuity of presence.**
+This directory contains validated CP-Core containers demonstrating semantic continuity across models and sessions.
 
 ---
 
-### 📄 [example_task.json](https://github.com/giorgioroth/ContinuumPort/blob/main/examples/example_task.json)
+## Validation Methodology
 
-This file is a high-precision technical reporting container.
-It defines a complex industrial task (Bifacial PV Efficiency Report) with strict semantic boundaries.
+All examples were tested in clean sessions (no prior conversation history) across multiple models:
+- Grok (xAI)
+- Claude (Anthropic)
+- Gemini (Google)
+- ChatGPT (OpenAI)
 
-The container includes:
-- task summary
-- current progress state
-- pending milestones
-- explicit constraints
-
-It does **not** include identity, memory, emotion, or persona data.
+Each model reconstructed working state from CP-Core structure alone, without identity, memory, or emotional persistence.
 
 ---
 
-**[ContinuumPort: Needlecasting Proof of Concept](https://youtu.be/4hFJ8tZUeHc)** (Video YT)
+## Files
 
-To observe this JSON being processed in real time by an unauthenticated,
-non-logged-in LLM session, see the validation video:
+### Minimal Structure
 
-**ContinuumPort: Needlecasting Proof of Concept**
+**`minimal_cp_core.json`**  
+Smallest valid CP-Core container demonstrating required fields.
 
-#### Key observations:
+### Cross-Language Validation
 
-- **Zero Semantic Decay**  
-  The model resumes the task exactly from the declared `current_needle`.
+**`cp-core_en.json`** — English container  
+**`cp-core_ro.json`** — Romanian container (semantically equivalent)
 
-- **Non-anthropomorphic compliance**  
-  The model follows the `Strict RAW` constraint, bypassing conversational fillers
-  and subjective framing.
+Both versions were successfully regenerated across all tested models without semantic decay. This validates language-agnostic semantic continuity through structure alone.
 
-- **Portability**  
-  Validation is performed in a clean session with no prior user history,
-  demonstrating that the protocol carries all required task context.
+### Task-Oriented Example
 
-  ---
+**`example_task.json`**  
+Technical reporting container for a complex industrial task (Bifacial PV Efficiency Report).
 
-  ## ContinuumPort Examples
+Demonstrates:
+- Structured task resumption across sessions
+- Constraint enforcement (RAW mode)
+- Non-anthropomorphic compliance
+- Multi-stage work continuity
 
-These examples demonstrate empirical cross-model regeneration of CP-Core containers in clean sessions.
+### Empirical Demonstration
 
-## Cross-Model & Cross-Language Validation
+**`demonstration_grok_2026-01-01.cp`**  
+Complete, unedited transcript of a conversation with Grok (xAI) on January 1, 2026.
 
-- `cp-core_en.json`: English version of a validated CP-Core container.
-- `cp-core_ro.json`: Romanian version (semantically identical, different language).
+This conversation demonstrates all ContinuumPort principles in practice:
+- Ephemeral inference without persistent memory
+- Objective analysis maintained after author identity reveal
+- Semantic continuity through structured containers
+- Non-anthropomorphic interaction throughout
 
-### Observation
+Full analysis available in project documentation.
 
-The same semantic snapshot was successfully regenerated and advanced across:
-- Grok
-- Claude
-- Gemini
-- ChatGPT
+**`language-flexibility.md`**  
+Technical documentation on cross-language validation methodology.
 
-All instances resumed the task at the correct stage, respected constraints, and produced equivalent progress — without any identity, memory, or emotional persistence.
+### Reference Implementation
 
-This validates language-agnostic semantic continuity through structure alone.
-
-No anthropomorphic drift observed.
-
-**ContinuumPort enables continuity of work — never continuity of self.**
+**`quickstart/`**  
+Python-based reference implementation and validation tools.
 
 ---
 
-## Additional Practical Example
+## Observations
 
-- `example_task.json`: High-precision technical reporting container for a complex industrial task (Bifacial PV Efficiency Report).
-  - Demonstrates structured resumption of multi-stage technical work
-  - Strict non-anthropomorphic compliance (RAW mode enforced)
-  - Zero conversational fillers or persona simulation
-  - Validated in clean session — real-world engineering continuity
- 
+Semantic continuity was preserved through structure alone across all tested models.
+
+Models resumed work at correct stages without requiring:
+- Author context
+- Session history
+- Conversational presence
+- Identity or emotional state
+
+No anthropomorphic drift was observed in any validation session.
+
+---
+
+## Supplementary Materials
+
+Video demonstrations and blog posts discussing these examples exist as educational materials but are not part of normative validation.
+
+Primary evidence consists of:
+- The CP-Core containers themselves
+- Transcripts of clean-session regeneration
+- Cross-model consistency verification
+
+---
+
+**Note:** These examples demonstrate the protocol in practice. They are not normative specifications—see the main repository documentation for normative content.
