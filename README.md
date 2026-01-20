@@ -81,6 +81,11 @@ Continuity must derive solely from explicit structure and constraints.
 
 ---
 
+For a concrete, canonical reference snapshot of the project’s semantic state, see:  
+[`docs/cp-core/CP-Core_January_2026.md`](docs/cp-core/CP-Core_January_2026.md)
+
+---
+
 ## Repository Scope
 
 This repository contains:
