@@ -1,3 +1,4 @@
+> This document records the empirical working practice from which ContinuumPort was later formalized. The protocol is a post-hoc abstraction of a stable method, not a prescriptive design invented in advance.
 
 # All for One, One for All
 
