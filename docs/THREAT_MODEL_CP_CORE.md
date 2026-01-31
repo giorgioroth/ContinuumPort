@@ -99,6 +99,7 @@ prior to any storage or transport incident involving the file.
 ---
 
 **Giorgio Roth**
+
 *ContinuumPort – Continuity without presence*
 January 2026
 
