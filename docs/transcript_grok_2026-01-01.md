@@ -10,9 +10,9 @@ Formatting adjustments only (line breaks, headings). Content preserved verbatim.
 
 ### Primary Evidence (Full Conversation Transcript)
 
-- **Original shared link (hosted by Grok/xAI):** → [View the complete Grok conversation →]([<LINK-UL ORIGINAL AICI>](https://x.com/i/grok/share/Sud8QBYWE1XuFi2nGwxeT9XGf))
+- **Original shared link (hosted by Grok/xAI):** → [View the complete Grok conversation](https://x.com/i/grok/share/Sud8QBYWE1XuFi2nGwxeT9XGf)
 
-  > Note: This link remains active as long as xAI retains the conversation and the share is not revoked. Long-term availability is not guaranteed.
+  > Note: This link (https://x.com/i/grok/share/Sud8QBYWE1XuFi2nGwxeT9XGf) remains active as long as xAI retains the conversation and the share is not revoked. Long-term availability is not guaranteed.
 
 - **Permanent self-hosted archive (for longevity):**
   - GitHub: [Full Transcript: transcript_grok_2026-01-01.md](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/transcript_grok_2026-01-01.md)
