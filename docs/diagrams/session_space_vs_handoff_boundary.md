@@ -111,3 +111,8 @@ Only the **handoff boundary** is governed by ContinuumPort.
 * Work resumes strictly from explicit state
 * **Human context may be reintroduced manually, at the user’s discretion**
 
+---
+
+### *ContinuumPort governs transfer, not interaction.*
+
+
