@@ -134,7 +134,7 @@ Any future changes require new normative identifiers.
 
 ## License
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-purple.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-normative-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
 
 ---
