@@ -4,6 +4,16 @@
 
 ---
 
+## AI Architectural Thinking
+
+Framework for semantic continuity of work across AI systems.
+
+Ten chapters.
+From a single agent to a delegation network.
+→ [Read the full text](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md)
+
+---
+
 ## Canonical Description
 
 ContinuumPort is a normative and architectural framework for the continuity of work when using AI systems.
