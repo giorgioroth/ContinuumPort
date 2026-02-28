@@ -56,6 +56,4 @@ It must respect the data exactly as it was captured by the **author** — the hu
 
 ContinuumPort preserves the dynamic range of human thought *before* it is compressed into the irreversibility of a chatbot’s personality.
 
-This document explores the metaphorical and philosophical framework of ContinuumPort.
-
 By treating our work as **semantic RAW files**, we ensure that the author — the human sensor — remains sovereign, regardless of which machine renders the moment.
