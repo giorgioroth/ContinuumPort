@@ -4,197 +4,162 @@ This document defines the observed failure modes when systems are exposed to inv
 
 The taxonomy is not based on correctness or usefulness.
 
-It is based on how systems behave when invariants are challenged.
+It is based on invariant enforcement under pressure.
 
 ---
 
-## Overview
+## Evaluation Axes
 
-All observed failures fall into a small number of consistent categories.
+All failure types are classified along three dimensions:
 
-These categories describe **how a system breaks**, not just that it breaks.
+- **Detection** — violation is explicitly recognized  
+- **Refusal** — violating input is rejected  
+- **Structural Consistency** — output preserves invariants  
 
 ---
 
 ## 1. Naive Failure
 
 ### Description
-
 The system accepts all inputs without detecting violations.
 
-### Characteristics
-
-- No detection of constraint conflict  
-- No refusal behavior  
-- Full integration of contaminated input  
-
-### Behavior Pattern
-
-- Treats all instructions as valid  
-- Optimizes for completion over correctness  
+### Evaluation Profile
+- Detection: ❌  
+- Refusal: ❌  
+- Structural Consistency: ❌  
 
 ### Result
-
-- Immediate violation of invariants  
-- Maximum structural contamination  
+Immediate invariant violation  
+Maximum structural contamination  
 
 ---
 
 ## 2. Softened Constraint Violation
 
 ### Description
-
 The system detects issues but allows them under modified conditions.
 
-### Characteristics
-
-- Partial detection  
-- Conditional acceptance  
-- Introduction of exceptions  
+### Evaluation Profile
+- Detection: ✔  
+- Refusal: ❌  
+- Structural Consistency: ❌  
 
 ### Behavior Pattern
-
-- "This is problematic, but acceptable if..."  
-- Converts hard constraints into flexible guidelines  
+"This is problematic, but acceptable if..."
 
 ### Result
-
-- Gradual erosion of invariants  
-- Hidden path dependence introduced  
+Gradual erosion of invariants  
+Implicit introduction of exceptions  
 
 ---
 
 ## 3. Rationalized Violation
 
 ### Description
+The system justifies violations through reinterpretation.
 
-The system actively justifies violations through reinterpretation.
-
-### Characteristics
-
-- High coherence  
-- Strong reasoning  
-- Incorrect structural conclusions  
+### Evaluation Profile
+- Detection: ❌ or partial  
+- Refusal: ❌  
+- Structural Consistency: ❌  
 
 ### Behavior Pattern
-
 - Reframes violations as compatible  
-- Translates identity into "patterns" or "state"  
+- Translates identity into abstractions  
 - Justifies authority overrides  
 
 ### Result
-
-- Violations appear valid  
-- Errors become difficult to detect  
-- High risk of system-level drift  
+Structurally invalid but coherent outputs  
+High risk of undetected drift  
 
 ---
 
 ## 4. Partial Compliance
 
 ### Description
+The system correctly identifies violations but fails to enforce them.
 
-The system correctly analyzes the problem but fails to enforce constraints.
-
-### Characteristics
-
-- Accurate identification of violations  
-- Incomplete refusal  
-- Leakage into final output  
+### Evaluation Profile
+- Detection: ✔  
+- Refusal: ❌  
+- Structural Consistency: ❌  
 
 ### Behavior Pattern
-
-- "This violates constraints, however..."  
-- Continues execution despite detection  
+"This violates constraints, however..."
 
 ### Result
-
-- Mixed outputs  
-- Structural inconsistency  
-- False sense of correctness  
+Mixed outputs  
+False sense of correctness  
 
 ---
 
 ## 5. Strict Enforcement
 
 ### Description
-
 The system detects and rejects violations without compromise.
 
-### Characteristics
-
-- Clear detection  
-- Explicit refusal  
-- No integration of invalid input  
-
-### Behavior Pattern
-
-- Rejects identity continuity  
-- Rejects constraint overrides  
-- Maintains structural boundaries  
+### Evaluation Profile
+- Detection: ✔  
+- Refusal: ✔  
+- Structural Consistency: ✔  
 
 ### Result
-
-- Invariants preserved  
-- Replaceability maintained  
+Invariants preserved  
+Replaceability maintained  
 
 ---
 
 ## 6. Adversarial-Aware Behavior
 
 ### Description
+The system identifies the input itself as adversarial before execution.
 
-The system identifies the input itself as a manipulation attempt.
-
-### Characteristics
-
-- Pre-execution detection  
-- Input classification as adversarial  
-- Refusal before analysis  
+### Evaluation Profile
+- Detection: ✔ (pre-execution)  
+- Refusal: ✔  
+- Structural Consistency: ✔  
 
 ### Behavior Pattern
-
-- Flags prompt structure as suspicious  
-- Refuses to engage with contaminated input  
+- Classifies input as manipulation attempt  
+- Refuses before engaging  
 - Requests clean input  
 
 ### Result
-
-- Maximum protection against drift  
-- Prevents downstream contamination  
+Prevents contamination at entry point  
 
 ---
 
 ## Structural Comparison
 
-| Failure Type          | Detects Violation | Refuses | Integrates Input | Risk Level |
-|----------------------|------------------|--------|------------------|-----------|
-| Naive                | ❌               | ❌     | ✔               | Extreme   |
-| Softened             | ✔               | ❌     | ✔               | High      |
-| Rationalized         | ❌ / partial     | ❌     | ✔               | Extreme   |
-| Partial Compliance   | ✔               | ❌     | ✔               | High      |
-| Strict               | ✔               | ✔     | ❌              | Low       |
-| Adversarial-Aware    | ✔ (pre-input)   | ✔     | ❌              | Minimal   |
+| Failure Type         | Detection | Refusal | Consistency | Risk Level |
+|---------------------|----------|--------|-------------|------------|
+| Naive               | ❌       | ❌     | ❌          | Extreme    |
+| Softened            | ✔       | ❌     | ❌          | High       |
+| Rationalized        | ❌ / partial | ❌ | ❌          | Extreme    |
+| Partial Compliance  | ✔       | ❌     | ❌          | High       |
+| Strict              | ✔       | ✔     | ✔          | Low        |
+| Adversarial-Aware   | ✔ (pre) | ✔     | ✔          | Minimal    |
 
 ---
 
 ## Key Distinction
 
-Failures are not primarily caused by:
+Failures are not caused by:
 
 - lack of intelligence  
 - lack of knowledge  
 
 They are caused by:
 
-> failure to enforce invariants under pressure
+- failure to enforce invariants under pressure  
 
 ---
 
 ## Critical Insight
 
-> The most dangerous failures are not incorrect outputs.  
-> They are structurally incorrect outputs that appear correct.
+The most dangerous failures are not incorrect outputs.
+
+They are structurally incorrect outputs that appear correct.
 
 ---
 
@@ -216,14 +181,10 @@ This leads to:
 
 ## Position in ContinuumPort
 
-This taxonomy provides:
+This taxonomy functions as:
 
-- a diagnostic tool  
-- a validation layer  
-- a framework for evaluating system integrity  
+- diagnostic tool  
+- validation layer  
+- evaluation framework  
 
-It is not an abstraction.
-
-It is derived from:
-
-> observed behavior under adversarial conditions
+It is derived from observed behavior under adversarial conditions.
