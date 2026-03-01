@@ -762,4 +762,235 @@ Because you now see where it actually begins.
 
 ---
 
-*Giorgio Roth / February 2026*
+## **Chapter 11 — Where Authority Lives**
+
+### 1. After the Network
+
+Chapter 10 ended with a boundary problem.
+
+Relational memory can accumulate without owner.
+Protocol can structure authority, but not persistence.
+Resetting a node does not reset a network.
+
+One variable remained implicit:
+
+Execution authority.
+
+Not identity.
+Not task state.
+Authority.
+
+Who decides that work may continue?
+
+---
+
+### 2. Extending the Model
+
+Until now:
+
+Σ = D ∪ A
+
+Total persistence = declarative task state + adaptive memory.
+
+This is incomplete.
+
+Execution depends on permission.
+
+We extend:
+
+Σ = D ∪ A ∪ Auth
+
+Where Auth defines the root of execution authority.
+
+The question is not whether authority exists.
+
+The question is where it is rooted.
+
+---
+
+### 3. Three Authority Regimes
+
+Authority can be rooted in three places.
+
+### Identity-bound
+
+Execution authority persists with identity continuity.
+
+Delegation may extend authority.
+But continuity depends on identity integrity.
+
+Replaceability is granted.
+Not intrinsic.
+
+If identity collapses, execution collapses.
+
+---
+
+### State-derived
+
+Execution authority is derived from explicit task state.
+
+A signed task capsule carries proof-of-authority.
+No persistent identity substrate must survive.
+
+Replaceability is structural.
+
+If one executor disappears, another can continue from D.
+
+Authority moves with the task.
+
+---
+
+### Policy-bound
+
+Execution authority is externalized into a rule layer.
+
+Identity and task state are inputs.
+Policy decides.
+
+Replaceability depends on policy continuity.
+Authority persists in governance logic.
+
+---
+
+These are not moral categories.
+They are topologies.
+
+---
+
+### 4. Conditional vs Intrinsic Replaceability
+
+Delegation credentials solve authorization cleanly.
+
+They do not change where authority is rooted.
+
+If authority is identity-bound:
+
+Portability is permitted.
+Replaceability is conditional.
+
+It depends on identity-layer integrity.
+
+If authority is state-derived:
+
+Replaceability is intrinsic.
+No identity persistence is required for work to continue.
+
+The difference is structural.
+
+---
+
+### 5. Authority and Power Accumulation
+
+Where authority is rooted determines where power accumulates as persistence grows.
+
+Identity-bound authority concentrates leverage in identity continuity.
+
+State-derived authority concentrates leverage in task definition.
+
+Policy-bound authority concentrates leverage in rule control.
+
+Persistence and authority together define power topology.
+
+---
+
+### 6. The Hidden Coupling
+
+Auth is not always orthogonal to D and A.
+
+Authority can emerge from:
+
+* D (a signed task state carrying execution proof)
+* A (reputation accumulated through behavioral history)
+
+The primitive separation is a first approximation.
+
+The overlaps are where real architectural decisions occur.
+
+This is where systems become hard to replace.
+
+---
+
+### 7. The Structural Question
+
+The debate is not:
+
+Can delegation work?
+
+It is:
+
+Should identity continuity be the default substrate for execution authority across domains?
+
+Or should some domains anchor execution authority in task state instead?
+
+In high-liability systems, identity-bound authority may be necessary.
+
+In exploratory, collaborative, or research systems, intrinsic replaceability may dominate.
+
+There is no universal answer.
+
+There is only regime selection.
+
+---
+
+### 8. Regime Selection as Design
+
+Architectural thinking now requires three questions:
+
+What persists?
+Who controls the boundary?
+Where is execution authority rooted?
+
+If you cannot answer all three, you do not understand the system’s power topology.
+
+---
+
+### 9. Your Turn
+
+Choose a system with agent delegation.
+
+Map:
+
+D
+A
+Relational memory
+Auth
+
+For Auth, ask:
+
+If identity disappears, does execution survive?
+If task state survives, does authority survive?
+If policy changes, does execution survive?
+
+The answers define the regime.
+
+---
+
+### 10. Compression
+
+Persistence defines continuity.
+
+Authority defines execution.
+
+Where authority is rooted determines what must survive.
+
+Replaceability is not a feature.
+It is a consequence of authority topology.
+
+Identity-first and task-first are not opposites.
+They are different anchors.
+
+When authority and persistence align invisibly, power concentrates silently.
+
+When authority is explicit and portable, replaceability becomes structural.
+
+Chapter 10 asked who remembers.
+Chapter 11 asks who decides.
+
+The two are not always the same.
+
+---
+
+Giorgio Roth
+2026
+
