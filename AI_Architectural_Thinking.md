@@ -1211,6 +1211,215 @@ but by where execution can be refused.
 
 ---
 
+## Chapter 13 — Authority Drift
+
+Chapter 12 described authority as a topology of veto points.
+
+Execution does not depend on a single root of control.  
+It depends on multiple layers that can permit or refuse action.
+
+But topologies are not static.
+
+They evolve.
+
+This chapter examines what happens when authority structures change over time.
+
+---
+
+### 1. Authority Does Not Stay Still
+
+In simple systems, authority structures are stable.
+
+The rules are defined.  
+The enforcement mechanisms remain fixed.  
+The topology does not change.
+
+But agentic systems rarely remain static.
+
+Components evolve.  
+Policies change.  
+Capabilities expand.  
+Infrastructure is replaced.
+
+Each of these changes can alter where authority effectively resides.
+
+This phenomenon is **authority drift**.
+
+---
+
+### 2. What Authority Drift Means
+
+Authority drift occurs when the **effective location of veto power shifts over time**, even if the formal architecture remains unchanged.
+
+The system may still appear to have the same rules.
+
+But the real control points have moved.
+
+Drift does not require a redesign.
+
+It can emerge gradually through:
+
+- policy updates  
+- capability changes  
+- infrastructure scaling  
+- coordination adjustments  
+
+Over time, these small changes alter the authority topology.
+
+---
+
+### 3. How Drift Appears
+
+Consider a system where execution initially depends on three veto points:
+
+```
+intent
+↓
+policy validation
+↓
+runtime capability
+↓
+execution
+```
+
+Now imagine the runtime becomes increasingly powerful.
+
+It begins to infer capabilities automatically.  
+It anticipates policy constraints.  
+It optimizes execution paths.
+
+Gradually, fewer actions are rejected by policy.
+
+Execution becomes dominated by runtime decisions.
+
+The topology has changed.
+
+Policy still exists.
+
+But the effective veto point has shifted.
+
+---
+
+### 4. Formal Authority vs Effective Authority
+
+Architectural diagrams describe **formal authority**.
+
+But systems operate according to **effective authority**.
+
+Formal authority is defined by design.
+
+Effective authority is determined by which components actually exercise veto power during operation.
+
+Authority drift is the divergence between these two.
+
+---
+
+### 5. Why Drift Is Almost Inevitable
+
+Authority drift emerges naturally in systems that are:
+
+- adaptive  
+- continuously updated  
+- distributed across multiple components  
+
+Every change in capability redistributes **veto potential**.
+
+Every redistribution of veto potential alters where execution can realistically be refused.
+
+Over time, the topology evolves.
+
+Even if the architecture documentation does not change.
+
+---
+
+### 6. A Familiar Example
+
+Consider aviation again.
+
+Originally, pilots directly controlled aircraft behavior.
+
+Over time, new veto layers appeared:
+
+- fly-by-wire systems  
+- envelope protection  
+- automated stability systems  
+- autopilot logic  
+
+The formal role of the pilot did not disappear.
+
+But the effective authority shifted.
+
+Certain maneuvers are now structurally impossible.
+
+The topology evolved.
+
+---
+
+### 7. Drift and Replaceability
+
+Authority drift has a direct consequence for replaceability.
+
+A component may appear replaceable according to the original design.
+
+But if authority has drifted toward that component, replacing it becomes structurally difficult.
+
+Replaceability depends on the **current authority topology**, not the original one.
+
+---
+
+### 8. Why Drift Matters for AI Systems
+
+Agentic systems evolve quickly.
+
+Models improve.  
+Policies update.  
+Tools expand.  
+Infrastructure scales.
+
+Each improvement subtly redistributes control.
+
+Without careful analysis, systems may accumulate authority in unexpected places.
+
+Not by intention.
+
+But by drift.
+
+---
+
+### 9. Detecting Drift
+
+Authority drift is rarely visible from documentation.
+
+It must be observed empirically.
+
+Key questions include:
+
+- Which layer actually refuses actions most often?  
+- Which component can halt execution in practice?  
+- Which component cannot realistically be overridden?
+
+The answers reveal the **effective topology**.
+
+---
+
+### 10. Compression
+
+Authority topology describes where execution can be refused.
+
+Authority drift describes how that topology evolves.
+
+Formal architecture defines where authority should reside.
+
+Operational reality determines where authority actually resides.
+
+In adaptive systems, these two rarely remain identical.
+
+Authority does not only distribute.
+
+Over time, it moves.
+
+---
+
 Giorgio Roth  
 2026
 
