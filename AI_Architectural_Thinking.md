@@ -991,6 +991,226 @@ The two are not always the same.
 
 ---
 
-Giorgio Roth
+## Chapter 12 — The Topology of Authority
+
+Chapter 10 showed that persistence in agent networks does not live only inside nodes, but also along their edges.  
+Chapter 11 examined where execution authority can be rooted.  
+This chapter asks a different question: how authority is distributed once execution crosses system boundaries.
+
+---
+
+### 1. The Missing Assumption
+
+When we speak about authority in systems, we instinctively look for a root.
+
+Who ultimately decides?  
+Who has control?
+
+This instinct comes from hierarchical thinking. In simple systems, authority often does have a root.
+
+But agentic systems are rarely simple.
+
+Once execution is distributed across multiple layers, authority no longer lives in a single place.
+
+It becomes structural.
+
+---
+
+### 2. The Boundary Insight
+
+In the previous chapter, we introduced a third primitive:
+
+```
+Σ = D ∪ A ∪ Auth
+```
+
+Execution depends not only on task state (D) or adaptive memory (A), but also on permission to act (Auth).
+
+A key observation emerges when examining real execution paths:
+
+Authority is not evaluated once.  
+It is re-evaluated at every boundary crossing.
+
+Each boundary becomes a place where execution may stop.
+
+---
+
+### 3. From Root to Structure
+
+Many architectures implicitly assume something like:
+
+```
+authority → execution
+```
+
+But real systems rarely behave this way.
+
+Instead, execution depends on multiple layers validating the action.
+
+For example:
+
+```
+intent
+↓
+policy validation
+↓
+capability check
+↓
+runtime permissions
+↓
+infrastructure availability
+↓
+execution
+```
+
+Any of these layers can halt the operation.
+
+Authority therefore does not behave like a root.
+
+It behaves like a structure.
+
+---
+
+### 4. Veto Points
+
+Each layer that can block execution acts as a **veto point**.
+
+Execution occurs only if every veto point allows it.
+
+Formally:
+
+```
+execution allowed ⇔ ∀ vᵢ ∈ V : permit(vᵢ)
+```
+
+Where **V** is the set of veto points governing execution.
+
+This is the structural property that emerges in complex systems:
+
+Authority becomes a topology of veto points.
+
+---
+
+### 5. Identity Is Only One Node
+
+Identity-centric architectures assume authority originates from identity.
+
+```
+identity → authorization → execution
+```
+
+This model works for many systems.
+
+But identity is only one possible veto point.
+
+Execution may still depend on:
+
+- policy rules  
+- runtime capability  
+- infrastructure limits  
+- coordination with other systems  
+
+Identity alone cannot guarantee execution.
+
+It participates in the topology but does not define it.
+
+---
+
+### 6. The Aviation Example
+
+Consider a modern aircraft.
+
+A pilot may attempt a maneuver.
+
+But execution depends on multiple systems:
+
+- flight control laws  
+- envelope protection  
+- avionics safeguards  
+- air traffic control  
+- operational procedures  
+
+The pilot proposes.
+
+But any of these systems may refuse.
+
+The aircraft flies only when all layers permit the action.
+
+This is a veto topology.
+
+---
+
+### 7. Why Systems Evolve This Way
+
+Distributed veto structures are not accidental.
+
+They emerge whenever systems must satisfy multiple independent constraints.
+
+Safety requirements.  
+Resource limits.  
+Legal obligations.  
+Operational coordination.
+
+Each constraint introduces a boundary.
+
+Each boundary introduces a veto point.
+
+Over time, authority spreads across the system.
+
+---
+
+### 8. Authority as Topology
+
+Once this happens, authority is no longer a root.
+
+It becomes a topology — a distributed structure where execution emerges only when all constraints align.
+
+This topology may include:
+
+- identity systems  
+- policy engines  
+- runtime capability checks  
+- infrastructure schedulers  
+- coordination mechanisms  
+
+No single component fully controls execution.
+
+Control emerges from their interaction.
+
+---
+
+### 9. The Architectural Consequence
+
+This has an important implication for AI systems.
+
+If authority is distributed, replacing a single component does not necessarily change the authority structure.
+
+True replaceability requires understanding the full topology.
+
+A system that appears replaceable at one layer may still be constrained by others.
+
+Execution authority must therefore be analyzed structurally, not locally.
+
+---
+
+### 10. Compression
+
+Authority in complex agentic systems is not a single root of control.
+
+It is a distributed topology of veto points governing execution.
+
+Intent defines what should happen.  
+Policy validates rules.  
+Runtime validates capability.  
+Infrastructure validates feasibility.
+
+Execution occurs only if every layer permits.
+
+Control is not defined by where authority originates,  
+but by where execution can be refused.
+
+---
+
+Giorgio Roth  
 2026
 
