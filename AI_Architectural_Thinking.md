@@ -1420,6 +1420,209 @@ Over time, it moves.
 
 ---
 
+## Chapter 14 — Authority Capture
+
+Chapter 12 described authority as a topology of veto points.
+
+Chapter 13 showed that this topology evolves through authority drift.
+
+Authority does not remain fixed.
+Veto potential shifts across the system as capabilities evolve.
+
+Most of the time, these shifts remain distributed.
+
+But sometimes drift stops being movement and becomes accumulation.
+
+This chapter examines what happens when authority converges toward a dominant node.
+
+This phenomenon is **authority capture**.
+
+---
+
+### 1. When Drift Accumulates
+
+Authority drift redistributes veto potential.
+
+Policies evolve.  
+Capabilities expand.  
+Infrastructure scales.
+
+Each change shifts where execution can be refused.
+
+When these shifts repeatedly favor the same component, veto power accumulates.
+
+At that point, authority has been captured.
+
+---
+
+### 2. What Authority Capture Means
+
+Authority capture occurs when **effective veto power concentrates in a single component or layer**, even though the architecture originally distributed it.
+
+The system may still appear structurally balanced.
+
+But in practice, execution depends on one decisive veto point.
+
+The topology remains formally distributed.
+
+Operational authority has converged.
+
+---
+
+### 3. From Topology to Dominance
+
+Consider a system with several veto layers:
+
+```
+intent
+↓
+policy validation
+↓
+runtime capability
+↓
+infrastructure scheduling
+↓
+execution
+```
+
+Initially, each layer can halt execution.
+
+Now imagine the runtime becomes increasingly capable.
+
+It pre-validates policy constraints.  
+It manages scheduling internally.  
+It anticipates infrastructure limits.
+
+Fewer actions reach upstream veto layers.
+
+Upstream veto points remain present, but rarely intervene.
+
+The runtime becomes the effective authority.
+
+---
+
+### 4. Capture Without Intent
+
+Authority capture rarely begins as a deliberate redesign.
+
+It often emerges from optimization.
+
+Systems evolve toward:
+
+- greater efficiency  
+- lower latency  
+- simpler coordination  
+
+If one component becomes better at enforcing constraints, other layers gradually defer to it.
+
+Over time, the system relies on that component.
+
+Control concentrates.
+
+This is structural capture.
+
+---
+
+### 5. Formal Authority vs Effective Authority
+
+Architectural diagrams describe **formal authority**.
+
+Systems operate according to **effective authority**.
+
+Formal authority is defined by design.
+
+Effective authority is determined by which component actually exercises veto power during operation.
+
+Capture occurs when these two diverge.
+
+---
+
+### 6. The Safety Paradox
+
+Authority capture introduces a paradox.
+
+Concentrated authority can increase safety.
+
+A strong gate may enforce constraints more reliably than a distributed system.
+
+But concentration also increases fragility.
+
+If the captured authority fails, the system loses its distributed safeguards.
+
+Modern aviation illustrates this pattern.
+
+Fly-by-wire systems dramatically improved safety.
+
+But they also moved critical veto power into a small number of software modules.
+
+Reliability increased.
+
+Failure consequences became more concentrated.
+
+---
+
+### 7. A Recurring Pattern
+
+Authority capture appears across many complex systems.
+
+Infrastructure layers begin to dominate application control.
+
+Orchestration frameworks centralize execution paths.
+
+Automated systems override human operators.
+
+The architecture may still appear layered.
+
+But effective authority has centralized.
+
+---
+
+### 8. Capture and Replaceability
+
+Authority capture directly affects replaceability.
+
+A component may appear replaceable according to the original design.
+
+But if veto power has drifted toward that component, replacing it becomes structurally difficult.
+
+Other layers remain present.
+
+Execution depends on the captured authority.
+
+Replaceability becomes illusory.
+
+---
+
+### 9. Capture in Agentic Systems
+
+Agentic AI systems amplify this dynamic.
+
+Capability growth is often asymmetric.
+
+Runtimes and orchestration layers evolve faster than policy layers.
+
+As a result, execution control tends to accumulate in the components that mediate tool use and action.
+
+Not by design.
+
+But by drift.
+
+---
+
+### 10. Compression
+
+Authority rooting defines where authority begins.
+
+Authority topology defines how veto power is distributed.
+
+Authority drift describes how that distribution evolves.
+
+Authority capture occurs when veto power converges toward a dominant node.
+
+In complex systems, authority rarely remains evenly distributed.
+
+It tends to accumulate where execution is most efficiently controlled.
+
 Giorgio Roth  
 2026
 
