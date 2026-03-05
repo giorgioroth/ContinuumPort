@@ -1623,6 +1623,159 @@ In complex systems, authority rarely remains evenly distributed.
 
 It tends to accumulate where execution is most efficiently controlled.
 
+---
+
+## Chapter 15 — Anti-Capture Architecture
+
+Chapter 14 described authority capture.
+
+Authority drift redistributes veto power.
+When drift accumulates, authority may converge toward a dominant node.
+
+Without deliberate constraints, this outcome is common.
+
+Complex systems tend toward authority concentration.
+
+This chapter examines how architecture can resist that tendency.
+
+---
+
+### 1. Capture as the Default Gradient
+
+Authority capture rarely results from explicit intent.
+
+It usually emerges from optimization.
+
+Systems evolve toward:
+
+- lower latency  
+- fewer coordination steps  
+- simpler execution paths  
+
+Each improvement reduces friction.
+
+But reducing friction also removes veto points.
+
+Over time, authority converges toward the component that most efficiently controls execution.
+
+Capture is therefore not an anomaly.
+
+It is the natural gradient of system optimization.
+
+---
+
+### 2. Designing Against the Gradient
+
+Anti-capture architecture does not eliminate drift.
+
+Drift is unavoidable in adaptive systems.
+
+Instead, the goal is to prevent drift from collapsing the authority topology.
+
+This requires deliberately introducing structural constraints that preserve distributed veto power.
+
+In other words, anti-capture architecture introduces **deliberate friction**.
+
+---
+
+### 3. Veto Independence
+
+Veto points must remain operationally independent.
+
+If multiple veto layers rely on the same execution environment, their independence is illusory.
+
+A policy gate implemented inside the same runtime that executes actions does not represent a separate authority.
+
+Meaningful veto independence requires **distinct control domains**.
+
+Only then can multiple veto points constrain execution.
+
+---
+
+### 4. Capability Separation
+
+Authority capture often emerges when a single component accumulates too many capabilities.
+
+For example, a runtime that:
+
+- validates policy  
+- schedules execution  
+- manages tool access  
+
+gradually becomes the effective authority of the system.
+
+Anti-capture architecture separates these capabilities.
+
+No single component should control every stage of the execution path.
+
+---
+
+### 5. Replaceability as Structural Constraint
+
+Replaceability is one of the strongest defenses against capture.
+
+If a dominant component can be replaced without redesigning the system, authority remains distributed.
+
+If replacement becomes structurally impossible, capture has already occurred.
+
+Replaceability therefore cannot remain theoretical.
+
+It must be periodically tested in practice.
+
+---
+
+### 6. Distributed Safety
+
+Distributed authority may appear less efficient than centralized control.
+
+But it provides resilience.
+
+When multiple veto points remain active, the failure of a single component does not eliminate system safeguards.
+
+Anti-capture architecture preserves this redundancy.
+
+Efficiency may decrease.
+
+Systemic fragility is reduced.
+
+---
+
+### 7. The Architectural Tradeoff
+
+Anti-capture mechanisms introduce friction.
+
+Independent veto layers increase coordination cost.
+
+Capability separation complicates orchestration.
+
+Replaceability requires stable interfaces.
+
+These constraints slow optimization.
+
+But they preserve authority distribution.
+
+Architecture therefore becomes a balance between efficiency and control.
+
+---
+
+### 8. Compression
+
+Authority capture is the natural endpoint of authority drift.
+
+Anti-capture architecture introduces structural constraints that resist this convergence.
+
+Veto independence preserves distributed authority.
+
+Capability separation prevents dominant components.
+
+Replaceability maintains structural flexibility.
+
+Without such constraints, authority in complex systems tends to concentrate.
+
+With them, distributed control can remain stable.
+
+---
+
 Giorgio Roth  
 2026
 
