@@ -1980,5 +1980,197 @@ Stable governance in agentic systems emerges only when distributed authority rem
 
 ---
 
+# AI Architectural Thinking
+
+## Chapter 17 — Governance Equilibrium
+
+Chapter 16 described authority fragmentation.
+
+Authority fragmentation occurs when execution authority becomes too widely distributed.
+
+Too many independent veto points make coordination impossible.
+
+Execution stalls.
+
+Fragmentation is the opposite structural failure of authority capture.
+
+Where capture concentrates power, fragmentation disperses it beyond coordination.
+
+Both break effective governance.
+
+The question therefore becomes:
+
+How do systems remain stable between these two extremes?
+
+This chapter examines the concept of **governance equilibrium**.
+
+---
+
+### 1. Two Structural Failure Modes
+
+Complex systems that govern execution authority tend to encounter two opposing pathologies.
+
+Authority capture.
+
+Authority fragmentation.
+
+Capture occurs when authority concentrates in a dominant node.
+
+Fragmentation occurs when authority becomes too widely distributed for coordination.
+
+These forces pull system architecture in opposite directions.
+
+Capture breaks systems through domination.
+
+Fragmentation breaks systems through paralysis.
+
+---
+
+### 2. The Authority Stability Problem
+
+Distributed authority introduces a fundamental design challenge.
+
+Too little authority distribution leads to capture.
+
+Too much authority distribution leads to fragmentation.
+
+Both outcomes undermine the stability of the system.
+
+Sustainable governance therefore requires maintaining a balance between these forces.
+
+This balance can be described as **governance equilibrium**.
+
+---
+
+### 3. Authority as a Dynamic System
+
+Earlier chapters introduced the structural invariant:
+
+```
+Σ = (D, A, Auth)
+```
+
+where:
+
+```
+D = declarative task state
+A = adaptive memory
+Auth = execution authority
+```
+
+Execution occurs only when authority permits an action:
+
+```
+execute(α) ⇔ approval(Auth, α)
+```
+
+But as systems evolve, the structure of **Auth** changes.
+
+Authorities appear, disappear, or gain influence.
+
+The authority topology therefore becomes dynamic.
+
+Governance equilibrium emerges when this topology remains stable enough to coordinate execution without collapsing toward capture or fragmentation.
+
+---
+
+### 4. The Stability Band
+
+Authority distribution in real systems tends to stabilize within a narrow band between the two failure modes.
+
+This can be visualized along a single structural axis:
+
+```
+Capture ◄─────── Equilibrium Zone ───────► Fragmentation
+domination                                    paralysis
+```
+
+At the left extreme, authority collapses into a dominant node.
+
+At the right extreme, authority disperses into uncoordinated veto points.
+
+Effective governance exists only within the stable region between these extremes.
+
+---
+
+### 5. Structural Forces
+
+Several forces push systems toward capture:
+
+efficiency optimization  
+centralized orchestration  
+latency reduction  
+simplified coordination  
+
+Other forces push systems toward fragmentation:
+
+defensive architecture  
+redundant safety layers  
+independent policy engines  
+distributed control mechanisms  
+
+These forces are rarely intentional.
+
+They emerge gradually as systems evolve.
+
+Governance equilibrium therefore requires continuous architectural adjustment.
+
+---
+
+### 6. Coordination Mechanisms
+
+Stable systems introduce mechanisms that regulate authority distribution.
+
+Examples include:
+
+coordination kernels  
+policy aggregation layers  
+control planes  
+consensus protocols  
+
+These mechanisms ensure that distributed authorities can produce consistent decisions.
+
+They do not eliminate authority distribution.
+
+They stabilize it.
+
+Without coordination mechanisms, systems drift toward fragmentation.
+
+Without distribution safeguards, they drift toward capture.
+
+---
+
+### 7. Emergent Stability
+
+Governance equilibrium is rarely designed perfectly from the beginning.
+
+It typically emerges through iteration.
+
+Systems drift toward capture.
+
+Architectures introduce anti-capture mechanisms.
+
+These mechanisms introduce fragmentation.
+
+Coordination layers restore balance.
+
+The system gradually converges toward a stable authority distribution.
+
+---
+
+### 8. Compression
+
+Authority capture concentrates execution control.
+
+Authority fragmentation disperses it excessively.
+
+Governance equilibrium exists only between these extremes.
+
+Stable agentic systems maintain authority distribution within this narrow band.
+
+Understanding this balance is essential for designing resilient architectures of execution governance.
+
+---
+
 Giorgio Roth  
 2026
