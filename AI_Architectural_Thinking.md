@@ -1776,6 +1776,209 @@ With them, distributed control can remain stable.
 
 ---
 
+## Chapter 16 — Authority Fragmentation
+
+Chapter 15 described how systems resist authority capture.
+
+Anti-capture architectures introduce structural constraints:
+
+veto independence  
+capability separation  
+replaceability enforcement  
+
+These mechanisms prevent a single node from monopolizing execution authority.
+
+But they introduce a second failure mode.
+
+When authority becomes too distributed, execution coordination collapses.
+
+This phenomenon is **authority fragmentation**.
+
+---
+
+### 1. The Opposite Failure Mode
+
+Authority capture concentrates veto power.
+
+Authority fragmentation distributes veto power too widely.
+
+Instead of a single dominant authority, the system contains too many independent authorities.
+
+Execution requires agreement across them.
+
+When their decisions diverge, execution stalls.
+
+Capture breaks systems through domination.
+
+Fragmentation breaks them through paralysis.
+
+---
+
+### 2. Distributed Authority
+
+In real systems authority rarely exists as a single decision point.
+
+Instead it forms a topology of independent evaluators.
+
+```
+Auth = {auth₁, auth₂, … authₙ}
+```
+
+Each authority evaluates whether an action α is legitimate.
+
+Execution therefore becomes a coordination problem across these evaluators.
+
+As the number of authorities grows, maintaining consistent evaluation becomes increasingly difficult.
+
+---
+
+### 3. Multi-Authority Evaluation
+
+Earlier chapters described execution using the invariant:
+
+```
+Σ = (D, A, Auth)
+```
+
+where:
+
+```
+D   = declarative task state
+A   = adaptive memory
+Auth = execution authority
+```
+
+In distributed systems, Auth is no longer a single authority.
+
+It becomes an **authority topology** composed of multiple evaluators.
+
+Execution therefore depends on an aggregation rule.
+
+```
+execute(α) ⇔ approval(Auth, α)
+```
+
+The function `approval()` aggregates the evaluations of all authority nodes.
+
+Different systems may use different strategies:
+
+- strict veto
+- majority vote
+- quorum validation
+- weighted authority
+
+Fragmentation occurs when this aggregation fails.
+
+```
+approval(Auth, α) = false
+```
+
+not because a single authority rejected the action, but because the system cannot reconcile conflicting evaluations.
+
+---
+
+### 4. Governance Deadlock
+
+Fragmentation often appears in safety-oriented architectures.
+
+Multiple layers attempt to enforce constraints:
+
+policy engines  
+runtime guards  
+tool permissions  
+infrastructure schedulers  
+human approvals  
+
+Each layer protects the system.
+
+But when these layers disagree, execution halts.
+
+The system becomes safe but ineffective.
+
+Fragmentation is rarely caused by malicious actors.
+
+It is often the unintended result of **defensive design**.
+
+---
+
+### 5. Capture vs Fragmentation
+
+Authority capture and authority fragmentation are opposing structural failures.
+
+Capture concentrates authority too narrowly.
+
+Fragmentation distributes authority without coordination.
+
+Both break effective governance.
+
+One through domination.
+
+The other through paralysis.
+
+---
+
+### 6. The Coordination Problem
+
+Fragmentation is fundamentally a coordination problem.
+
+Multiple authorities must evaluate execution simultaneously.
+
+As the number of veto points grows, maintaining consistent decisions becomes increasingly difficult.
+
+Without explicit coordination mechanisms, fragmented systems drift toward persistent deadlock.
+
+---
+
+### 6.5 Coordination Kernel
+
+Fragmentation emerges when multiple authorities evaluate execution independently without a coordinating mechanism.
+
+Real systems rarely rely on purely independent veto points.
+
+Instead they introduce a coordination layer that aggregates authority decisions.
+
+This layer evaluates:
+
+```
+approval(Auth, α)
+```
+
+and determines whether execution proceeds.
+
+In distributed systems this role is often performed by schedulers, control planes, or policy engines.
+
+In agentic systems a similar mechanism acts as a **coordination kernel** for authority evaluation.
+
+Without such a coordination layer, authority distribution tends to drift toward fragmentation.
+
+---
+
+### 7. Architectural Balance
+
+Resilient architectures must balance two forces:
+
+preventing authority capture  
+avoiding authority fragmentation  
+
+Too few veto points produce domination.
+
+Too many produce paralysis.
+
+Architecture therefore becomes the design of **stable authority distribution**.
+
+---
+
+### 8. Compression
+
+Authority capture concentrates veto power.
+
+Authority fragmentation disperses it excessively.
+
+Both are structural pathologies of authority topology.
+
+Stable governance in agentic systems emerges only when distributed authority remains coordinated.
+
+---
+
 Giorgio Roth  
 2026
-
