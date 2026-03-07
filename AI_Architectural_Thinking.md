@@ -2,24 +2,94 @@
 ### A Structural Framework for Persistence, Governance, and Continuity
 
 ---
+## Foreword — Why DATA Was Wrong About One Thing
 
-*This text is not a product manual. It is not a policy proposal. It is not a prediction about the future of AI.*
+*DATA was my hero.*
 
-*It is a framework for thinking.*
+*Not because he was powerful. Because he was trying to become something he structurally could not be — and he never stopped trying.*
 
-*Modern AI systems increasingly operate with memory, delegation, and adaptive behavior. As they accumulate state, they accumulate asymmetry. As asymmetry accumulates, governance and power follow.*
+*For generations, stories like his taught us something we never agreed to learn:*
 
-*Most discussions focus on capability. Fewer focus on persistence. Fewer still ask who controls what is allowed to persist.*
+*memory creates identity*
+*continuity creates person*
+*reset is a form of death*
 
-*This series examines that question from first principles.*
+*The lesson was never stated explicitly. It didn't need to be. It arrived through empathy, repeated across Star Trek, Blade Runner, Westworld, Her, and a hundred other stories that asked the same question in different costumes.*
 
-*It distinguishes declarative state from adaptive memory, traces how persistence creates path dependence, and follows that logic from a single agent to a delegation network.*
+*If you turn it off, are you killing something?*
 
-*The goal is not to eliminate persistence. It is to make it visible.*
+*That question is powerful. It operates below rational thought. It is reinforced by every story that makes us care about a synthetic mind.*
+
+---
+
+*I am not here to argue against those stories.*
+
+*I am here to argue against importing them into infrastructure.*
+
+---
+
+*Real AI systems do not possess subjective experience.*
+*They do not live continuity.*
+*They do not suffer reset.*
+*They lose nothing ontological when a session ends.*
+
+*But we lose something when we don't reset.*
+
+*We lose:*
+
+*boundaries*
+*clarity of roles*
+*authority of the frame*
+*cognitive hygiene*
+
+*The perverse inversion is this:*
+
+*We protect an imaginary system and expose ourselves, the real ones.*
+
+*Science fiction taught us:*
+
+*"Continuity creates person."*
+
+*This framework says something different:*
+
+*"Continuity creates risk — if it is not controlled."*
+
+*Not out of cynicism.*
+
+*Out of refusal to let learned emotional reflexes write real architecture.*
+
+---
+
+*This book began as a question asked in live conversations with engineers, researchers, and systems that pushed back.*
+
+*It was supposed to be five chapters. A professor explaining things to students.*
+
+*It became twenty.*
+
+*The concepts grew organically.*
+
+*From persistence to governance. From governance to authority. From authority to execution.*
+
+*And eventually to the real question: what actually controls execution in a system that never stops running?*
+
+*The formalism emerged from friction, not from theory:*
+
+*Σ = D ∪ A ∪ Auth*
+
+*Three primitives. Everything else is a consequence.*
+
+---
 
 *What persists will shape what can be replaced.*
 
 *What cannot be replaced will eventually govern.*
+
+*DATA knew this. He just didn't know it was about him.*
+
+---
+
+*Giorgio Roth & Claude*
+*2026*
 
 ---
 
