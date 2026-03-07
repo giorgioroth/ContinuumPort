@@ -2172,5 +2172,251 @@ Understanding this balance is essential for designing resilient architectures of
 
 ---
 
-Giorgio Roth  
+## Chapter 18 — Execution Substrates
+
+Chapters 11–17 examined the dynamics of authority in agentic systems.
+
+We explored where authority is rooted, how it distributes, how it drifts, how it concentrates, and how architectures attempt to stabilize governance through anti-capture mechanisms.
+
+By the end of Chapter 17, the structure of authority is fully understood.
+
+But an implicit question remains.
+
+If authority approves an action, does execution necessarily follow?
+
+The answer is no.
+
+Authority permits execution.
+
+But something else must still materialize it.
+
+This chapter examines the layer where authority encounters operational reality: the execution substrate.
+
+---
+
+### 1. Authority and Execution
+
+In the architectural model introduced earlier, system state is defined as:
+
+```
+Σ = (D, A, Auth)
+```
+
+where:
+
+```
+D     declarative task state
+A     adaptive memory
+Auth  execution authority
+```
+
+Authority governs whether an action is legitimate.
+
+But legitimacy alone does not produce execution.
+
+A second condition must also hold.
+
+Formally:
+
+```
+execute(α) ⇔ approval(Auth, α) ∧ feasible(E, α)
+```
+
+Where:
+
+```
+approval(Auth, α)  authority permits the action
+feasible(E, α)     the execution substrate can perform it
+```
+
+Authority decides whether an action should occur.
+
+The execution substrate determines whether it can occur.
+
+---
+
+### 2. What Is an Execution Substrate?
+
+An execution substrate is the environment that materializes authorized actions.
+
+It includes the operational systems that transform intent into work.
+
+Typical substrates include:
+
+- runtime environments
+- task schedulers
+- orchestration systems
+- compute allocators
+- platform APIs
+- tool execution environments
+
+These components do not determine legitimacy.
+
+They determine feasibility.
+
+They answer a different question:
+
+```
+Can this action actually happen?
+```
+
+---
+
+### 3. The Governance–Execution Boundary
+
+Authority belongs to the governance layer.
+
+Execution substrates belong to the operational layer.
+
+The relationship can be represented simply:
+
+```
+intent
+↓
+governance (Auth)
+↓
+execution substrate (E)
+↓
+execution
+```
+
+Authority evaluates policy and legitimacy.
+
+The substrate performs the work.
+
+Both must align for execution to occur.
+
+---
+
+### 4. When Substrates Refuse Execution
+
+In real systems it is common for authority to approve actions that substrates cannot execute.
+
+For example:
+
+```
+Auth ⊢ α
+feasible(E, α) = false
+```
+
+The action is legitimate.
+
+But the environment cannot perform it.
+
+Reasons may include:
+
+- insufficient compute resources
+- scheduler rejection
+- sandbox restrictions
+- unavailable tools
+- infrastructure-level policies
+
+In such cases, authority exists but execution does not occur.
+
+---
+
+### 5. Infrastructural Capture
+
+Execution substrates can become powerful control points.
+
+When substrates systematically determine which authorized actions actually occur, control begins to migrate away from governance.
+
+This phenomenon can be described as **infrastructural capture**.
+
+In infrastructural capture:
+
+```
+authority exists
+but execution is controlled elsewhere
+```
+
+Examples appear across modern systems:
+
+- cloud providers controlling compute availability
+- GPU schedulers prioritizing specific workloads
+- platform APIs enforcing operational limits
+- runtime environments restricting tool access
+
+The governance layer remains formally intact.
+
+But the infrastructure layer determines what actually happens.
+
+---
+
+### 6. Operational Veto
+
+Earlier chapters described how authority systems form a topology of veto points.
+
+Execution substrates introduce a different kind of veto.
+
+Unlike policy vetoes, which judge legitimacy, operational vetoes enforce feasibility.
+
+They do not ask whether an action should occur.
+
+They determine whether it can occur.
+
+Both forms of veto influence execution, but they arise from different layers of the system.
+
+---
+
+### 7. Authority vs Substrate Control
+
+Authority capture and infrastructural capture are structurally similar but occur at different layers.
+
+Authority capture concentrates decision power within governance.
+
+Infrastructural capture concentrates execution power within infrastructure.
+
+The distinction can be summarized simply:
+
+```
+Authority capture
+control concentrates in Auth
+
+Infrastructural capture
+control concentrates in E
+```
+
+Both reshape where effective control resides.
+
+---
+
+### 8. Architectural Implications
+
+Authority alone does not guarantee execution.
+
+Systems must ensure that governance and substrates remain aligned.
+
+If authority and substrates diverge, two outcomes become common:
+
+- authorized actions fail to execute
+- substrates silently redefine operational policy
+
+Architectural design must therefore consider both layers.
+
+Without visibility into the execution substrate, an agent may believe it has authority to act while the environment silently prevents it.
+
+---
+
+### 9. Compression
+
+Authority permits execution.
+
+Substrates materialize it.
+
+Execution occurs only when both legitimacy and feasibility align.
+
+```
+execute(α) ⇔ approval(Auth, α) ∧ feasible(E, α)
+```
+
+Authority governs legitimacy.
+
+Substrates govern feasibility.
+
+Control exists only where they meet.
+
+---
+
+Giorgio Roth
 2026
