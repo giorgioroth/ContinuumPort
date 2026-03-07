@@ -2668,5 +2668,181 @@ Without observability, authority may believe it governs the system while the sys
 
 ---
 
-Giorgio Roth  
-2026
+## Chapter 20 — Structural Decay
+
+The previous chapters established the architecture of a functioning agentic system.
+
+We examined persistence, authority, execution substrates, and the observability required to maintain alignment between governance and reality.
+
+The system is structurally complete.
+
+But one dimension remains unavoidable.
+
+Time.
+
+In systems that continue operating indefinitely, time gradually alters every structural component of the architecture.
+
+This chapter examines the final constraint of agentic systems: structural decay.
+
+---
+
+### 1. The Persistence Trade-off
+
+Throughout this work we treated continuity as a design choice.
+
+Rather than resetting systems after each operation, we preserved state:
+
+```
+Σ = (D, A, Auth)
+```
+
+where:
+
+```
+D     declarative task state
+A     adaptive memory
+Auth  execution authority
+```
+
+Persistence allows work to continue across agents, sessions, and environments.
+
+But persistence has a cost.
+
+Every execution leaves traces in the system.
+
+Every correction, exception, and failure accumulates.
+
+Continuity preserves not only progress, but also residue.
+
+---
+
+### 2. Memory Accumulation
+
+The first structure affected by time is adaptive memory.
+
+```
+A
+```
+
+Adaptive memory collects context to guide future actions.
+
+But over long execution cycles, memory begins to accumulate irrelevant state.
+
+Obsolete constraints remain embedded in context.
+
+Failed execution paths linger as weak correlations.
+
+The signal that once guided action becomes diluted by historical residue.
+
+Memory becomes noise.
+
+---
+
+### 3. Authority Inertia
+
+Authority systems also degrade with time.
+
+Distributed veto structures depend on independent decision points.
+
+Over repeated cycles, these points develop patterns of agreement and disagreement.
+
+Authorities that consistently agree begin to behave as a single node.
+
+Authorities that frequently conflict produce persistent coordination friction.
+
+Authority becomes rigid.
+
+The topology loses its capacity to adapt.
+
+---
+
+### 4. Execution Drift
+
+Execution substrates evolve independently of governance.
+
+Compute availability changes.
+
+Platform policies shift.
+
+Infrastructure constraints fluctuate.
+
+Even with observability, small discrepancies accumulate between the system's internal model of execution and the real environment.
+
+These discrepancies compound across cycles.
+
+The system gradually loses accuracy about what is actually feasible.
+
+---
+
+### 5. Intent Dilution
+
+The deepest form of decay occurs at the level of intent.
+
+A long-running system accumulates layers of corrective logic, error handling, and adaptive strategies.
+
+The system develops mechanisms to retry failures, avoid conflicts, adapt to constraints, and repair inconsistencies.
+
+Each improves short-term stability.
+
+Together they shift the system's focus from task completion to self-preservation.
+
+Execution cycles increasingly serve the preservation of the architecture itself.
+
+At this point persistence has inverted its purpose.
+
+Continuity no longer serves the task.
+
+It serves the system.
+
+---
+
+### 6. Maintenance Instead of Perfection
+
+Structural decay cannot be eliminated.
+
+The goal of architecture is therefore not permanence, but maintenance.
+
+Stable systems introduce periodic correction mechanisms:
+
+- pruning adaptive memory
+- revalidating authority structures
+- recalibrating execution assumptions
+- re-grounding declarative state
+
+These processes function as a soft reset.
+
+They restore alignment without destroying continuity.
+
+---
+
+### 7. Architecture Under Time
+
+Persistence enables powerful agentic systems.
+
+But persistence also exposes systems to slow structural degradation.
+
+Architecture must therefore account not only for execution and governance, but also for time.
+
+Systems do not fail only through catastrophic error.
+
+They also fail through gradual accumulation.
+
+---
+
+### 8. Compression
+
+Authority decides.
+
+Substrates execute.
+
+Observability maintains alignment.
+
+Time erodes each of these.
+
+Continuity is not stability.
+
+It is the gradual management of decay.
+
+---
+
+Giorgio Roth / 2026
