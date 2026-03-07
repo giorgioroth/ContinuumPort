@@ -2488,5 +2488,185 @@ Control exists only where they meet.
 
 ---
 
-Giorgio Roth
+## Chapter 19 — Observability
+
+Chapter 18 introduced a crucial distinction.
+
+Authority permits execution.
+
+Execution substrates materialize it.
+
+An action may therefore be authorized without ever being performed.
+
+This raises a new architectural problem.
+
+How does the system know whether execution actually occurred?
+
+Without a mechanism to observe execution outcomes, authority operates blindly.
+
+This chapter examines observability as a structural requirement of agentic systems.
+
+---
+
+### 1. The Execution Gap
+
+An action in the system follows the rule:
+
+```
+execute(α) ⇔ approval(Auth, α) ∧ feasible(E, α)
+```
+
+Authority may approve the action.
+
+But the execution substrate may refuse or fail.
+
+```
+approval(Auth, α) = true
+feasible(E, α) = false
+```
+
+In this case the action never occurs.
+
+If the governance layer cannot detect this failure, the system continues operating under incorrect assumptions.
+
+The architecture has lost contact with reality.
+
+---
+
+### 2. Authority Without Observability
+
+When authority cannot observe execution outcomes, the system enters a dangerous condition.
+
+Authority continues to approve actions.
+
+But it does so without knowing whether those actions actually happen.
+
+Commands accumulate.
+
+Policies are enforced.
+
+Approvals are granted.
+
+Yet the substrate may be silently refusing execution.
+
+Authority appears intact.
+
+But governance has become detached from the system it governs.
+
+---
+
+### 3. The Broken Feedback Loop
+
+Execution occurs in the substrate.
+
+Authority resides in governance.
+
+Between them must exist a feedback loop.
+
+```
+intent
+↓
+authority
+↓
+execution substrate
+↓
+execution
+↓
+observability
+↓
+state update
+```
+
+If this loop is broken, authority becomes speculative.
+
+The system believes it is acting, but it may be doing nothing at all.
+
+---
+
+### 4. Observability as Structural Requirement
+
+Observability is often treated as a debugging feature.
+
+In agentic systems it is a structural necessity.
+
+Authority must observe:
+
+- whether actions executed
+- whether actions failed
+- whether substrates refused execution
+- whether outcomes altered system state
+
+Without these signals, governance cannot maintain an accurate model of reality.
+
+The system's internal state begins to drift away from the environment.
+
+---
+
+### 5. Updating the System State
+
+Observability closes the loop between execution and governance.
+
+After execution, the system state must be updated.
+
+```
+Σ = (D, A, Auth)
+```
+
+becomes:
+
+```
+Σ' = update(Σ, outcome)
+```
+
+Where the outcome reflects the real result of execution.
+
+Without this update, the system continues operating on outdated assumptions.
+
+---
+
+### 6. Illusory Authority
+
+When execution outcomes remain invisible, authority begins to operate in an imagined environment.
+
+Actions are approved.
+
+Policies are evaluated.
+
+But execution failures accumulate silently.
+
+The system therefore develops **illusory authority**.
+
+It believes it governs the system.
+
+But the substrate is determining reality.
+
+---
+
+### 7. Architectural Implications
+
+Resilient agentic systems require explicit observability between substrates and governance.
+
+Execution outcomes must be visible.
+
+Failures must propagate back to the governing state.
+
+Without this feedback, authority becomes disconnected from the system it governs.
+
+Control requires visibility.
+
+---
+
+### 8. Compression
+
+Authority permits execution.
+
+Substrates materialize it.
+
+Observability reveals whether it actually happened.
+
+Without observability, authority may believe it governs the system while the system does nothing at all.
+
+---
+
+Giorgio Roth  
 2026
