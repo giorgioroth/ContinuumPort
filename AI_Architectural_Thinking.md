@@ -3,6 +3,20 @@
 
 ---
 
+This book is not about artificial intelligence.
+
+Artificial intelligence is only where the problem became visible.
+
+The subject of this book is more fundamental:
+
+## control of execution in systems that do not reset.
+
+When systems persist across time, memory accumulates, authority distributes, and execution must be governed.
+
+AI merely made this architecture impossible to ignore.
+
+---
+
 ### *Foreword — Why DATA Was Wrong About One Thing*
 
 *DATA was my hero.*
