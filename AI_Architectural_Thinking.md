@@ -2639,6 +2639,316 @@ It is the gradual management of decay.
 
 ---
 
+# Chapter 21 — Trajectory Integrity
+
+The previous chapters examined the structural conditions required for agentic systems to operate reliably.
+
+Authority determines whether actions are permitted.
+Execution substrates materialize those actions.
+Observability confirms whether execution actually occurred.
+
+Yet even when these mechanisms function correctly, a long-running system may still lose something more subtle.
+
+Direction.
+
+This chapter examines **trajectory integrity** — the property that preserves the direction of work as it continues across agents, sessions, and execution environments.
+
+---
+
+# 1. Work Without Memory
+
+Continuity in agentic systems is often described in terms of memory.
+
+Conversation history is preserved.
+Context windows expand.
+Logs accumulate.
+
+These mechanisms attempt to reconstruct the past.
+
+But reconstruction of the past is not the same as preservation of direction.
+
+A system may remember every event that occurred and still lose the trajectory of the work.
+
+Memory preserves events.
+
+Trajectory preserves direction.
+
+---
+
+# 2. Trajectory as a Property of Work
+
+Trajectory does not belong to the agent.
+
+It belongs to the work itself.
+
+When work evolves over time, it develops a directional structure.
+
+Decisions constrain future actions.
+Constraints restrict possible paths.
+Progress establishes momentum.
+
+Together these elements define the trajectory of the work state.
+
+In formal terms:
+
+```
+D = (intent, constraints, decisions, progress)
+```
+
+Trajectory is the directional structure implicit in **D**.
+
+When **D** is reconstructed correctly, the trajectory of the work reappears even if the agent executing the work changes.
+
+---
+
+# 3. Reconstruction Without Identity
+
+Traditional continuity models assume that identity must persist for work to continue.
+
+The same agent must remember previous decisions.
+The same session must maintain context.
+
+However, reconstruction experiments demonstrate a different possibility.
+
+A system may reconstruct the trajectory of work from the semantic state alone.
+
+No identity is required.
+No conversational history is required.
+
+The system does not remember the past.
+
+It recognizes the direction embedded in the work state.
+
+Trajectory therefore becomes a property of the work rather than a property of the agent.
+
+---
+
+# 4. Direction Without Action
+
+Recovering trajectory restores orientation.
+
+It tells the system where the work was going.
+
+But trajectory alone does not produce action.
+
+Execution still depends on authority.
+
+Reconstruction therefore recovers two distinct structural conditions:
+
+```
+work state continuity → restores trajectory
+authority continuity → restores execution legitimacy
+```
+
+Trajectory defines the direction of possible work.
+
+Authority determines whether the system is permitted to execute the next step.
+
+Only when both conditions are satisfied can the system continue the work.
+
+---
+
+# 5. Dual Continuity
+
+Reconstruction therefore preserves two independent forms of continuity.
+
+The first is **continuity of the work itself**.
+
+This continuity lives in the declarative work state: intent, constraints, decisions, and progress.
+
+The second is **continuity of permission to act**.
+
+This continuity lives in the authority structure governing execution.
+
+When trajectory survives but authority does not, the system understands the next step but cannot perform it.
+
+When authority survives but trajectory does not, the system can execute actions but no longer knows which direction the work was moving.
+
+Stable continuation requires both.
+
+---
+
+# 6. The Problem of Trajectory Drift
+
+Even when trajectory is reconstructed correctly, it may slowly change over time.
+
+Small decisions accumulate.
+
+Constraints evolve.
+
+Execution outcomes modify the state.
+
+Over long periods the system may still appear coherent while gradually moving away from the original direction.
+
+This phenomenon can be called **trajectory drift**.
+
+Trajectory drift differs from execution failure.
+
+Execution failure breaks the system visibly.
+
+Trajectory drift preserves visible coherence while the direction silently changes.
+
+The system continues operating.
+
+But the work is no longer moving toward its original intent.
+
+---
+
+# 7. Thought Experiment — Two Agent Teams
+
+Consider two independent agent teams operating the same long-running system.
+
+Both teams share identical infrastructure.
+
+Both have perfect authority validation.
+
+Both have full observability of execution outcomes.
+
+Each team receives the same initial work state:
+
+```
+intent
+constraints
+decisions
+progress
+```
+
+From that point forward, the two systems evolve independently.
+
+---
+
+### Team A — Trajectory Preserved
+
+Team A reconstructs the work state before every execution cycle.
+
+Each proposed action is validated against the existing trajectory.
+
+New decisions must remain consistent with:
+
+```
+intent
+constraints
+prior decisions
+```
+
+Small changes accumulate over time.
+
+But the direction of the work remains stable.
+
+After months of execution, the system continues to advance toward the original objective.
+
+---
+
+### Team B — Trajectory Drift
+
+Team B operates with perfect execution and observability.
+
+Every action is permitted by authority.
+
+Every execution succeeds.
+
+Logs confirm each result.
+
+Yet the system never reconstructs the original trajectory.
+
+Each cycle introduces small reinterpretations of the work state.
+
+Constraints gradually shift.
+
+Decisions accumulate local optimizations.
+
+Over time the system still appears coherent.
+
+Execution works.
+
+Authority functions.
+
+Observability confirms activity.
+
+But the work is no longer moving toward its original objective.
+
+Nothing failed.
+
+The trajectory changed.
+
+---
+
+# 8. Trajectory Integrity
+
+Trajectory integrity is the property that ensures the directional structure of the work remains stable across cycles of execution.
+
+A system maintains trajectory integrity when:
+
+the current work state remains consistent with prior intent
+new decisions do not contradict established constraints
+progress continues to align with the work's directional structure
+
+Trajectory integrity does not require perfect preservation of the past.
+
+It requires preservation of directional coherence.
+
+---
+
+# 9. Relationship to Observability and Decay
+
+Trajectory integrity connects two problems previously examined.
+
+Observability ensures that execution outcomes are visible.
+
+Structural decay explains how systems degrade over time.
+
+Trajectory integrity sits between them.
+
+Observability ensures that actions occurred.
+
+Trajectory integrity ensures those actions remain aligned with the direction of the work.
+
+Without observability, systems lose contact with execution.
+
+Without trajectory integrity, systems lose contact with purpose.
+
+---
+
+# 10. Compression
+
+Authority permits execution.
+
+Substrates perform it.
+
+Observability reveals whether it happened.
+
+Trajectory integrity ensures the work is still moving in the same direction.
+
+A system may continue operating indefinitely while producing coherent outputs.
+
+But without trajectory integrity, coherence does not guarantee continuity.
+
+Continuity without direction is not progress.
+
+It is drift.
+
+---
+
+# 11. Toward the Next Problem
+
+Trajectory integrity raises a final architectural question.
+
+If trajectory drift can occur silently while systems continue operating normally, a new problem appears:
+
+How does a system detect that its trajectory has changed?
+
+The next chapter examines this problem.
+
+Trajectory integrity preserves direction.
+
+But preservation alone is not sufficient.
+
+Systems must also be able to **recognize when the direction has been lost**.
+
+
+---
+
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
