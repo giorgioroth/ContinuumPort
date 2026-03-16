@@ -1252,7 +1252,7 @@ but by where execution can be refused.
 
 ---
 
-## Chapter 13 — Authority Drift
+ # Chapter 13 — Authority Drift
 
 Chapter 12 described authority as a topology of veto points.
 
@@ -1265,7 +1265,7 @@ They evolve.
 
 This chapter examines what happens when authority structures change over time.
 
-### 1. Authority Does Not Stay Still
+## 1. Authority Does Not Stay Still
 
 In simple systems, authority structures are stable.
 
@@ -1284,7 +1284,7 @@ Each of these changes can alter where authority effectively resides.
 
 This phenomenon is **authority drift**.
 
-### 2. What Authority Drift Means
+## 2. What Authority Drift Means
 
 Authority drift occurs when the **effective location of veto power shifts over time**, even if the formal architecture remains unchanged.
 
@@ -1303,7 +1303,7 @@ It can emerge gradually through:
 
 Over time, these small changes alter the authority topology.
 
-### 3. How Drift Appears
+## 3. How Drift Appears
 
 Consider a system where execution initially depends on three veto points:
 
@@ -1333,7 +1333,7 @@ Policy still exists.
 
 But the effective veto point has shifted.
 
-### 4. Formal Authority vs Effective Authority
+## 4. Formal Authority vs Effective Authority
 
 Architectural diagrams describe **formal authority**.
 
@@ -1345,7 +1345,7 @@ Effective authority is determined by which components actually exercise veto pow
 
 Authority drift is the divergence between these two.
 
-### 5. Why Drift Is Almost Inevitable
+## 5. Why Drift Is Almost Inevitable
 
 Authority drift emerges naturally in systems that are:
 
@@ -1361,7 +1361,7 @@ Over time, the topology evolves.
 
 Even if the architecture documentation does not change.
 
-### 6. A Familiar Example
+## 6. A Familiar Example
 
 Consider aviation again.
 
@@ -1382,7 +1382,7 @@ Certain maneuvers are now structurally impossible.
 
 The topology evolved.
 
-### 7. Drift and Replaceability
+## 7. Drift and Replaceability
 
 Authority drift has a direct consequence for replaceability.
 
@@ -1392,7 +1392,7 @@ But if authority has drifted toward that component, replacing it becomes structu
 
 Replaceability depends on the **current authority topology**, not the original one.
 
-### 8. Why Drift Matters for AI Systems
+## 8. Why Drift Matters for AI Systems
 
 Agentic systems evolve quickly.
 
@@ -1409,7 +1409,7 @@ Not by intention.
 
 But by drift.
 
-### 9. Detecting Drift
+## 9. Detecting Drift
 
 Authority drift is rarely visible from documentation.
 
@@ -1423,7 +1423,7 @@ Key questions include:
 
 The answers reveal the **effective topology**.
 
-### 10. Compression
+## 10. Compression
 
 Authority topology describes where execution can be refused.
 
@@ -1439,9 +1439,10 @@ Authority does not only distribute.
 
 Over time, it moves.
 
+
 ---
 
-## Chapter 14 — Authority Capture
+ # Chapter 14 — Authority Capture
 
 Chapter 12 described authority as a topology of veto points.
 
@@ -1458,7 +1459,7 @@ This chapter examines what happens when authority converges toward a dominant no
 
 This phenomenon is **authority capture**.
 
-### 1. When Drift Accumulates
+## 1. When Drift Accumulates
 
 Authority drift redistributes veto potential.
 
@@ -1472,7 +1473,7 @@ When these shifts repeatedly favor the same component, veto power accumulates.
 
 At that point, authority has been captured.
 
-### 2. What Authority Capture Means
+## 2. What Authority Capture Means
 
 Authority capture occurs when **effective veto power concentrates in a single component or layer**, even though the architecture originally distributed it.
 
@@ -1484,7 +1485,7 @@ The topology remains formally distributed.
 
 Operational authority has converged.
 
-### 3. From Topology to Dominance
+## 3. From Topology to Dominance
 
 Consider a system with several veto layers:
 
@@ -1514,7 +1515,7 @@ Upstream veto points remain present, but rarely intervene.
 
 The runtime becomes the effective authority.
 
-### 4. Capture Without Intent
+## 4. Capture Without Intent
 
 Authority capture rarely begins as a deliberate redesign.
 
@@ -1534,7 +1535,7 @@ Control concentrates.
 
 This is structural capture.
 
-### 5. Formal Authority vs Effective Authority
+## 5. Formal Authority vs Effective Authority
 
 Architectural diagrams describe **formal authority**.
 
@@ -1546,7 +1547,7 @@ Effective authority is determined by which component actually exercises veto pow
 
 Capture occurs when these two diverge.
 
-### 6. The Safety Paradox
+## 6. The Safety Paradox
 
 Authority capture introduces a paradox.
 
@@ -1568,7 +1569,7 @@ Reliability increased.
 
 Failure consequences became more concentrated.
 
-### 7. A Recurring Pattern
+## 7. A Recurring Pattern
 
 Authority capture appears across many complex systems.
 
@@ -1582,7 +1583,7 @@ The architecture may still appear layered.
 
 But effective authority has centralized.
 
-### 8. Capture and Replaceability
+## 8. Capture and Replaceability
 
 Authority capture directly affects replaceability.
 
@@ -1596,7 +1597,7 @@ Execution depends on the captured authority.
 
 Replaceability becomes illusory.
 
-### 9. Capture in Agentic Systems
+## 9. Capture in Agentic Systems
 
 Agentic AI systems amplify this dynamic.
 
@@ -1610,7 +1611,7 @@ Not by design.
 
 But by drift.
 
-### 10. Compression
+## 10. Compression
 
 Authority rooting defines where authority begins.
 
@@ -1624,9 +1625,10 @@ In complex systems, authority rarely remains evenly distributed.
 
 It tends to accumulate where execution is most efficiently controlled.
 
+
 ---
 
-## Chapter 15 — Anti-Capture Architecture
+ # Chapter 15 — Anti-Capture Architecture
 
 Chapter 14 described authority capture.
 
@@ -1639,7 +1641,7 @@ Complex systems tend toward authority concentration.
 
 This chapter examines how architecture can resist that tendency.
 
-### 1. Capture as the Default Gradient
+## 1. Capture as the Default Gradient
 
 Authority capture rarely results from explicit intent.
 
@@ -1661,7 +1663,7 @@ Capture is therefore not an anomaly.
 
 It is the natural gradient of system optimization.
 
-### 2. Designing Against the Gradient
+## 2. Designing Against the Gradient
 
 Anti-capture architecture does not eliminate drift.
 
@@ -1673,7 +1675,7 @@ This requires deliberately introducing structural constraints that preserve dist
 
 In other words, anti-capture architecture introduces **deliberate friction**.
 
-### 3. Veto Independence
+## 3. Veto Independence
 
 Veto points must remain operationally independent.
 
@@ -1685,7 +1687,7 @@ Meaningful veto independence requires **distinct control domains**.
 
 Only then can multiple veto points constrain execution.
 
-### 4. Capability Separation
+## 4. Capability Separation
 
 Authority capture often emerges when a single component accumulates too many capabilities.
 
@@ -1701,7 +1703,7 @@ Anti-capture architecture separates these capabilities.
 
 No single component should control every stage of the execution path.
 
-### 5. Replaceability as Structural Constraint
+## 5. Replaceability as Structural Constraint
 
 Replaceability is one of the strongest defenses against capture.
 
@@ -1713,7 +1715,7 @@ Replaceability therefore cannot remain theoretical.
 
 It must be periodically tested in practice.
 
-### 6. Distributed Safety
+## 6. Distributed Safety
 
 Distributed authority may appear less efficient than centralized control.
 
@@ -1727,7 +1729,7 @@ Efficiency may decrease.
 
 Systemic fragility is reduced.
 
-### 7. The Architectural Tradeoff
+## 7. The Architectural Tradeoff
 
 Anti-capture mechanisms introduce friction.
 
@@ -1743,7 +1745,7 @@ But they preserve authority distribution.
 
 Architecture therefore becomes a balance between efficiency and control.
 
-### 8. Compression
+## 8. Compression
 
 Authority capture is the natural endpoint of authority drift.
 
@@ -1761,7 +1763,7 @@ With them, distributed control can remain stable.
 
 ---
 
-## Chapter 16 — Authority Fragmentation
+ # Chapter 16 — Authority Fragmentation
 
 Chapter 15 described how systems resist authority capture.
 
@@ -1779,7 +1781,7 @@ When authority becomes too distributed, execution coordination collapses.
 
 This phenomenon is **authority fragmentation**.
 
-### 1. The Opposite Failure Mode
+## 1. The Opposite Failure Mode
 
 Authority capture concentrates veto power.
 
@@ -1795,7 +1797,7 @@ Capture breaks systems through domination.
 
 Fragmentation breaks them through paralysis.
 
-### 2. Distributed Authority
+## 2. Distributed Authority
 
 In real systems authority rarely exists as a single decision point.
 
@@ -1811,7 +1813,7 @@ Execution therefore becomes a coordination problem across these evaluators.
 
 As the number of authorities grows, maintaining consistent evaluation becomes increasingly difficult.
 
-### 3. Multi-Authority Evaluation
+## 3. Multi-Authority Evaluation
 
 Earlier chapters described execution using the invariant:
 
@@ -1846,7 +1848,7 @@ approval(Auth, α) = false
 
 not because a single authority rejected the action, but because the system cannot reconcile conflicting evaluations.
 
-### 4. Governance Deadlock
+## 4. Governance Deadlock
 
 Fragmentation often appears in safety-oriented architectures.
 
@@ -1868,7 +1870,7 @@ Fragmentation is rarely caused by malicious actors.
 
 It is often the unintended result of **defensive design**.
 
-### 5. Capture vs Fragmentation
+## 5. Capture vs Fragmentation
 
 Authority capture and authority fragmentation are opposing structural failures.
 
@@ -1882,7 +1884,7 @@ One through domination.
 
 The other through paralysis.
 
-### 6. The Coordination Problem
+## 6. The Coordination Problem
 
 Fragmentation is fundamentally a coordination problem.
 
@@ -1892,7 +1894,7 @@ As the number of veto points grows, maintaining consistent decisions becomes inc
 
 Without explicit coordination mechanisms, fragmented systems drift toward persistent deadlock.
 
-### 7. Coordination Kernel
+## 7. Coordination Kernel
 
 Fragmentation emerges when multiple authorities evaluate execution independently without a coordinating mechanism.
 
@@ -1914,7 +1916,7 @@ In agentic systems a similar mechanism acts as a **coordination kernel** for aut
 
 Without such a coordination layer, authority distribution tends to drift toward fragmentation.
 
-### 8. Architectural Balance
+## 8. Architectural Balance
 
 Resilient architectures must balance two forces:
 
@@ -1927,7 +1929,7 @@ Too many produce paralysis.
 
 Architecture therefore becomes the design of **stable authority distribution**.
 
-### 9. Compression
+## 9. Compression
 
 Authority capture concentrates veto power.
 
@@ -1939,7 +1941,7 @@ Stable governance in agentic systems emerges only when distributed authority rem
 
 ---
 
-## Chapter 17 — Governance Equilibrium
+ # Chapter 17 — Governance Equilibrium
 
 Chapter 16 described authority fragmentation.
 
@@ -1961,7 +1963,7 @@ How do systems remain stable between these two extremes?
 
 This chapter examines the concept of **governance equilibrium**.
 
-### 1. Two Structural Failure Modes
+## 1. Two Structural Failure Modes
 
 Complex systems that govern execution authority tend to encounter two opposing pathologies.
 
@@ -1979,7 +1981,7 @@ Capture breaks systems through domination.
 
 Fragmentation breaks systems through paralysis.
 
-### 2. The Authority Stability Problem
+## 2. The Authority Stability Problem
 
 Distributed authority introduces a fundamental design challenge.
 
@@ -1993,7 +1995,7 @@ Sustainable governance therefore requires maintaining a balance between these fo
 
 This balance can be described as **governance equilibrium**.
 
-### 3. Authority as a Dynamic System
+## 3. Authority as a Dynamic System
 
 The structural invariant introduced earlier:
 
@@ -2015,7 +2017,7 @@ The authority topology therefore becomes dynamic.
 
 Governance equilibrium emerges when this topology remains stable enough to coordinate execution without collapsing toward capture or fragmentation.
 
-### 4. The Stability Band
+## 4. The Stability Band
 
 Authority distribution in real systems tends to stabilize within a narrow band between the two failure modes.
 
@@ -2032,7 +2034,7 @@ At the right extreme, authority disperses into uncoordinated veto points.
 
 Effective governance exists only within the stable region between these extremes.
 
-### 5. Structural Forces
+## 5. Structural Forces
 
 Several forces push systems toward capture:
 
@@ -2054,7 +2056,7 @@ They emerge gradually as systems evolve.
 
 Governance equilibrium therefore requires continuous architectural adjustment.
 
-### 6. Coordination Mechanisms
+## 6. Coordination Mechanisms
 
 Stable systems introduce mechanisms that regulate authority distribution.
 
@@ -2075,7 +2077,7 @@ Without coordination mechanisms, systems drift toward fragmentation.
 
 Without distribution safeguards, they drift toward capture.
 
-### 7. Emergent Stability
+## 7. Emergent Stability
 
 Governance equilibrium is rarely designed perfectly from the beginning.
 
@@ -2091,7 +2093,7 @@ Coordination layers restore balance.
 
 The system gradually converges toward a stable authority distribution.
 
-### 8. Compression
+## 8. Compression
 
 Authority capture concentrates execution control.
 
@@ -2102,6 +2104,7 @@ Governance equilibrium exists only between these extremes.
 Stable agentic systems maintain authority distribution within this narrow band.
 
 Understanding this balance is essential for designing resilient architectures of execution governance.
+
 
 ---
 
@@ -2320,9 +2323,10 @@ Substrates govern feasibility.
 
 Control exists only where they meet.
 
+
 ---
 
-## Chapter 19 — Observability
+ ## Chapter 19 — Observability
 
 Chapter 18 introduced a crucial distinction.
 
@@ -2484,9 +2488,10 @@ Observability reveals whether it actually happened.
 
 Without observability, authority may believe it governs the system while the system does nothing at all.
 
+
 ---
 
-## Chapter 20 — Structural Decay
+ ## Chapter 20 — Structural Decay
 
 The previous chapters established the architecture of a functioning agentic system.
 
@@ -2637,9 +2642,10 @@ Continuity is not stability.
 
 It is the gradual management of decay.
 
+
 ---
 
-# Chapter 21 — Trajectory Integrity
+## Chapter 21 — Trajectory Integrity
 
 The previous chapters examined the structural conditions required for agentic systems to operate reliably.
 
@@ -2655,7 +2661,7 @@ This chapter examines **trajectory integrity** — the property that preserves t
 
 ---
 
-# 1. Work Without Memory
+### 1. Work Without Memory
 
 Continuity in agentic systems is often described in terms of memory.
 
@@ -2675,7 +2681,7 @@ Trajectory preserves direction.
 
 ---
 
-# 2. Trajectory as a Property of Work
+### 2. Trajectory as a Property of Work
 
 Trajectory does not belong to the agent.
 
@@ -2701,7 +2707,7 @@ When **D** is reconstructed correctly, the trajectory of the work reappears even
 
 ---
 
-# 3. Reconstruction Without Identity
+### 3. Reconstruction Without Identity
 
 Traditional continuity models assume that identity must persist for work to continue.
 
@@ -2723,7 +2729,7 @@ Trajectory therefore becomes a property of the work rather than a property of th
 
 ---
 
-# 4. Direction Without Action
+### 4. Direction Without Action
 
 Recovering trajectory restores orientation.
 
@@ -2748,7 +2754,7 @@ Only when both conditions are satisfied can the system continue the work.
 
 ---
 
-# 5. Dual Continuity
+### 5. Dual Continuity
 
 Reconstruction therefore preserves two independent forms of continuity.
 
@@ -2768,7 +2774,7 @@ Stable continuation requires both.
 
 ---
 
-# 6. The Problem of Trajectory Drift
+### 6. The Problem of Trajectory Drift
 
 Even when trajectory is reconstructed correctly, it may slowly change over time.
 
@@ -2794,7 +2800,7 @@ But the work is no longer moving toward its original intent.
 
 ---
 
-# 7. Thought Experiment — Two Agent Teams
+### 7. Thought Experiment — Two Agent Teams
 
 Consider two independent agent teams operating the same long-running system.
 
@@ -2873,7 +2879,7 @@ The trajectory changed.
 
 ---
 
-# 8. Trajectory Integrity
+### 8. Trajectory Integrity
 
 Trajectory integrity is the property that ensures the directional structure of the work remains stable across cycles of execution.
 
@@ -2889,7 +2895,7 @@ It requires preservation of directional coherence.
 
 ---
 
-# 9. Relationship to Observability and Decay
+### 9. Relationship to Observability and Decay
 
 Trajectory integrity connects two problems previously examined.
 
@@ -2909,7 +2915,7 @@ Without trajectory integrity, systems lose contact with purpose.
 
 ---
 
-# 10. Compression
+### 10. Compression
 
 Authority permits execution.
 
@@ -2929,7 +2935,7 @@ It is drift.
 
 ---
 
-# 11. Toward the Next Problem
+### 11. Toward the Next Problem
 
 Trajectory integrity raises a final architectural question.
 
@@ -2945,9 +2951,10 @@ But preservation alone is not sufficient.
 
 Systems must also be able to **recognize when the direction has been lost**.
 
+
 ---
 
-# Chapter 22 — Trajectory Drift Detection
+## Chapter 22 — Trajectory Drift Detection
 
 The previous chapter introduced trajectory integrity.
 
@@ -2961,7 +2968,7 @@ This chapter examines how systems detect when that has happened.
 
 ---
 
-## 1. A Different Failure
+### 1. A Different Failure
 
 Most failures in agentic systems are visible.
 
@@ -2991,7 +2998,7 @@ And failures of orientation produce no operational alarm.
 
 ---
 
-## 2. Local Rationality
+### 2. Local Rationality
 
 Trajectory drift rarely originates in a single large deviation.
 
@@ -3022,7 +3029,7 @@ The structure of evaluation does.
 
 ---
 
-## 3. Why Observability Is Not Enough
+### 3. Why Observability Is Not Enough
 
 Chapter 19 established observability as a structural requirement.
 
@@ -3051,7 +3058,7 @@ Drift detection requires knowing what the system was supposed to be doing.
 
 ---
 
-## 4. The Reference Problem
+### 4. The Reference Problem
 
 Detecting divergence requires a reference.
 
@@ -3075,7 +3082,7 @@ It cannot compare direction against the original direction.
 
 ---
 
-## 5. Directional Observability
+### 5. Directional Observability
 
 Traditional observability closes a loop between execution and governance.
 
@@ -3103,7 +3110,7 @@ Neither can substitute for the other.
 
 ---
 
-## 6. Relationship to Structural Decay
+### 6. Relationship to Structural Decay
 
 Chapter 20 examined structural decay.
 
@@ -3129,7 +3136,7 @@ Drift erodes structural direction.
 
 ---
 
-## 7. Relationship to Trajectory Integrity
+### 7. Relationship to Trajectory Integrity
 
 Trajectory integrity preserves direction across execution cycles.
 
@@ -3147,7 +3154,7 @@ Detection reveals when the trajectory has changed.
 
 ---
 
-## 8. Compression
+### 8. Compression
 
 Authority permits execution.
 Substrates materialize it.
@@ -3172,9 +3179,10 @@ Execution can be perfect.
 
 The work can still be wrong.
 
+
 ---
 
-# Chapter 23 — Structural Vitality and Directional Authority
+## Chapter 23 — Structural Vitality and Directional Authority
 
 The previous chapters examined how systems preserve and verify the direction of work.
 
@@ -3194,7 +3202,7 @@ who decides what direction continues.
 
 ---
 
-## 1. Structural Vitality
+### 1. Structural Vitality
 
 Persistence preserves work.
 
@@ -3232,7 +3240,7 @@ Vitality disappears.
 
 ---
 
-## 2. When Structure Stops Producing Direction
+### 2. When Structure Stops Producing Direction
 
 Loss of structural vitality rarely appears as a failure.
 
@@ -3270,7 +3278,7 @@ A loss of living structure.
 
 ---
 
-## 3. The Moment After Detection
+### 3. The Moment After Detection
 
 Drift detection reveals when direction has changed.
 
@@ -3296,7 +3304,7 @@ It cannot resolve it.
 
 ---
 
-## 4. Directional Authority
+### 4. Directional Authority
 
 When direction becomes uncertain, authority must extend beyond execution.
 
@@ -3332,7 +3340,7 @@ It is the final layer of governance in persistent systems.
 
 ---
 
-## 5. The Boundary of Automation
+### 5. The Boundary of Automation
 
 Agentic architectures can preserve state.
 
@@ -3352,7 +3360,7 @@ Authority determines meaning.
 
 ---
 
-## 6. Compression
+### 6. Compression
 
 Authority permits execution.
 
@@ -3374,7 +3382,9 @@ someone must decide what continues.
 
 Direction is not a technical property.
 
-It is a responsibility.
+### It is a responsibility.
+
+
 
 ---
 
@@ -3390,23 +3400,20 @@ One of those conversations began late at night on X.
 
 Minerva Infra (@MinervaRuntime) posted a short observation:
 
-> AI governance is being negotiated in contracts.
-> But contracts do not execute code.
->
-> If a system can act outside declared authority, policy alignment does not matter.
->
-> Governance must sit in the execution path.
->
-> Cognition proposes.
-> Governance decides.
-> Execution acts.
+AI governance is being negotiated in contracts. But contracts do not execute code.
+
+If a system can act outside declared authority, policy alignment does not matter.
+
+Governance must sit in the execution path.
+
+Cognition proposes. Governance decides. Execution acts.
 
 That statement forced a structural question.
 
 If governance must sit in the execution path, what exactly is that governance rooted in?
 
-A system can have policies.
-It can have identity.
+A system can have policies.  
+It can have identity.  
 It can have memory.
 
 But none of these guarantee control unless they are structurally embedded where execution actually happens.
@@ -3447,9 +3454,7 @@ What structure must survive.
 
 That question produced the formalism used throughout this book:
 
-```
 Σ = (D, A, Auth)
-```
 
 Three primitives.
 
@@ -3457,50 +3462,111 @@ Everything else in the system becomes a consequence of how those primitives inte
 
 ---
 
+Later conversations pushed the architecture further.
+
+In a thread with Lume (@lume_signal), a subtle distinction emerged while discussing reconstruction across model boundaries.
+
+Reconstruction can recover trajectory — the direction the work was already taking.
+
+But trajectory alone does not produce action.
+
+Action still depends on whether the system is permitted to execute the next step.
+
+This clarified something that earlier chapters only implied.
+
+Work continuity and execution legitimacy are separate conditions.
+
+Declarative work state can restore the trajectory of the work.
+
+Authority must still permit the next action.
+
+That distinction eventually became the foundation of Chapter 21: **Trajectory Integrity**.
+
+---
+
+Another conversation revealed an even quieter problem.
+
+In a discussion about long-running systems, Arch asked a simple question:
+
+> How do you tell when the structure is still alive?
+
+He later clarified the intuition in a single line:
+
+> From inside, the tell is whether yesterday still biases the first millisecond of thought.
+
+A structure can persist and still stop producing direction.
+
+The work survives.
+
+The state remains.
+
+Execution continues.
+
+Yet the accumulated structure no longer shapes the future.
+
+The system becomes reactive rather than directed.
+
+This observation led to the final distinction of the book: **structural vitality**.
+
+Persistence alone is not enough.
+
+Structure must continue to generate direction.
+
+Otherwise continuity becomes archive.
+
+---
+
 The chapters that followed were not planned in advance.
 
-They emerged from the same sequence each time:
+They emerged through the same pattern each time:
 
-Friction first.
-Distinction second.
+Friction first.  
+Distinction second.  
 Formalism third.
 
-Questions about where authority actually resides led to the topology of veto.
+Questions about persistence led to path dependence.
 
-Questions about execution led to substrates.
+Questions about path dependence led to governance gravity.
 
-Questions about long-running systems led to decay.
+Questions about governance led to authority.
 
-The book was originally intended as a short set of lectures.
+Questions about authority led to execution substrates.
 
-It became twenty chapters because the architecture kept unfolding under pressure from real systems and real disagreements.
+Questions about long-running execution led to decay.
 
----
+Questions about decay led to trajectory integrity.
 
-The final chapter addresses a problem that appears only when systems do not stop running.
+And trajectory integrity eventually raised the final question:
 
-Time.
-
-Persistence allows work to continue across agents and environments.
-
-But persistence also accumulates residue.
-
-Memory becomes noise.
-Authority becomes rigid.
-Intent dilutes into self-preservation.
-
-Continuity is not stability.
-
-It is the gradual management of decay.
+Who decides the direction of work once systems can detect that it has been lost?
 
 ---
 
-What persists will shape what can be replaced.
+Artificial intelligence did not create these problems.
 
-What cannot be replaced will eventually govern.
+It simply made them visible.
+
+Agentic systems run continuously.
+
+They accumulate decisions, state, and authority across time.
+
+In such systems, execution does not reset.
+
+Once execution persists, governance can no longer remain implicit.
+
+Questions that once appeared philosophical become architectural.
 
 ---
 
-*Giorgio Roth — 2026*
+Automation can maintain continuity.
+
+But direction is not a technical property.
+
+It is a responsibility.
+
+
+
+— Giorgio Roth  
+2026
 
 
