@@ -2945,9 +2945,234 @@ But preservation alone is not sufficient.
 
 Systems must also be able to **recognize when the direction has been lost**.
 
+---
+
+# Chapter 22 — Trajectory Drift Detection
+
+The previous chapter introduced trajectory integrity.
+
+Trajectory integrity preserves the direction of work across execution cycles.
+
+But preservation is not the same as verification.
+
+A system may maintain trajectory integrity as a structural property while losing the trajectory in practice.
+
+This chapter examines how systems detect when that has happened.
 
 ---
 
+## 1. A Different Failure
+
+Most failures in agentic systems are visible.
+
+An action fails to execute.
+A substrate becomes unavailable.
+A dependency breaks.
+
+These failures interrupt operation.
+
+They produce signals.
+
+Trajectory drift does not interrupt operation.
+
+Authority continues to approve actions.
+Execution continues to succeed.
+Observability confirms each result.
+
+From every operational perspective the system appears healthy.
+
+Yet the direction of the work may have already changed.
+
+Drift is not a failure of operation.
+
+It is a failure of orientation.
+
+And failures of orientation produce no operational alarm.
+
+---
+
+## 2. Local Rationality
+
+Trajectory drift rarely originates in a single large deviation.
+
+It emerges from how decisions are evaluated in long-running systems.
+
+Each decision is evaluated within a local context.
+
+The current state.
+The current constraints.
+The immediate execution path.
+
+Within that frame each decision appears valid.
+
+It satisfies present constraints.
+It follows from prior state.
+
+But local validity is not the same as directional continuity.
+
+A sequence of locally valid decisions can still redirect the work.
+
+Each step is correct within its frame.
+
+The accumulation of steps moves outside it.
+
+No single step causes the drift.
+
+The structure of evaluation does.
+
+---
+
+## 3. Why Observability Is Not Enough
+
+Chapter 19 established observability as a structural requirement.
+
+Without observability authority operates blindly.
+
+But observability answers a specific question.
+
+Did the action occur?
+
+Drift detection requires a different question.
+
+Is the work still moving in the same direction?
+
+These questions are not equivalent.
+
+A system may observe every action that occurred.
+
+Every execution.
+Every outcome.
+
+And still lack any mechanism to determine whether those actions together form a drift away from the original trajectory.
+
+Observability monitors what the system did.
+
+Drift detection requires knowing what the system was supposed to be doing.
+
+---
+
+## 4. The Reference Problem
+
+Detecting divergence requires a reference.
+
+Not a log of what occurred.
+
+A structural record of where the work was directed.
+
+The declarative work state provides this reference.
+
+```
+D = (intent, constraints, decisions, progress)
+```
+
+But storing the state is not sufficient.
+
+The system must preserve the directional relationship between these elements as it existed before later execution cycles modified them.
+
+Without this reference the system can compare actions against previous actions.
+
+It cannot compare direction against the original direction.
+
+---
+
+## 5. Directional Observability
+
+Traditional observability closes a loop between execution and governance.
+
+Execution occurs.
+Observability reports the outcome.
+Governance updates the system state.
+
+Drift detection introduces a second loop.
+
+This loop does not monitor execution.
+
+It monitors direction.
+
+The first loop asks:
+
+Did execution occur?
+
+The second loop asks:
+
+Is the trajectory still consistent with what it was?
+
+Both loops are necessary.
+
+Neither can substitute for the other.
+
+---
+
+## 6. Relationship to Structural Decay
+
+Chapter 20 examined structural decay.
+
+Decay alters the mechanisms of execution.
+
+Memory becomes noise.
+Authority becomes rigid.
+Infrastructure assumptions drift.
+
+Trajectory drift operates differently.
+
+A system can decay without drifting.
+
+It may become slower, noisier, or less efficient while still pursuing the original objective.
+
+A system can drift without decaying.
+
+It may execute perfectly while gradually pursuing a different objective.
+
+Decay erodes structural capacity.
+
+Drift erodes structural direction.
+
+---
+
+## 7. Relationship to Trajectory Integrity
+
+Trajectory integrity preserves direction across execution cycles.
+
+Drift detection verifies that this preservation holds.
+
+Without integrity, direction cannot persist.
+
+Without detection, loss of direction remains invisible.
+
+The two mechanisms operate together.
+
+Integrity maintains the trajectory.
+
+Detection reveals when the trajectory has changed.
+
+---
+
+## 8. Compression
+
+Authority permits execution.
+Substrates materialize it.
+Observability confirms it occurred.
+
+Trajectory integrity preserves direction across cycles.
+
+Drift detection determines whether that direction still holds.
+
+Observability and drift detection are not redundant.
+
+One monitors execution.
+
+The other monitors orientation.
+
+A system may execute every action correctly
+and confirm every outcome.
+
+While silently pursuing a different objective than the one it began with.
+
+Execution can be perfect.
+
+The work can still be wrong.
+
+---
 
 ## Afterword — Where the Questions Came From
 
