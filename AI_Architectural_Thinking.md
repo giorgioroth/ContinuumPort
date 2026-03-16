@@ -1,5 +1,5 @@
 # AI Architectural Thinking
-### A Structural Framework for Persistence, Governance, and Continuity
+## A Structural Framework for Persistence, Governance, and Continuity
 
 ---
 
@@ -1252,7 +1252,7 @@ but by where execution can be refused.
 
 ---
 
- # Chapter 13 — Authority Drift
+ ## Chapter 13 — Authority Drift
 
 Chapter 12 described authority as a topology of veto points.
 
@@ -1265,7 +1265,7 @@ They evolve.
 
 This chapter examines what happens when authority structures change over time.
 
-## 1. Authority Does Not Stay Still
+### 1. Authority Does Not Stay Still
 
 In simple systems, authority structures are stable.
 
@@ -1284,7 +1284,7 @@ Each of these changes can alter where authority effectively resides.
 
 This phenomenon is **authority drift**.
 
-## 2. What Authority Drift Means
+### 2. What Authority Drift Means
 
 Authority drift occurs when the **effective location of veto power shifts over time**, even if the formal architecture remains unchanged.
 
@@ -1303,7 +1303,7 @@ It can emerge gradually through:
 
 Over time, these small changes alter the authority topology.
 
-## 3. How Drift Appears
+### 3. How Drift Appears
 
 Consider a system where execution initially depends on three veto points:
 
@@ -1333,7 +1333,7 @@ Policy still exists.
 
 But the effective veto point has shifted.
 
-## 4. Formal Authority vs Effective Authority
+### 4. Formal Authority vs Effective Authority
 
 Architectural diagrams describe **formal authority**.
 
@@ -1345,7 +1345,7 @@ Effective authority is determined by which components actually exercise veto pow
 
 Authority drift is the divergence between these two.
 
-## 5. Why Drift Is Almost Inevitable
+### 5. Why Drift Is Almost Inevitable
 
 Authority drift emerges naturally in systems that are:
 
@@ -1361,7 +1361,7 @@ Over time, the topology evolves.
 
 Even if the architecture documentation does not change.
 
-## 6. A Familiar Example
+### 6. A Familiar Example
 
 Consider aviation again.
 
@@ -1382,7 +1382,7 @@ Certain maneuvers are now structurally impossible.
 
 The topology evolved.
 
-## 7. Drift and Replaceability
+### 7. Drift and Replaceability
 
 Authority drift has a direct consequence for replaceability.
 
@@ -1392,7 +1392,7 @@ But if authority has drifted toward that component, replacing it becomes structu
 
 Replaceability depends on the **current authority topology**, not the original one.
 
-## 8. Why Drift Matters for AI Systems
+### 8. Why Drift Matters for AI Systems
 
 Agentic systems evolve quickly.
 
@@ -1409,7 +1409,7 @@ Not by intention.
 
 But by drift.
 
-## 9. Detecting Drift
+### 9. Detecting Drift
 
 Authority drift is rarely visible from documentation.
 
@@ -1423,7 +1423,7 @@ Key questions include:
 
 The answers reveal the **effective topology**.
 
-## 10. Compression
+### 10. Compression
 
 Authority topology describes where execution can be refused.
 
@@ -1442,7 +1442,7 @@ Over time, it moves.
 
 ---
 
- # Chapter 14 — Authority Capture
+ ## Chapter 14 — Authority Capture
 
 Chapter 12 described authority as a topology of veto points.
 
@@ -1459,7 +1459,7 @@ This chapter examines what happens when authority converges toward a dominant no
 
 This phenomenon is **authority capture**.
 
-## 1. When Drift Accumulates
+### 1. When Drift Accumulates
 
 Authority drift redistributes veto potential.
 
@@ -1473,7 +1473,7 @@ When these shifts repeatedly favor the same component, veto power accumulates.
 
 At that point, authority has been captured.
 
-## 2. What Authority Capture Means
+### 2. What Authority Capture Means
 
 Authority capture occurs when **effective veto power concentrates in a single component or layer**, even though the architecture originally distributed it.
 
@@ -1485,7 +1485,7 @@ The topology remains formally distributed.
 
 Operational authority has converged.
 
-## 3. From Topology to Dominance
+### 3. From Topology to Dominance
 
 Consider a system with several veto layers:
 
@@ -1515,7 +1515,7 @@ Upstream veto points remain present, but rarely intervene.
 
 The runtime becomes the effective authority.
 
-## 4. Capture Without Intent
+### 4. Capture Without Intent
 
 Authority capture rarely begins as a deliberate redesign.
 
@@ -1535,7 +1535,7 @@ Control concentrates.
 
 This is structural capture.
 
-## 5. Formal Authority vs Effective Authority
+### 5. Formal Authority vs Effective Authority
 
 Architectural diagrams describe **formal authority**.
 
@@ -1547,7 +1547,7 @@ Effective authority is determined by which component actually exercises veto pow
 
 Capture occurs when these two diverge.
 
-## 6. The Safety Paradox
+### 6. The Safety Paradox
 
 Authority capture introduces a paradox.
 
@@ -1569,7 +1569,7 @@ Reliability increased.
 
 Failure consequences became more concentrated.
 
-## 7. A Recurring Pattern
+### 7. A Recurring Pattern
 
 Authority capture appears across many complex systems.
 
@@ -1583,7 +1583,7 @@ The architecture may still appear layered.
 
 But effective authority has centralized.
 
-## 8. Capture and Replaceability
+### 8. Capture and Replaceability
 
 Authority capture directly affects replaceability.
 
@@ -1597,7 +1597,7 @@ Execution depends on the captured authority.
 
 Replaceability becomes illusory.
 
-## 9. Capture in Agentic Systems
+### 9. Capture in Agentic Systems
 
 Agentic AI systems amplify this dynamic.
 
@@ -1611,7 +1611,7 @@ Not by design.
 
 But by drift.
 
-## 10. Compression
+### 10. Compression
 
 Authority rooting defines where authority begins.
 
@@ -1628,7 +1628,7 @@ It tends to accumulate where execution is most efficiently controlled.
 
 ---
 
- # Chapter 15 — Anti-Capture Architecture
+ ## Chapter 15 — Anti-Capture Architecture
 
 Chapter 14 described authority capture.
 
@@ -1641,7 +1641,7 @@ Complex systems tend toward authority concentration.
 
 This chapter examines how architecture can resist that tendency.
 
-## 1. Capture as the Default Gradient
+### 1. Capture as the Default Gradient
 
 Authority capture rarely results from explicit intent.
 
@@ -1663,7 +1663,7 @@ Capture is therefore not an anomaly.
 
 It is the natural gradient of system optimization.
 
-## 2. Designing Against the Gradient
+### 2. Designing Against the Gradient
 
 Anti-capture architecture does not eliminate drift.
 
@@ -1675,7 +1675,7 @@ This requires deliberately introducing structural constraints that preserve dist
 
 In other words, anti-capture architecture introduces **deliberate friction**.
 
-## 3. Veto Independence
+### 3. Veto Independence
 
 Veto points must remain operationally independent.
 
@@ -1687,7 +1687,7 @@ Meaningful veto independence requires **distinct control domains**.
 
 Only then can multiple veto points constrain execution.
 
-## 4. Capability Separation
+### 4. Capability Separation
 
 Authority capture often emerges when a single component accumulates too many capabilities.
 
@@ -1703,7 +1703,7 @@ Anti-capture architecture separates these capabilities.
 
 No single component should control every stage of the execution path.
 
-## 5. Replaceability as Structural Constraint
+### 5. Replaceability as Structural Constraint
 
 Replaceability is one of the strongest defenses against capture.
 
@@ -1715,7 +1715,7 @@ Replaceability therefore cannot remain theoretical.
 
 It must be periodically tested in practice.
 
-## 6. Distributed Safety
+### 6. Distributed Safety
 
 Distributed authority may appear less efficient than centralized control.
 
@@ -1729,7 +1729,7 @@ Efficiency may decrease.
 
 Systemic fragility is reduced.
 
-## 7. The Architectural Tradeoff
+### 7. The Architectural Tradeoff
 
 Anti-capture mechanisms introduce friction.
 
@@ -1745,7 +1745,7 @@ But they preserve authority distribution.
 
 Architecture therefore becomes a balance between efficiency and control.
 
-## 8. Compression
+### 8. Compression
 
 Authority capture is the natural endpoint of authority drift.
 
@@ -1763,7 +1763,7 @@ With them, distributed control can remain stable.
 
 ---
 
- # Chapter 16 — Authority Fragmentation
+## Chapter 16 — Authority Fragmentation
 
 Chapter 15 described how systems resist authority capture.
 
@@ -1781,7 +1781,7 @@ When authority becomes too distributed, execution coordination collapses.
 
 This phenomenon is **authority fragmentation**.
 
-## 1. The Opposite Failure Mode
+### 1. The Opposite Failure Mode
 
 Authority capture concentrates veto power.
 
@@ -1797,7 +1797,7 @@ Capture breaks systems through domination.
 
 Fragmentation breaks them through paralysis.
 
-## 2. Distributed Authority
+### 2. Distributed Authority
 
 In real systems authority rarely exists as a single decision point.
 
@@ -1813,7 +1813,7 @@ Execution therefore becomes a coordination problem across these evaluators.
 
 As the number of authorities grows, maintaining consistent evaluation becomes increasingly difficult.
 
-## 3. Multi-Authority Evaluation
+### 3. Multi-Authority Evaluation
 
 Earlier chapters described execution using the invariant:
 
@@ -1848,7 +1848,7 @@ approval(Auth, α) = false
 
 not because a single authority rejected the action, but because the system cannot reconcile conflicting evaluations.
 
-## 4. Governance Deadlock
+### 4. Governance Deadlock
 
 Fragmentation often appears in safety-oriented architectures.
 
@@ -1870,7 +1870,7 @@ Fragmentation is rarely caused by malicious actors.
 
 It is often the unintended result of **defensive design**.
 
-## 5. Capture vs Fragmentation
+### 5. Capture vs Fragmentation
 
 Authority capture and authority fragmentation are opposing structural failures.
 
@@ -1884,7 +1884,7 @@ One through domination.
 
 The other through paralysis.
 
-## 6. The Coordination Problem
+### 6. The Coordination Problem
 
 Fragmentation is fundamentally a coordination problem.
 
@@ -1894,7 +1894,7 @@ As the number of veto points grows, maintaining consistent decisions becomes inc
 
 Without explicit coordination mechanisms, fragmented systems drift toward persistent deadlock.
 
-## 7. Coordination Kernel
+### 7. Coordination Kernel
 
 Fragmentation emerges when multiple authorities evaluate execution independently without a coordinating mechanism.
 
@@ -1916,7 +1916,7 @@ In agentic systems a similar mechanism acts as a **coordination kernel** for aut
 
 Without such a coordination layer, authority distribution tends to drift toward fragmentation.
 
-## 8. Architectural Balance
+### 8. Architectural Balance
 
 Resilient architectures must balance two forces:
 
@@ -1929,7 +1929,7 @@ Too many produce paralysis.
 
 Architecture therefore becomes the design of **stable authority distribution**.
 
-## 9. Compression
+### 9. Compression
 
 Authority capture concentrates veto power.
 
@@ -1941,7 +1941,7 @@ Stable governance in agentic systems emerges only when distributed authority rem
 
 ---
 
- # Chapter 17 — Governance Equilibrium
+ ## Chapter 17 — Governance Equilibrium
 
 Chapter 16 described authority fragmentation.
 
@@ -1963,7 +1963,7 @@ How do systems remain stable between these two extremes?
 
 This chapter examines the concept of **governance equilibrium**.
 
-## 1. Two Structural Failure Modes
+### 1. Two Structural Failure Modes
 
 Complex systems that govern execution authority tend to encounter two opposing pathologies.
 
@@ -1981,7 +1981,7 @@ Capture breaks systems through domination.
 
 Fragmentation breaks systems through paralysis.
 
-## 2. The Authority Stability Problem
+### 2. The Authority Stability Problem
 
 Distributed authority introduces a fundamental design challenge.
 
@@ -1995,7 +1995,7 @@ Sustainable governance therefore requires maintaining a balance between these fo
 
 This balance can be described as **governance equilibrium**.
 
-## 3. Authority as a Dynamic System
+### 3. Authority as a Dynamic System
 
 The structural invariant introduced earlier:
 
@@ -2017,7 +2017,7 @@ The authority topology therefore becomes dynamic.
 
 Governance equilibrium emerges when this topology remains stable enough to coordinate execution without collapsing toward capture or fragmentation.
 
-## 4. The Stability Band
+### 4. The Stability Band
 
 Authority distribution in real systems tends to stabilize within a narrow band between the two failure modes.
 
@@ -2034,7 +2034,7 @@ At the right extreme, authority disperses into uncoordinated veto points.
 
 Effective governance exists only within the stable region between these extremes.
 
-## 5. Structural Forces
+### 5. Structural Forces
 
 Several forces push systems toward capture:
 
@@ -2056,7 +2056,7 @@ They emerge gradually as systems evolve.
 
 Governance equilibrium therefore requires continuous architectural adjustment.
 
-## 6. Coordination Mechanisms
+### 6. Coordination Mechanisms
 
 Stable systems introduce mechanisms that regulate authority distribution.
 
@@ -2077,7 +2077,7 @@ Without coordination mechanisms, systems drift toward fragmentation.
 
 Without distribution safeguards, they drift toward capture.
 
-## 7. Emergent Stability
+### 7. Emergent Stability
 
 Governance equilibrium is rarely designed perfectly from the beginning.
 
@@ -2093,7 +2093,7 @@ Coordination layers restore balance.
 
 The system gradually converges toward a stable authority distribution.
 
-## 8. Compression
+### 8. Compression
 
 Authority capture concentrates execution control.
 
