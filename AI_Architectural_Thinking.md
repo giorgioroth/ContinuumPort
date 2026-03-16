@@ -3174,6 +3174,210 @@ The work can still be wrong.
 
 ---
 
+# Chapter 23 — Structural Vitality and Directional Authority
+
+The previous chapters examined how systems preserve and verify the direction of work.
+
+Trajectory integrity preserves direction across execution cycles.
+
+Drift detection reveals when that direction has changed.
+
+But detection alone does not restore direction.
+
+A system may know that its trajectory has diverged.
+
+Knowing is not the same as deciding.
+
+This chapter examines the final problem of persistent systems:
+
+who decides what direction continues.
+
+---
+
+## 1. Structural Vitality
+
+Persistence preserves work.
+
+A system may accumulate decisions, constraints, and progress across many execution cycles.
+
+The work survives.
+
+But survival is not the same as vitality.
+
+A structure may preserve every past decision and still cease to shape the future.
+
+New actions follow procedural rules.
+
+Execution continues.
+
+Yet the accumulated structure no longer influences what happens next.
+
+The work persists.
+
+But it no longer produces direction.
+
+Structural vitality exists only when past work continues to influence future execution.
+
+When yesterday still bends tomorrow.
+
+Without this influence, persistence becomes archive.
+
+The system stores the past.
+
+But the past no longer participates in the present.
+
+Continuity remains.
+
+Vitality disappears.
+
+---
+
+## 2. When Structure Stops Producing Direction
+
+Loss of structural vitality rarely appears as a failure.
+
+Execution still succeeds.
+
+Observability still confirms results.
+
+The system appears stable.
+
+Yet something subtle changes.
+
+New decisions no longer arise from accumulated structure.
+
+They arise from immediate circumstances.
+
+Constraints adapt.
+
+Progress continues.
+
+But the work gradually becomes reactive rather than directed.
+
+The system still acts.
+
+But the structure that once guided those actions no longer generates direction.
+
+Trajectory becomes procedural.
+
+Not generative.
+
+At this point the system has not drifted.
+
+It has something more subtle.
+
+A loss of living structure.
+
+---
+
+## 3. The Moment After Detection
+
+Drift detection reveals when direction has changed.
+
+But detection produces only a signal.
+
+A signal is not a decision.
+
+The system now knows that the trajectory no longer matches the original direction.
+
+What happens next cannot be resolved by mechanism alone.
+
+Execution substrates cannot decide direction.
+
+Observability cannot decide direction.
+
+Even trajectory integrity cannot restore direction once it is lost.
+
+At this point the architecture reaches its limit.
+
+The system can reveal the problem.
+
+It cannot resolve it.
+
+---
+
+## 4. Directional Authority
+
+When direction becomes uncertain, authority must extend beyond execution.
+
+Earlier chapters examined authority as permission to act.
+
+Directional authority is different.
+
+It is authority over the direction of the work itself.
+
+Directional authority answers a different question.
+
+Not:
+
+*May this action execute?*
+
+But:
+
+*Should this work continue in this direction at all?*
+
+This decision cannot be derived mechanically.
+
+Execution systems optimize action.
+
+They do not determine purpose.
+
+Purpose requires judgment.
+
+Judgment requires authority.
+
+Directional authority therefore exists outside the automatic mechanisms that sustain execution.
+
+It is the final layer of governance in persistent systems.
+
+---
+
+## 5. The Boundary of Automation
+
+Agentic architectures can preserve state.
+
+They can execute actions.
+
+They can observe outcomes.
+
+They can detect drift.
+
+But they cannot determine purpose.
+
+The direction of work ultimately exceeds the scope of automation.
+
+Automation maintains continuity.
+
+Authority determines meaning.
+
+---
+
+## 6. Compression
+
+Authority permits execution.
+
+Substrates perform it.
+
+Observability confirms it occurred.
+
+Structural decay erodes capacity.
+
+Trajectory integrity preserves direction.
+
+Drift detection reveals when direction is lost.
+
+But systems do not correct themselves.
+
+When structure stops generating direction,
+
+someone must decide what continues.
+
+Direction is not a technical property.
+
+It is a responsibility.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
