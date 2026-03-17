@@ -2574,7 +2574,69 @@ Without this feedback, authority becomes disconnected from the system it governs
 
 Control requires visibility.
 
-### 8. Compression
+### 8. Observability and Blind Constraints
+
+A system may enforce a constraint.
+
+It may reject an action.
+
+It may produce a result that appears consistent.
+
+From the outside, everything seems correct.
+
+But the question is not:
+
+did the system enforce the constraint?
+
+The question is:
+
+what state did the constraint operate on?
+
+If that state cannot be observed,
+the constraint cannot be evaluated.
+
+If the constraint cannot be evaluated,
+it cannot be governed.
+
+The system is not being controlled.
+
+It is being assumed.
+
+A constraint applied to an unobservable state
+is indistinguishable from a defect.
+
+Such systems do not fail loudly.
+
+Execution continues.
+
+Outputs remain plausible.
+
+But over time, the system drifts.
+
+Not because constraints are missing.
+
+But because they operate on a state
+that cannot be inspected or verified.
+
+Observability is not about logs.
+
+It is the ability to confirm
+that execution changed the system state
+in the way authority intended.
+
+Without that, authority does not govern execution.
+
+It only precedes it.
+
+---
+
+### 9. Compression
+
+A system can enforce every constraint
+and still not be governed.
+
+If execution cannot be observed,
+governance is only assumption.
 
 Authority permits execution.
 
@@ -2582,8 +2644,7 @@ Substrates materialize it.
 
 Observability reveals whether it actually happened.
 
-Without observability, authority may believe it governs the system while the system does nothing at all.
-
+And over time, that gap accumulates.
 
 ---
 
