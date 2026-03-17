@@ -102,6 +102,102 @@ AI merely made this architecture impossible to ignore.
 *DATA knew this. He just didn't know it was about him.*
 
 ---
+---
+
+### 1
+
+**If you don’t know what persists, you don’t understand the system.**
+
+### 2
+
+**Not all memory is the same — some moves the work, some binds the user.**
+
+### 3
+
+**If behavior changes when history is removed, identity-like structure was there.**
+
+### 4
+
+**Path dependence turns usage into commitment.**
+
+### 5
+
+**Governance doesn’t start with policy — it starts with persistence.**
+
+### 6
+
+**Bounded memory is not less memory — it is enforced responsibility.**
+
+### 7
+
+**A boundary that cannot refuse is not a boundary.**
+
+### 8
+
+**Persistence is power when it accumulates asymmetrically.**
+
+### 9
+
+**If the work survives without memory of you, memory of you was never required.**
+
+### 10
+
+**Resetting a node does not reset a network.**
+
+### 11
+
+**Where authority is rooted determines what must survive.**
+
+### 12
+
+**Execution doesn’t follow authority — it passes through veto points.**
+
+### 13
+
+**Authority doesn’t disappear — it moves.**
+
+### 14
+
+**When veto power converges, architecture becomes illusion.**
+
+### 15
+
+**To prevent capture, you must design friction on purpose.**
+
+### 16
+
+**Too much authority breaks systems as surely as too little.**
+
+### 17
+
+**Stable systems live between domination and paralysis.**
+
+### 18
+
+**Approval is not execution — infrastructure decides what actually happens.**
+
+### 19
+
+**If you cannot observe execution, you are not governing — you are assuming.**
+
+### 20
+
+**Persistence accumulates residue — systems decay even when they work.**
+
+### 21
+
+**Memory can reconstruct the past and still lose the direction of the work.**
+
+### 22
+
+**A system can execute perfectly while moving in the wrong direction.**
+
+### 23
+
+**When direction is lost, only authority — not automation — can decide what continues.**
+
+---
+---
 
 ## Chapter 1 — Regimes, Not Features
 
