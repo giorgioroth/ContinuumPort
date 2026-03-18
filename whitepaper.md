@@ -1,5 +1,15 @@
 # Architecture of Work Continuity in Human–AI Systems
 
+Version: v1.0
+
+Status: Preprint
+
+Date: March 2026
+
+*This document describes an ongoing research framework and may evolve.*
+
+Download PDF [(https://continuumport.com/whitepaper.pdf)](https://continuumport.com/wp-content/uploads/2026/03/whitepaper.pdf)
+
 ## Authority, Persistence, and Semantic Handoff
 
 **Giorgio Roth**
