@@ -8,3 +8,6 @@ No explanation.
 No interpretation.
 
 Only structure.
+
+They are not derived.
+They are recognized.
