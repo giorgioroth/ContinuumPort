@@ -102,102 +102,56 @@ AI merely made this architecture impossible to ignore.
 *DATA knew this. He just didn't know it was about him.*
 
 ---
----
+## **If it doesn’t constrain execution, it doesn’t persist as D.**
 
-### 1
+### 1. **If you don’t know what persists, you don’t understand the system.**
 
-**If you don’t know what persists, you don’t understand the system.**
+### 2. **Not all memory is the same — some moves the work, some binds the user.**
 
-### 2
+### 3. **If behavior changes when history is removed, identity-like structure was there.**
 
-**Not all memory is the same — some moves the work, some binds the user.**
+### 4. **Path dependence turns usage into commitment.**
 
-### 3
+### 5. **Governance doesn’t start with policy — it starts with persistence.**
 
-**If behavior changes when history is removed, identity-like structure was there.**
+### 6. **Bounded memory is not less memory — it is enforced responsibility.**
 
-### 4
+### 7. **A boundary that cannot refuse is not a boundary.**
 
-**Path dependence turns usage into commitment.**
+### 8. **Persistence is power when it accumulates asymmetrically.**
 
-### 5
+### 9. **If the work survives without memory of you, memory of you was never required.**
 
-**Governance doesn’t start with policy — it starts with persistence.**
+### 10. **Resetting a node does not reset a network.**
 
-### 6
+### 11. **Where authority is rooted determines what must survive.**
 
-**Bounded memory is not less memory — it is enforced responsibility.**
+### 12. **Execution doesn’t follow authority — it passes through veto points.**
 
-### 7
+### 13. **Authority doesn’t disappear — it moves.**
 
-**A boundary that cannot refuse is not a boundary.**
+### 14. **When veto power converges, architecture becomes illusion.**
 
-### 8
+### 15. **To prevent capture, you must design friction on purpose.**
 
-**Persistence is power when it accumulates asymmetrically.**
+### 16. **Too much authority breaks systems as surely as too little.**
 
-### 9
+### 17. **Stable systems live between domination and paralysis.**
 
-**If the work survives without memory of you, memory of you was never required.**
+### 18. **Approval is not execution — infrastructure decides what actually happens.**
 
-### 10
+### 19. **If you cannot observe execution, you are not governing — you are assuming.**
 
-**Resetting a node does not reset a network.**
+### 20. **Persistence accumulates residue — systems decay even when they work.**
 
-### 11
+### 21. **Memory can reconstruct the past and still lose the direction of the work.**
 
-**Where authority is rooted determines what must survive.**
+### 22. **A system can execute perfectly while moving in the wrong direction.**
 
-### 12
-
-**Execution doesn’t follow authority — it passes through veto points.**
-
-### 13
-
-**Authority doesn’t disappear — it moves.**
-
-### 14
-
-**When veto power converges, architecture becomes illusion.**
-
-### 15
-
-**To prevent capture, you must design friction on purpose.**
-
-### 16
-
-**Too much authority breaks systems as surely as too little.**
-
-### 17
-
-**Stable systems live between domination and paralysis.**
-
-### 18
-
-**Approval is not execution — infrastructure decides what actually happens.**
-
-### 19
-
-**If you cannot observe execution, you are not governing — you are assuming.**
-
-### 20
-
-**Persistence accumulates residue — systems decay even when they work.**
-
-### 21
-
-**Memory can reconstruct the past and still lose the direction of the work.**
-
-### 22
-
-**A system can execute perfectly while moving in the wrong direction.**
-
-### 23
-
-**When direction is lost, only authority — not automation — can decide what continues.**
+### 23. **When direction is lost, only authority — not automation — can decide what continues.**
 
 ---
----
+
 
 ## Chapter 1 — Regimes, Not Features
 
