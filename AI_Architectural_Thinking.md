@@ -102,7 +102,12 @@ AI merely made this architecture impossible to ignore.
 *DATA knew this. He just didn't know it was about him.*
 
 ---
-## **If it doesn’t constrain execution, it doesn’t persist as D.**
+
+## Operational Principles of Persistent Systems
+
+## *If it doesn’t constrain execution, it doesn’t persist as D.*
+
+### *Persistence*
 
 ### 1. **If you don’t know what persists, you don’t understand the system.**
 
@@ -116,11 +121,13 @@ AI merely made this architecture impossible to ignore.
 
 ### 6. **Bounded memory is not less memory — it is enforced responsibility.**
 
+### *Authority & Governance*
+
 ### 7. **A boundary that cannot refuse is not a boundary.**
 
 ### 8. **Persistence is power when it accumulates asymmetrically.**
 
-### 9. **If the work survives without memory of you, memory of you was never required.**
+### 9. **If the work survives without memory of you, that memory was not structurally required.**
 
 ### 10. **Resetting a node does not reset a network.**
 
@@ -138,6 +145,8 @@ AI merely made this architecture impossible to ignore.
 
 ### 17. **Stable systems live between domination and paralysis.**
 
+### *Execution & Direction*
+
 ### 18. **Approval is not execution — infrastructure decides what actually happens.**
 
 ### 19. **If you cannot observe execution, you are not governing — you are assuming.**
@@ -145,6 +154,9 @@ AI merely made this architecture impossible to ignore.
 ### 20. **Persistence accumulates residue — systems decay even when they work.**
 
 ### 21. **Memory can reconstruct the past and still lose the direction of the work.**
+
+***Direction is not memory.
+It is the constraint that limits what the next valid action can be.***
 
 ### 22. **A system can execute perfectly while moving in the wrong direction.**
 
