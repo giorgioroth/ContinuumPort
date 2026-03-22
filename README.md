@@ -1,150 +1,96 @@
 # 🧭 ContinuumPort
 
-**Normative framework for semantic continuity of work across AI systems**
+Most AI systems can execute.
+
+They cannot guarantee consistency.
+
+They allow partial state.
+They accumulate drift.
+They lose alignment with reality over time.
 
 ---
 
-## AI Architectural Thinking
+ContinuumPort is a structural framework for:
 
-Framework for semantic continuity of work across AI systems.
+→ persistence → governance → controlled execution
 
-Ten chapters.
-From a single agent to a delegation network.
-→ [Read the full text](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md)
+in systems that do not reset.
 
 ---
 
-## Canonical Description
-
-ContinuumPort is a normative and architectural framework for the continuity of work when using AI systems.
-
-It defines how semantic work state can be transferred across sessions, models, languages, and environments **without relying on memory, identity, presence, or conversational history**.
-
-Continuity is achieved exclusively through explicit, portable structure.
+It separates what defines direction
+from what is allowed to happen.
 
 ---
 
-## Core Principle
+Continuity does not come from memory.
 
-**Only intention and working state are portable.**  
-Identity, emotion, presence, relationship continuity, and behavioral memory are explicitly excluded.
-
-Semantic continuity is treated as a structural property of work, not as a behavioral property of an AI system.
+It comes from constraints that survive transitions.
 
 ---
 
-## What ContinuumPort Is
+The problem:
 
-ContinuumPort provides:
+Agents can:
 
-* a normative definition of semantic work continuity;
-* a minimal structural container (CP-Core) for capturing work state;
-* explicit constraints on what must *not* be transferred;
-* a handoff primitive that enables work to resume without author presence.
+• act • call tools • transfer data
 
-AI models are treated as ephemeral, interchangeable tools.  
-Continuity does not belong to the model, the session, or the vendor.
+But when work is handed off:
+
+→ state diverges → intent is reinterpreted → constraints dilute → systems drift
 
 ---
 
-## What ContinuumPort Is Not
+The solution:
 
-ContinuumPort is **not**:
+A system where:
 
-* a memory system;
-* a conversation archive;
-* an identity or personality persistence mechanism;
-* a user profiling framework;
-* a semantic web or data interoperability standard;
-* a commercial product or service.
-
-It intentionally refuses to carry anything that would simulate presence or self.
+• invalid outcomes are rejected  
+• authority is enforced  
+• inconsistent outcomes are rejected  
 
 ---
 
-## CP-Core
+AI can propose.
 
-The core artifact defined by ContinuumPort is **CP-Core**: a structured, human-readable container representing the semantic state of work.
-
-A CP-Core may include:
-
-* intent (objective of the work);
-* established decisions or conclusions;
-* open questions requiring continuation;
-* explicit constraints and exclusions;
-* a single next expected action.
-
-A CP-Core explicitly excludes:
-
-* chat transcripts;
-* autobiographical or relational context;
-* implicit assumptions tied to a specific agent;
-* emotional or behavioral state.
+It cannot partially change reality.
 
 ---
 
-## Normative Constraint: Author Absence Invariance
+This is the difference between:
 
-A ContinuumPort-compliant system **must not** require the ongoing presence, availability, or authority of the original author in order to function or continue semantic work.
-
-Continuity must derive solely from explicit structure and constraints.
-
----
-
-For a concrete, canonical reference snapshot of the project’s semantic state, see:  
-[`docs/cp-core/CP-Core_January_2026.md`](docs/cp-core/CP-Core_January_2026.md)
+→ systems that execute  
+and  
+→ systems that converge
 
 ---
 
-## Repository Scope
+## Components
 
-This repository contains:
-
-* the CP-Core normative definitions;
-* frozen normative constraints (e.g. CP-NORM-H01);
-* schemas and reference examples;
-* documentation explaining design boundaries.
-
-Project scope and status are defined in `PROJECT_STATUS.md`.
-
----
-
-## Technical Overview
-
-For a concise, academic-oriented description of ContinuumPort’s current conceptual and normative state, see:
-
-- **ContinuumPort Technical Summary (Canonical, Soft-Frozen)**  
-  [`docs/CONTINUUMPORT_TECHNICAL_SUMMARY.md`](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/CONTINUUMPORT_TECHNICAL_SUMMARY.md)
-
-This document summarizes the protocol’s scope, boundaries, residual properties, and transition from exploratory development to custodial maintenance.
-
-
----
-
-## Implementations
-
-ContinuumPort defines **normative structure**, not implementation behavior.
-
-Independent implementations may exist that consume CP-Core artifacts and regenerate working context. Such implementations are **not required** for understanding or using the normative framework.
-
-**Regen Engine** is a proprietary implementation maintained separately under its own license. It is one possible implementation of CP-Core, not a requirement.
-
-This repository does not mandate, bundle, or privilege any specific implementation.
+- CP-Core (open specification)
+- Regen Engine (execution control layer)
+- Semantic boundary model
 
 ---
 
 ## Status
 
-ContinuumPort is an exploratory, non-commercial research project.
+Active development — March 2026  
+Regen Engine: Beta  
+Specification: evolving
 
-Normative content marked as **FROZEN** is stable and will not be modified.  
-Any future changes require new normative identifiers.
+---
+
+## Read
+
+AI Architectural Thinking:
+https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md
 
 ---
 
 ## License
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-purple.svg)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-normative-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
 
 ---
