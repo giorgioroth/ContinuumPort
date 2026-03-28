@@ -162,6 +162,8 @@ It is the constraint that limits what the next valid action can be.***
 
 ### 23. **When direction is lost, only authority — not automation — can decide what continues.**
 
+### 24. **Control exists only where unauthorized execution is impossible.**
+
 ---
 
 
