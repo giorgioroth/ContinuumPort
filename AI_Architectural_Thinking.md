@@ -4061,6 +4061,267 @@ It is complete when nothing outside the system can act on its behalf without pas
 
 ---
 
+## Chapter 26 — Execution as Materialized Authority
+
+Chapter 25 exposed a limit.
+
+The authority gate can prevent invalid state transitions.
+
+It cannot prevent effects that occur before or outside authorization.
+
+This reveals a deeper problem.
+
+The system still assumes that execution is something that happens first, and is then validated.
+
+That assumption must be removed.
+
+---
+
+### 1. The Ontological Shift
+
+In previous chapters, execution was treated as an operation applied to the system:
+
+```python
+executor.apply(action)
+```
+
+This model is fundamentally unstable.
+
+An action is an intention.
+
+An intention requires interpretation.
+
+Interpretation introduces ambiguity.
+
+Ambiguity creates space for execution outside the authority model.
+
+The system may validate outcomes, but it no longer controls how they are produced.
+
+This is where enforcement breaks.
+
+---
+
+### 2. Eliminating Actions
+
+To restore control, the system must stop executing actions.
+
+Actions are not primitive.
+
+They are descriptions of intent.
+
+Intent is not enforceable.
+
+Only state is.
+
+Execution must therefore be redefined.
+
+Not as:
+
+action → effect
+
+But as:
+
+authorized transition → materialized state
+
+---
+
+### 3. The Transition Primitive
+
+The system requires a new primitive.
+
+Not an action.
+
+A transition.
+
+A transition is a complete, deterministic description of a state change.
+
+It contains no ambiguity and no interpretation.
+
+```python
+@dataclass(frozen=True)
+class Transition:
+    before: dict
+    after: dict
+    diff: list[Operation]
+```
+
+Each operation is atomic:
+
+```python
+@dataclass(frozen=True)
+class Operation:
+    type: Literal["set", "delete", "append"]
+    key: str
+    value: Any | None
+```
+
+A transition does not describe what should happen.
+
+It describes what the state becomes.
+
+---
+
+### 4. Authority Moves Upstream
+
+In this model, authority is no longer applied to actions.
+
+It is applied to transitions.
+
+The question is no longer:
+
+*is this action allowed?*
+
+It becomes:
+
+*is this state change valid?*
+
+Authorization evaluates the full transition:
+
+* preconditions
+* postconditions
+* invariants
+
+No execution occurs before this evaluation completes.
+
+---
+
+### 5. Proposal Becomes Construction
+
+The proposal phase is no longer a filter.
+
+It becomes a constructor.
+
+It produces a candidate transition:
+
+```python
+TransitionProposal:
+    transition
+    authorized
+    reason
+```
+
+The system does not ask whether an action may execute.
+
+It constructs a possible future state and asks whether it may exist.
+
+This removes interpretation from execution.
+
+---
+
+### 6. The Executor Without Logic
+
+The executor must be reduced to a mechanical component.
+
+It does not decide.
+
+It does not interpret.
+
+It does not validate.
+
+It only applies an already authorized transition.
+
+```python
+class Executor:
+    def commit(self, transition: Transition, env: Environment):
+        for op in transition.diff:
+            if op.type == "set":
+                env.set(op.key, op.value)
+            elif op.type == "delete":
+                env.delete(op.key)
+            elif op.type == "append":
+                env.append(op.key, op.value)
+```
+
+There is no branching based on intent.
+
+No external calls.
+
+No hidden capabilities.
+
+Execution becomes deterministic.
+
+---
+
+### 7. Closing the Substrate Gap
+
+This model eliminates an entire class of failure.
+
+If an effect cannot be expressed as an operation inside a transition, it cannot be executed.
+
+There is no path from intention to effect that bypasses representation.
+
+This leads to a strict condition:
+
+```text
+∀ effect ∈ execution:
+    ∃ representation ∈ geometry
+```
+
+Every effect must exist in the authority model before it can exist in the system.
+
+---
+
+### 8. The Collapse of Interpretation
+
+Traditional systems separate:
+
+* decision
+* execution
+
+This creates a gap.
+
+Execution becomes a second source of authority.
+
+In this model, that gap is removed.
+
+There is no interpretation layer.
+
+No execution-time decision.
+
+Only materialization of an already authorized state.
+
+---
+
+### 9. Redefining Execution
+
+Execution is no longer a process.
+
+It is a projection.
+
+The system does not compute what happens.
+
+It realizes what has already been approved.
+
+This leads to a stronger invariant:
+
+```text
+execute(τ) ⟺ τ ∈ valid(G)
+```
+
+Where τ is a transition.
+
+Not an action.
+
+---
+
+### 10. Closing Statement
+
+A system is not controlled when it validates execution.
+
+It is controlled when execution cannot exist outside validation.
+
+This requires more than a gate.
+
+It requires redefining execution itself.
+
+---
+
+Execution is not what the system does.
+
+It is what the system allows to become real.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
