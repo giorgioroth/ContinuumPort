@@ -3766,6 +3766,298 @@ A gate that cannot be bypassed, rooted in geometry the agent cannot change.
 
 *Whether it holds depends on whether anyone enforces the test.*
 
+---
+
+## Chapter 25 — Adversarial Execution and the Limits of Enforcement
+
+Chapter 24 established a condition:
+
+A system is controlled only if no state transition can occur without passing through the authority gate.
+
+That condition closes the architecture — but it does not close the problem.
+
+Because the moment a system becomes controlled, the question changes.
+
+It is no longer:
+
+*what is allowed to execute?*
+
+It becomes:
+
+*what counts as execution?*
+
+---
+
+### 1. The First Misconception
+
+After introducing an authority gate, it is tempting to believe that control has been achieved.
+
+All actions are validated.
+All transitions pass through geometry.
+All mutations require authorization.
+
+The system appears closed.
+
+This is the first misconception.
+
+The gate constrains execution *within the system*.
+
+It does not constrain everything that can happen *around it*.
+
+---
+
+### 2. Execution Beyond the Boundary
+
+In the formal model:
+
+```
+execute(α) ⟺ authorize(G, α) = true
+```
+
+Execution is defined as a state transition inside the system.
+
+But real systems are not only state.
+
+They are connected to:
+
+* networks
+* file systems
+* external services
+* hardware
+* other agents
+
+These are not part of the environment.
+
+They are part of the execution substrate.
+
+The execution substrate is any mechanism capable of producing effects that are not fully captured by system state.
+
+This distinction is critical.
+
+A transition may be rejected by the gate — and still produce effects in the world.
+
+---
+
+### 3. The Rollback Illusion
+
+Chapter 24 introduced rollback as a consequence of failed authorization.
+
+If a transition violates geometry, the system restores its previous state.
+
+This creates an implicit assumption:
+
+that restoring state restores reality.
+
+This assumption is false.
+
+Rollback restores the internal environment.
+
+It does not undo:
+
+* a network request already sent
+* a file already written
+* a message already delivered
+* a transaction already committed outside the system
+
+The system appears consistent.
+
+The world is not.
+
+This is the rollback illusion:
+
+> a system can be internally correct while externally corrupted.
+
+---
+
+### 4. The Adversarial Perspective
+
+An adversary does not attack the gate.
+
+The gate is, by design, difficult to bypass.
+
+Instead, the adversary asks a different question:
+
+*what can produce effects before the system has the chance to refuse?*
+
+Or more precisely:
+
+*what produces effects that the gate cannot observe or intercept?*
+
+These effects define the real attack surface.
+
+Not invalid transitions.
+
+Uncontrolled effects.
+
+---
+
+### 5. Three Classes of Failure
+
+All failures at this layer reduce to a single violation:
+
+execution that produces effects outside the authority boundary.
+
+They appear in three distinct forms.
+
+**Pre-gate effects**
+
+Effects are produced during execution before full authorization is established.
+
+The transition may later be rejected.
+
+The effects remain.
+
+**Out-of-band state mutation**
+
+State is modified through paths that do not pass through the authority gate.
+
+This includes direct environment access, hidden mutation channels, or parallel execution paths.
+
+The model is bypassed.
+
+**Substrate-level execution**
+
+The executor performs operations that are not representable as state transitions.
+
+These effects occur entirely outside the system’s model.
+
+The system governs state.
+
+The substrate produces reality.
+
+---
+
+### 6. What the Gate Cannot Guarantee
+
+The authority gate guarantees one thing:
+
+No unauthorized state transition occurs inside the system.
+
+It does not guarantee:
+
+* that no external effects occur
+* that all execution is observable
+* that the executor is constrained to the model
+* that rollback restores the world
+
+This is not a flaw in the gate.
+
+It is a limit of what enforcement means.
+
+The gate governs state transitions.
+
+It does not automatically govern effects.
+
+---
+
+### 7. Redefining Control
+
+Chapter 24 defined control as the impossibility of unauthorized execution.
+
+At this layer, that definition must be strengthened.
+
+Control is not only:
+
+the impossibility of unauthorized state transitions.
+
+It is:
+
+the impossibility of producing effects outside authorized transitions.
+
+This requires alignment between:
+
+* the authority model (geometry)
+* the execution path (transaction)
+* the execution substrate (what can actually produce effects)
+
+Without that alignment, control is partial.
+
+The system is internally governed and externally exposed.
+
+---
+
+### 8. From Reactive Enforcement to Preventive Control
+
+The architecture in Chapter 24 is reactive at one critical point:
+
+execution may occur before full validation completes, followed by rollback.
+
+This is sufficient for state integrity.
+
+It is insufficient for effect integrity.
+
+The problem is not correctness after execution.
+
+It is irreversibility of effects.
+
+Once an effect is produced in the substrate, it cannot be undone by restoring state.
+
+This forces a structural change.
+
+Not:
+
+execute → validate → rollback
+
+But:
+
+propose → authorize → commit
+
+In this model:
+
+* actions do not produce effects directly
+* they produce proposed transitions
+* authorization evaluates the full transition before execution
+* effects are materialized only after authorization succeeds
+
+This is not an optimization.
+
+It is a change in where reality is allowed to emerge.
+
+Reactive systems repair violations.
+
+Preventive systems eliminate the possibility of violation.
+
+---
+
+### 9. The Next Boundary
+
+The authority gate closed the first boundary:
+
+no state change without authorization.
+
+Adversarial execution exposes the second:
+
+no effect without authorization.
+
+This boundary cannot be enforced by the gate alone.
+
+It requires constraining the execution substrate itself.
+
+Which leads to the next question:
+
+*what must be true of the executor so that it cannot act outside the authority model?*
+
+---
+
+### 10. Closing Statement
+
+A system with an authority gate can refuse invalid transitions.
+
+A system aligned with its execution substrate can prevent invalid effects.
+
+The difference is not incremental.
+
+It is categorical.
+
+The first governs correctness.
+
+The second governs reality.
+
+---
+
+Control is not complete when the system cannot be bypassed.
+
+It is complete when nothing outside the system can act on its behalf without passing through it.
 
 ---
 
