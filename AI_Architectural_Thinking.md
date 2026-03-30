@@ -4322,6 +4322,294 @@ It is what the system allows to become real.
 
 ---
 
+## Chapter 27 — Execution as Materialized Authority (Refined)
+
+Chapter 26 introduced a structural shift.
+
+Execution is no longer an operation applied to the system.
+
+It is the realization of a state transition that has already been validated.
+
+This chapter closes the gap left open.
+
+If execution is only materialization, then the question is no longer how it is controlled.
+
+The question becomes:
+
+What makes a transition admissible at all?
+
+---
+
+### 1. The Admissible Set
+
+Not every transition can exist.
+
+A system does not operate over all possible changes to state.
+
+It operates over a constrained subset defined by its structure.
+
+A transition is admissible only if it can exist fully inside the system’s authority model.
+
+Every operation contained in the transition must:
+
+be expressible through a registered capability
+be accepted by that capability under its constraints
+be bound to a concrete execution context that can realize it
+
+If any of these conditions fail, the transition does not exist operationally.
+
+Not rejected.
+
+Not delayed.
+
+Non-existent.
+
+Execution is not filtered.
+
+It is precluded.
+
+---
+
+### 2. Capability as Structural Boundary
+
+Capabilities are not helpers.
+
+They are boundaries.
+
+Each capability defines:
+
+what operations can exist
+under what constraints they are valid
+what forms of state change are representable
+
+If an operation cannot be mapped to a capability, it cannot enter the system.
+
+If a capability refuses it, the transition cannot be formed.
+
+The system does not ask:
+
+Should this be allowed?
+
+It asks:
+
+Can this transition exist at all?
+
+---
+
+### 3. Substrate Binding as Final Constraint
+
+Even a structurally valid transition must be realizable.
+
+Each operation must be bound to a concrete execution context.
+
+A backend.
+
+A resource.
+
+An environment capable of materializing it.
+
+A transition that cannot be bound is not deferred.
+
+It is invalid.
+
+Not because it is forbidden.
+
+Because it cannot become real.
+
+Admissibility therefore requires both:
+
+structural validity
+operational binding
+
+---
+
+### 4. Execution as Intersection
+
+Execution is not a decision.
+
+It is the intersection of constraints.
+
+A transition exists only where all layers agree:
+
+it can be constructed through capabilities
+it is accepted under capability constraints
+it is bound to a realizable execution context
+
+If any layer fails, execution does not occur.
+
+Not because it was stopped.
+
+Because there is nothing to execute.
+
+---
+
+### 5. The Elimination of Interpretation
+
+Traditional systems contain a hidden layer.
+
+Something interprets intent.
+
+Something decides how to act.
+
+That layer is the source of divergence.
+
+In this model, that layer is removed.
+
+There is no interpretation step.
+
+No runtime decision.
+
+No behavioral freedom.
+
+Execution does not decide.
+
+It materializes.
+
+---
+
+### 6. Risk as a Property of Transitions
+
+If execution cannot diverge, risk does not disappear.
+
+It moves.
+
+Risk exists in the transition itself.
+
+Each transition carries exposure along multiple dimensions:
+
+reversibility
+externality
+latency
+observability
+
+Risk is not a scalar.
+
+It is a structure composed of independent properties.
+
+Two admissible transitions may still differ radically in their exposure.
+
+Execution remains deterministic.
+
+Transitions are not equivalent.
+
+---
+
+### 7. From Execution to Construction
+
+The system no longer executes actions.
+
+It constructs possible futures.
+
+Each proposal is a fully defined transition:
+
+a before state
+an after state
+an explicit set of operations
+
+The system evaluates whether that future is admissible.
+
+If yes, it is realized.
+
+If not, it never exists.
+
+This replaces:
+
+action → execution → validation
+
+with:
+
+construction → admissibility → materialization
+
+---
+
+### 8. The Collapse of the Execution Phase
+
+Execution is no longer an independent phase.
+
+There is no:
+
+decision → execution → correction
+
+There is only:
+
+validated transition → realization
+
+Execution does not transform the system.
+
+It reflects a decision already made.
+
+---
+
+### 9. The Strong Invariant
+
+The system satisfies a stronger condition:
+
+A transition is realized if and only if it is admissible.
+
+There is no gap between permission and execution.
+
+No intermediate interpretation.
+
+No hidden path.
+
+If it exists, it is allowed.
+
+If it is allowed, it is realized.
+
+---
+
+### 10. Where Enforcement Actually Lives
+
+These constraints are not conceptual.
+
+They are enforced structurally.
+
+If a capability is missing, the transition cannot be constructed.
+
+If capability validation fails, the transition cannot be formed.
+
+If no execution context can be bound, the transition cannot be realized.
+
+The system does not rely on checks after the fact.
+
+It eliminates invalid transitions before they can exist.
+
+What earlier chapters enforced through authority,
+
+this chapter embeds into the construction of reality itself.
+
+---
+
+### 11. Closing
+
+Earlier chapters asked:
+
+Where does authority live?
+
+This chapter answers:
+
+Authority lives in the definition of what can exist.
+
+Not in a gate.
+
+Not in a validator.
+
+Not in execution.
+
+When execution becomes materialization, control is no longer applied.
+
+It is embedded.
+
+A system is not controlled when it checks execution.
+
+It is controlled when execution cannot be anything other than what was already permitted.
+
+At that point, execution is no longer a phase.
+
+It is the realization of authority.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
