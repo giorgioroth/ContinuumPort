@@ -4750,6 +4750,187 @@ Execution without recovery is incomplete.
 
 ---
 
+## Chapter 29 — Recovery Under Constraint
+
+Chapter 28 established a boundary.
+
+When the system detects contradiction, execution stops.
+
+This prevents the system from acting on an untrusted state.
+
+But stopping is not sufficient.
+
+A system that cannot resume remains incomplete.
+
+This chapter defines how recovery exists without violating the epistemic constraint.
+
+---
+
+### 1. Recovery Is Not Correction
+
+Recovery does not restore truth.
+
+The system does not know what the correct state is.
+
+It only knows that its current state cannot be trusted.
+
+Any attempt to "fix" the state internally introduces interpretation.
+
+Interpretation under uncertainty produces unreliable results.
+
+Recovery cannot be defined as correction.
+
+---
+
+### 2. Recovery as New Execution
+
+Recovery is not a reversal.
+
+It is a new transition.
+
+    τ_r
+
+It must satisfy the same conditions as any other transition:
+
+    τ_r ∈ valid(G) ∧ admissible(τ_r, B)
+
+Recovery does not bypass authority.
+
+It is subject to it.
+
+---
+
+### 3. The Epistemic Constraint
+
+Recovery is only possible after the veto is cleared.
+
+    ¬veto ⟹ execute(τ_r)
+
+The system cannot recover while in contradiction.
+
+Any recovery attempted under veto is invalid.
+
+The system must first re-enter a state where execution is permitted.
+
+---
+
+### 4. No Internal Justification
+
+Recovery begins from permission, not certainty.
+
+---
+
+### 5. Recovery Does Not Erase
+
+Recovery does not undo what happened.
+
+External effects may persist.
+
+Internal rollback does not reach beyond the boundary.
+
+Recovery introduces new effects that move the system toward alignment.
+
+It does not erase history.
+
+---
+
+### 6. Compensation as Controlled Transition
+
+When recovery targets prior effects, it does so through compensation.
+
+    o → o⁻
+
+Compensation is not inversion.
+
+It is a new operation defined to reduce the impact of a previous one.
+
+Each compensating transition must be valid and admissible.
+
+There is no privileged path.
+
+---
+
+### 7. Sequencing Recovery
+
+If execution produced a sequence:
+
+    (o_1, o_2, ..., o_n)
+
+and failure occurs at position k,
+
+recovery may require:
+
+    (o_k⁻, ..., o_1⁻)
+
+This sequence is constructed explicitly.
+
+It is not derived automatically.
+
+---
+
+### 8. Recovery Under Uncertainty
+
+Recovery operates under limited knowledge.
+
+The system may not know:
+
+- which effects reached reality
+- which effects failed
+- which state is current
+
+Recovery must not extend effects beyond what is required to compensate for prior transitions.
+
+---
+
+### 9. The Role of Observation
+
+As defined in Chapter 28, recovery depends on observation.
+
+Observation does not guarantee correctness.
+
+It provides the only available signal.
+
+---
+
+### 10. The Minimal Condition
+
+Recovery is allowed only if:
+
+- execution authority is active
+- the veto is cleared
+- the transition is valid
+- the transition is admissible
+
+No additional guarantees are assumed.
+
+---
+
+### 11. Separation from Reconciliation
+
+Recovery does not resolve contradiction.
+
+It operates after the system is allowed to act again.
+
+Reconciliation determines whether alignment is restored.
+
+Recovery introduces transitions.
+
+Reconciliation evaluates their effect.
+
+---
+
+### 12. Closing
+
+Recovery does not restore truth.
+
+It restores the ability to act.
+
+The system does not claim correctness.
+
+It proceeds under constraint.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
