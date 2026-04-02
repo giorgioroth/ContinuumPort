@@ -4931,6 +4931,188 @@ It proceeds under constraint.
 
 ---
 
+## Chapter 30 — Reconciliation
+
+Chapter 29 defined recovery.  
+Recovery allows the system to act again after a veto has been cleared.  
+It does not guarantee that the system is correct.  
+It only restores the ability to execute transitions.  
+
+This creates a new problem.  
+
+After recovery, the system acts without certainty.  
+Reconciliation determines whether those actions restored alignment.  
+
+---
+
+### 1. The Problem of Evaluation
+
+Execution produces a state.  
+Recovery produces additional transitions.  
+
+Neither guarantees that the system now reflects reality.  
+
+The system must evaluate:
+
+Σ_observed vs τ_after  
+
+This evaluation is reconciliation.  
+
+---
+
+### 2. Reconciliation Is Not Execution
+
+Reconciliation does not change the system.  
+It does not produce effects.  
+
+It observes and compares.  
+
+Any attempt to merge reconciliation with execution introduces bias.  
+
+The system must not evaluate and act in the same step.  
+
+---
+
+### 3. The Observed State
+
+Reconciliation depends on observation:
+
+Σ_observed  
+
+This state is not controlled by the system.  
+It is obtained from the boundary.  
+
+It may be incomplete.  
+It may be delayed.  
+It may be wrong.  
+
+Reconciliation operates under these constraints.  
+
+---
+
+### 4. The Expected State
+
+The system holds an expected state:
+
+τ_after  
+
+This state is derived from the transition model.  
+
+It represents what should exist if execution aligned with reality.  
+
+It is internally consistent.  
+It is not guaranteed to be true.  
+
+---
+
+### 5. The Comparison
+
+Reconciliation compares:
+
+τ_after and Σ_observed  
+
+Three outcomes are possible:
+
+match  
+mismatch  
+insufficient data  
+
+The system does not infer beyond these outcomes.  
+
+---
+
+### 6. Match
+
+If the states match:
+
+τ_after = Σ_observed  
+
+the system has confirmation.  
+
+This does not prove correctness globally.  
+It proves consistency at the point of observation.  
+
+---
+
+### 7. Mismatch
+
+If the states do not match:
+
+τ_after ≠ Σ_observed  
+
+divergence exists.  
+
+This is not a hypothesis.  
+It is an observed contradiction.  
+
+The system must not ignore it.  
+
+---
+
+### 8. Insufficient Data
+
+If observation is incomplete:
+
+the system cannot determine alignment.  
+
+This is not failure.  
+It is ignorance.  
+
+The system must not convert absence of evidence into evidence of correctness.  
+
+---
+
+### 9. No Automatic Resolution
+
+Reconciliation does not resolve divergence.  
+It does not trigger recovery automatically.  
+
+It produces a result.  
+
+Action based on that result belongs to another layer.  
+
+---
+
+### 10. Separation of Concerns
+
+The system now contains three distinct processes:
+
+execution  
+recovery  
+reconciliation  
+
+Each has a different role:
+
+execution produces state  
+recovery restores the ability to act  
+reconciliation evaluates alignment  
+
+These must remain separate.  
+
+---
+
+### 11. Iteration
+
+Reconciliation is not a single step.  
+It may be repeated:
+
+observe → compare → act → observe  
+
+Convergence is not guaranteed.  
+The system may remain in partial alignment.  
+
+---
+
+### 12. Closing
+
+Reconciliation does not make the system correct.  
+It makes the system aware of whether it is aligned.  
+
+The system does not assume truth.  
+It evaluates it.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
