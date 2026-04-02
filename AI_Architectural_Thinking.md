@@ -4610,275 +4610,143 @@ It is the realization of authority.
 
 ---
 
+## Chapter 28 — Observation, Veto, and Recovery
 
+### 28.1 — Observation
 
-## **Chapter 28 — Recovery, Compensation, and Reconciliation**
+Execution produces an internal result.
+
+It does not guarantee alignment with reality.
+
+To determine whether execution reflects the world, the system must observe.
+
+Observation compares two states:
+
+* the proven state
+* the realized state
+
+If they match, execution is confirmed.
+
+If they do not match, divergence is detected.
+
+If the system cannot determine the outcome, the result remains unknown.
+
+Unknown is the absence of evidence. Divergence is the presence of contradiction.
+
+Observation does not correct the system.
+
+It establishes what can be known.
+
+---
+
+### 28.2 — Epistemic Veto
+
+Detection of divergence introduces a new condition.
+
+The system no longer trusts its state.
+
+At that point, execution must stop.
+
+This is not a failure of validity.
+
+A transition may still be correct.
+
+It is not permitted.
+
+The veto is applied before any further evaluation.
+
+No proposal is constructed.
+
+No transition is analyzed.
+
+The system does not reason on an untrusted state.
+
+This is the epistemic veto.
+
+---
+
+### 28.3 — Reconciliation Boundary
+
+The veto cannot be removed by execution.
+
+It cannot be removed by observation.
+
+It cannot be removed by repetition.
+
+Once activated, the system remains suspended.
+
+To continue, the veto must be cleared.
+
+Clearing the veto is not a neutral operation.
+
+It asserts that the system can again rely on its state.
+
+This assertion is not derived automatically.
+
+It is not inferred from partial evidence.
+
+It is not triggered by a single successful execution.
+
+The system does not define the conditions under which this assertion becomes valid.
+
+It only enforces that without it, execution does not resume.
+
+Incorrect clearance reintroduces the system into an undefined state.
+
+The boundary between suspension and continuation is explicit.
+
+The system does not cross it on its own.
+
+---
+
+### 28.4 — Recovery, Compensation, and Reconciliation
 
 Chapter 27 established a constraint.
 
-Execution does not decide.
-It materializes a validated transition.
+Execution does not decide. It materializes a validated transition.
 
 It reveals failure.
 
----
+If execution is internally correct, failure originates at the boundary.
 
-### **1. The Return of the Problem**
-
-If execution cannot diverge, failure must come from elsewhere.
-
-It comes from the boundary.
-
-A transition may be valid.
-It may be admissible.
-It may be executed exactly as defined.
+A transition may be valid. It may be admissible. It may be executed exactly as defined.
 
 And still not match reality.
 
----
-
-### **2. The Split State**
-
-Chapter 27 defined the Backend as the boundary of execution.
-
-Within it, state is owned.
-Beyond it, state is not.
-
-Every boundary-crossing execution produces two states:
+Execution produces two states:
 
 * internal state — controlled, rollback-safe
 * external state — affected, but not owned
 
-The invariant applies only to the internal state.
-
 Alignment is not guaranteed.
-Global consistency is not a property of the system.
-It is a temporary condition.
 
----
-
-### **3. Failure as Misalignment**
-
-Failure is not invalid execution.
-
-Invalid transitions do not execute.
+Global consistency is a temporary condition.
 
 Failure is misalignment:
 
-[
-\tau_{\mathrm{after}} ;\neq; \Sigma_{\mathrm{observed}}
-]
-
-It is not a failure of execution.
-It is a property of the boundary.
-
----
-
-### **4. The Three Moments of Failure**
-
-Misalignment appears at three positions:
-
-**Pre-execution** — the transition is built on stale reality
-→ validation is correct, but no longer relevant
-
-**Mid-execution** — effects are partially applied
-→ atomicity holds internally, but collapses at the boundary
-
-**Post-commit** — reality diverges after completion
-→ execution is complete, but state is no longer reliable
-
-Each position requires a different response model.
-
----
-
-### **5. Partial Failure**
-
-[
-\exists, \tau :
-\execute(\tau) ;\wedge;
-\neg!\left(\Sigma_{\mathrm{after}} = \Sigma_{\mathrm{observed}}\right)
-]
-
-Partial failure is a consequence of non-closure.
-
----
-
-### **6. The Limits of Rollback**
-
-[
-\rollback ;\neq; \mathrm{inverse}(\effect)
-]
+    τ_after ≠ Σ_observed
 
 Rollback restores internal state.
+
 It does not restore reality.
 
----
+Recovery does not undo effects.
 
-### **7. Compensation**
+It introduces new transitions.
 
-Compensation does not invert effects.
+Compensation reduces the impact of prior operations.
 
-It introduces new transitions:
+It does not erase them.
 
-[
-o ;\rightarrow; o'
-]
+Reconciliation reconstructs observed state and compares it with the expected state.
 
-where (o') reduces the impact of (o) without erasing it.
+Resolution requires additional transitions.
 
----
+Execution and recovery follow the same rule:
 
-### **8. Reconciliation**
-
-Reconciliation reconstructs:
-
-[
-\Sigma_{\mathrm{observed}}
-]
-
-and compares it with:
-
-[
-\tau_{\mathrm{after}}
-]
-
-Divergence is resolved through additional transitions.
-
----
-
-### **9. Observability**
-
-Without observation:
-
-* misalignment is not detectable
-* compensation is not triggerable
-* reconciliation is not possible
-
-Observability is not auxiliary.
-
-It is the condition under which recovery can exist.
-
----
-
-### **10. Sequences**
-
-Execution crosses the boundary as sequences:
-
-[
-(o_1, o_2, ..., o_n)
-]
-
-[
-\exists, i < j :
-\mathrm{applied}(o_i) ;\wedge;
-\neg,\mathrm{applied}(o_j)
-]
-
-Earlier effects persist.
-Rollback cannot reach them.
-
----
-
-### **11. Compensation Chains**
-
-Each step requires a compensating transition:
-
-[
-o_i ;\rightarrow; o_i^{-}
-]
-
-Failure at position (k) produces:
-
-[
-(o_k^{-}, ..., o_1^{-})
-]
-
----
-
-### **12. The Structural Pattern**
-
-Execution:
-
-[
-(o_1, o_2, ..., o_n)
-]
-
-Recovery:
-
-[
-(o_k^{-}, ..., o_1^{-})
-]
-
-Forward path and counter-path are both defined.
-
----
-
-### **13. Convergence**
-
-[
-\Sigma_{\mathrm{observed}} ;\to; \tau_{\mathrm{after}}
-]
-
-Reconciliation is iterative.
-Convergence is not guaranteed.
-
----
-
-### **14. Recovery Under Authority**
-
-Recovery is execution.
-
-[
-\execute(\tau_r) ;\iff;
-\tau_r \in \valid(G) ;\wedge; \admissible(\tau_r, B)
-]
-
-Authority remains unchanged.
-
----
-
-### **15. Extension of the Execution Law**
-
-Chapter 27:
-
-[
-\execute(\tau) ;\iff;
-\tau \in \valid(G)
-;\wedge;
-\admissible(\tau, B)
-]
-
-Extended:
-
-[
-\execute(\tau)
-;\Rightarrow;
-\exists, \mathcal{R}(\tau)
-]
-
-where:
-
-[
-\mathcal{R}(\tau) =
-{\tau_1^{-}, ..., \tau_n^{-}}
-]
-
-and:
-
-[
-\forall, \tau_r \in \mathcal{R}(\tau) :
-\tau_r \in \valid(G) ;\wedge; \admissible(\tau_r, B)
-]
+    execute(τ) ⇔ τ ∈ valid(G) ∧ admissible(τ, B)
 
 Execution without recovery is incomplete.
-
----
-
-### **16. Closing**
-
-Execution defines what is allowed.
-
-Recovery defines whether the system survives.
 
 ---
 
