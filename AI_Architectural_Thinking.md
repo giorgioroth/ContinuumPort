@@ -5116,6 +5116,168 @@ It evaluates it.
 
 ---
 
+## Chapter 31 — Decision Under Constraint
+
+Chapter 30 produces a verdict.
+
+It does not act.
+
+This chapter defines how that verdict constrains action.
+
+Not what it enables.
+
+What it removes.
+
+---
+
+### 31.1 — Decision Is Not Execution
+
+Execution applies a transition.
+
+Decision constrains whether execution is permitted.
+
+A decision does not produce effects.
+
+It restricts the set of actions that remain admissible.
+
+---
+
+### 31.2 — Verdict Does Not Imply Action
+
+A reconciliation result is not an instruction.
+
+It is a classification:
+
+    ALIGNED
+    DIVERGED
+    INSUFFICIENT_DATA
+
+No classification contains an action.
+
+No mapping from verdict to action is defined.
+
+Decision does not select.
+
+It eliminates.
+
+---
+
+### 31.3 — Constraint, Not Control
+
+Decision operates only by restricting the admissible action set.
+
+It does not construct transitions, prioritize actions, or resolve state.
+
+---
+
+### 31.4 — The Constraint Function
+
+Let V be the reconciliation verdict and A be the set of currently admissible actions.
+
+Decision produces:
+
+    A' ⊆ A
+
+Decision does not construct new actions.
+
+It only removes elements from A.
+
+---
+
+### 31.5 — DIVERGED
+
+When V = DIVERGED:
+
+    A' = ∅
+
+No action is permitted.
+
+The system is operating on a known contradiction.
+
+---
+
+### 31.6 — INSUFFICIENT_DATA
+
+When V = INSUFFICIENT_DATA:
+
+    A' = { a ∈ A | a can be validated using only known state }
+
+An action is permitted only if its validity and admissibility can be evaluated without reference to unobserved data.
+
+If no action satisfies this condition:
+
+    A' = ∅
+
+The system stops.
+
+The system does not classify actions by meaning.
+
+It admits only those that can be validated with available evidence.
+
+---
+
+### 31.7 — ALIGNED
+
+When V = ALIGNED:
+
+The additional constraint from mismatch is removed.
+
+Decision does not expand the set of admissible actions.
+
+Alignment does not justify action.
+
+It only lifts the mismatch veto.
+
+It does not introduce new permission.
+
+---
+
+### 31.8 — No Implicit Escalation
+
+Decision cannot bypass geometry, admissibility, or epistemic constraints.
+
+It operates strictly within existing limits.
+
+---
+
+### 31.9 — Separation
+
+Decision does not execute actions, construct transitions, or modify system state.
+
+It does not activate, clear, or modify epistemic state.
+
+It produces a constrained action set.
+
+Execution consumes that set.
+
+---
+
+### 31.10 — No Default Action
+
+There is no default behavior.
+
+The absence of restriction is not permission.
+
+---
+
+### 31.11 — Closing
+
+Decision produces only A' ⊆ A.
+
+The system does not decide what to do.
+
+It determines what is no longer permitted.
+
+Action remains possible only within:
+
+    geometry ∩ admissibility ∩ epistemic state ∩ A'
+
+If this intersection is empty,
+
+the system stops.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
