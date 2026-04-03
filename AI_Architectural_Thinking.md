@@ -4933,6 +4933,9 @@ It proceeds under constraint.
 
 ## Chapter 30 — Reconciliation
 
+### *The system does not infer reality.*
+### *It compares it, or refuses to conclude.*
+
 Chapter 29 defined recovery.  
 Recovery allows the system to act again after a veto has been cleared.  
 It does not guarantee that the system is correct.  
