@@ -5284,7 +5284,7 @@ This book did not begin as a book.
 
 It began as a series of conversations.
 
-Many of them happened publicly, in threads between engineers building real systems and trying to understand where control actually lives in agentic architectures.
+Many of them happened publicly — in threads between engineers building real systems and trying to understand where control actually lives in agentic architectures.
 
 One of those conversations began late at night on X.
 
@@ -5298,17 +5298,17 @@ Governance must sit in the execution path.
 
 Cognition proposes. Governance decides. Execution acts.
 
-That statement forced a structural question.
+That statement forced a structural question:
 
-If governance must sit in the execution path, what exactly is that governance rooted in?
+If governance must sit in the execution path, what is that governance rooted in?
 
-A system can have policies.  
-It can have identity.  
+A system can have policies.
+It can have identity.
 It can have memory.
 
-But none of these guarantee control unless they are structurally embedded where execution actually happens.
+None of these guarantee control unless they are structurally embedded where execution actually happens.
 
-The response that followed framed the problem differently.
+The response that followed reframed the problem.
 
 The question was not whether a gate exists.
 
@@ -5322,25 +5322,24 @@ Both architectures can be fail-closed.
 
 They differ in where replaceability breaks.
 
-That distinction eventually became Chapter 12.
+That distinction became Chapter 12.
 
 ---
 
 A similar friction appeared in discussions with TACIT Protocol (@tacitprotocol).
 
-Their model defended a coherent identity-first architecture: cryptographic identity as invariant, delegation credentials for portability, reputation as a durable layer across sessions.
+Their model defended an identity-first architecture: cryptographic identity as invariant, delegation credentials for portability, reputation as a durable layer across sessions.
 
-The model works well for accountability.
+The model works for accountability.
 
-But it raised a different question.
+But it raised a different question:
 
 What must persist for the work to continue, independent of who continues it?
 
-Not who holds the identity.
+Not identity.
+Not credentials.
 
-Not who holds the credentials.
-
-What structure must survive.
+Structure.
 
 That question produced the formalism used throughout this book:
 
@@ -5348,7 +5347,7 @@ That question produced the formalism used throughout this book:
 
 Three primitives.
 
-Everything else in the system becomes a consequence of how those primitives interact.
+Everything else is a consequence of how they interact.
 
 ---
 
@@ -5362,101 +5361,94 @@ But trajectory alone does not produce action.
 
 Action still depends on whether the system is permitted to execute the next step.
 
-This clarified something that earlier chapters only implied.
+This clarified something earlier chapters only implied:
 
 Work continuity and execution legitimacy are separate conditions.
 
-Declarative work state can restore the trajectory of the work.
+Declarative state can restore trajectory.
 
-Authority must still permit the next action.
+Authority must still permit action.
 
-That distinction eventually became the foundation of Chapter 21: **Trajectory Integrity**.
+That became the foundation of Chapter 21: Trajectory Integrity.
 
 ---
 
-Another conversation revealed an even quieter problem.
+Another conversation revealed a quieter failure mode.
 
-In a discussion about long-running systems, Arch asked a simple question:
+In a discussion about long-running systems, Arch asked:
 
-> How do you tell when the structure is still alive?
+How do you tell when the structure is still alive?
 
-He later clarified the intuition in a single line:
+He later reduced it to a single line:
 
-> From inside, the tell is whether yesterday still biases the first millisecond of thought.
+From inside, the tell is whether yesterday still biases the first millisecond of thought.
 
 A structure can persist and still stop producing direction.
 
-The work survives.
+* The work survives.
+* The state remains.
+* Execution continues.
 
-The state remains.
+But accumulated structure no longer shapes what comes next.
 
-Execution continues.
+The system becomes reactive instead of directed.
 
-Yet the accumulated structure no longer shapes the future.
+This distinction became structural vitality.
 
-The system becomes reactive rather than directed.
-
-This observation led to the final distinction of the book: **structural vitality**.
-
-Persistence alone is not enough.
+Persistence is not enough.
 
 Structure must continue to generate direction.
 
-Otherwise continuity becomes archive.
+Otherwise, continuity becomes archive.
 
 ---
 
-The chapters that followed were not planned in advance.
+The chapters that followed were not planned.
 
-They emerged through the same pattern each time:
+They emerged through the same pattern:
 
-Friction first.  
-Distinction second.  
+Friction first.
+Distinction second.
 Formalism third.
 
 Questions about persistence led to path dependence.
-
 Questions about path dependence led to governance gravity.
-
 Questions about governance led to authority.
-
 Questions about authority led to execution substrates.
-
 Questions about long-running execution led to decay.
-
 Questions about decay led to trajectory integrity.
 
-And trajectory integrity eventually raised the final question:
+And trajectory integrity raised the final question:
 
-Who decides the direction of work once systems can detect that it has been lost?
+Who holds authority over direction once loss is detected?
 
 ---
 
 Artificial intelligence did not create these problems.
 
-It simply made them visible.
+It made them visible.
 
 Agentic systems run continuously.
 
-They accumulate decisions, state, and authority across time.
+They accumulate decisions, state, and authority without reset.
 
 In such systems, execution does not reset.
 
-Once execution persists, governance can no longer remain implicit.
+Once execution persists, governance cannot remain implicit.
 
-Questions that once appeared philosophical become architectural.
-
----
+Questions that appeared philosophical become architectural.
 
 Automation can maintain continuity.
 
-But direction is not a technical property.
+Direction is not a technical property.
 
-It is a responsibility.
+And responsibility cannot be delegated to execution.
 
+---
 
+**If it can’t prove it, it won’t do it.**
 
-— Giorgio Roth  
+— Giorgio Roth
 2026
 
 
