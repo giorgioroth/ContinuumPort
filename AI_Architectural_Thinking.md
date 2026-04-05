@@ -5278,6 +5278,207 @@ the system stops.
 
 ---
 
+## Chapter 32 — The Execution Loop
+
+The system does not initiate execution.
+It admits or refuses it.
+
+Execution is not continuous.
+It occurs in discrete admission cycles.
+
+---
+
+### 32.1 — Trigger Condition
+
+A cycle exists only if:
+
+```
+(event, A)
+```
+
+are provided.
+
+If no input exists, no cycle occurs.
+
+---
+
+### 32.2 — Input Set
+
+The system receives:
+
+```
+A
+```
+
+A is external.
+
+No assumption is made regarding correctness, completeness, or admissibility.
+
+The system does not transform A.
+
+Invalid elements are not repaired.
+They are excluded.
+
+---
+
+### 32.3 — Observation
+
+The system acquires:
+
+```
+Σ_observed
+```
+
+No guarantees are made about its quality.
+
+The system does not modify or extend observed state.
+
+---
+
+### 32.4 — Reconciliation
+
+The system evaluates:
+
+```
+τ_after vs Σ_observed
+```
+
+and produces:
+
+```
+V ∈ { ALIGNED, DIVERGED, INSUFFICIENT_DATA }
+```
+
+No action is taken at this stage.
+
+---
+
+### 32.5 — Restriction
+
+The system computes:
+
+```
+A' ⊆ A
+```
+
+Such that all elements of A' satisfy admissibility constraints.
+
+No new elements are introduced.
+
+---
+
+### Constraints
+
+```
+V = DIVERGED → A' = ∅
+```
+
+```
+V = INSUFFICIENT_DATA → A' limited to locally provable elements
+```
+
+```
+V = ALIGNED → A' ⊆ A
+```
+
+If:
+
+```
+A' = ∅
+```
+
+no execution occurs.
+
+---
+
+### 32.6 — Execution
+
+Execution is defined over:
+
+```
+A'
+```
+
+Execution applies admissible elements and produces transition.
+
+No validation or expansion occurs during execution.
+
+---
+
+### 32.7 — Transition
+
+Execution yields:
+
+```
+τ_after
+```
+
+No assumption is made that:
+
+```
+τ_after = Σ_observed
+```
+
+---
+
+### 32.8 — Iteration
+
+Cycles are independent:
+
+```
+(event, A) → observe → reconcile → restrict → execute
+```
+
+No cycle assumes correctness of another.
+
+---
+
+### 32.9 — Control Boundary
+
+The system does not control the origin of A.
+
+It only enforces:
+
+```
+A → A'
+```
+
+---
+
+### 32.10 — No Implicit Behavior
+
+If no input exists:
+
+```
+no A → no execution
+```
+
+The system remains idle.
+
+---
+
+### 32.11 — Halting
+
+If:
+
+```
+A' = ∅
+```
+
+no execution occurs.
+
+---
+
+### 32.12 — Closure
+
+The system does not determine what should be done.
+
+It determines whether any action is admissible.
+
+If admissibility cannot be established, no execution occurs.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
