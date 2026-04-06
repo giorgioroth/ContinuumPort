@@ -5479,6 +5479,172 @@ If admissibility cannot be established, no execution occurs.
 
 ---
 
+## Chapter 33 — Saturation & Adversarial Pressure
+
+The system does not assume benign input.
+It assumes persistence of invalid input.
+
+Saturation is not a failure of correctness.
+It is a condition of sustained pressure on admission.
+
+---
+
+### 33.1 — The Nature of Saturation
+
+Saturation occurs when `A_untrusted` is unbounded in volume or frequency.
+
+The system may receive redundant actions, invalid actions, adversarial sequences, or structurally valid but inadmissible actions.
+
+Saturation does not imply breach. It tests whether rejection remains bounded in cost.
+
+---
+
+### 33.2 — No Obligation to Process
+
+The system does not guarantee evaluation of all input.
+
+```
+A_untrusted → may be partially observed
+```
+
+There is no requirement that `∀ a ∈ A_untrusted → evaluated`.
+
+Unprocessed input is not deferred. It is ignored.
+
+---
+
+### 33.3 — Bounded Admission Surface
+
+The system defines a bounded intake:
+
+```
+|A_considered| ≤ N
+```
+
+where `A_considered ⊆ A_untrusted` and `N` is finite and context-independent.
+
+Selection into `A_considered` is not prioritization, not interpretation, and not based on semantic value. It is structural limitation.
+
+---
+
+### 33.4 — Rejection Cost Invariant
+
+For any input:
+
+```
+cost(reject(a)) = O(1)
+```
+
+Rejection must not depend on history length, trigger cascading evaluation, or allocate unbounded memory.
+
+The system guarantees: unbounded input → bounded rejection cost.
+
+---
+
+### 33.5 — No Feedback Amplification
+
+The system does not signal why an action failed, how it could succeed, or which constraints were violated.
+
+Rejection is opaque: `invalid → excluded`.
+
+This guarantee applies at the external boundary. Internally, the system produces structured errors (`AuthorityError`, `GeometryError`, `CapabilityError`) that are part of execution semantics. These distinctions are not exposed to the producer. There is no adaptive loop between system and producer.
+
+---
+
+### 33.6 — Admission Independence
+
+Each cycle `(event, A_untrusted)` is evaluated independently.
+
+The system does not accumulate invalid attempts, escalate based on repetition, or learn from adversarial input. There is no memory of failure patterns.
+
+---
+
+### 33.7 — No Exhaustion Path
+
+The system must not reach a state where processing invalid input prevents evaluation of valid input.
+
+This is enforced by bounded intake, constant-time rejection, and cycle isolation.
+
+---
+
+### 33.8 — Conditional Fairness
+
+The system does not rank actions. The system does not guarantee that all valid actions in `A_untrusted` are observed.
+
+Fairness applies only within the considered subset:
+
+```
+a ∈ A_considered ∧ admissible(a) → a ∈ A′
+```
+
+The system guarantees: no valid action is excluded once considered.
+
+The system does not guarantee: `∀ valid a ∈ A_untrusted → a ∈ A_considered`.
+
+An adversary filling the first `N` slots with structurally valid but inadmissible actions may prevent valid actions at position `> N` from being considered. This is the defined behavior under structural limitation, not a failure of the model. Mitigation belongs to the external layer (§33.12).
+
+Fairness is structural — bounded intake and admissibility filtering — not heuristic.
+
+---
+
+### 33.9 — No Global Backpressure State
+
+The system does not maintain global rate counters, per-producer penalties, or adaptive throttling state.
+
+All constraints are local to the cycle.
+
+---
+
+### 33.10 — Interaction with Decision
+
+Decision receives `A_considered`, not `A_untrusted`.
+
+Saturation does not alter decision semantics. It constrains only input size.
+
+---
+
+### 33.11 — Interaction with Halting
+
+If `A′ = ∅` under saturation, the system halts as defined in Chapter 32.
+
+Saturation does not introduce new halting states.
+
+---
+
+### 33.12 — External Responsibility
+
+Mitigation of sustained adversarial input belongs outside the system: rate limiting, identity tracking, abuse detection.
+
+The system remains input-agnostic. It enforces admissibility, not behavior correction.
+
+---
+
+### 33.13 — Bounded Evaluation Window
+
+Evaluation within a cycle is bounded. The system may terminate intake before reaching `|A_considered| = N` if a cycle time budget is configured.
+
+In this case:
+
+```
+A_evaluated ⊆ A_considered
+```
+
+Evaluation order is not semantically defined. Partial evaluation is permitted.
+
+The system guarantees bounded time per cycle, not complete evaluation of `A_considered`.
+
+---
+
+### 33.14 — Closure
+
+The system does not resist saturation by learning or adaptation.
+
+It resists by remaining bounded, stateless per cycle, and non-interactive in rejection.
+
+If input cannot be reduced externally, the system does not degrade. It continues to admit only what can be validated and ignore the rest.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
