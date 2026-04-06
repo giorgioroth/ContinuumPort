@@ -6029,6 +6029,285 @@ The system does not conflate these. An authorized key with an empty domain produ
 
 ---
 
+# Chapter 36 — Composition Attacks
+
+The system evaluates actions individually.
+
+Individually valid actions may produce collectively invalid state.
+
+This is not a flaw in the model. It is a structural property that must be understood to use geometry correctly.
+
+---
+
+## 36.1 — The Composition Problem
+
+Each action is evaluated against current state:
+
+```
+validate(state_before, a) → authorized or rejected
+```
+
+A sequence of actions passes if each step passes:
+
+```
+[a₁, a₂, ..., aₙ] → authorized iff ∀i: validate(stateᵢ, aᵢ) passes
+```
+
+This means the system evaluates composition *stepwise*, not globally.
+
+A sequence that satisfies every per-step constraint may still produce a final state that violates an invariant expressible only across multiple steps.
+
+---
+
+## 36.2 — Independence of Evaluation
+
+Actions are independent at evaluation time.
+
+Admissibility of each action is determined without reference to other actions in the same cycle.
+
+Execution is not independent. Actions modify the same state. An action admitted independently may interact with the effects of another action admitted independently.
+
+```
+evaluation: independent
+execution:  shared state
+```
+
+Evaluation independence does not imply execution independence.
+
+---
+
+## 36.3 — What Stepwise Verification Catches
+
+The proposal engine simulates actions sequentially. After each action, geometry verifies:
+
+```
+preconditions(stateᵢ, aᵢ)
+postconditions(stateᵢ₊₁, aᵢ)
+invariants(stateᵢ₊₁)
+```
+
+This catches:
+
+- actions invalid in isolation
+- actions that become invalid because a prior action changed state
+- invariant violations produced by any individual step
+
+If any step fails, the entire batch is rejected. The system rolls back to `state₀`. No partial state survives.
+
+---
+
+## 36.4 — What Stepwise Verification Does Not Catch
+
+Stepwise verification does not catch invariants expressible only across the full sequence — conditions satisfied after each individual step but violated by the combined effect.
+
+Example:
+
+```
+invariant: budget ≥ 0
+
+a₁: subtract(budget, 60)   → budget = 40  ✔ invariant holds
+a₂: subtract(budget, 50)   → budget = -10   invariant violated → rejected
+```
+
+This is caught. But:
+
+```
+a₁: set(reserve, 0)          → reserve = 0   ✔
+a₂: set(withdraw_enabled, 1) → enabled = 1   ✔
+
+combined effect: reserve = 0 ∧ withdraw_enabled = 1
+```
+
+If the invariant `reserve > 0 → withdraw_enabled = 0` is not declared in geometry, neither step fails. The system commits. The combined state may be dangerous.
+
+The system does not detect this. The geometry does not contain the constraint. This is a geometry definition problem, not an execution problem.
+
+---
+
+## 36.5 — Atomicity Does Not Imply Semantic Safety
+
+The system guarantees atomicity:
+
+```
+all actions commit or none apply
+```
+
+Atomicity prevents partial state. It does not prevent harmful combinations.
+
+A fully committed batch may produce a state that is structurally valid — no declared invariant was violated — but dangerous from the perspective of the system's intent.
+
+The execution model does not reason about intent. It enforces declared constraints.
+
+---
+
+## 36.6 — The Boundary of Geometry
+
+Geometry is the mechanism for expressing composition constraints. Its expressive power determines what the system can enforce.
+
+What geometry can express:
+
+```
+invariants on state after each action
+preconditions on state before each action
+postconditions on state after each action
+```
+
+What geometry cannot currently express:
+
+```
+constraints on action sequences (if a₁ executed, a₂ is disallowed in same batch)
+constraints on the full diff (properties of the complete set of operations)
+inter-action dependencies within a batch
+```
+
+These are not architectural limits of the model — they are limits of the current geometry DSL. A richer constraint language could express them.
+
+---
+
+## 36.7 — Composition Safety Is a Constraint Design Problem
+
+The system cannot be made safe against composition attacks by modifying the execution layer.
+
+The execution layer's responsibility is: apply committed transitions atomically, verify per-step constraints, roll back on failure.
+
+Composition safety is the responsibility of geometry design: the invariants declared must be sufficient to make dangerous compositions unreachable.
+
+If a dangerous composition is possible, the correct response is to add a geometry constraint that makes it impossible — not to add sequence analysis to the execution layer.
+
+---
+
+## 36.8 — No Sequence Analysis Layer
+
+The system does not include a batch validator, sequence analyzer, or policy engine.
+
+Adding such a layer would introduce interpretation: the system would need to reason about what sequences mean, which requires semantic knowledge the execution layer does not have and must not acquire.
+
+The execution layer evaluates structure. Semantics belong to geometry constraints.
+
+---
+
+## 36.9 — Rollback Scope
+
+When a batch fails at step k:
+
+```
+state₀ → a₁ → state₁ → ... → aₖ → FAIL → rollback → state₀
+```
+
+The rollback is complete. No effect from `a₁, ..., aₖ₋₁` survives.
+
+If a dangerous combination is detected at any step, the entire batch is cancelled. Partial effects do not accumulate.
+
+What this does not provide: if the dangerous combination is only visible after all steps complete — because no single step violated a declared constraint — the batch commits.
+
+---
+
+## 36.10 — All Constraints Are State-Local
+
+The constraint system has a formal boundary.
+
+No constraint may depend on:
+
+```
+action history       — what was executed before this action
+action ordering      — whether a₁ preceded a₂
+action co-occurrence — whether a₁ and a₂ appear in the same batch
+```
+
+All constraints are state-local:
+
+```
+constraint(state_before, action, state_after)
+```
+
+This is not a limitation to be worked around. It is the property that makes the system deterministic and verifiable.
+
+A constraint that depends on history introduces memory. A constraint that depends on ordering introduces sequencing logic. A constraint that depends on co-occurrence introduces batch semantics. All three are forms of interpretation that the execution model explicitly excludes.
+
+If a safety property cannot be expressed as a state-local constraint, it cannot be enforced by this system. It must be enforced above it.
+
+---
+
+## 36.11 — Composition Does Not Imply Safety
+
+The system guarantees:
+
+```
+∀ a ∈ A′ → admissible(a)
+```
+
+It does not guarantee:
+
+```
+sequence(A′) is safe
+```
+
+A sequence of individually admissible actions may still:
+
+- produce cross-action state interactions not captured by per-step invariants
+- create multi-step effects invisible to stepwise evaluation
+- combine legally to reach a state that is structurally valid but operationally dangerous
+
+The system does not detect these properties. They are outside the model.
+
+---
+
+## 36.12 — Limits of the Model
+
+The system cannot detect:
+
+```
+emergent behavior from valid sequences
+multi-step exploits where each step is individually valid
+strategic sequencing across cycles
+```
+
+These are deliberate design decisions.
+
+Detecting them would require the system to maintain history, reason about intent, or evaluate global properties of sequences — all of which introduce state, interpretation, and coupling that the model explicitly excludes.
+
+The model trades global sequence reasoning for local determinism.
+
+---
+
+## 36.13 — External Responsibility
+
+Higher-level systems may enforce:
+
+```
+sequence constraints before submitting a batch
+behavioral analysis of action patterns
+workflow validation against declared policies
+```
+
+These are outside the execution model. The execution model does not prevent their implementation above it.
+
+---
+
+## 36.14 — Correct Use of the Model
+
+A system using this execution model is responsible for:
+
+1. Declaring all safety invariants in geometry that must hold after every action.
+2. Ensuring that dangerous combinations are made unreachable through preconditions and invariants, not through trust in the caller.
+3. Treating any combination not excluded by geometry as potentially executable.
+
+The execution model enforces what is declared. It does not reason about what was not declared.
+
+---
+
+## 36.15 — Closure
+
+The system guarantees that no individually invalid action commits.
+
+It does not guarantee that all valid combinations are safe.
+
+Safety is a property of the geometry, not of the execution layer. An execution system with correct geometry is safe. An execution system with incomplete geometry is not, regardless of how the execution layer is implemented.
+
+The correct response to a composition attack is not a smarter executor. It is a more complete geometry.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
