@@ -5645,6 +5645,187 @@ If input cannot be reduced externally, the system does not degrade. It continues
 
 ---
 
+## Chapter 34 — Authority & Origin Control
+
+The system does not assume that input is legitimate.
+It requires that input is authorized to exist.
+
+Authority does not grant correctness.
+It grants only the right to be considered.
+
+---
+
+### 34.1 — Authority as Context
+
+Authority is not part of the action.
+
+It is provided as an explicit context:
+
+```
+authority_context
+```
+
+A cycle exists only if `(event, A_untrusted, authority_context)` are provided together.
+
+Without authority, the cycle does not exist.
+
+---
+
+### 34.2 — Authority Gate
+
+Before any processing, the system applies:
+
+```
+AuthorityGate.verify(input, authority_context)
+```
+
+Verification determines whether the input is allowed to enter the system.
+
+If verification fails, the cycle does not proceed to any execution stage. No system transition occurs.
+
+---
+
+### 34.3 — Scope of Authority
+
+Authority applies to the origin of input.
+
+It does not apply to correctness of actions, admissibility of actions, or epistemic alignment.
+
+An authorized input remains `A_untrusted`.
+
+---
+
+### 34.4 — No Implicit Authority
+
+The system does not read authority from global state, environment variables, or implicit configuration.
+
+Authority must be explicitly provided per cycle or per system instance.
+
+---
+
+### 34.5 — Separation from Validation
+
+Authority verification does not validate structure.
+
+```
+authority ≠ validity
+```
+
+Invalid but authorized input proceeds to validation and may be rejected later. Unauthorized input is never observed by the system.
+
+---
+
+### 34.6 — Failure Semantics
+
+Authority failure is defined as: input origin cannot be verified.
+
+At the `AuthorityGate` boundary, both failure modes produce the same error type:
+
+```
+unknown signer       → AuthorityError   (identity failure)
+invalid signature    → AuthorityError   (origin unverifiable)
+```
+
+`AuthorityError` represents refusal to construct a cycle. It does not correspond to a system transition and does not imply partial evaluation.
+
+At higher layers, context disambiguates. When the signer is known but the signature is invalid, `TransactionManager` reinterprets the failure as:
+
+```
+invalid signature    → GeometryError    (integrity failure)
+```
+
+This reinterpretation is the responsibility of the layer that has the knowledge to make it. `AuthorityGate` does not have that knowledge — it only knows whether origin can be verified. The distinction between identity failure and integrity failure is resolved above the gate, not inside it.
+
+---
+
+### 34.7 — No Authority Escalation
+
+The system does not allow input to modify `authority_context`.
+
+Authority is immutable during execution. There is no mechanism by which `A_untrusted` increases its own authority.
+
+---
+
+### 34.8 — Trust Roots
+
+Authority is defined relative to a set of trusted origins:
+
+```
+AuthorityContext(trusted_keys)
+```
+
+The system does not infer trust. Trust must be explicitly configured.
+
+`AuthorityContext.from_env()` is a bootstrap helper only. It is not part of the runtime execution path.
+
+---
+
+### 34.9 — Key Rotation and Evolution
+
+Changes in authority — key rotation, signer addition or removal — occur outside the execution cycle.
+
+The system does not migrate authority mid-cycle and does not reinterpret past inputs under new authority. Each cycle uses a fixed `authority_context`.
+
+---
+
+### 34.10 — Authority Independence from Saturation
+
+Authority does not affect intake limits.
+
+```
+authorized input ≠ prioritized input
+```
+
+All input, regardless of origin, is subject to `SaturationGate` constraints (§33.3). A trusted source does not receive a larger `N`.
+
+---
+
+### 34.11 — Authority Independence from Decision
+
+Authority does not affect admissibility.
+
+```
+authorized action ≠ admissible action
+```
+
+Decision operates on `(V, A_considered)` independently of authority. An authorized action may still be rejected by the decision layer.
+
+---
+
+### 34.12 — Authority Independence from Execution
+
+Execution does not verify authority. Authority is resolved before any execution path exists.
+
+Execution assumes input has passed `AuthorityGate`. This assumption is enforced by pipeline order, not by runtime checks within the execution layer.
+
+---
+
+### 34.13 — No Persistence of Authority
+
+The system does not accumulate authority over time.
+
+Previous authorization does not imply future authorization. Each cycle is independent.
+
+---
+
+### 34.14 — Boundary of Responsibility
+
+The system enforces authorization of input existence.
+
+It does not enforce identity tracking, rate limiting, or behavioral trust. These belong to external systems (§33.12).
+
+---
+
+### 34.15 — Closure
+
+The system does not trust input. It does not trust origin.
+
+It only verifies whether input is allowed to be considered.
+
+If authority cannot be established, nothing enters the system.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
