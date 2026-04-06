@@ -5826,7 +5826,7 @@ If authority cannot be established, nothing enters the system.
 
 ---
 
-# Chapter 35 — Capability Domains
+## Chapter 35 — Capability Domains
 
 Authority answers: is this input allowed to exist?
 
@@ -5836,7 +5836,7 @@ These are different questions. A valid key does not imply permission to invoke a
 
 ---
 
-## 35.1 — The Problem Authority Does Not Solve
+### 35.1 — The Problem Authority Does Not Solve
 
 A system with a single `AuthorityContext` treats all authorized input as equivalent. Any signer may request any action.
 
@@ -5848,7 +5848,7 @@ Authority as boolean — authorized or not — does not express these distinctio
 
 ---
 
-## 35.2 — Capability Domain as Space
+### 35.2 — Capability Domain as Space
 
 A capability domain is not a role. It is not a permission list.
 
@@ -5866,7 +5866,7 @@ The domain does not modify what actions do. It constrains which actions may be r
 
 ---
 
-## 35.3 — Separation of Concerns
+### 35.3 — Separation of Concerns
 
 Three distinct questions, three distinct answers:
 
@@ -5882,7 +5882,7 @@ An action may be authorized and out-of-domain — rejected at the domain layer. 
 
 ---
 
-## 35.4 — Domain is Declared, Not Inferred
+### 35.4 — Domain is Declared, Not Inferred
 
 The system does not infer what a signer should be allowed to do from context, history, or behavior.
 
@@ -5900,7 +5900,7 @@ If a signer has no declared domain, the system fails closed: `D(signer_id) = ∅
 
 ---
 
-## 35.5 — Domain Does Not Grant Correctness
+### 35.5 — Domain Does Not Grant Correctness
 
 An action within domain is not guaranteed to be valid or admissible.
 
@@ -5910,7 +5910,7 @@ It does not mean the action is structurally valid, admissible given current stat
 
 ---
 
-## 35.6 — Domain is Geometry-Agnostic
+### 35.6 — Domain is Geometry-Agnostic
 
 Domains are defined against `A_registered`. Domain filtering does not consult geometry.
 
@@ -5927,7 +5927,7 @@ This preserves separation: domain constrains origin, geometry constrains structu
 
 ---
 
-## 35.7 — No Domain Escalation
+### 35.7 — No Domain Escalation
 
 A signer cannot expand its own domain.
 
@@ -5937,7 +5937,7 @@ There is no mechanism by which `a ∈ A_untrusted` expands `D(signer_id)`. Domai
 
 ---
 
-## 35.8 — One Signer Per Cycle
+### 35.8 — One Signer Per Cycle
 
 A cycle has a single authority origin.
 
@@ -5953,7 +5953,7 @@ This preserves the model: `A_untrusted` is a list of operations, not a list of a
 
 ---
 
-## 35.9 — Pipeline Position
+### 35.9 — Pipeline Position
 
 Domain filtering occurs after saturation and before decision:
 
@@ -5971,7 +5971,7 @@ Volume limits apply regardless of domain. A narrow domain under saturation press
 
 ---
 
-## 35.10 — Domain Failure Semantics
+### 35.10 — Domain Failure Semantics
 
 An action outside the declared domain is excluded without per-action feedback.
 
@@ -5981,7 +5981,7 @@ The system does not signal why the action was excluded, what the signer's domain
 
 ---
 
-## 35.11 — No Default Domain
+### 35.11 — No Default Domain
 
 The system has no default domain.
 
@@ -5991,7 +5991,7 @@ Fail closed, not open.
 
 ---
 
-## 35.12 — Interaction with Authority
+### 35.12 — Interaction with Authority
 
 Domain resolution requires a known signer identity established by `AuthorityGate`.
 
@@ -5999,7 +5999,7 @@ If `AuthorityGate` fails, domain resolution does not occur. Domain is not a fall
 
 ---
 
-## 35.13 — Boundary of Responsibility
+### 35.13 — Boundary of Responsibility
 
 The domain layer enforces which origins may request which action types.
 
@@ -6007,7 +6007,7 @@ It does not enforce what values are valid within an action, what state transitio
 
 ---
 
-## 35.14 — Monotonicity
+### 35.14 — Monotonicity
 
 Domains are restrictive only.
 
@@ -6019,7 +6019,7 @@ Domain filtering cannot introduce admissibility. It can only reduce the action s
 
 ---
 
-## 35.15 — Closure
+### 35.15 — Closure
 
 A key is not a capability.
 
@@ -6029,7 +6029,7 @@ The system does not conflate these. An authorized key with an empty domain produ
 
 ---
 
-# Chapter 36 — Composition Attacks
+## Chapter 36 — Composition Attacks
 
 The system evaluates actions individually.
 
@@ -6039,7 +6039,7 @@ This is not a flaw in the model. It is a structural property that must be unders
 
 ---
 
-## 36.1 — The Composition Problem
+### 36.1 — The Composition Problem
 
 Each action is evaluated against current state:
 
@@ -6059,7 +6059,7 @@ A sequence that satisfies every per-step constraint may still produce a final st
 
 ---
 
-## 36.2 — Independence of Evaluation
+### 36.2 — Independence of Evaluation
 
 Actions are independent at evaluation time.
 
@@ -6076,7 +6076,7 @@ Evaluation independence does not imply execution independence.
 
 ---
 
-## 36.3 — What Stepwise Verification Catches
+### 36.3 — What Stepwise Verification Catches
 
 The proposal engine simulates actions sequentially. After each action, geometry verifies:
 
@@ -6096,7 +6096,7 @@ If any step fails, the entire batch is rejected. The system rolls back to `state
 
 ---
 
-## 36.4 — What Stepwise Verification Does Not Catch
+### 36.4 — What Stepwise Verification Does Not Catch
 
 Stepwise verification does not catch invariants expressible only across the full sequence — conditions satisfied after each individual step but violated by the combined effect.
 
@@ -6124,7 +6124,7 @@ The system does not detect this. The geometry does not contain the constraint. T
 
 ---
 
-## 36.5 — Atomicity Does Not Imply Semantic Safety
+### 36.5 — Atomicity Does Not Imply Semantic Safety
 
 The system guarantees atomicity:
 
@@ -6140,7 +6140,7 @@ The execution model does not reason about intent. It enforces declared constrain
 
 ---
 
-## 36.6 — The Boundary of Geometry
+### 36.6 — The Boundary of Geometry
 
 Geometry is the mechanism for expressing composition constraints. Its expressive power determines what the system can enforce.
 
@@ -6164,7 +6164,7 @@ These are not architectural limits of the model — they are limits of the curre
 
 ---
 
-## 36.7 — Composition Safety Is a Constraint Design Problem
+### 36.7 — Composition Safety Is a Constraint Design Problem
 
 The system cannot be made safe against composition attacks by modifying the execution layer.
 
@@ -6176,7 +6176,7 @@ If a dangerous composition is possible, the correct response is to add a geometr
 
 ---
 
-## 36.8 — No Sequence Analysis Layer
+### 36.8 — No Sequence Analysis Layer
 
 The system does not include a batch validator, sequence analyzer, or policy engine.
 
@@ -6186,7 +6186,7 @@ The execution layer evaluates structure. Semantics belong to geometry constraint
 
 ---
 
-## 36.9 — Rollback Scope
+### 36.9 — Rollback Scope
 
 When a batch fails at step k:
 
@@ -6202,7 +6202,7 @@ What this does not provide: if the dangerous combination is only visible after a
 
 ---
 
-## 36.10 — All Constraints Are State-Local
+### 36.10 — All Constraints Are State-Local
 
 The constraint system has a formal boundary.
 
@@ -6228,7 +6228,7 @@ If a safety property cannot be expressed as a state-local constraint, it cannot 
 
 ---
 
-## 36.11 — Composition Does Not Imply Safety
+### 36.11 — Composition Does Not Imply Safety
 
 The system guarantees:
 
@@ -6252,7 +6252,7 @@ The system does not detect these properties. They are outside the model.
 
 ---
 
-## 36.12 — Limits of the Model
+### 36.12 — Limits of the Model
 
 The system cannot detect:
 
@@ -6270,7 +6270,7 @@ The model trades global sequence reasoning for local determinism.
 
 ---
 
-## 36.13 — External Responsibility
+### 36.13 — External Responsibility
 
 Higher-level systems may enforce:
 
@@ -6284,7 +6284,7 @@ These are outside the execution model. The execution model does not prevent thei
 
 ---
 
-## 36.14 — Correct Use of the Model
+### 36.14 — Correct Use of the Model
 
 A system using this execution model is responsible for:
 
@@ -6296,7 +6296,7 @@ The execution model enforces what is declared. It does not reason about what was
 
 ---
 
-## 36.15 — Closure
+### 36.15 — Closure
 
 The system guarantees that no individually invalid action commits.
 
@@ -6305,6 +6305,314 @@ It does not guarantee that all valid combinations are safe.
 Safety is a property of the geometry, not of the execution layer. An execution system with correct geometry is safe. An execution system with incomplete geometry is not, regardless of how the execution layer is implemented.
 
 The correct response to a composition attack is not a smarter executor. It is a more complete geometry.
+
+---
+
+## Chapter 37 — Temporal Constraints
+
+The system evaluates each cycle independently.
+
+It does not retain execution history.
+
+It only observes current state.
+
+This creates a class of properties that cannot be enforced locally: properties that depend on what happened before, how long ago, or in what order.
+
+---
+
+### 37.1 — The Temporal Gap
+
+Chapter 36 established that all constraints are state-local:
+
+```
+constraint(state_before, action, state_after)
+```
+
+State-local constraints cannot express:
+
+```
+time since last execution
+number of cycles since a key was set
+whether an action occurred in a prior cycle
+elapsed wall-clock time between two actions
+```
+
+These are temporal properties. They require memory the system does not have — by design, not by omission.
+
+---
+
+### 37.2 — What "Stateless Per Cycle" Means
+
+Each cycle begins from:
+
+```
+(event, A_untrusted, authority_context)
+```
+
+The system does not carry forward:
+
+```
+execution history of prior cycles
+timing of prior events
+identity of prior signers
+A_untrusted from previous cycles
+```
+
+`τ_after` from the previous cycle enters the next cycle only as `Σ_observed` — the observed state passed to reconciliation. It is not execution history. It is current state.
+
+The system knows what the state is. It does not know how it got there.
+
+---
+
+### 37.3 — Replay
+
+A replay attack submits an action or batch that was valid and executed in a prior cycle.
+
+Replay is constrained within a cycle but unbounded across cycles.
+
+Within a cycle, `TransactionManager` prevents replay of a proposal if the underlying state has changed between `propose()` and `commit()`. The TOCTOU check compares `proposal.transition.before` with the environment snapshot at commit time. If they differ, the transaction is rejected.
+
+This protection is limited to a single cycle. Across cycles, the system provides no replay protection.
+
+An identical input submitted in a later cycle is treated as a new request and evaluated independently. The system maintains no memory of prior executions, no proposal identifiers, and no deduplication mechanism.
+
+This is not a gap. It is a direct consequence of determinism:
+
+```
+f(state, input) = output
+same(state, input) → same(output)
+```
+
+Determinism implies replayability. The system does not track prior executions — it evaluates current state against current input.
+
+If replay must be prevented, it must be enforced externally: nonces, sequence numbers, proposal identifiers — validated before input reaches the system.
+
+---
+
+### 37.4 — Staleness
+
+Staleness occurs when:
+
+```
+Σ_observed reflects state from time t
+execution occurs at time t + Δ
+```
+
+The gap Δ may be significant. The system does not know.
+
+Reconciliation compares `τ_after` with `Σ_observed`. If they match, the system proceeds. It does not reason about whether `Σ_observed` is recent.
+
+A stale observation that happens to match `τ_after` passes reconciliation. The system cannot distinguish between a fresh observation and a cached one.
+
+If staleness is a risk, the observer must guarantee freshness. The execution model does not impose this guarantee.
+
+---
+
+### 37.5 — Ordering Within a Cycle
+
+Within a single cycle, the proposal engine processes actions sequentially in the order of `A_untrusted` as received. The system does not reorder.
+
+The domain layer and decision layer do not impose ordering. Order is a property of the input, not of the system.
+
+This means ordering is implicitly trusted. If the order of actions is security-relevant, the system does not detect or prevent reordering by the caller. Ordering-sensitive semantics must be enforced explicitly — either by the caller before submission, or expressed as geometry constraints that make incorrect orders unreachable.
+
+---
+
+### 37.6 — Ordering Across Cycles
+
+The system does not enforce ordering across cycles.
+
+There is no mechanism to require:
+
+```
+cycle N must complete before cycle N+1 begins
+action a must precede action b across separate cycles
+```
+
+Each cycle is independent. The system does not know it is cycle N.
+
+If cross-cycle ordering is required, it must be enforced externally — through sequencing logic above the execution model.
+
+---
+
+### 37.7 — The Timing of Observation
+
+Observation (`Σ_observed`) occurs at the start of each cycle.
+
+Between observation and execution, state may drift externally:
+
+```
+observe(state_t) → ... → execute(state_t + drift)
+```
+
+The TOCTOU check in `TransactionManager` catches drift that occurs between `propose()` and `commit()` within the same cycle.
+
+It does not catch drift that occurred before `observe()` — because the system does not know what state existed before the current observation.
+
+---
+
+### 37.8 — No Internal Clock
+
+The system does not maintain a clock.
+
+It does not timestamp actions, timestamp cycles, measure elapsed time between events, or enforce timeouts on cycle duration beyond `SaturationGate`'s optional intake budget.
+
+Time is not a first-class concept in the execution model.
+
+If time matters — for expiry, rate limiting, freshness — it must enter the system as state, declared in geometry and enforced as invariants.
+
+---
+
+### 37.9 — Time as State
+
+The correct way to introduce temporal constraints is to represent time as state:
+
+```
+set(key="last_withdraw_time", value=<timestamp>)
+```
+
+With a precondition:
+
+```
+now - last_withdraw_time ≥ cooldown_period
+```
+
+This is expressible as a geometry constraint if `now` is provided as part of the action payload.
+
+---
+
+### 37.10 — Time Requires a Trusted Source
+
+Time-based constraints are only as reliable as the source of time.
+
+The execution model does not validate the truthfulness of timestamps. If `now` is provided by an untrusted source, temporal constraints are trivially bypassable:
+
+```
+cooldown = 60s
+now = falsified value
+→ constraint passes
+```
+
+Time as state introduces a dependency on external truth. The execution model does not provide this truth.
+
+For temporal guarantees to hold, time must originate from a trusted authority — verified before entering the system, at the authority layer or above. This is not a limitation to be patched in the execution layer. It is a boundary of responsibility.
+
+---
+
+### 37.11 — Cross-Cycle Memory via State
+
+The execution model has no cross-cycle memory. But state persists across cycles.
+
+An action may write to state what a future cycle needs to know:
+
+```
+cycle N:   set(key="lock_acquired", value=true)
+cycle N+1: precondition: lock_acquired = false → rejected
+```
+
+This is cross-cycle coordination via state — not via system memory. The system enforces the constraint. The caller is responsible for what the state means.
+
+---
+
+### 37.12 — State-Based Coordination Hazards
+
+State used for cross-cycle coordination may become inconsistent if a cycle fails after partial logical completion.
+
+```
+set(lock = true)
+→ failure before intended release
+→ lock persists indefinitely
+```
+
+The system guarantees atomicity of state transitions within a cycle. It does not guarantee that state encodes a complete logical process.
+
+```
+state persists
+intent does not
+```
+
+If a cycle writes coordination state and fails before completion, the state remains without guarantee that the intended operation finished. This is a liveness risk — not a consistency failure. The state is correct; the logical process is incomplete.
+
+Recovery from such states must be handled explicitly above the execution model: timeouts encoded as state, external intervention, or idempotent compensation actions.
+
+---
+
+### 37.13 — What Cannot Be Enforced
+
+The execution model cannot enforce:
+
+```
+exactly-once execution (without external idempotency mechanism)
+maximum frequency of a specific action type
+wall-clock deadlines on cycle completion
+causal ordering across independent systems
+elapsed time between two state changes
+```
+
+These require a clock, history, or coordination primitives the execution model does not have and does not provide.
+
+---
+
+### 37.14 — External Responsibility
+
+Temporal enforcement belongs outside the execution model:
+
+```
+sequence numbers on events (anti-replay)
+timestamp validation before submission
+rate limiting on cycle submission
+freshness guarantees from observers
+cross-cycle ordering in orchestration layer
+idempotency keys on non-idempotent actions
+```
+
+The execution model does not prevent these from being implemented above it.
+
+---
+
+### 37.15 — Replay and Idempotency
+
+The system does not distinguish between first execution and repeated execution.
+
+Not all actions are idempotent:
+
+```
+http_call("/withdraw")  → not idempotent
+append(key, value)      → not idempotent
+set(key, value)         → idempotent if value is deterministic
+```
+
+For non-idempotent actions, replay produces additional effects. The system does not prevent this.
+
+Idempotency must be enforced in geometry — for example, through preconditions that make repeated execution unreachable — or above the system through request identifiers and deduplication.
+
+---
+
+### 37.16 — Closure
+
+The system enforces state correctness, not temporal correctness.
+
+Correct state does not imply correct history.
+
+The system knows:
+
+```
+what the state is now
+whether an action is admissible against current state
+```
+
+The system does not know:
+
+```
+when state was last changed
+whether an action has been executed before
+in what order events occurred
+how much time has elapsed
+```
+
+This is not a set of gaps. It is the boundary of a model that trades temporal awareness for local determinism, statelessness per cycle, and freedom from clock dependencies.
+
+Temporal properties that matter must be encoded as state and declared as geometry constraints. Properties that cannot be encoded this way must be enforced above the execution model.
 
 ---
 
