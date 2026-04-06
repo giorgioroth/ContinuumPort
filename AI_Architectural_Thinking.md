@@ -6616,6 +6616,274 @@ Temporal properties that matter must be encoded as state and declared as geometr
 
 ---
 
+## Chapter 38 — External Control Plane
+
+The execution model defines what happens inside a cycle.
+
+It does not define what controls when cycles occur, what enters them, or what is done with their results.
+
+That is the responsibility of the control plane.
+
+---
+
+### 38.1 — The Boundary
+
+Chapters 27–37 define the execution model: a closed, deterministic system that transforms authorized input into verified state transitions.
+
+The execution model answers:
+
+```
+given this input, is this transition valid?
+```
+
+It does not answer:
+
+```
+who decides what input to submit?
+when should a cycle occur?
+what happens if a cycle fails?
+how are results communicated?
+how are failures recovered?
+```
+
+These questions belong to the control plane — the layer above the execution model.
+
+---
+
+### 38.2 — What the Control Plane Is
+
+The control plane is not part of the execution model.
+
+It is the external system responsible for:
+
+```
+submitting cycles          — deciding when and what to execute
+observing results          — receiving CycleResult and acting on it
+handling failures          — retry, escalation, compensation
+enforcing temporal props   — sequencing, rate limiting, replay prevention
+managing authority         — provisioning keys, rotating credentials
+routing input              — deciding which actions reach which system
+```
+
+The execution model does not know the control plane exists.
+
+---
+
+### 38.3 — Temporal Properties Belong Here
+
+Chapter 37 established that the execution model has no clock, no history, and no replay protection across cycles. These are not gaps. They are boundaries.
+
+The control plane is where temporal enforcement lives:
+
+```
+sequence numbers on submissions    → anti-replay
+timestamps validated externally    → trusted time
+rate limiting on cycle frequency   → abuse prevention
+freshness requirements on observers → staleness prevention
+cross-cycle ordering               → causal sequencing
+```
+
+The execution model is agnostic to all of these. The control plane enforces them before input reaches the execution model.
+
+---
+
+### 38.4 — Idempotency and Event Identity Belong Here
+
+Chapter 37 established that the execution model does not distinguish first execution from repeated execution.
+
+The control plane is responsible for assigning identity to submissions. Without identity:
+
+```
+replay cannot be detected
+idempotency cannot be enforced
+ordering cannot be established
+```
+
+Identity may take the form of unique request IDs, sequence numbers, or nonces. The execution model operates on anonymous input. It does not generate or require submission identity.
+
+For non-idempotent actions, the control plane is responsible for deduplicating submissions before they reach the execution model. The execution model commits what it receives. The control plane decides what to send.
+
+---
+
+### 38.5 — Authority Provisioning Belongs Here
+
+Chapter 34 established that authority must be explicitly provided per cycle.
+
+The control plane is responsible for:
+
+```
+provisioning AuthorityContext for each cycle
+managing signing key lifecycle
+rotating keys outside the execution cycle
+revoking compromised keys before they are used
+```
+
+The execution model verifies authority. The control plane controls authority.
+
+The execution model does not know where keys come from. It only knows whether the presented key is trusted.
+
+---
+
+### 38.6 — Failure Handling Belongs Here
+
+The execution model produces `CycleResult` with a status:
+
+```
+EXECUTED
+HALTED_DIVERGED
+HALTED_EMPTY
+HALTED_NO_INPUT
+ROLLED_BACK
+```
+
+It does not decide what to do next.
+
+The control plane receives these results and decides:
+
+```
+EXECUTED       → proceed, observe, submit next cycle
+ROLLED_BACK    → retry, escalate, or compensate
+HALTED_DIVERGED → investigate, clear veto if appropriate, resume
+HALTED_EMPTY   → inspect, modify input, or pause
+```
+
+Retry is a new cycle, not a continuation. The execution model has no concept of resuming a failed cycle. Each submission is evaluated independently from the current state.
+
+The execution model is not responsible for recovery. It is responsible for accurate reporting of what happened.
+
+---
+
+### 38.7 — Orchestration Belongs Here
+
+The execution model executes one cycle at a time. It has no concept of workflow, process, or multi-step operation.
+
+The control plane is responsible for:
+
+```
+sequencing cycles into workflows
+managing dependencies between cycles
+deciding when to initiate recovery cycles
+composing multiple execution results into higher-level outcomes
+```
+
+The execution model is a primitive. The control plane composes primitives into processes.
+
+---
+
+### 38.8 — Observation Belongs Here
+
+Each cycle requires an observer — a callable that acquires `Σ_observed`:
+
+```
+observer(env) → dict | None
+```
+
+The execution model calls the observer but does not control it.
+
+The control plane is responsible for providing a reliable observer implementation, ensuring freshness of observed state, handling observation failures, and deciding what counts as sufficient observation.
+
+The execution model treats `None` as `INSUFFICIENT_DATA`. The control plane decides whether that is acceptable.
+
+---
+
+### 38.9 — The Separation Is Enforced by Interface
+
+The execution model exposes a minimal interface:
+
+```
+ExecutionLoop.cycle(event, a_untrusted, env) → CycleResult
+SaturationGate.filter(a_untrusted)           → IntakeResult
+DomainFilter.filter(a_considered, signer_id) → DomainResult
+AuthorityGate.verify(geometry, signer_id)    → None | raises
+```
+
+The control plane interacts with the execution model only through these interfaces.
+
+No control plane component may inject state directly into the execution environment, bypass `AuthorityGate`, `SaturationGate`, `DomainFilter`, or `Decision`, or modify execution results after the fact. All interaction must occur through defined interfaces.
+
+---
+
+### 38.10 — No Control Plane Logic in the Execution Model
+
+The execution model must not contain:
+
+```
+retry logic
+escalation policies
+workflow state
+scheduling decisions
+logging policy
+alerting
+```
+
+These would introduce control plane concerns into the execution layer — creating coupling between what the system does and how it is operated.
+
+The execution model remains a deterministic function of its inputs. The control plane remains responsible for the conditions under which that function is called.
+
+---
+
+### 38.11 — Trust Boundary at the Interface
+
+The execution model treats the control plane as the source of input, not as a trusted actor.
+
+It verifies:
+
+```
+authority of input origin
+structural validity of actions
+admissibility under current state
+```
+
+It does not verify:
+
+```
+intent correctness
+policy compliance
+operational safety
+```
+
+A malicious or misconfigured control plane can produce valid inputs that lead to valid but undesired outcomes. This is not a failure of the execution model. It is the definition of the boundary.
+
+The execution model guarantees that all executed transitions are valid under geometry and that no invalid state transitions occur. It does not guarantee that submitted input reflects correct intent or that the sequence of cycles is appropriate for higher-level goals.
+
+Correct execution does not imply correct orchestration.
+
+---
+
+### 38.12 — The Control Plane Is Not Specified Here
+
+This specification does not define a control plane.
+
+A concrete system may define one. ContinuumPort is one such system that instantiates a control plane above this execution model. Its design is not part of this specification, and this specification does not depend on any particular control plane implementation.
+
+---
+
+### 38.13 — Closure
+
+The execution model is complete with respect to:
+
+```
+validation of transitions
+enforcement of constraints
+atomic state change
+```
+
+It is not complete with respect to:
+
+```
+when to execute
+what to execute
+why to execute
+```
+
+These belong to the control plane.
+
+The control plane decides intent. The execution model enforces possibility.
+
+The execution model without a control plane is a function that is never called. The control plane without an execution model is intent without enforcement.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
