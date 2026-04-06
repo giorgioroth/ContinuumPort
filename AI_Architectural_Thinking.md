@@ -5826,6 +5826,209 @@ If authority cannot be established, nothing enters the system.
 
 ---
 
+# Chapter 35 — Capability Domains
+
+Authority answers: is this input allowed to exist?
+
+A capability domain answers: what is this input allowed to do?
+
+These are different questions. A valid key does not imply permission to invoke all capabilities. Authorization of origin is not authorization of action.
+
+---
+
+## 35.1 — The Problem Authority Does Not Solve
+
+A system with a single `AuthorityContext` treats all authorized input as equivalent. Any signer may request any action.
+
+This is sufficient when the system has one trusted source.
+
+It is insufficient when multiple signers exist with different operational roles, or when a compromised key should not grant full capability access.
+
+Authority as boolean — authorized or not — does not express these distinctions.
+
+---
+
+## 35.2 — Capability Domain as Space
+
+A capability domain is not a role. It is not a permission list.
+
+It is a declared subset of the action space:
+
+```
+D(signer_id) ⊆ A_registered
+```
+
+where `A_registered` is the full set of op_types in the `CapabilityRegistry`.
+
+A signer operating within domain `D` may only request actions in `D`. Actions outside `D` are excluded regardless of structural validity.
+
+The domain does not modify what actions do. It constrains which actions may be requested by which origin.
+
+---
+
+## 35.3 — Separation of Concerns
+
+Three distinct questions, three distinct answers:
+
+```
+AuthorityGate    → is this origin allowed to speak?
+CapabilityDomain → is this origin allowed to request this action?
+Decision         → is this action admissible given current state?
+```
+
+These are evaluated in order. A failure at any stage halts progression.
+
+An action may be authorized and out-of-domain — rejected at the domain layer. An action may be authorized and in-domain and inadmissible — rejected at the decision layer. Only authorized, in-domain, admissible actions proceed to execution.
+
+---
+
+## 35.4 — Domain is Declared, Not Inferred
+
+The system does not infer what a signer should be allowed to do from context, history, or behavior.
+
+Domains are declared at configuration time:
+
+```
+DomainConfig({
+    "deploy-key":  {"set", "delete"},
+    "monitor-key": {"http_call"},
+    "audit-key":   {"set"},
+})
+```
+
+If a signer has no declared domain, the system fails closed: `D(signer_id) = ∅`.
+
+---
+
+## 35.5 — Domain Does Not Grant Correctness
+
+An action within domain is not guaranteed to be valid or admissible.
+
+Domain membership means: this origin may request this type of action.
+
+It does not mean the action is structurally valid, admissible given current state, or will succeed. Domain filtering precedes validation. Both are required.
+
+---
+
+## 35.6 — Domain is Geometry-Agnostic
+
+Domains are defined against `A_registered`. Domain filtering does not consult geometry.
+
+An action must satisfy both constraints independently:
+
+```
+a ∈ D(signer_id)      — domain constraint
+a ∈ A_geometry        — geometry constraint
+```
+
+If an action is in-domain but not present in the current geometry, it passes domain filtering and is rejected at the geometry or validation layer. The domain layer does not carry this responsibility.
+
+This preserves separation: domain constrains origin, geometry constrains structure. Neither layer knows the other.
+
+---
+
+## 35.7 — No Domain Escalation
+
+A signer cannot expand its own domain.
+
+There is no mechanism by which `a ∈ A_untrusted` expands `D(signer_id)`. Domain modification occurs only outside the execution cycle, through explicit reconfiguration.
+
+`DomainConfig` is immutable after construction. This mirrors the constraint on authority escalation (§34.7).
+
+---
+
+## 35.8 — One Signer Per Cycle
+
+A cycle has a single authority origin.
+
+All actions in `A_untrusted` are attributed to the signer established by `AuthorityGate` for that cycle. The system does not support per-action origin attribution.
+
+```
+(event, A_untrusted, signer_id) → single domain applied to all actions
+```
+
+If multiple signers need to act, they operate in separate cycles. There is no mechanism to merge domains within a single cycle.
+
+This preserves the model: `A_untrusted` is a list of operations, not a list of attributed tuples. The domain layer receives `(A_considered, signer_id)` — one set, one origin.
+
+---
+
+## 35.9 — Pipeline Position
+
+Domain filtering occurs after saturation and before decision:
+
+```
+A_untrusted
+    → SaturationGate → A_considered
+    → DomainFilter   → A_domain
+    → Decision       → A′
+    → Execution
+```
+
+Saturation constrains volume. Domain constrains scope. Decision constrains admissibility. These are independent operations on the same pipeline.
+
+Volume limits apply regardless of domain. A narrow domain under saturation pressure receives no special treatment (§33.10).
+
+---
+
+## 35.10 — Domain Failure Semantics
+
+An action outside the declared domain is excluded without per-action feedback.
+
+The system does not signal why the action was excluded, what the signer's domain contains, or how the action could be made admissible. This is consistent with §33.5: rejection is opaque at the boundary.
+
+`DomainResult` exposes aggregate counts — `dropped_domain`, `dropped_total` — not per-action reasons.
+
+---
+
+## 35.11 — No Default Domain
+
+The system has no default domain.
+
+A signer without a declared domain has `D(signer_id) = ∅`. All actions from that signer are excluded. This is not an error — it is the defined behavior for an undeclared domain.
+
+Fail closed, not open.
+
+---
+
+## 35.12 — Interaction with Authority
+
+Domain resolution requires a known signer identity established by `AuthorityGate`.
+
+If `AuthorityGate` fails, domain resolution does not occur. Domain is not a fallback for authority. The two layers are sequential, not parallel.
+
+---
+
+## 35.13 — Boundary of Responsibility
+
+The domain layer enforces which origins may request which action types.
+
+It does not enforce what values are valid within an action, what state transitions are permissible, or whether the action will have the intended effect. These belong to validation and admissibility.
+
+---
+
+## 35.14 — Monotonicity
+
+Domains are restrictive only.
+
+```
+A_domain ⊆ A_considered
+```
+
+Domain filtering cannot introduce admissibility. It can only reduce the action set. A domain cannot create capabilities that do not exist in `A_considered`.
+
+---
+
+## 35.15 — Closure
+
+A key is not a capability.
+
+A key establishes that input may exist. A domain establishes what that input may request. Admissibility establishes whether the request is executable now.
+
+The system does not conflate these. An authorized key with an empty domain produces no executable actions. The system halts cleanly, as defined in §32 and §33.11.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
