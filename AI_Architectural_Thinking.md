@@ -6884,6 +6884,306 @@ The execution model without a control plane is a function that is never called. 
 
 ---
 
+## Chapter 39 — System Properties
+
+This chapter defines the formal properties of the execution model.
+
+These properties are not aspirational. They are enforced by construction — by the architecture defined in Chapters 27–38 — and validated by the test suite.
+
+Each property states:
+
+- what the system guarantees
+- why the guarantee holds
+- what follows from it
+
+Together, they define the boundary of the model.
+
+---
+
+### 39.1 — Determinism
+
+Given identical initial state and identical input, the system produces identical output.
+
+```
+f(state₀, input) = output
+same(state₀, input) → same(output)
+```
+
+This holds because:
+
+- proposal is a pure function of inputs
+- geometry evaluation is deterministic
+- execution order is fixed
+- no clock, randomness, or external reads are used
+
+Consequence:
+
+- cycles are reproducible
+- behavior is auditable
+- replay is predictable
+
+Determinism implies replayability, not safety under replay (§37.3).
+
+---
+
+### 39.2 — Atomicity
+
+A cycle commits all operations or none.
+
+```
+commit(ops) → success ∨ rollback → state₀
+```
+
+This holds because:
+
+- a full snapshot is taken before execution
+- failure triggers full restore
+- no partial commit path exists
+
+Consequence:
+
+- no intermediate state is observable
+- state transitions are discrete
+
+---
+
+### 39.3 — No Partial State Escape
+
+If a cycle fails, no effects persist.
+
+This is a direct consequence of atomicity, stated explicitly for adversarial reasoning.
+
+Consequence:
+
+- failed execution leaves no residue
+- rollback is semantically clean
+
+---
+
+### 39.4 — TOCTOU Protection (Intra-Cycle)
+
+A proposal is rejected if state changes between propose and commit.
+
+```
+state_before ≠ snapshot_at_commit → reject
+```
+
+This holds because:
+
+- `TransactionManager` re-checks state before commit
+
+Scope:
+
+- protects within a cycle
+- does not apply across cycles (§37.3)
+
+Consequence:
+
+- no drift can be injected between validation and execution
+
+---
+
+### 39.5 — Monotonic Filtering
+
+Each processing layer can only remove actions.
+
+```
+A′ ⊆ A_domain ⊆ A_considered ⊆ A_untrusted
+```
+
+This holds because:
+
+- no layer appends actions
+- all filters are reductive
+
+Consequence:
+
+- execution cannot exceed input
+- input defines the upper bound of effects
+
+---
+
+### 39.6 — Decision Idempotency
+
+Applying decision multiple times yields the same result.
+
+```
+decide(V, decide(V, A)) = decide(V, A)
+```
+
+This holds because:
+
+- decision only removes invalid actions
+- no state is accumulated
+
+Consequence:
+
+- decision is stable
+- no cascading filtering effects
+
+---
+
+### 39.7 — Divergence Collapse
+
+If reconciliation yields `DIVERGED`, no action is admissible.
+
+```
+V = DIVERGED → A′ = ∅
+```
+
+This holds because:
+
+- decision short-circuits without evaluating actions
+
+Consequence:
+
+- execution halts under uncertainty
+- safety is prioritized over progress
+
+---
+
+### 39.8 — No Authority Escalation
+
+Execution cannot modify authority or domain.
+
+This holds because:
+
+- authority and domain are immutable inputs
+- no execution path writes to them
+
+Consequence:
+
+- no privilege escalation via actions
+- permissions are externally controlled
+
+---
+
+### 39.9 — Controlled State Mutation
+
+All state changes occur through `TransactionManager`.
+
+This holds because:
+
+- environment mutation requires gate access
+- the gate is opened only during execution
+- execution is reachable only via validated proposals
+
+Consequence:
+
+- all state transitions are mediated
+- no out-of-band mutation exists within the model
+
+---
+
+### 39.10 — Bounded Intake
+
+The number of actions evaluated per cycle is bounded.
+
+```
+|A_considered| ≤ N
+```
+
+This holds because:
+
+- `SaturationGate` enforces limits before evaluation
+
+Consequence:
+
+- evaluation cost is bounded
+- adversarial volume cannot propagate
+
+---
+
+### 39.11 — State-Local Constraints
+
+All constraints depend only on current state and a single action.
+
+```
+constraint(state_before, action, state_after)
+```
+
+Constraints cannot depend on:
+
+- history
+- ordering
+- co-occurrence
+
+This holds because:
+
+- the geometry DSL has no temporal or sequence primitives
+
+Consequence:
+
+- evaluation is local and deterministic
+- temporal properties are not expressible (§37)
+
+---
+
+### 39.12 — Error Layer Separation
+
+Each error type belongs to a single layer.
+
+```
+AuthorityError     → authority layer
+GeometryError      → geometry / transaction layer
+EpistemicVetoError → epistemic layer
+CapabilityError    → capability layer
+ExecutionError     → execution layer
+```
+
+Exception:
+
+- invalid signatures may be interpreted as geometry failure
+
+Consequence:
+
+- error type identifies failure origin
+- debugging is layer-local
+
+---
+
+### 39.13 — Explicit Non-Guarantees
+
+The model does not guarantee:
+
+```
+temporal correctness
+cross-cycle replay protection
+idempotency of non-idempotent actions
+cross-cycle ordering
+composition safety across actions
+intent correctness
+control plane correctness
+```
+
+These are not omissions.
+
+They are outside the model boundary and belong to the control plane (§38).
+
+---
+
+### 39.14 — Closure
+
+The execution model is defined by these properties.
+
+A correct implementation must satisfy all properties above.
+
+These properties are not independent:
+
+- atomicity implies no partial state
+- monotonic filtering bounds execution
+- state-local constraints imply stateless evaluation
+
+The architecture ensures these properties reinforce each other.
+
+The test suite verifies them empirically.
+
+Formal proofs exist for structural properties (atomicity, monotonicity, idempotency, divergence collapse).
+
+The remaining properties follow directly from architectural constraints.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
