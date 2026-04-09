@@ -7184,6 +7184,203 @@ The remaining properties follow directly from architectural constraints.
 
 ---
 
+## Chapter 40 — State Continuity Across Sessions
+
+### 40.0 — Status of This Chapter
+
+Chapters 27–39 define the execution model.
+
+This chapter defines a protocol for transferring validated state across sessions.
+
+This protocol is not part of the execution model.
+It is not enforced by the execution engine.
+
+It is assumed to be implemented by the control plane (§38).
+
+All guarantees in this chapter hold only if the protocol is respected.
+
+---
+
+### 40.1 — Continuity Is Not Defined by the Execution Model
+
+The execution model is stateless per cycle (§37).
+
+No execution history is retained across cycles.
+
+State persists only as Σ_observed.
+
+The system does not distinguish between:
+
+* state produced by prior valid execution
+* state introduced externally
+
+Continuity across sessions is not defined within the execution model.
+
+---
+
+### 40.2 — Continuity as State Transfer
+
+Continuity is defined as the transfer of validated state across sessions.
+
+Let C be a capsule.
+
+C.S represents validated state.
+
+A subsequent cycle may initialize its environment using C.S.
+
+No other information is transferred.
+
+---
+
+### 40.3 — The State Capsule
+
+A capsule is defined as:
+
+```
+C = (I, K, S, A_next)
+```
+
+Where:
+
+* I — intent
+* K — constraint set
+* S — validated state snapshot
+* A_next — next action
+
+The capsule contains only state required for execution.
+
+The capsule does not contain:
+
+* execution history
+* unvalidated input
+* inferred context
+
+---
+
+### 40.4 — Capsule Validity
+
+A capsule is valid iff:
+
+```
+valid(C) ⇔
+    S was produced by a committed execution
+    ∧ K corresponds to the active constraint set
+    ∧ A_next ∈ admissible(geometry, S)
+```
+
+A capsule that fails any condition is invalid.
+
+Invalid capsules are treated as untrusted input.
+
+---
+
+### 40.5 — Reconstruction
+
+A new cycle may be initialized as:
+
+```
+env := C.S
+```
+
+This operation is reconstruction.
+
+No execution state is resumed.
+
+No history is restored.
+
+---
+
+### 40.6 — Capsule as Untrusted Input
+
+A capsule is not trusted by default.
+
+C.S enters the system as Σ_observed.
+
+It is subject to reconciliation and validation.
+
+No capsule bypasses validation.
+
+---
+
+### 40.7 — Execution After Reconstruction
+
+If valid(C):
+
+```
+restore(env, C.S)
+execute(A_next) if admissible(A_next, S)
+```
+
+Execution is conditional on admissibility.
+
+---
+
+### 40.8 — No Implicit Continuity
+
+The system does not retain:
+
+* execution identity
+* cycle linkage
+* historical ordering
+
+Each cycle is independent.
+
+Continuity exists only through explicit state transfer.
+
+---
+
+### 40.9 — Conditional Continuity
+
+Continuity holds only if:
+
+* the capsule protocol is implemented by the control plane
+* validation is enforced before use
+
+If these conditions are not met, no continuity guarantees apply.
+
+---
+
+### 40.10 — Limits of This Protocol
+
+This protocol does not guarantee:
+
+* capsule integrity under adversarial control plane
+* replay protection across sessions
+* compatibility across geometry versions
+* semantic consistency of intent
+
+These are outside the execution model.
+
+---
+
+### 40.11 — Relationship to the Model
+
+```
+Execution Model   — enforces valid transitions
+Control Plane     — governs execution
+Continuity Layer  — transfers validated state
+```
+
+The execution model does not depend on continuity.
+
+Continuity depends on valid execution.
+
+---
+
+### 40.12 — Closure
+
+The execution model does not provide continuity across sessions.
+
+Continuity requires explicit transfer of validated state.
+
+A capsule does not represent memory.
+
+It represents state produced by valid execution and reintroduced under validation.
+
+No other form of continuity is defined.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
