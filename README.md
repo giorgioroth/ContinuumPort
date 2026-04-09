@@ -1,221 +1,253 @@
 
-# ContinuumPort
+# ContinuumPort (Regen Engine)
 
-A fail-closed execution model for persistent AI systems.
+**Fail-closed execution layer for AI systems and automation.**
 
 ---
 
-## The Problem
+## What this is
+
+ContinuumPort is a **verifiable execution model**.
+
+It guarantees that:
+
+> **No invalid state transition can execute.**
+
+This is not prompt engineering.
+This is not policy filtering.
+
+This is **execution-level enforcement**.
+
+---
+
+## The problem
 
 AI systems can execute.
 
 They cannot guarantee control.
 
-Across time, they:
+Over time, they:
 
-- accumulate hidden state  
-- drift from original intent  
-- act without provable alignment  
+* accumulate hidden state
+* drift from constraints
+* execute actions that cannot be verified
 
-When systems persist:
+More intelligence does not fix this.
 
-- memory becomes implicit authority  
-- execution escapes declared boundaries  
-- governance becomes illusion  
+Execution must be constrained.
 
 ---
 
-## The Claim
+## The solution
 
-ContinuumPort enforces execution that cannot proceed without proof of alignment.
+ContinuumPort enforces:
 
-It introduces a structural model where:
+* **admissibility before execution**
+* **atomic state transitions**
+* **no partial effects**
+* **no implicit authority**
+* **no state mutation outside control**
 
-- continuity is explicit  
-- authority is bounded  
-- execution is constrained  
+If a system cannot prove it is allowed to act:
 
----
-
-## The Principle
-
-If the system cannot prove it is allowed to act, it does not act.
+> **it does not act**
 
 ---
 
-## Quickstart
+## Quick example
 
 ```python
-from regen_engine import TransactionManager, CapabilityRegistry
-from regen_engine.capabilities import HttpCapability
-from regen_engine.backends import HttpBackend
+from execution.environment import Environment
+from execution.geometry import build_geometry
+from execution.executor import Executor
+from execution.transaction import TransactionManager
 
-registry = CapabilityRegistry()
-registry.register(
-    "http_call",
-    HttpCapability(allowed_hosts={"api.example.com"})
+env = Environment({"balance": 100})
+
+geometry = build_geometry(
+    geometry_id="example",
+    invariants=["balance >= 0"],
+    actions=[
+        {
+            "name": "set",
+            "preconditions": [],
+            "postconditions": []
+        }
+    ],
+    signing_key=b"demo-key"
 )
 
-tm = TransactionManager(
-    registry=registry,
-    backend=HttpBackend()
-)
+executor = Executor(...)
+tm = TransactionManager(env, executor, geometry)
 
-operation = {
-    "type": "http_call",
-    "value": {
-        "url": "https://api.example.com/data",
-        "method": "GET",
-        "timeout": 5
-    }
-}
+actions = [
+    {"type": "set", "key": "balance", "value": -50}
+]
 
-tm.run([operation])
-````
+proposal = tm.propose(actions)
 
-If the request is invalid, unauthorized, or the system state is not trusted:
-
-```
-Execution is blocked.
+# ❌ Rejected before execution
+print(proposal.authorized)  # False
 ```
 
-All execution is validated against declared authority.
+Invalid state never commits.
 
 ---
 
-## The Model
+## What makes it different
 
-Σ = (D, A, Auth)
+### Fail-closed execution
 
-* D (Declarative State) — explicit task state
-* A (Adaptive Memory) — non-authoritative history
-* Auth (Authority) — execution permissions
+No action runs unless it is explicitly valid.
 
 ---
 
-## Core Properties
+### Atomic by construction
 
-### No Implicit Continuity
-
-If it is not declared, it does not exist.
-
-### Fail-Closed Execution
-
-No action is taken unless explicitly authorized.
-
-### Separation of Concerns
-
-```
-validate → build → commit
+```text
+commit → success
+      → or full rollback
 ```
 
-* validate → structural correctness
-* build → pure intent
-* commit → real-world effect
-
-### No Side-Effects Without Control
-
-* no effects during validation
-* no effects during build
-* only commit can act
-
-### No Silent Drift
-
-If alignment cannot be proven:
-
-```
-execution is blocked
-```
+No partial state is ever observable.
 
 ---
 
-## What This Prevents
+### No implicit authority
+
+* no hidden permissions
+* no inherited trust
+* no global state shortcuts
+
+All authority is explicit.
+
+---
+
+### Monotonic filtering
+
+```text
+input → filtered → filtered → filtered → execution
+```
+
+No layer can add actions. Only remove.
+
+---
+
+### Deterministic
+
+```text
+same state + same input → same result
+```
+
+No randomness. No hidden behavior.
+
+---
+
+## What it prevents
 
 * hidden state accumulation
-* unauthorized execution
-* TOCTOU inconsistencies
-* implicit authority escalation
-* unbounded memory governance
+* unsafe agent execution
+* TOCTOU attacks
+* authority escalation
+* partial side-effects
 * execution based on unverified assumptions
 
 ---
 
-## Example
+## Architecture (simplified)
 
-Without ContinuumPort:
-
-```
-Agent proposes → executes → side-effect happens
-```
-
-With ContinuumPort:
-
-```
-Agent proposes
-→ validate
-→ build
-→ state diverges
-→ commit attempted
-
-Result:
-BLOCKED
+```text
+A_untrusted
+    → Saturation
+    → Authority
+    → Domain
+    → Decision
+    → Execution (atomic)
 ```
 
----
+Optional:
 
-## Implementation
+```text
+Capsule → validate → restore → execute
+```
 
-ContinuumPort is implemented as the Regen Engine.
-
-* strict capability boundaries
-* atomic execution with rollback
-* epistemic veto
-* reconciliation (pure)
-* decision as constraint
+(continuity without memory)
 
 ---
 
-## CP-NORM
+## Tested, not assumed
 
-* no execution without validation
-* no side-effects outside commit
-* veto is absolute
-* authority must be explicit
+* 383 tests
+* adversarial scenarios included:
 
----
+  * TOCTOU
+  * state mutation bypass
+  * capability confusion
+  * replay conditions
+  * composition attacks
 
-## Positioning
+All behaviors are either:
 
-This is not:
-
-* a framework
-* an agent library
-* a convenience layer
-
-This is:
-
-An execution constraint model for systems that do not reset.
+* **blocked**
+* or **explicitly bounded**
 
 ---
 
-## Final Statement
+## What this is NOT
 
-The system must be incapable of acting incorrectly without stopping.
+* not an agent framework
+* not a workflow engine
+* not a policy layer
 
 ---
+
+## What this IS
+
+> A **constraint layer** that makes invalid execution impossible.
+
+---
+
+## Use cases
+
+* AI agents with real-world actions
+* financial / transactional systems
+* automation pipelines that must not drift
+* any system where **state correctness matters more than flexibility**
+
+---
+
+## Continuity (optional)
+
+ContinuumPort supports **state continuity without memory**:
+
+* no history transfer
+* no implicit context
+* only validated state (capsule)
+
+```text
+continuity = validated state transfer
+```
+
+---
+
+## Status
+
+* Core execution model: **stable**
+* Test suite: **383 passing**
+* Continuity protocol: **implemented**
+
+---
+
+## Final
+
+> Not smarter AI.
+> **Safer execution.**
 
 ## Links
 
 * Blog: [https://gi0rgioroth.blogspot.com/](https://gi0rgioroth.blogspot.com/)
 * Site: [https://continuumport.com/](https://continuumport.com/)
 * Repository: [https://github.com/giorgioroth/ContinuumPort](https://github.com/giorgioroth/ContinuumPort)
-
----
-
-## Status
-
-Active development on implementation.
-Normative core is fixed.
 
 ---
 
