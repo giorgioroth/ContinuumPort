@@ -7285,7 +7285,6 @@ env := C.S
 This operation is reconstruction.
 
 No execution state is resumed.
-
 No history is restored.
 
 ---
@@ -7362,8 +7361,119 @@ Continuity Layer  — transfers validated state
 ```
 
 The execution model does not depend on continuity.
-
 Continuity depends on valid execution.
+
+---
+
+### 40.11.a — Implementation Mapping
+
+The continuity protocol is realized through concrete components:
+
+* `execution/capsule.py`
+* `execution/control_plane.py`
+
+These define the behavior of validation, reconstruction, and resumption.
+
+---
+
+### Capsule Construction and Validation
+
+Defined in:
+
+`StateCapsule` (`execution/capsule.py`)
+
+Responsibilities:
+
+* structural definition of `C = (I, K, S, A_next)`
+* integrity verification (state hash)
+* defensive parsing via `from_dict()` (untrusted input)
+* validation via `CapsuleValidator`
+
+Mapping:
+
+* §40.3 → `StateCapsule`
+* §40.4 → `CapsuleValidator.validate()`
+* §40.6 → `from_dict()` + validation
+
+---
+
+### Reconstruction
+
+Defined in:
+
+`reconstruct()` (`execution/capsule.py`)
+
+Behavior:
+
+* validates capsule before applying state
+* initializes environment from `C.S`
+* does not restore execution history
+
+Mapping:
+
+* §40.5 → reconstruction
+* §40.8 → no history restoration
+
+---
+
+### Authority Binding
+
+Defined in:
+
+* `StateCapsule.authority_id`
+* `reconstruct(..., authority_context=...)`
+
+Behavior:
+
+* verifies authority match before applying state
+* rejects mismatches (fail-closed)
+
+Mapping:
+
+* §40.9 → enforced continuity condition
+* §40.10 → partial replay mitigation
+
+---
+
+### Control Plane Enforcement
+
+Defined in:
+
+`resume_from_capsule()` (`execution/control_plane.py`)
+
+This is the **only supported entry point** for cross-session resumption.
+
+Responsibilities:
+
+* enforces authority binding
+* supports strict mode (reject unbound capsules)
+* guarantees fail-closed behavior before reconstruction
+
+Mapping:
+
+* §40.2 → controlled state transfer
+* §40.6 → no direct capsule application
+* §40.9 → enforced at entry point
+
+---
+
+### Fail-Closed Behavior
+
+Implemented across:
+
+* `CapsuleValidator`
+* `reconstruct()`
+* `resume_from_capsule()`
+
+Behavior:
+
+* any validation failure aborts before mutation
+* environment remains unchanged on failure
+
+Mapping:
+
+* §40.7 → conditional execution
+* §40.9 → structural enforcement
 
 ---
 
@@ -7379,7 +7489,10 @@ It represents state produced by valid execution and reintroduced under validatio
 
 No other form of continuity is defined.
 
+> “Continuity is not a property of the system. It is a property of correctly enforced reconstruction.”
+
 ---
+
 
 ## Afterword — Where the Questions Came From
 
