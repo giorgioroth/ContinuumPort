@@ -1,7 +1,7 @@
 
 # ContinuumPort (Regen Engine)
 
-**Fail-closed execution layer for AI systems and automation.**
+**Fail-closed execution layer with formal guarantees for AI systems.**
 
 ---
 
@@ -11,12 +11,18 @@ ContinuumPort is a **verifiable execution model**.
 
 It guarantees that:
 
-> **No invalid state transition can execute.**
+> **Invalid state transitions are structurally impossible to execute.**
 
 This is not prompt engineering.
 This is not policy filtering.
 
 This is **execution-level enforcement**.
+
+```text
+This is not an AI system.
+
+It is an execution model that constrains AI behavior.
+```
 
 ---
 
@@ -24,7 +30,7 @@ This is **execution-level enforcement**.
 
 AI systems can execute.
 
-They cannot guarantee control.
+They cannot guarantee that those actions are valid under all conditions.
 
 Over time, they:
 
@@ -86,7 +92,7 @@ actions = [
 
 proposal = tm.propose(actions)
 
-# ❌ Rejected before execution
+# ❌ Rejected before execution (no side-effects)
 print(proposal.authorized)  # False
 ```
 
@@ -162,7 +168,7 @@ A_untrusted
     → Authority
     → Domain
     → Decision
-    → Execution (atomic)
+    → Execution (atomic, fail-closed)
 ```
 
 Optional:
@@ -177,14 +183,16 @@ Capsule → validate → restore → execute
 
 ## Tested, not assumed
 
-* 383 tests
-* adversarial scenarios included:
+* Core execution tests: **383**
+* Total test suite: **437** (including property verification)
 
-  * TOCTOU
-  * state mutation bypass
-  * capability confusion
-  * replay conditions
-  * composition attacks
+Adversarial scenarios included:
+
+* TOCTOU
+* state mutation bypass
+* capability confusion
+* replay conditions
+* composition attacks
 
 All behaviors are either:
 
@@ -207,12 +215,28 @@ All behaviors are either:
 
 ---
 
+## Why this matters
+
+Most systems attempt to detect incorrect behavior.
+
+ContinuumPort prevents it structurally.
+
+There is no recovery from invalid execution.
+
+Because invalid execution cannot occur.
+
+---
+
 ## Use cases
 
-* AI agents with real-world actions
-* financial / transactional systems
-* automation pipelines that must not drift
-* any system where **state correctness matters more than flexibility**
+* AI agents performing external API calls
+* financial systems enforcing invariant safety (e.g. balance ≥ 0)
+* automation pipelines with strict state guarantees
+* safety-critical orchestration layers
+
+Any system where:
+
+> **execution must be correct, not just likely correct**
 
 ---
 
@@ -230,18 +254,53 @@ continuity = validated state transfer
 
 ---
 
-## Status
+## Formal Verification (Executable)
 
-* Core execution model: **stable**
-* Test suite: **383 passing**
-* Continuity protocol: **implemented**
+ContinuumPort is not tested for behavior.
+
+It is tested for invariants.
+
+The system includes:
+
+* **437 tests**
+* adversarial scenarios
+* property-level validation
+
+Chapter 39 defines **13 formal properties**.
+
+Each property is enforced by a dedicated test:
+
+```text
+tests/test_ch39_properties.py
+```
+
+Verification is not behavioral coverage.
+
+It is **property-level enforcement**.
+
+If a property is violated, its corresponding test fails.
+
+The system is verified against its invariants, not its outcomes.
+
+---
+
+## Proof
+
+```bash
+pytest
+# 437 passed in ~1.5s
+```
 
 ---
 
 ## Final
 
 > Not smarter AI.
-> **Safer execution.**
+> Constrained execution.
+> Predictable systems.
+> Systems that refuse to act without proof of correctness.
+
+---
 
 ## Links
 
@@ -255,16 +314,14 @@ continuity = validated state transfer
 [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
 [![Status](https://img.shields.io/badge/status-normative-green)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
 
-
 ---
-
 
 ## Author
 
-> Gh. Rotaru (Giorgio Roth)
->
-> Independent researcher
->
-> continuumport@gmail.com
+Gh. Rotaru (Giorgio Roth) 
+Independent researcher 
+
+[continuumport@gmail.com](mailto:continuumport@gmail.com)
+
 
 
