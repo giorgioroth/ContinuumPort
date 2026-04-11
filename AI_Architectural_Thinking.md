@@ -8545,6 +8545,239 @@ The selection layer is bounded, policy-driven, and non-authoritative by design.
 
 ---
 
+# Chapter 45 — Pipeline Integration
+
+The advisory pipeline is complete.
+
+Four layers. One direction. No authority.
+
+---
+
+## 45.1 — What the Pipeline Is
+
+Chapters 41–44 defined four independent layers.
+
+This chapter verifies that they compose correctly as a system.
+
+The pipeline receives untrusted input and produces, at most, one candidate action to present to the execution kernel. It does not decide whether that candidate executes. It does not enforce anything. It evaluates.
+
+The four layers in order:
+
+```
+CandidateSet  — structural normalization (Ch. 42)
+Simulation    — hypothetical evaluation against a goal (Ch. 43)
+Selection     — policy-driven choice (Ch. 44)
+[hand-off]    — boundary to execution kernel
+```
+
+Each layer is independent. Each layer can only remove. None can add.
+
+---
+
+## 45.2 — Monotonicity Across the Pipeline
+
+The pipeline satisfies a single structural invariant across all four layers:
+
+```
+|selected| ≤ 1
+|accepted| ≤ |candidates|
+|candidates| ≤ |input|
+```
+
+This is not a coincidence. It is a design constraint enforced at every layer:
+
+- CandidateSet filters structurally invalid input
+- Simulation filters candidates that do not satisfy the goal
+- Selection chooses at most one from those that do
+
+No layer introduces actions. The input set defines the upper bound of effects. A flooded input cannot produce more output than the input contained.
+
+This property mirrors the monotonic filtering of the execution kernel (§39.5), extended into the advisory layers.
+
+---
+
+## 45.3 — Composition Without Coupling
+
+The four layers compose without importing from each other.
+
+```
+candidate.py   does not import goal, simulation, or selection
+goal.py        does not import candidate, simulation, or selection
+simulation.py  does not import candidate, selection, or execution modules
+selection.py   does not import simulation, goal, or execution modules
+```
+
+Each layer receives its input explicitly. Each layer returns its output as a value. There is no shared state. There is no implicit coupling.
+
+This is the property that makes the pipeline testable in isolation and composable without surprises. Integration tests verify that the layers compose correctly — not because they are coupled, but because their contracts are compatible.
+
+---
+
+## 45.4 — The Hand-Off Boundary
+
+The most important boundary in this pipeline is not between its own layers.
+
+It is between the advisory pipeline and the execution kernel.
+
+**What crosses this boundary:**
+
+```
+SelectionResult.selected → a plain dict with a type field
+or None
+```
+
+**What does not cross:**
+
+```
+goal satisfaction status
+simulation confidence
+selection policy identity
+any advisory metadata
+```
+
+The execution kernel receives the selected candidate as untrusted input. It re-evaluates independently:
+
+```
+AuthorityGate      — verifies origin
+DomainFilter       — verifies scope
+Decision           — verifies admissibility against current state
+TransactionManager — verifies geometry and atomicity
+```
+
+A candidate that passes the full advisory pipeline may be rejected by any of these layers. This is not a failure of the advisory pipeline. It is the correct behavior of the execution kernel.
+
+The hand-off is not a trust escalation.
+
+---
+
+## 45.5 — Separation of Concern Across Pipelines
+
+The execution kernel pipeline:
+
+```
+A_untrusted
+    ↓
+SaturationGate       (Ch. 33)
+    ↓
+DomainFilter         (Ch. 35)
+    ↓
+Decision             (Ch. 31)
+    ↓
+TransactionManager   (Ch. 27)
+    ↓
+[execution]
+```
+
+The advisory pipeline:
+
+```
+UNTRUSTED INPUT
+    ↓
+CandidateSet         (Ch. 42)
+    ↓
+Simulation           (Ch. 43)
+    ↓
+Selection            (Ch. 44)
+    ↓
+[hand-off to execution kernel]
+```
+
+These are not competing pipelines. They are complementary.
+
+The execution kernel enforces what is permitted.
+The advisory pipeline narrows what is attempted.
+
+A system using only the execution kernel can execute any valid action. A system using the advisory pipeline before the execution kernel executes only what satisfies a declared goal — subject to kernel enforcement.
+
+```
+Selection decides under policy.
+Execution decides under constraint.
+```
+
+They do not substitute for each other.
+
+---
+
+## 45.6 — What the Integration Tests Verify
+
+The test suite (`test_ch45_pipeline.py`) derives directly from the pipeline contract. Each test maps to a specific property.
+
+**Happy path** — full pipeline traversal produces one selected candidate. Monotonic reduction holds across all layers. Output is deterministic.
+
+**Nothing satisfies the goal** — Simulation produces an empty accepted set. Selection halts without calling policy. Clean halt, not an error.
+
+**Multiple candidates satisfy** — policy controls which is selected. Partition totality holds: `selected + skipped == accepted`.
+
+**Adversarial input** — junk, floods, malformed dicts. Invalid candidates do not propagate. Pipeline output is never larger than input.
+
+**State isolation** — original state is not mutated through pipeline. Candidates are not mutated during simulation. Policy receives a defensive copy.
+
+**Hand-off boundary** — selected candidate is a plain dict. No advisory metadata is present. `None` selection is a clean halt. The execution kernel re-evaluates independently.
+
+**Non-guarantees** — four tests that document what the pipeline does not guarantee. These are not edge cases. They are documented limits.
+
+---
+
+## 45.7 — The Role of Non-Guarantee Tests
+
+Most test suites test what a system does.
+
+The non-guarantee tests verify what the system does not do — and confirm that this is stable, not accidental.
+
+This pattern was established in Chapter 39 (`TestProperty39_13_ExplicitNonGuarantees`). It continues here.
+
+```
+test_n1 — apply ≈ real execution is not guaranteed
+test_n3 — a satisfied goal does not mean correct intent
+test_n4 — the pipeline has no memory across cycles
+test_n5 — execution kernel may reject what advisory pipeline accepted
+```
+
+Each of these passes. Not because the system prevents the failure — but because the failure is documented, understood, and delegated to the appropriate layer.
+
+A system that knows its limits is more trustworthy than one that does not.
+
+---
+
+## 45.8 — Explicit Non-Guarantees
+
+The pipeline does not guarantee:
+
+- that a selected candidate will be admitted by the execution kernel
+- that the apply function used in Simulation matches real execution semantics
+- that a satisfied goal implies correct intent
+- that pipeline state is preserved across cycles
+- that goal satisfaction implies execution success
+
+These are not omissions. They follow directly from the layered design:
+
+- Simulation evaluates consequences, not admissibility
+- Selection decides under policy, not under constraint
+- The execution kernel is the sole authority on what executes
+
+---
+
+## 45.9 — Closure
+
+Chapters 41–45 are complete.
+
+```
+Goal         — pure evaluation of state against a condition
+CandidateSet — structural normalization of untrusted input
+Simulation   — hypothetical evaluation against goal
+Selection    — policy-driven choice, no default strategy
+Chapter 45   — integration and hand-off boundary
+```
+
+The advisory pipeline evaluates what is desired.
+The execution kernel enforces what is possible.
+
+Neither overrides the other.
+
+627 tests. 0 failures.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
