@@ -194,6 +194,13 @@ The engine enforces what you declare. It does not validate what you declare.
 
 ---
 
+## Formal boundaries
+
+- [docs/analysis/scope_and_limits.md](docs/analysis/scope_and_limits.md)
+- [docs/analysis/attack_classification.md](docs/analysis/attack_classification.md)
+
+---
+
 ## Use cases
 
 - AI agents with real-world effects
@@ -209,9 +216,9 @@ The engine enforces what you declare. It does not validate what you declare.
 
 ---
 
-[![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-blue)](LICENSE)
+[![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](LICENSE)
 [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
-[![Status](https://img.shields.io/badge/status-normative-green)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
+[![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
 
 ---
 
