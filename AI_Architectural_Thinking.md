@@ -8839,7 +8839,43 @@ Fail-closed.
 
 ---
 
-### 46.2 — Separation from Other Layers
+### 46.2 — Signer Binding
+
+The signer identity is not taken from the payload.
+
+It is derived from signature verification and bound to the action before authority evaluation.
+
+Formally:
+
+```
+verify_signature(payload, signature) → s
+```
+
+The signer used in authority evaluation is the one obtained from verified signature material.
+
+Any signer field present in the payload is ignored.
+
+This prevents impersonation via payload injection.
+
+---
+
+### 46.3 — Verification Order
+
+Authority evaluation is performed only after successful signature verification.
+
+The evaluation sequence is:
+
+```
+verify_signature → extract_signer → authority_check
+```
+
+If signature verification fails, authority evaluation is not performed.
+
+This ordering is strict.
+
+---
+
+### 46.4 — Separation from Other Layers
 
 The authority layer is independent of all other layers.
 
@@ -8864,28 +8900,7 @@ It evaluates only origin and permission.
 
 ---
 
-### 46.3 — Signer Identity
-
-A signer is an identity bound to a verification mechanism.
-
-Minimal structure:
-
-```
-Signer:
-    id: str
-    verification: function(payload, signature) → bool
-```
-
-The verification mechanism is external to this layer.
-
-The authority layer does not define cryptography.
-It consumes a verification result.
-
-An action with an invalid signature is rejected before authority evaluation.
-
----
-
-### 46.4 — Authority Binding
+### 46.5 — Authority Binding
 
 Authority is explicitly configured.
 
@@ -8903,7 +8918,7 @@ If an action type is not explicitly listed, it is not allowed.
 
 ---
 
-### 46.5 — Fail-Closed Behavior
+### 46.6 — Fail-Closed Behavior
 
 If a signer is unknown:
 
@@ -8927,7 +8942,7 @@ All undefined states resolve to no permission.
 
 ---
 
-### 46.6 — Non-Escalation of Authority
+### 46.7 — Non-Escalation of Authority
 
 Authority is immutable during execution.
 
@@ -8948,7 +8963,7 @@ Authority is an input to the system, not a state variable.
 
 ---
 
-### 46.7 — Stateless Evaluation
+### 46.8 — Stateless Evaluation
 
 Authority evaluation depends only on:
 
@@ -8969,9 +8984,33 @@ authority_check(s, a) → {allowed, rejected}
 
 is a pure function.
 
+Authority does not enforce rate limits or behavioral constraints.
+
+Such controls belong to the control plane or external systems.
+
 ---
 
-### 46.8 — Independence from Execution
+### 46.9 — Authority vs Domain
+
+Authority defines the maximum permission set of a signer.
+
+DomainFilter (Ch. 35) may further restrict this set per execution context.
+
+Authority is global and static.
+Domain is contextual and potentially dynamic.
+
+Formally:
+
+```
+Allowed_by_domain ⊆ Authority(s)
+```
+
+Authority does not depend on domain.
+Domain cannot expand authority.
+
+---
+
+### 46.10 — Independence from Execution
 
 Authority validation does not imply execution.
 
@@ -8991,7 +9030,7 @@ Authority answers only:
 
 ---
 
-### 46.9 — Failure Modes
+### 46.11 — Failure Modes
 
 ```
 AuthorityError(INVALID_SIGNATURE) — signature verification failed
@@ -9014,7 +9053,7 @@ Each error remains confined to its layer.
 
 ---
 
-### 46.10 — Limits of the Authority Layer
+### 46.12 — Limits of the Authority Layer
 
 The authority layer cannot:
 
@@ -9032,15 +9071,16 @@ Authority defines permission, not correctness.
 
 ---
 
-### 46.11 — Correct Use of the Authority Layer
+### 46.13 — Correct Use of the Authority Layer
 
 A system using the authority layer is responsible for:
 
 1. Verifying signatures before authority evaluation.
-2. Providing an explicit Authority mapping.
-3. Treating unknown signers as having zero permissions.
-4. Passing only authority-valid actions to subsequent layers.
-5. Not assuming authority implies execution.
+2. Binding signer identity from verified signature — not payload.
+3. Providing an explicit Authority mapping.
+4. Treating unknown signers as having zero permissions.
+5. Passing only authority-valid actions to subsequent layers.
+6. Not assuming authority implies execution.
 
 Authority is a gate on origin and scope.
 
@@ -9048,7 +9088,7 @@ It is not a guarantee of success.
 
 ---
 
-### 46.12 — Closure
+### 46.14 — Closure
 
 The authority layer answers one question:
 
