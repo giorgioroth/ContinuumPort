@@ -7750,6 +7750,243 @@ The goal layer is bounded, pure, and non-authoritative by design.
 
 ---
 
+## Chapter 42 — Candidate Actions
+
+A CandidateSet is a structural normalization boundary for untrusted action input.
+
+It accepts externally provided action dicts, validates minimal structure, normalizes input, and silently filters structurally invalid entries.
+
+This layer does not generate actions.
+This layer does not execute actions.
+This layer does not validate admissibility against geometry.
+
+---
+
+### 42.1 — Formal Definition
+
+A CandidateSet C is a finite set of actions:
+
+```
+C = {a₁, a₂, ..., aₙ}
+```
+
+where each aᵢ is a dict with at least:
+
+```
+"type": str  — non-empty string
+```
+
+The source of candidates is external and opaque.
+The layer does not know or care where candidates come from.
+
+Input is treated as adversarial.
+Every candidate is rejected unless it passes structural checks.
+
+---
+
+### 42.2 — Separation from the Execution Layer
+
+A CandidateSet does not know the execution layer exists.
+
+```
+candidate.py  — CandidateSet definition and validation
+goal.py       — Goal evaluation
+geometry.py   — admissibility of transitions
+control_plane — orchestration and policy
+```
+
+There are no imports between `candidate.py` and any of these modules.
+
+This separation is structural and tested.
+
+---
+
+### 42.3 — Structural Validation
+
+Validation is minimal and structural only.
+
+A candidate is accepted if and only if:
+
+```
+isinstance(candidate, dict)
+∧ "type" in candidate
+∧ isinstance(candidate["type"], str)
+∧ candidate["type"].strip() != ""
+```
+
+A candidate is silently filtered if any condition fails.
+
+Semantic validation — whether the action is known, registered, or admissible — is not performed here.
+That belongs to geometry (admissibility) and the execution layer.
+
+---
+
+### 42.4 — Silent Filtering
+
+Invalid candidates are dropped without raising an error.
+
+This is intentional.
+
+The caller is not assumed to know which candidates are structurally valid before submitting them.
+The layer accepts a raw, untrusted collection and returns what survived.
+
+```
+input:  [valid, invalid, valid, "string", {"key": "no_type"}]
+output: CandidateSet(size=2)
+```
+
+Only `CandidateError` is raised when the container itself is invalid — that is, when a non-iterable is passed as input.
+
+---
+
+### 42.5 — Monotonicity
+
+Let C_in be the input set of candidates.
+Let C_out be the CandidateSet output.
+
+Then:
+
+```
+C_out ⊆ C_in
+```
+
+The candidate layer is strictly reductive.
+It never expands the input set.
+
+This property is consistent with the monotonic filtering established in Chapter 39.5.
+Every layer in the pipeline can only remove — never add.
+
+---
+
+### 42.6 — Input Isolation
+
+The original input is never mutated.
+
+Each accepted candidate is stored as a defensive copy.
+
+`to_list()` returns independent copies — mutations to the returned list do not affect the CandidateSet.
+
+---
+
+### 42.7 — Orthogonality with Goal
+
+CandidateSet and Goal operate on different dimensions:
+
+```
+CandidateSet:
+    filters based on structure
+    input:  raw action dicts
+    output: structurally valid subset
+
+Goal:
+    evaluates based on state semantics
+    input:  state snapshot
+    output: bool
+```
+
+They are orthogonal and do not overlap in responsibility.
+
+The CandidateSet does not depend on Goal.
+The Goal does not depend on CandidateSet.
+
+However, they participate in the same pipeline.
+The output of CandidateSet may be consumed by subsequent layers where Goal evaluation occurs.
+
+Structural independence does not mean pipeline independence.
+
+---
+
+### 42.8 — Relationship to Adjacent Layers
+
+```
+Goal (Ch. 41)           — evaluates whether a state satisfies a condition
+CandidateSet (Ch. 42)   — holds the set of possible actions to consider
+Simulation (Ch. 43)     — evaluates candidates against goal and state
+ContinuumPort           — enforces admissibility and executes
+```
+
+The pipeline is:
+
+```
+UNTRUSTED INPUT → STRUCTURAL NORMALIZATION → SEMANTIC EVALUATION → EXECUTION
+                        ↑
+                  CandidateSet
+```
+
+The CandidateSet does not depend on Goal.
+The CandidateSet does not depend on ContinuumPort.
+
+It holds candidates. Nothing more.
+
+---
+
+### 42.9 — Failure Modes
+
+```
+CandidateError(INVALID_CANDIDATE_SET)  — non-iterable passed as input
+```
+
+`CandidateError` is distinct from all other layer errors:
+
+```
+CandidateError ≠ GoalError
+CandidateError ≠ GeometryError
+CandidateError ≠ AuthorityError
+CandidateError ≠ ExecutionError
+```
+
+Each error stays in its layer.
+
+---
+
+### 42.10 — Limits of the Candidate Layer
+
+The candidate layer cannot:
+
+- generate actions
+- validate semantic correctness
+- check geometry admissibility
+- evaluate goals
+- execute transitions
+- access the environment
+- bypass authority
+
+These are deliberate design decisions.
+
+The candidate layer is the boundary between external input and internal evaluation.
+It enforces only what can be enforced structurally.
+
+---
+
+### 42.11 — Correct Use of the Candidate Layer
+
+A system using the candidate layer is responsible for:
+
+1. Providing candidates from an external source — a model, a planner, a human, or a control plane.
+2. Treating the CandidateSet as a structured container, not as a guarantee of admissibility.
+3. Passing the CandidateSet to subsequent layers for further evaluation.
+4. Not assuming that a candidate in the set will execute successfully.
+
+The candidate layer normalizes what is provided.
+It does not validate what is intended.
+
+---
+
+### 42.12 — Closure
+
+A CandidateSet answers one question:
+
+> Which of these inputs are structurally valid candidates?
+
+It does not ask whether they are admissible.
+It does not ask whether they satisfy a goal.
+It does not ask what happens next.
+
+Those questions belong to subsequent layers.
+
+The candidate layer is bounded, passive, and non-authoritative by design.
+
+---
 
 ## Afterword — Where the Questions Came From
 
