@@ -7988,6 +7988,273 @@ The candidate layer is bounded, passive, and non-authoritative by design.
 
 ---
 
+## Chapter 43 — Simulation
+
+Simulation is a pure evaluation layer over hypothetical state transitions.
+
+It evaluates candidate actions against a goal by applying a provided transition function on a state snapshot.
+
+It does not execute actions.
+It does not modify real state.
+It does not access the environment.
+It does not enforce admissibility.
+
+---
+
+### 43.1 — Formal Definition
+
+Let:
+
+```
+S     = current state
+C     = CandidateSet = {a₁, a₂, ..., aₙ}
+G     = Goal
+apply : (state, action) → state_after
+```
+
+Then Simulation computes:
+
+```
+R = { a ∈ C | G(apply(S, a)) = True }
+```
+
+Simulation evaluates each candidate independently.
+
+No ordering is assumed.
+No interaction between candidates is modeled.
+
+---
+
+### 43.2 — External Transition Function
+
+Simulation does not define how actions transform state.
+
+It requires an external function:
+
+```
+apply(state, action) → state_after
+```
+
+Properties required (by contract):
+
+- pure — must not mutate input state
+- deterministic — same input produces same output
+- state-local — no external dependencies
+
+Simulation treats `apply` as opaque.
+
+It does not interpret actions.
+It does not validate semantics.
+It does not enforce correctness of transitions.
+
+---
+
+### 43.3 — Evaluation Process
+
+For each candidate `a ∈ C`:
+
+1. Create an isolated copy of state `S'`
+2. Compute hypothetical state:
+
+```
+S_after = apply(S', a)
+```
+
+3. Evaluate goal:
+
+```
+result = G(S_after)
+```
+
+4. Include candidate in output if:
+
+```
+result == True
+```
+
+Each evaluation is independent.
+
+State is re-initialized for every candidate.
+
+---
+
+### 43.4 — Purity and Isolation
+
+Simulation is a pure function:
+
+```
+simulate(C, G, S, apply) → subset of C
+```
+
+It guarantees:
+
+- original state `S` is never modified
+- candidates are not modified
+- no side effects occur
+- no external systems are accessed
+
+Any violation of these guarantees is a contract violation of `apply` or `Goal`.
+
+---
+
+### 43.5 — Non-Authority
+
+Simulation has no authority.
+
+A candidate that satisfies Goal:
+
+- is not executed
+- is not approved
+- is not guaranteed admissible
+
+A candidate that fails Goal:
+
+- is not blocked
+- is not rejected by the system
+
+Simulation produces advisory output only.
+
+---
+
+### 43.6 — Independence from Execution Layer
+
+Simulation does not know the execution layer exists.
+
+```
+simulation.py  — Simulation logic
+candidate.py   — CandidateSet
+goal.py        — Goal
+geometry.py    — admissibility (not used here)
+```
+
+There are no imports from:
+
+- `execution.geometry`
+- `execution.transaction`
+- `execution.environment`
+- `execution.authority`
+
+This separation is structural and tested.
+
+---
+
+### 43.7 — Monotonicity
+
+Let:
+
+```
+C_in  = input CandidateSet
+C_out = result of Simulation
+```
+
+Then:
+
+```
+C_out ⊆ C_in
+```
+
+Simulation is strictly reductive.
+
+It never creates new candidates.
+It only selects from existing ones.
+
+---
+
+### 43.8 — Failure Modes
+
+```
+SimulationLayerError(INVALID_CANDIDATES)    — input is not CandidateSet
+SimulationLayerError(INVALID_GOAL)          — goal is not Goal instance
+SimulationLayerError(INVALID_STATE)         — state is not dict
+SimulationLayerError(INVALID_APPLY)         — apply is not callable
+SimulationLayerError(APPLY_VIOLATION)       — apply raises or mutates state
+SimulationLayerError(APPLY_INVALID_RETURN)  — apply returned non-dict
+SimulationLayerError(GOAL_VIOLATION)        — goal raises during evaluation
+```
+
+`SimulationLayerError` is distinct from all other layer errors:
+
+```
+SimulationLayerError ≠ GoalError
+SimulationLayerError ≠ GeometryError
+SimulationLayerError ≠ AuthorityError
+SimulationLayerError ≠ ExecutionError
+```
+
+Errors remain within the simulation layer.
+
+---
+
+### 43.9 — Limits of Simulation
+
+Simulation cannot:
+
+- guarantee correctness of predicted outcomes
+- enforce admissibility
+- detect invalid action semantics
+- access real environment state
+- execute transitions
+- prevent divergence between simulated and real execution
+
+Simulation models hypothetical outcomes only.
+
+---
+
+### 43.10 — Assumption Boundary
+
+Simulation assumes:
+
+- `apply` correctly models state transitions
+- `apply` is pure and deterministic
+- `Goal` correctly evaluates state
+
+Violation of these assumptions is outside the responsibility of Simulation.
+
+Simulation does not validate the model.
+It uses the model.
+
+---
+
+### 43.11 — Relationship to Adjacent Layers
+
+```
+CandidateSet (Ch. 42) — structural normalization
+Simulation (Ch. 43)   — hypothetical evaluation
+ContinuumPort         — admissibility + execution
+```
+
+Pipeline:
+
+```
+UNTRUSTED INPUT
+    ↓
+CandidateSet
+    ↓
+Simulation
+    ↓
+ContinuumPort
+```
+
+Simulation sits between structure and execution.
+
+---
+
+### 43.12 — Closure
+
+Simulation answers one question:
+
+> If this action were applied, would the resulting state satisfy the goal?
+
+It does not ask:
+
+- whether the action is allowed
+- whether the transition is valid
+- whether execution will succeed
+
+Simulation is predictive, not authoritative.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
