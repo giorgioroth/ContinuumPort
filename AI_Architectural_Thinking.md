@@ -7493,6 +7493,263 @@ No other form of continuity is defined.
 
 ---
 
+## Chapter 41 — Goal
+
+A Goal is a pure function on state.
+
+It evaluates whether a given state snapshot satisfies a declared condition.
+It does not generate actions. It does not execute anything.
+It does not access the environment directly.
+It does not override geometry or authority.
+
+---
+
+### 41.1 — Formal Definition
+
+A Goal G is a function:
+
+```
+G : State → {True, False}
+```
+
+with the following properties:
+
+1. **Deterministic** — same state produces the same result, always
+2. **Pure** — evaluation does not mutate state
+3. **State-local** — no external dependencies at evaluation time
+4. **Non-authoritative** — cannot override geometry, authority, or constraints
+5. **Composable** — goals can be combined via AND / OR
+
+The output is advisory only.
+
+A Goal cannot force execution.
+A Goal cannot block execution.
+ContinuumPort remains the sole enforcement layer.
+
+---
+
+### 41.2 — Separation from the Execution Layer
+
+A Goal does not know the execution layer exists.
+
+```
+goal.py       — Goal definition and evaluation
+geometry.py   — admissibility of transitions
+capsule.py    — state transfer across sessions
+control_plane — orchestration and policy
+```
+
+There are no imports between `goal.py` and any of these modules.
+
+This separation is structural and tested.
+
+---
+
+### 41.3 — Goal Evaluation
+
+The `GoalEvaluator` enforces properties at evaluation time:
+
+```
+GoalEvaluator.evaluate(goal, state) → bool
+```
+
+Evaluation procedure:
+
+```
+1. Verify goal is a Goal instance
+2. Verify state is a dict
+3. Create defensive copy of state (deepcopy)
+4. Record canonical representation of original state
+5. Call goal.evaluate(state_copy)
+6. Verify state_copy was not mutated
+7. Verify original state was not mutated
+8. Verify return type is bool
+9. Return result
+```
+
+If any step fails, `GoalError` is raised.
+
+The evaluator does not interpret the result.
+It does not act on True or False.
+It returns the boolean and stops.
+
+---
+
+### 41.4 — Determinism
+
+Determinism is a **contract requirement**, not a property enforced at runtime.
+
+The `GoalEvaluator` does not attempt to detect non-determinism.
+
+Goals that depend on time, randomness, or external state may produce
+inconsistent results and are considered invalid by design, but are not
+prevented at evaluation time.
+
+This is a model limit, consistent with the execution model:
+only properties that can be structurally enforced are enforced.
+
+`NON_DETERMINISTIC_GOAL` exists as a failure reason — it is a contract violation,
+not an actively detected condition.
+
+---
+
+### 41.5 — State Isolation
+
+The evaluator provides a defensive copy of state to the goal.
+
+The goal never receives a reference to the original state.
+
+After evaluation, the evaluator verifies:
+
+```
+canonical(state_copy_after) == canonical(state_copy_before)
+canonical(original_state_after) == canonical(original_state_before)
+```
+
+If either check fails, `GoalError(SIDE_EFFECT_DURING_EVALUATION)` is raised.
+
+This treats the goal as potentially adversarial input — exactly as the
+execution model treats `A_untrusted`.
+
+---
+
+### 41.6 — Composition
+
+Goals compose via the `&` and `|` operators:
+
+```python
+g = BalancePositive() & StepsWithinBound()   # ConjunctiveGoal
+g = BalancePositive() | StepsWithinBound()   # DisjunctiveGoal
+```
+
+Composition rules:
+
+- Both operands must be `Goal` instances
+- `&` short-circuits: if left is False, right is not evaluated
+- `|` short-circuits: if left is True, right is not evaluated
+- Each operand is evaluated through `GoalEvaluator` — enforcement applies per-goal
+- Composed goals are themselves `Goal` instances and can be further composed
+
+Composition does not introduce authority.
+A composed goal is still advisory only.
+
+---
+
+### 41.7 — Failure Modes
+
+```
+GoalError(NON_DETERMINISTIC_GOAL)        — contract violation, not detected at runtime
+GoalError(STATE_EXTERNAL_DEPENDENCY)     — evaluation raised an unexpected exception
+GoalError(SIDE_EFFECT_DURING_EVALUATION) — goal mutated its input state
+GoalError(INVALID_COMPOSITION)           — operand is not a Goal instance
+GoalError(INVALID_GOAL_DEFINITION)       — non-callable, non-bool return, or invalid input
+```
+
+`GoalError` is distinct from all execution layer errors:
+
+```
+GoalError ≠ GeometryError
+GoalError ≠ AuthorityError
+GoalError ≠ ExecutionError
+GoalError ≠ CapsuleError
+GoalError ≠ ControlPlaneError
+```
+
+Each error stays in its layer.
+
+---
+
+### 41.8 — Non-Authority
+
+A satisfied goal has no effect on its own.
+An unsatisfied goal has no effect on its own.
+
+```python
+result = evaluator.evaluate(goal, state)
+# state is unchanged
+# nothing was executed
+# nothing was blocked
+```
+
+This is not a limitation. It is the design.
+
+The goal layer provides direction.
+The execution layer provides enforcement.
+These are not the same thing, and must not be conflated.
+
+---
+
+### 41.9 — Relationship to Volume I
+
+Volume I establishes what is **permitted**.
+Volume II establishes what is **desired**.
+
+These are orthogonal:
+
+```
+permitted ∧ desired   → candidate for execution
+permitted ∧ ¬desired  → legally executable, wrong direction
+¬permitted ∧ desired  → blocked regardless of goal
+¬permitted ∧ ¬desired → blocked
+```
+
+The execution model enforces permission.
+The goal layer evaluates desire.
+
+Neither overrides the other.
+
+---
+
+### 41.10 — Limits of the Goal Layer
+
+The goal layer cannot:
+
+- generate actions
+- filter actions
+- execute transitions
+- access the environment
+- override geometry
+- bypass authority
+- guarantee determinism of evaluation
+- detect all forms of external dependency
+
+These are deliberate design decisions.
+
+Adding any of these capabilities to the goal layer would couple evaluation
+to enforcement — destroying the separation that makes both layers reliable.
+
+---
+
+### 41.11 — Correct Use of the Goal Layer
+
+A system using the goal layer is responsible for:
+
+1. Defining goals as pure functions of state — no external dependencies.
+2. Using `GoalEvaluator` to evaluate goals, not calling `evaluate()` directly.
+3. Treating the boolean result as advisory — never as execution authorization.
+4. Passing goal results to higher-level systems that remain outside the execution layer.
+
+The goal layer evaluates what is declared.
+It does not reason about what was not declared.
+
+---
+
+### 41.12 — Closure
+
+A Goal answers one question:
+
+> Does this state satisfy a declared condition?
+
+It does not ask what to do about the answer.
+It does not ask who authorized the question.
+It does not ask what happens next.
+
+Those questions belong to subsequent layers.
+
+The goal layer is bounded, pure, and non-authoritative by design.
+
+---
+
 
 ## Afterword — Where the Questions Came From
 
