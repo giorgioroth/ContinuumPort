@@ -8334,7 +8334,7 @@ Policy contract (by contract, not enforced at runtime):
 3. **Non-mutating** — policy must not modify the candidate list
 4. **Returns one** — policy returns one candidate from C, or None
 
-Selection does not validate policy correctness beyond structural checks. A policy that violates its contract produces undefined selection behavior. This is a documented model limit.
+Selection does not validate policy correctness beyond structural checks. If the policy violates its contract, Selection provides no guarantees about the result. This is a documented model limit, not a defect to be patched at this layer.
 
 ---
 
@@ -8353,6 +8353,8 @@ Evaluation procedure:
 5. Call `policy(candidates_copy)`
 6. Verify return is dict or None
 7. Verify returned candidate is structurally identical to one element of C_in (by equality, not just by action type)
+
+Equality is defined as full key-value equivalence of the candidate dict. Subset equality and hash-based approximations are not sufficient.
 8. Return `SelectionResult(selected=chosen, skipped=remainder)`
 
 If any step fails, `SelectionError` is raised.
@@ -8425,7 +8427,7 @@ The selection layer provides a decision. The execution layer provides enforcemen
 
 ---
 
-## 44.9 — Built-in Policies
+### 44.9 — Built-in Policies
 
 Two minimal policies are provided:
 
