@@ -8255,6 +8255,294 @@ Simulation is predictive, not authoritative.
 
 ---
 
+## Chapter 44 — Selection
+
+Selection is the layer that chooses one candidate from a set of simulated admissible candidates.
+
+It is the first layer in the pipeline that must choose, not just filter.
+
+It does not generate actions. It does not execute actions. It does not evaluate goals. It does not enforce admissibility.
+
+It delegates the choice to an externally provided policy function.
+
+---
+
+### 44.1 — Formal Definition
+
+Let:
+
+```
+C     = finite collection of candidates (output of Simulation)
+P     = SelectionPolicy
+P : C → aᵢ | None
+```
+
+Selection is:
+
+```
+select(C, P) = P(C)
+```
+
+If P returns None, no candidate is selected.
+
+If C is empty, selection halts without calling P.
+
+The output is advisory only.
+
+Selection cannot force execution. Selection cannot block execution. ContinuumPort remains the sole enforcement layer.
+
+---
+
+### 44.2 — Separation from the Execution Layer
+
+Selection does not know the execution layer exists.
+
+```
+selection.py  — Selection logic
+simulation.py — hypothetical evaluation
+candidate.py  — CandidateSet
+goal.py       — Goal evaluation
+geometry.py   — admissibility (not used here)
+```
+
+There are no imports between `selection.py` and any of these modules.
+
+This separation is structural and tested.
+
+---
+
+### 44.3 — Policy Injection
+
+Selection has no default strategy.
+
+A caller that does not provide a policy cannot proceed.
+
+This is not an omission. It is a design decision.
+
+A default selection strategy is a hidden decision. Hidden decisions break auditability. The caller must declare how selection is performed.
+
+The policy is a callable:
+
+```
+policy(candidates: list[dict]) → dict | None
+```
+
+Policy contract (by contract, not enforced at runtime):
+
+1. **Deterministic** — same input produces same output
+2. **Non-executing** — policy must not execute actions
+3. **Non-mutating** — policy must not modify the candidate list
+4. **Returns one** — policy returns one candidate from C, or None
+
+Selection does not validate policy correctness beyond structural checks. A policy that violates its contract produces undefined selection behavior. This is a documented model limit.
+
+---
+
+### 44.4 — Selection Process
+
+```
+select(candidates, policy) → SelectionResult
+```
+
+Evaluation procedure:
+
+1. Verify candidates is a list of dicts
+2. Verify policy is callable
+3. If candidates is empty, return `SelectionResult(selected=None, skipped=[])`
+4. Provide defensive copy of candidates to policy
+5. Call `policy(candidates_copy)`
+6. Verify return is dict or None
+7. Verify returned candidate is structurally identical to one element of C_in (by equality, not just by action type)
+8. Return `SelectionResult(selected=chosen, skipped=remainder)`
+
+If any step fails, `SelectionError` is raised.
+
+The evaluator does not interpret the result. It does not act on the selection. It returns the result and stops.
+
+---
+
+### 44.5 — Input Isolation
+
+The policy receives a defensive copy of the candidate list.
+
+The policy never receives a reference to the original candidates.
+
+Mutations to the copy do not affect the original input.
+
+This treats the policy as potentially adversarial input — exactly as the execution model treats `A_untrusted`.
+
+---
+
+### 44.6 — Monotonicity
+
+Let `C_in` be the input candidates. Let `C_out` be the SelectionResult output.
+
+Then:
+
+```
+selected ∈ C_in  ∨  selected = None
+|{selected}| + |skipped| = |C_in|
+```
+
+Selection is strictly non-expansive. It never introduces new candidates. It only selects from existing ones.
+
+This property is consistent with the monotonic filtering established in §39.5. Every layer in the pipeline can only remove — never add.
+
+A policy that attempts to return a candidate not structurally identical to one element of the input is rejected with `POLICY_FOREIGN_RETURN`. Matching by action type alone is insufficient — two candidates with the same `type` but different fields are distinct candidates.
+
+---
+
+### 44.7 — Empty Candidates
+
+If the candidate list is empty, selection halts immediately.
+
+The policy is not called.
+
+The result is `SelectionResult(selected=None, skipped=[])`.
+
+This is not a failure. It is a defined outcome.
+
+An empty candidate set means simulation produced no candidates that satisfied the goal. There is nothing to select from. The system reports this accurately and stops.
+
+---
+
+### 44.8 — Non-Authority
+
+A selected candidate has no effect on its own. An unselected candidate has no effect on its own.
+
+```python
+result = selection.run(candidates, policy)
+# candidates are unchanged
+# nothing was executed
+# nothing was blocked
+```
+
+This is not a limitation. It is the design.
+
+The selection layer provides a decision. The execution layer provides enforcement. These are not the same thing, and must not be conflated.
+
+`SelectionResult` carries no authority to execute. It carries data — a plain dict — that subsequent layers may act upon.
+
+---
+
+## 44.9 — Built-in Policies
+
+Two minimal policies are provided:
+
+**`policy_first`**
+
+Selects the first candidate in the list. Deterministic. Depends on ordering of input. Ordering is the caller's responsibility.
+
+**`policy_none`**
+
+Always returns None. No candidate is selected. Useful for testing or when selection should explicitly produce no result.
+
+These are not defaults. They are explicit choices the caller must pass. No policy is assumed.
+
+---
+
+### 44.10 — Failure Modes
+
+```
+SelectionError(INVALID_CANDIDATES)    — candidates is not a list of dicts
+SelectionError(INVALID_POLICY)        — policy is not callable
+SelectionError(POLICY_VIOLATION)      — policy raised an exception
+SelectionError(POLICY_INVALID_RETURN) — policy returned non-dict, non-None
+SelectionError(POLICY_FOREIGN_RETURN) — policy returned candidate not in input
+```
+
+`SelectionError` is distinct from all other layer errors:
+
+```
+SelectionError ≠ GoalError
+SelectionError ≠ SimulationLayerError
+SelectionError ≠ CandidateError
+SelectionError ≠ GeometryError
+SelectionError ≠ AuthorityError
+SelectionError ≠ ExecutionError
+```
+
+Each error stays in its layer.
+
+---
+
+### 44.11 — Relationship to Adjacent Layers
+
+```
+Simulation (Ch. 43)   — hypothetical evaluation → accepted candidates
+Selection  (Ch. 44)   — chooses one from accepted candidates
+ContinuumPort         — admissibility + execution
+```
+
+Pipeline:
+
+```
+UNTRUSTED INPUT
+    ↓
+CandidateSet
+    ↓
+Simulation
+    ↓
+Selection
+    ↓
+ContinuumPort
+```
+
+Selection sits between evaluation and execution.
+
+The output of Simulation — the accepted set — is the input to Selection. Selection narrows that set to one. ContinuumPort then decides whether to execute it.
+
+Selection does not know whether ContinuumPort will accept the selected candidate. Volume I evaluates independently.
+
+---
+
+### 44.12 — Limits of the Selection Layer
+
+The selection layer cannot:
+
+- generate actions
+- evaluate goals
+- enforce admissibility
+- execute transitions
+- access the environment
+- override geometry
+- bypass authority
+- validate policy determinism
+- detect all forms of policy contract violation
+
+These are deliberate design decisions.
+
+Adding any of these capabilities to the selection layer would couple choice to enforcement — destroying the separation that makes both layers reliable.
+
+---
+
+### 44.13 — Correct Use of the Selection Layer
+
+A system using the selection layer is responsible for:
+
+- Providing candidates from the output of Simulation — not arbitrary external input.
+- Supplying an explicit policy — no default is assumed.
+- Treating the `SelectionResult` as advisory — never as execution authorization.
+- Passing the selected candidate to ContinuumPort for independent admissibility evaluation.
+
+The selection layer chooses what is provided. It does not validate what is intended. It does not guarantee that the selected candidate will execute successfully.
+
+---
+
+### 44.14 — Closure
+
+Selection answers one question:
+
+> Given these candidates, which one should proceed?
+
+It does not ask whether the candidate is allowed. It does not ask whether it will succeed. It does not ask what happens next.
+
+Those questions belong to subsequent layers.
+
+The selection layer is bounded, policy-driven, and non-authoritative by design.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
