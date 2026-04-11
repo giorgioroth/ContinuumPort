@@ -7681,8 +7681,10 @@ These are not the same thing, and must not be conflated.
 
 ### 41.9 — Relationship to Volume I
 
-Volume I establishes what is **permitted**.
-Volume II establishes what is **desired**.
+### 41.9 — Relationship to Adjacent Chapters
+
+Chapters 27–40 establish what is **permitted.**
+Chapters 41–45 establish what is **desired.**
 
 These are orthogonal:
 
@@ -8775,6 +8777,557 @@ The execution kernel enforces what is possible.
 Neither overrides the other.
 
 627 tests. 0 failures.
+
+
+<img width="2404" height="1282" alt="image" src="https://github.com/user-attachments/assets/f6196dee-d310-4497-8404-6016dd6baa63" />
+
+---
+
+## Chapter 46 — Signer and Authority
+
+A Signer defines who is allowed to propose actions.
+
+Authority defines what actions that signer is allowed to propose.
+
+This layer establishes origin and permission.
+It does not evaluate actions.
+It does not execute actions.
+It does not enforce admissibility.
+
+---
+
+### 46.1 — Formal Definition
+
+Let:
+
+```
+s ∈ Signers
+A_untrusted = set of proposed actions
+```
+
+Each action is associated with a signer:
+
+```
+a = (s, payload)
+```
+
+Authority is a mapping:
+
+```
+Authority : Signer → P(ActionType)
+```
+
+where:
+
+```
+ActionType = a["type"]
+```
+
+An action is authority-valid if:
+
+```
+ActionType ∈ Authority(s)
+```
+
+If a signer is not present in Authority:
+
+```
+Authority(s) = ∅
+```
+
+Fail-closed.
+
+---
+
+### 46.2 — Separation from Other Layers
+
+The authority layer is independent of all other layers.
+
+```
+signer.py     — identity and signature verification
+authority.py  — authority mapping
+candidate.py  — structural normalization
+goal.py       — goal evaluation
+simulation.py — hypothetical evaluation
+selection.py  — policy choice
+```
+
+There are no imports between `authority.py` and any advisory or execution modules.
+
+Authority does not know:
+
+* whether an action satisfies a goal
+* whether an action will be selected
+* whether an action will execute
+
+It evaluates only origin and permission.
+
+---
+
+### 46.3 — Signer Identity
+
+A signer is an identity bound to a verification mechanism.
+
+Minimal structure:
+
+```
+Signer:
+    id: str
+    verification: function(payload, signature) → bool
+```
+
+The verification mechanism is external to this layer.
+
+The authority layer does not define cryptography.
+It consumes a verification result.
+
+An action with an invalid signature is rejected before authority evaluation.
+
+---
+
+### 46.4 — Authority Binding
+
+Authority is explicitly configured.
+
+```
+Authority(s) = {t₁, t₂, ..., tₙ}
+```
+
+No implicit permissions exist.
+
+There is no wildcard.
+There is no inheritance.
+There is no default allow.
+
+If an action type is not explicitly listed, it is not allowed.
+
+---
+
+### 46.5 — Fail-Closed Behavior
+
+If a signer is unknown:
+
+```
+Authority(s) = ∅
+```
+
+If an action type is not declared:
+
+```
+a is rejected
+```
+
+If authority configuration is missing:
+
+```
+no actions are allowed
+```
+
+All undefined states resolve to no permission.
+
+---
+
+### 46.6 — Non-Escalation of Authority
+
+Authority is immutable during execution.
+
+No action can:
+
+* modify Authority mapping
+* grant new permissions to a signer
+* alter its own permission surface
+* impersonate another signer
+
+Formally:
+
+```
+execute(a) cannot change Authority(s)
+```
+
+Authority is an input to the system, not a state variable.
+
+---
+
+### 46.7 — Stateless Evaluation
+
+Authority evaluation depends only on:
+
+```
+(s, a["type"])
+```
+
+It does not depend on:
+
+* past actions
+* ordering of actions
+* frequency of requests
+* system history
+
+```
+authority_check(s, a) → {allowed, rejected}
+```
+
+is a pure function.
+
+---
+
+### 46.8 — Independence from Execution
+
+Authority validation does not imply execution.
+
+```
+allowed_by_authority(a) ≠ executable(a)
+```
+
+An authority-valid action may still be rejected by:
+
+* domain constraints
+* geometry constraints
+* state conditions
+
+Authority answers only:
+
+> Is this signer allowed to propose this type of action?
+
+---
+
+### 46.9 — Failure Modes
+
+```
+AuthorityError(INVALID_SIGNATURE) — signature verification failed
+AuthorityError(UNKNOWN_SIGNER)    — signer not in authority mapping
+AuthorityError(UNAUTHORIZED_TYPE) — action type not permitted
+```
+
+`AuthorityError` is distinct from all other layer errors:
+
+```
+AuthorityError ≠ CandidateError
+AuthorityError ≠ GoalError
+AuthorityError ≠ SimulationLayerError
+AuthorityError ≠ SelectionError
+AuthorityError ≠ GeometryError
+AuthorityError ≠ ExecutionError
+```
+
+Each error remains confined to its layer.
+
+---
+
+### 46.10 — Limits of the Authority Layer
+
+The authority layer cannot:
+
+* validate action structure
+* evaluate goals
+* simulate outcomes
+* enforce admissibility
+* execute actions
+* access environment state
+* resolve conflicts between actions
+
+These are deliberate design constraints.
+
+Authority defines permission, not correctness.
+
+---
+
+### 46.11 — Correct Use of the Authority Layer
+
+A system using the authority layer is responsible for:
+
+1. Verifying signatures before authority evaluation.
+2. Providing an explicit Authority mapping.
+3. Treating unknown signers as having zero permissions.
+4. Passing only authority-valid actions to subsequent layers.
+5. Not assuming authority implies execution.
+
+Authority is a gate on origin and scope.
+
+It is not a guarantee of success.
+
+---
+
+### 46.12 — Closure
+
+The authority layer answers one question:
+
+> Who is allowed to propose this action?
+
+It does not ask whether the action is valid.
+It does not ask whether the action is desirable.
+It does not ask whether the action will execute.
+
+Those questions belong to other layers.
+
+Authority defines permission.
+Nothing more.
+
+---
+
+## Chapter 47 — Pipeline Integrity
+
+The advisory pipeline produces a selection.
+The execution kernel enforces admissibility.
+
+Between them is a boundary.
+
+This chapter defines what that boundary guarantees, what it does not guarantee, and what can go wrong at the point of transfer.
+
+---
+
+### 46.1 — The Boundary Is Not a Trust Escalation
+
+When the advisory pipeline completes, it produces at most one candidate:
+
+```
+SelectionResult.selected → dict | None
+```
+
+That candidate crosses the boundary into the execution kernel as untrusted input.
+
+The execution kernel does not inherit the advisory pipeline's evaluation.
+
+It does not know:
+
+- that the candidate satisfied a goal
+- that simulation ran
+- that a policy chose it
+- that any evaluation occurred at all
+
+The kernel re-evaluates from scratch:
+
+```
+AuthorityGate      — verifies origin
+DomainFilter       — verifies scope
+Decision           — verifies admissibility against current state
+TransactionManager — verifies geometry and atomicity
+```
+
+The hand-off is not approval. It is submission.
+
+---
+
+### 46.2 — What Integrity Means Here
+
+Pipeline integrity is not a property of the advisory pipeline alone.
+
+It is a property of the full system from untrusted input to committed state transition.
+
+A pipeline has integrity if:
+
+- no advisory output bypasses kernel evaluation
+- no advisory result bypasses execution kernel evaluation
+- no state changes occur as a side effect of advisory evaluation
+- the boundary carries data, not authority
+
+Integrity fails if any of these conditions are violated — including through omission, shortcut, or assumed trust at the boundary.
+
+---
+
+### 46.3 — Failure at the Boundary
+
+Three failure modes are specific to the boundary between advisory and execution.
+
+**Trust escalation**
+
+The execution kernel trusts advisory results and skips its own evaluation.
+
+This is the most dangerous form of boundary failure.
+
+The advisory pipeline is not an authority layer. It is an evaluation layer. Its output is a plain dict.
+
+A kernel that promotes advisory output to authorized input has collapsed the separation between evaluation and enforcement.
+
+**State mutation during advisory evaluation**
+
+A goal, simulation, or selection step modifies state as a side effect.
+
+Chapters 41–44 guarantee this cannot happen within their own layers.
+
+It can still happen if the caller passes a live environment reference instead of a snapshot, or if the `apply` function in Simulation has access to mutable external state.
+
+The boundary cannot enforce what happens before it. The caller is responsible for providing clean inputs.
+
+**Metadata leakage**
+
+Advisory metadata — goal satisfaction status, simulation confidence, selection policy identity — accompanies the candidate across the boundary and influences kernel evaluation.
+
+This is a subtle form of coupling.
+
+The kernel must receive only the candidate dict. Nothing else from the advisory pipeline should be visible to or relied upon by the kernel.
+
+---
+
+### 46.4 — The Role of the apply Function
+
+Simulation requires an external transition function:
+
+```
+apply(state, action) → state_after
+```
+
+This function is the point of greatest divergence risk in the full pipeline.
+
+If `apply` does not faithfully model real execution semantics, Simulation produces results that do not predict what the execution kernel will do.
+
+A candidate accepted by Simulation may be rejected by the kernel.
+
+A candidate rejected by Simulation may have been accepted by the kernel.
+
+This divergence is not detectable by either pipeline.
+
+It is a model limit, not a defect.
+
+**Consequence for pipeline integrity:**
+
+Pipeline integrity does not require that advisory and execution pipelines agree.
+
+It requires that they remain independent — so that disagreement is resolved by the kernel, not hidden by the advisory layer.
+
+If advisory evaluation were authoritative, divergence between `apply` and real execution would be a security failure.
+
+Because advisory evaluation is not authoritative, divergence is only an efficiency concern: the system selected a candidate that was then rejected.
+
+Separation is what makes this safe.
+
+---
+
+### 46.5 — Monotonicity Across Both Pipelines
+
+The advisory pipeline satisfies monotonic reduction:
+
+```
+|selected| ≤ |accepted| ≤ |candidates| ≤ |input|
+```
+
+The execution kernel satisfies monotonic filtering:
+
+```
+A′ ⊆ A_domain ⊆ A_considered ⊆ A_untrusted
+```
+
+Both pipelines reduce. Neither expands.
+
+The full system from untrusted input to committed state satisfies:
+
+```
+|committed| ≤ 1
+|submitted to kernel| ≤ |selected| ≤ |input|
+```
+
+No execution can exceed what was submitted.
+No submission can exceed what was selected.
+No selection can exceed what was simulated.
+No simulation can exceed what was structured.
+
+The input set defines the upper bound of all effects.
+
+---
+
+### 46.6 — What Survives the Boundary
+
+Exactly one thing crosses from advisory to execution:
+
+```
+{"type": ..., ...}  — a plain dict
+```
+
+or nothing.
+
+What does not cross:
+
+- goal evaluation result
+- simulation accepted/rejected partition
+- selection policy identity
+- advisory error state
+- any reference to the state snapshot used in simulation
+
+The boundary is a data transfer, not a context transfer.
+
+This is by design.
+
+If context crossed the boundary, the execution kernel would need to reason about advisory history.
+
+Advisory history is not part of the execution model.
+
+---
+
+### 46.7 — Failure Is Informative, Not Catastrophic
+
+A candidate rejected by the execution kernel after passing the advisory pipeline is not a system failure.
+
+It is the system operating correctly.
+
+The advisory pipeline evaluated desirability.
+The execution kernel evaluated admissibility.
+They disagreed.
+
+The kernel's answer is authoritative.
+
+This outcome reveals one of two things:
+
+1. The `apply` function in Simulation does not model execution semantics accurately.
+2. State changed between advisory evaluation and kernel evaluation.
+
+Both are informative. Neither requires a correction to the pipeline structure.
+
+The system should surface this outcome — it is useful signal for the control plane.
+
+It should not suppress it.
+
+---
+
+### 46.8 — Limits of Pipeline Integrity
+
+Pipeline integrity as defined here cannot guarantee:
+
+- that `apply` matches execution semantics
+- that state is identical at advisory time and kernel time
+- that the policy chose the optimal candidate
+- that goal satisfaction implies correct intent
+- that the selected candidate will be admitted
+
+These are documented limits inherited from the individual layers.
+
+Pipeline integrity guarantees only structural properties:
+
+- no state mutation during advisory evaluation
+- no authority escalation at the boundary
+- no metadata leakage from advisory to execution
+- monotonic reduction holds across both pipelines
+
+---
+
+### 46.9 — Correct Integration
+
+A system integrating both pipelines is responsible for:
+
+1. Providing a state snapshot to advisory evaluation — not a live environment reference.
+2. Providing an `apply` function that faithfully models execution semantics.
+3. Passing only the selected candidate dict to the execution kernel — no advisory context.
+4. Treating kernel rejection of an advisory-accepted candidate as informative signal, not system failure.
+5. Not caching or reusing advisory results across cycles — each cycle evaluates independently.
+
+The advisory pipeline does not replace the execution kernel.
+
+It narrows what the kernel is asked to evaluate.
+
+---
+
+### 46.10 — Closure
+
+Pipeline integrity is the property that ensures the advisory and execution pipelines remain structurally independent while composing correctly.
+
+The advisory pipeline answers: what is worth attempting?
+
+The execution kernel answers: what is permitted to occur?
+
+Neither question subsumes the other.
+
+A system with pipeline integrity does not trust advisory results.
+
+It uses them.
 
 ---
 
