@@ -7679,8 +7679,6 @@ These are not the same thing, and must not be conflated.
 
 ---
 
-### 41.9 — Relationship to Volume I
-
 ### 41.9 — Relationship to Adjacent Chapters
 
 Chapters 27–40 establish what is **permitted.**
@@ -9116,7 +9114,7 @@ This chapter defines what that boundary guarantees, what it does not guarantee, 
 
 ---
 
-### 46.1 — The Boundary Is Not a Trust Escalation
+### 47.1 — The Boundary Is Not a Trust Escalation
 
 When the advisory pipeline completes, it produces at most one candidate:
 
@@ -9148,7 +9146,7 @@ The hand-off is not approval. It is submission.
 
 ---
 
-### 46.2 — What Integrity Means Here
+### 47.2 — What Integrity Means Here
 
 Pipeline integrity is not a property of the advisory pipeline alone.
 
@@ -9156,7 +9154,7 @@ It is a property of the full system from untrusted input to committed state tran
 
 A pipeline has integrity if:
 
-- no advisory output bypasses kernel evaluation
+- no candidate executes without passing through both pipelines
 - no advisory result bypasses execution kernel evaluation
 - no state changes occur as a side effect of advisory evaluation
 - the boundary carries data, not authority
@@ -9165,7 +9163,7 @@ Integrity fails if any of these conditions are violated — including through om
 
 ---
 
-### 46.3 — Failure at the Boundary
+### 47.3 — Failure at the Boundary
 
 Three failure modes are specific to the boundary between advisory and execution.
 
@@ -9199,7 +9197,7 @@ The kernel must receive only the candidate dict. Nothing else from the advisory 
 
 ---
 
-### 46.4 — The Role of the apply Function
+### 47.4 — The Role of the apply Function
 
 Simulation requires an external transition function:
 
@@ -9233,7 +9231,7 @@ Separation is what makes this safe.
 
 ---
 
-### 46.5 — Monotonicity Across Both Pipelines
+### 47.5 — Monotonicity Across Both Pipelines
 
 The advisory pipeline satisfies monotonic reduction:
 
@@ -9265,7 +9263,7 @@ The input set defines the upper bound of all effects.
 
 ---
 
-### 46.6 — What Survives the Boundary
+### 47.6 — What Survives the Boundary
 
 Exactly one thing crosses from advisory to execution:
 
@@ -9293,7 +9291,7 @@ Advisory history is not part of the execution model.
 
 ---
 
-### 46.7 — Failure Is Informative, Not Catastrophic
+### 47.7 — Failure Is Informative, Not Catastrophic
 
 A candidate rejected by the execution kernel after passing the advisory pipeline is not a system failure.
 
@@ -9318,7 +9316,7 @@ It should not suppress it.
 
 ---
 
-### 46.8 — Limits of Pipeline Integrity
+### 47.8 — Limits of Pipeline Integrity
 
 Pipeline integrity as defined here cannot guarantee:
 
@@ -9339,7 +9337,7 @@ Pipeline integrity guarantees only structural properties:
 
 ---
 
-### 46.9 — Correct Integration
+### 47.9 — Correct Integration
 
 A system integrating both pipelines is responsible for:
 
@@ -9355,7 +9353,7 @@ It narrows what the kernel is asked to evaluate.
 
 ---
 
-### 46.10 — Closure
+### 47.10 — Closure
 
 Pipeline integrity is the property that ensures the advisory and execution pipelines remain structurally independent while composing correctly.
 
