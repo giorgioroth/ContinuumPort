@@ -9918,6 +9918,270 @@ They hold because of what the architecture prevents.
 
 ---
 
+## Chapter 50 — Conformance and Semantic Alignment
+
+The system defines two distinct transition functions:
+
+    f(s, a)  — simulated transition, used by the advisory pipeline
+    F(s, a)  — execution transition, enforced by the kernel
+
+This chapter defines what alignment between these functions means,
+how divergence is classified, and how the system behaves under
+misalignment.
+
+### 50.1 — The Two Transitions
+
+The advisory pipeline (Ch. 41–45) evaluates actions by applying
+a caller-provided transition function:
+
+    f : (State, Action) → State
+
+The execution kernel (Ch. 27–39) applies actions through the
+capability and transaction layer:
+
+    F : (State, Action) → State | ⊥
+
+F may reject: a geometry violation, TOCTOU drift, or authority failure
+produces ⊥ (no state transition). f has no mechanism to produce ⊥ —
+it returns a state in all cases.
+
+There is no inherent guarantee that f(s, a) = F(s, a).
+
+This gap is the subject of this chapter.
+
+### 50.2 — Semantic Alignment
+
+Alignment is defined over observable, canonical state:
+
+    aligned(s, a) ⟺ canonical(f(s, a)) = canonical(F(s, a))
+
+Where canonical is a normalization function that removes key-ordering
+variance and representation differences while preserving all state
+semantics. The same canonical function is used for state hashing
+throughout the system (Ch. 39.1, Appendix A).
+
+Alignment is defined over pairs (s, a), not globally. f may be aligned
+for most (s, a) pairs and diverge on a specific combination.
+
+### 50.3 — Conformance Requirement
+
+f is conformant to F if:
+
+    f ⊑ F
+
+Meaning:
+
+    ∀ s, a : aligned(s, a)
+
+A conformant f does not produce effects that F would not produce,
+and does not omit effects that F would produce.
+
+Conformance is a property of the caller-provided apply function,
+not of the advisory pipeline itself. The pipeline enforces isolation,
+purity, and determinism of f (Ch. 43). It does not enforce that f
+models F correctly. That is the caller's responsibility.
+
+### 50.4 — Sources of Divergence
+
+Divergence between f and F may arise from:
+
+- incomplete apply implementation (missing field updates)
+- capability behavior not modeled in simulation (e.g. append semantics)
+- implicit state changes during execution not present in apply
+- external side effects that F commits but f cannot see
+- non-deterministic execution paths introduced by external systems
+
+These sources are not detectable by the advisory pipeline.
+The pipeline treats f as opaque (Ch. 43.2).
+
+### 50.5 — Divergence Classification
+
+Three classes of divergence, ordered by consequence:
+
+**D1 — False Acceptance**
+
+    f(s, a) → admissible state
+    F(s, a) → ⊥
+
+Simulation accepts. Execution rejects.
+
+Consequence: wasted evaluation, no state change. Safe.
+The execution kernel catches this and the system halts cleanly.
+
+**D2 — False Rejection**
+
+    f(s, a) → inadmissible state
+    F(s, a) → valid state
+
+Simulation rejects. Execution would have accepted.
+
+Consequence: lost opportunity. Safe.
+The candidate is not selected and not submitted to the kernel.
+
+**D3 — Semantic Mismatch**
+
+    f(s, a) → s'
+    F(s, a) → s''
+    canonical(s') ≠ canonical(s'')
+
+Both produce a state, but different states.
+
+Consequence: goal evaluation and selection operate on incorrect
+predictions. The selected candidate may satisfy the goal under f
+but produce a different state under F. This is the most consequential
+divergence class.
+
+D3 does not compromise safety. The execution kernel still enforces
+geometry, authority, and atomicity under F. But it degrades the
+usefulness of the advisory pipeline — the system commits a state
+that the goal was not evaluated against.
+
+### 50.6 — Safety Under Divergence
+
+Divergence does not affect execution correctness.
+
+Under any divergence class:
+
+    execute(a) ⇔ ∀ l ∈ L : passes_l(a)
+
+This is the conjunction property from Ch. 49.3. It depends only on F,
+not on f. The advisory pipeline does not participate in enforcement.
+
+Divergence degrades advisory quality. It does not weaken the invariants
+established in Ch. 49.8.
+
+### 50.7 — F as the Single Source of Truth
+
+Execution defines state transition semantics.
+
+The correct construction of f is:
+
+    f(s, a) := simulate(F)(s, a)
+
+Where simulate(F) is a projection of the execution path that
+returns the resulting state without committing.
+
+The incorrect construction is:
+
+    f := independent implementation with duplicated logic
+
+An independent implementation introduces a parallel semantic definition.
+Divergence between two independent implementations is structurally
+guaranteed over time. A projection of F is not a second implementation —
+it is the same implementation run without side effects.
+
+Where the execution kernel provides a dry-run path (see §50.8),
+that path is the preferred source for f.
+
+### 50.8 — Conformance Testing
+
+Conformance between f and F can be verified empirically for a given
+set of (s, a) pairs:
+
+    For each (s, a):
+        s₀      = snapshot(s)
+        s_sim   = f(copy(s₀), a)
+        s_exec  = F_dry_run(s₀, a)
+
+        assert canonical(s_sim) == canonical(s_exec)
+
+Where F_dry_run executes the full capability and transaction path
+without committing the result to the environment.
+
+Conformance tests provide coverage, not proof. They establish that
+f and F agree on the tested pairs. Untested pairs may still diverge.
+
+The test structure mirrors the advisory pipeline's own isolation
+guarantees: snapshot before, comparison after, no mutation of the
+baseline.
+
+### 50.9 — Canonicalization Requirements
+
+The canonical function used for alignment evaluation must satisfy:
+
+- deterministic: same state always produces same representation
+- complete: no state information is lost
+- stable: behavior does not change across cycles or sessions
+- consistent: the same function used for state hashing (Ch. 39.1)
+
+The last requirement is important. If alignment uses a different
+canonical function than state hashing, drift may be masked by
+representation differences that the hash would detect and alignment
+would not.
+
+### 50.10 — Interaction with Failure Composition
+
+Semantic drift (D1, D2, D3) does not alter the failure composition
+properties established in Ch. 49.
+
+Specifically:
+
+- I1–I7 (Ch. 49.8) hold regardless of divergence between f and F
+- Monotonic failure propagation (Ch. 49.5) is unaffected
+- Atomic failure closure (Ch. 49.7) applies to F, not f
+
+Drift is an advisory property. It operates above the enforcement
+boundary. The enforcement boundary remains closed under drift.
+
+### 50.11 — Responsibility Partition
+
+The execution model guarantees:
+
+- enforcement of all constraints under F
+- atomic and deterministic execution
+- independence from f correctness
+
+The advisory pipeline assumes:
+
+- f approximates F sufficiently to make goal evaluation meaningful
+
+The control plane is responsible for:
+
+- monitoring alignment between f and F
+- reacting to persistent D3 divergence
+- updating f when F semantics change
+
+This partition follows the general model established in Ch. 38:
+the execution model enforces, the control plane decides.
+
+### 50.12 — Non-Guarantees
+
+The system does not guarantee:
+
+- perfect alignment between f and F
+- detection of all divergence instances
+- equivalence for non-observable side effects
+- correctness of external systems invoked by F
+- that conformance tests cover all (s, a) pairs
+
+Alignment is verifiable on tested pairs. It is not provable in general
+without a formal equivalence proof between f and F — which requires
+f to be derived from F, not defined independently.
+
+### 50.13 — Closure
+
+The system separates what is evaluated from what is enforced.
+
+This separation is necessary for the advisory pipeline to operate
+without authority. It is also the source of the alignment requirement:
+when evaluation and enforcement are separate, their agreement cannot
+be assumed.
+
+Simulation proposes. Execution decides.
+
+Alignment is desirable. It is not required for safety.
+
+Safety does not depend on f being correct.
+
+It depends on F being constrained.
+
+The system does not assume that its predictions are accurate.
+
+It ensures that inaccurate predictions cannot produce unauthorized
+state transitions.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
