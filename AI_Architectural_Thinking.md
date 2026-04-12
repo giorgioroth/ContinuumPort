@@ -8545,7 +8545,7 @@ The selection layer is bounded, policy-driven, and non-authoritative by design.
 
 ---
 
-# Chapter 45 — Pipeline Integration
+## Chapter 45 — Pipeline Integration
 
 The advisory pipeline is complete.
 
@@ -8553,7 +8553,7 @@ Four layers. One direction. No authority.
 
 ---
 
-## 45.1 — What the Pipeline Is
+### 45.1 — What the Pipeline Is
 
 Chapters 41–44 defined four independent layers.
 
@@ -8574,7 +8574,7 @@ Each layer is independent. Each layer can only remove. None can add.
 
 ---
 
-## 45.2 — Monotonicity Across the Pipeline
+### 45.2 — Monotonicity Across the Pipeline
 
 The pipeline satisfies a single structural invariant across all four layers:
 
@@ -8596,7 +8596,7 @@ This property mirrors the monotonic filtering of the execution kernel (§39.5), 
 
 ---
 
-## 45.3 — Composition Without Coupling
+### 45.3 — Composition Without Coupling
 
 The four layers compose without importing from each other.
 
@@ -8613,7 +8613,7 @@ This is the property that makes the pipeline testable in isolation and composabl
 
 ---
 
-## 45.4 — The Hand-Off Boundary
+### 45.4 — The Hand-Off Boundary
 
 The most important boundary in this pipeline is not between its own layers.
 
@@ -8650,7 +8650,7 @@ The hand-off is not a trust escalation.
 
 ---
 
-## 45.5 — Separation of Concern Across Pipelines
+### 45.5 — Separation of Concern Across Pipelines
 
 The execution kernel pipeline:
 
@@ -8698,7 +8698,7 @@ They do not substitute for each other.
 
 ---
 
-## 45.6 — What the Integration Tests Verify
+### 45.6 — What the Integration Tests Verify
 
 The test suite (`test_ch45_pipeline.py`) derives directly from the pipeline contract. Each test maps to a specific property.
 
@@ -8718,7 +8718,7 @@ The test suite (`test_ch45_pipeline.py`) derives directly from the pipeline cont
 
 ---
 
-## 45.7 — The Role of Non-Guarantee Tests
+### 45.7 — The Role of Non-Guarantee Tests
 
 Most test suites test what a system does.
 
@@ -8739,7 +8739,7 @@ A system that knows its limits is more trustworthy than one that does not.
 
 ---
 
-## 45.8 — Explicit Non-Guarantees
+### 45.8 — Explicit Non-Guarantees
 
 The pipeline does not guarantee:
 
@@ -8757,7 +8757,7 @@ These are not omissions. They follow directly from the layered design:
 
 ---
 
-## 45.9 — Closure
+### 45.9 — Closure
 
 Chapters 41–45 are complete.
 
@@ -9370,6 +9370,276 @@ Neither question subsumes the other.
 A system with pipeline integrity does not trust advisory results.
 
 It uses them.
+
+---
+
+## Chapter 48 — Threat Model
+
+The system is designed under adversarial assumptions.
+
+Every external input is untrusted.
+Every callable is potentially malicious.
+Every boundary is a point of attack.
+
+This chapter defines the attack surface, the defenses enforced by each layer, and the residual risks that remain by design.
+
+---
+
+### 48.1 — Threat Model Scope
+
+The system assumes an adversary capable of:
+
+- submitting arbitrary action payloads
+- forging or replaying requests
+- attempting state mutation outside execution
+- exploiting inconsistencies between layers
+- abusing volume, timing, or ordering
+
+The adversary does not have:
+
+- direct write access to execution state
+- ability to modify Authority or Domain configuration
+- ability to bypass the execution kernel
+
+All defenses are evaluated under these constraints.
+
+---
+
+### 48.2 — Attack Surface Overview
+
+The system exposes four primary attack surfaces:
+
+```
+1. Input Surface       — untrusted action submission
+2. Advisory Surface    — evaluation pipeline (Goal, Simulation, Selection)
+3. Boundary Surface    — hand-off between advisory and execution
+4. Execution Surface   — enforcement pipeline (Authority, Domain, Geometry)
+```
+
+Each surface is independent.
+
+A successful attack must either bypass all relevant layers, or exploit a property not enforced by any layer.
+
+---
+
+### 48.3 — Input Surface Attacks
+
+**Attack Class: Malformed or Adversarial Input**
+
+Examples: non-dict payloads, missing or empty `"type"`, oversized or flooded candidate sets, structurally valid but semantically meaningless actions.
+
+**Defense: CandidateSet (Ch. 42)**
+
+```
+C ⊆ Input
+```
+
+Structural validation only. Silent filtering of invalid entries. No expansion of input.
+
+**Residual Risk:**
+
+Structurally valid but malicious actions pass through. Semantic correctness is not enforced at this layer. This is intentional.
+
+---
+
+### 48.4 — Identity and Authority Attacks
+
+**Attack Class: Impersonation / Unauthorized Actions**
+
+Examples: forging signer identity in payload, replaying signed requests, submitting actions outside declared authority.
+
+**Defense: Signer + Authority (Ch. 46)**
+
+```
+verify_signature → extract_signer → authority_check
+```
+
+Signer is derived from signature, not payload. Fail-closed authority mapping. Unauthorized action types are rejected before any evaluation occurs.
+
+**Residual Risk:**
+
+Replay attacks across cycles (no nonce enforcement at this layer). Compromised signer keys. These are explicitly out of scope for the engine layer.
+
+---
+
+### 48.5 — Advisory Surface Attacks
+
+**Attack Class: Evaluation Manipulation**
+
+Examples: malicious Goal function, adversarial `apply` function, policy that selects harmful candidates, mutation of state during evaluation.
+
+**Defense: Advisory Isolation (Ch. 41–44)**
+
+Defensive copies of state and candidates at every evaluation step. Mutation detection after evaluation. No authority to execute — advisory output is not trusted by the execution kernel.
+
+**Key Property:**
+
+```
+advisory_output ≠ execution
+```
+
+**Residual Risk:**
+
+Incorrect evaluation due to faulty Goal or `apply`. Selection of suboptimal or harmful candidate. These do not compromise safety — they affect only efficiency. The execution kernel re-evaluates independently.
+
+---
+
+### 48.6 — Boundary Attacks
+
+**Attack Class: Trust Escalation**
+
+Examples: execution kernel trusting advisory results, metadata leakage influencing execution, skipping enforcement based on prior evaluation.
+
+**Defense: Strict Boundary (Ch. 45–47)**
+
+```
+input_to_kernel = plain dict | None
+```
+
+No metadata crosses the boundary. Advisory results are not trusted. The kernel re-evaluates from scratch: AuthorityGate → DomainFilter → Decision → TransactionManager.
+
+**Residual Risk:**
+
+Incorrect system integration outside the defined model. This is a system integration failure, not a model failure.
+
+---
+
+### 48.7 — Execution Surface Attacks
+
+**Attack Class: Unauthorized State Transition**
+
+Examples: bypassing domain constraints, violating geometry rules, TOCTOU (time-of-check to time-of-use), partial state commits.
+
+**Defense: Execution Kernel (Volume I)**
+
+```
+SaturationGate       — bounded intake (Ch. 33)
+DomainFilter         — scope restriction (Ch. 35)
+Decision             — admissibility (Ch. 31)
+TransactionManager   — atomic commit + rollback (Ch. 27)
+```
+
+Properties enforced: atomicity, state-local constraints, divergence collapse, no partial execution.
+
+**Residual Risk:**
+
+Incorrect geometry definitions. Misconfigured domain constraints. The kernel enforces rules. It does not validate their correctness.
+
+---
+
+### 48.8 — Cross-Layer Attacks
+
+**Attack Class: Inconsistency Exploitation**
+
+Examples: Simulation accepts, kernel rejects. Goal satisfied under incorrect assumptions. `apply` semantics diverge from real execution semantics.
+
+**Defense: Layer Independence**
+
+No layer trusts another.
+
+```
+evaluation ≠ enforcement
+```
+
+Disagreement is resolved by the execution kernel. The kernel's answer is authoritative.
+
+**Residual Risk:**
+
+Wasted computation. Degraded efficiency. Not a security failure.
+
+---
+
+### 48.9 — Denial of Service
+
+**Attack Class: Resource Exhaustion**
+
+Examples: flooding candidate sets, repeated cycle submissions, expensive evaluation functions.
+
+**Defense:**
+
+```
+SaturationGate (Ch. 33)  — limits actions per cycle, O(1) rejection cost
+DomainFilter   (Ch. 35)  — further reduces A_considered before decision
+```
+
+Both defenses are part of the execution kernel, not the advisory pipeline. They operate before any semantic evaluation occurs.
+
+**Residual Risk:**
+
+Repeated valid cycles consuming execution resources. External resource exhaustion (network, disk) from committed actions. Rate limiting and scheduling belong to the control plane.
+
+---
+
+### 48.10 — Capsule and Cross-Session Attacks
+
+**Attack Class: State Transfer Exploitation**
+
+Examples: replaying a valid capsule from session A into session B, swapping geometry between sessions, exploiting hash canonicalization to bypass integrity checks, persisting adversarial state (e.g. locks) across session boundaries.
+
+**Defense: StateCapsule (Appendix A)**
+
+```
+state_hash      — SHA-256 of canonical JSON state (sort_keys=True)
+authority_id    — bound signer verified before reconstruct()
+CapsuleError    — raised on tamper, authority mismatch, inadmissible action
+```
+
+Integrity is hash-verified before reconstruction. Authority is verified before any state is written. Geometry is applied at reconstruction time, not capsule creation time.
+
+**Residual Risk (documented):**
+
+- Geometry is not embedded in the capsule. A capsule created under geometry G₁ may be reconstructed under geometry G₂. If G₂ is more permissive, actions blocked by G₁ may pass. This is a model limit — geometry binding is operational, not structural (V2, V6 in test suite).
+- Capsule replay across sessions is not prevented at the engine layer. The control plane is responsible for nonce enforcement and replay logs (V1 in test suite).
+- Lock state (or any adversarial state) survives capsule round-trips. The engine does not auto-clear locks or interpret state semantics. Recovery decisions belong to the control plane (V5 in test suite).
+- JSON canonicalization distinguishes all standard primitive types. Non-serializable state is rejected at capsule creation. Collision via payload substitution is infeasible under SHA-256 (V7 in test suite).
+
+---
+
+### 48.11 — Non-Guarantees as Attack Boundaries
+
+The system explicitly does not defend against:
+
+- replay across cycles (no nonce at engine layer)
+- incorrect intent encoded in valid actions
+- divergence between simulation and execution semantics
+- temporal manipulation (no internal clock)
+- geometry or authority misconfiguration by operators
+- capsule replay across sessions (control plane responsibility)
+
+These are not vulnerabilities.
+
+They define the boundary of the model.
+
+---
+
+### 48.12 — Security Invariant
+
+Across all layers, a single invariant holds:
+
+```
+No action can execute unless it passes all enforcement layers
+under current state and authority.
+```
+
+This invariant is independent of advisory evaluation, policy decisions, and input structure. It is enforced exclusively by the execution kernel.
+
+---
+
+### 48.13 — Closure
+
+The system does not attempt to prevent all failures.
+
+It prevents a specific class of failures:
+
+> unauthorized, invalid, or inconsistent state transitions.
+
+All other risks are isolated, documented, and delegated to external systems.
+
+Security does not come from prediction.
+
+It comes from enforcement.
+
+The system enforces.
 
 ---
 
