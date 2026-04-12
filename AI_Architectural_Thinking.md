@@ -8779,6 +8779,10 @@ Neither overrides the other.
 
 <img width="2404" height="1282" alt="image" src="https://github.com/user-attachments/assets/f6196dee-d310-4497-8404-6016dd6baa63" />
 
+**Figure 1.** — Full test suite execution (627 tests, 0 failures).
+
+Demonstrates determinism, enforcement of formal properties, and adversarial test coverage.
+
 ---
 
 ## Chapter 46 — Signer and Authority
