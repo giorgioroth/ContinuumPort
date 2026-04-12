@@ -10380,6 +10380,217 @@ It is a property of orchestration.
 
 ---
 
+## Chapter 52 — System Limits and Irreducible Boundaries
+
+The system enforces correctness within its defined model.
+
+This chapter defines what lies outside that model — not as missing
+features, but as irreducible boundaries that cannot be resolved without
+changing the fundamental nature of the system.
+
+### 52.1 — Definition of Boundary
+
+A boundary is a property that cannot be enforced by the system without
+introducing hidden state, temporal dependency, external trust, or
+semantic interpretation.
+
+Boundaries are not limitations of implementation.
+They are consequences of the system's core constraints.
+
+A more capable implementation does not remove them.
+A better test suite does not remove them.
+More layers do not remove them.
+
+They are structural.
+
+### 52.2 — Statelessness Across Cycles
+
+The execution model is stateless across cycles (Ch. 51.2).
+
+It does not retain history, identity continuity, or prior decisions.
+
+Any property requiring memory across cycles cannot be enforced:
+
+- replay detection
+- duplicate suppression
+- long-term behavioral consistency
+- causal ordering across submissions
+
+These require state that the model explicitly excludes.
+
+### 52.3 — No Intent Verification
+
+The system evaluates admissibility. It does not evaluate intent.
+
+An action may pass all enforcement layers and still be undesirable:
+
+    passes_all_layers(a) ⇏ correct_intent(a)
+
+Intent correctness is not expressible within the model. It would require
+semantic interpretation of what an action means in context — which
+requires knowledge the execution model does not have and must not
+acquire (Ch. 36.8).
+
+Geometry defines what transitions are permitted. It does not define
+what transitions are wise.
+
+### 52.4 — No External Truth
+
+The system operates on provided state. It does not verify that the
+provided state corresponds to external reality.
+
+If state is incorrect, execution remains correct relative to that
+state. No layer detects mismatch between internal state and the world:
+
+    state ≠ reality ⇏ execution_error
+
+The observation layer (Ch. 28) detects divergence between expected
+and observed state — but only when an observer is provided and only
+when the observed state is explicitly compared. The system does not
+autonomously verify external truth.
+
+### 52.5 — Simulation Non-Equivalence
+
+From Ch. 50.1:
+
+    f(s, a) ≠ F(s, a)  in general
+
+Perfect alignment requires f to be derived from F, not defined
+independently. Any caller-provided apply function that duplicates
+execution logic introduces divergence as a structural inevitability.
+
+This is not a bug in the advisory pipeline. It is a consequence of
+dual semantics: evaluation and enforcement are separate by design,
+and separation means they can disagree.
+
+### 52.6 — No Global Ordering
+
+The execution model does not enforce ordering across cycles (Ch. 51.5).
+
+Without external coordination:
+
+    execute(a₁) then execute(a₂) ≠ execute(a₂) then execute(a₁)
+
+in general. Causality, serialization, and sequencing constraints belong
+to the control plane. The kernel evaluates each cycle independently
+against current state.
+
+### 52.7 — No Replay Prevention
+
+Replay is permitted by the model (Ch. 51.3):
+
+    execute(s, a) → s'
+    execute(s, a) again → s'
+
+The system guarantees no hidden accumulation of effects. It does not
+guarantee single execution or uniqueness of submission. Replay detection
+requires persistent identity tracking across cycles — which requires
+the memory the model explicitly excludes.
+
+### 52.8 — No Temporal Guarantees
+
+The system has no internal clock (Ch. 37.8).
+
+All transitions are evaluated as pure functions over state. There are
+no deadlines, no time-based constraints, no scheduling guarantees,
+and no notion of elapsed time between cycles.
+
+Time-dependent constraints can be expressed only by encoding time as
+state and providing it as part of the action payload — which transfers
+responsibility for temporal correctness to the caller.
+
+### 52.9 — No Cross-System Consistency
+
+When the execution kernel commits an action that has external effects
+(e.g. an HTTP call via HttpBackend), internal state is atomic and
+restored on failure. External state is not:
+
+    internal_state → restored on failure
+    external_state → unknown
+
+Consistency across system boundaries is not guaranteed (Ch. 39.13,
+EXECUTION_MODEL_LIMITS.md §5). The observation layer (Ch. 28) can
+detect post-commit divergence, but cannot undo external effects.
+
+### 52.10 — No Economic or Strategic Reasoning
+
+The system does not evaluate cost, incentives, or adversarial strategy
+over time.
+
+An action that is valid and admissible may still be economically
+harmful, strategically exploitable, or collectively dangerous when
+composed with other valid actions (Ch. 36).
+
+These properties require models outside the execution boundary. The
+system enforces what is declared. It does not reason about what was
+not declared.
+
+### 52.11 — Boundary Composition
+
+Boundaries do not combine into guarantees.
+
+    statelessness + determinism ≠ replay prevention
+    correctness + alignment    ≠ intent correctness
+    atomicity + isolation      ≠ global consistency
+    enforcement + geometry     ≠ correct geometry
+
+Each boundary remains independent. No composition of system properties
+removes a boundary. A system that is correct in all other respects
+remains bounded by each limit independently.
+
+### 52.12 — Non-Removability
+
+These boundaries cannot be removed without violating core properties
+of the model:
+
+    Replay prevention   → requires persistent identity tracking
+    Intent verification → requires semantic interpretation layer
+    External truth      → requires trusted observation oracle
+    Global ordering     → requires temporal coordination layer
+    Alignment gap       → requires unified execution/simulation (Ch. 50.7)
+
+Each change introduces new trust assumptions, new failure modes, and
+loss of the isolation properties the model depends on.
+
+Removing a boundary does not make the system stronger.
+It makes it different — with different guarantees and different risks.
+
+### 52.13 — Relationship to System Guarantees
+
+The system guarantees, within these boundaries:
+
+- enforcement of invariants I1–I7 under all compositions (Ch. 49.8)
+- correctness and determinism of execution (Ch. 39)
+- separation of evaluation and enforcement (Ch. 45–47)
+- defined semantic alignment model (Ch. 50)
+- explicit temporal scope (Ch. 51)
+
+These guarantees hold within the boundaries defined in this chapter.
+They do not extend beyond them.
+
+### 52.14 — Closure
+
+The system is not incomplete.
+
+It is bounded.
+
+It does not attempt to solve intent, external truth, time, or strategy.
+
+It enforces admissibility, correctness of state transitions, and
+isolation of failure — within a single cycle, against declared
+constraints, under the authority that is presented.
+
+What lies outside is not a gap to be filled.
+
+It is a boundary to be respected.
+
+Safety is not achieved by eliminating limits.
+
+It is achieved by making them explicit — and ensuring they are never
+crossed implicitly.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
