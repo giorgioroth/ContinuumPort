@@ -9643,6 +9643,281 @@ The system enforces.
 
 ---
 
+## Chapter 49 — Failure Composition
+
+The system enforces safety through independent layers.
+
+Each layer can fail. Each layer fails independently.
+
+This chapter defines how failures compose across layers, what properties
+hold under all compositions, and what remains outside the model's scope.
+
+### 49.1 — Adversarial Assumption
+
+The system does not assume correct input.
+
+It assumes pressure.
+
+The adversarial model (defined in Ch. 48) establishes that the system
+operates under untrusted input, arbitrary payloads, replay attempts, and
+volume attacks.
+
+This chapter extends that model to the composition of failures:
+what happens when multiple layers interact under adversarial conditions.
+
+### 49.2 — Layer Independence Under Failure
+
+Let:
+
+    L = {Authority, Domain, Decision, Geometry, Transaction}
+
+Each layer evaluates independently. No layer assumes another layer
+has evaluated correctly.
+
+For any two distinct layers l₁, l₂ ∈ L:
+
+    failure(l₁) ⇒ semantics(l₂) unchanged
+
+A failure in the authority layer does not alter geometry rules.
+A failure in the geometry layer does not modify domain configuration.
+A failure in the transaction layer does not expose partial state.
+
+Failures isolate. They do not cascade into semantic corruption of
+other layers.
+
+### 49.3 — Execution as Conjunction
+
+Execution requires all enforcement layers to pass:
+
+    execute(a) ⇔ ∀ l ∈ L : passes_l(a)
+
+Equivalently:
+
+    ∃ l ∈ L : ¬passes_l(a) ⇒ ¬execute(a)
+
+No action executes unless every layer allows it. There is no partial
+passage. There is no weighted evaluation. The conjunction is strict.
+
+### 49.4 — Non-Compensability
+
+No layer can compensate for the failure of another.
+
+    passes(l₁) ∧ ¬passes(l₂) ⇒ ¬execute(a)
+
+Authority success does not compensate for domain failure.
+Domain success does not compensate for geometry failure.
+Geometry success does not compensate for TOCTOU rejection.
+
+Safety is conjunctive, not additive.
+
+A system that passes n-1 layers and fails on the nth does not receive
+partial credit. It does not execute.
+
+### 49.5 — Monotonic Failure Propagation
+
+Let A₀ be the input action set.
+
+Each enforcement layer applies a reductive transformation:
+
+    A₁ ⊆ A₀
+    A₂ ⊆ A₁
+    ...
+    Aₙ ⊆ Aₙ₋₁
+
+If any layer produces an empty set:
+
+    ∃ i : Aᵢ = ∅ ⇒ ∀ j > i : Aⱼ = ∅
+
+Collapse propagates forward and cannot be reversed by subsequent layers.
+
+This is the same monotonic reduction property established in Ch. 39.5
+and extended into the advisory pipeline in Ch. 45.2. It holds across
+the full system.
+
+### 49.6 — Failure Non-Interference
+
+Layer failures do not alter the semantics of other layers.
+
+Specifically:
+
+- Authority failure does not modify geometry rules
+- Geometry failure does not affect domain configuration
+- Decision failure does not mutate environment state
+- Transaction failure restores state to the pre-execution snapshot
+
+The last point is structural, not behavioral. TransactionManager does
+not "decide" to restore state after failure. It maintains the snapshot
+and never commits unless all steps succeed. Restoration is the default.
+
+### 49.7 — Atomic Failure Closure
+
+Execution outcomes are binary:
+
+    commit(ops) ⇒ state = state_after
+    failure      ⇒ state = state_before
+
+No intermediate state is observable or persistent:
+
+    ¬∃ state_intermediate : observable(state_intermediate)
+
+This is the atomicity property from Ch. 39.2, stated here in terms of
+failure composition. A failure at any step in a multi-step transaction
+produces the same outcome as a failure at the first step: complete
+restoration.
+
+There is no partial success. There is no residue.
+
+### 49.8 — Security Invariants
+
+The following invariants hold for all executions under all compositions
+of input, layer outcomes, and failure modes.
+
+**I1 — No Unauthorized Execution**
+
+    ¬passes(Authority) ⇒ ¬execute(a)
+
+**I2 — No Out-of-Domain Execution**
+
+    ¬passes(Domain) ⇒ ¬execute(a)
+
+**I3 — No Invalid State Transition**
+
+    ¬passes(Geometry ∧ State constraints) ⇒ ¬execute(a)
+
+**I4 — No Partial State Escape**
+
+    failure ⇒ state = state_before
+
+**I5 — Deterministic Outcome**
+
+    same(state₀, input) ⇒ same(result)
+
+**I6 — No Authority Escalation**
+
+    execute(a) ⇏ change(Authority)
+
+Authority is an input to the system, not a state variable. No
+execution can expand or modify the authority mapping.
+
+**I7 — Layer Independence**
+
+    ∀ l₁, l₂ ∈ L, l₁ ≠ l₂ : failure(l₁) ⇒ semantics(l₂) unchanged
+
+These invariants are not aspirational. They are structural consequences
+of the architecture defined in Chapters 27–48. The test suite validates
+them empirically. They do not require correct input, correct goals,
+or correct operator configuration to hold.
+
+### 49.9 — Failure Visibility
+
+Failures are observable. They are not recoverable within the cycle.
+
+Each failure produces:
+
+- a typed error from the layer that detected it (Ch. 39.12)
+- no state mutation
+
+The error type identifies the layer. The layer identification is
+exact: AuthorityError comes only from the authority layer,
+GeometryError only from geometry, and so on. The error taxonomy
+in execution/errors.py enforces this (Ch. 39.12, test_error_taxonomy.py).
+
+Recovery is external to the execution model. The control plane
+(Ch. 38) receives the failure and decides what to do next. The
+execution model reports accurately. It does not decide.
+
+### 49.10 — Composition with Advisory Pipeline Failures
+
+The advisory pipeline (Ch. 41–45) can produce incorrect evaluations
+without triggering safety failures.
+
+A malicious Goal, an inaccurate apply function, or a suboptimal
+Selection policy can cause the wrong candidate to be submitted to
+the execution kernel. The kernel re-evaluates independently. If the
+candidate is inadmissible, it is rejected.
+
+This means advisory failures are absorbed by the execution kernel.
+They become efficiency failures — wasted evaluation, rejected candidates —
+not security failures.
+
+The separation between advisory evaluation and execution enforcement
+is what makes this absorption possible. If advisory results were
+trusted by the kernel, an advisory failure would become a security
+failure.
+
+### 49.11 — Interaction with Documented Non-Guarantees
+
+Failure composition does not eliminate the limits documented in
+Ch. 39.13 and RFC-002 §7.
+
+The following remain outside the composition model:
+
+- replay across cycles: not detected at engine layer
+- simulation divergence from execution: not detectable by either pipeline
+- intent correctness: not enforced by any layer
+- cross-cycle ordering: not maintained by the system
+- temporal constraints: not expressible without external clock
+
+These are not gaps in failure composition. They are properties that
+require memory, sequence reasoning, or external truth — none of which
+the execution model provides.
+
+Failures are closed within a cycle.
+These limits exist across cycles.
+
+They are complementary, not contradictory.
+
+### 49.12 — Boundary of Responsibility
+
+The execution model guarantees:
+
+- enforcement of I1–I7 under all compositions
+- atomicity of state transitions
+- isolation of layer failures
+- accurate failure reporting
+
+The execution model does not guarantee:
+
+- correctness of goals
+- correctness of simulation
+- correctness of operator-defined geometry
+- correctness of external systems
+
+Responsibility is partitioned by design. The execution model enforces
+what is declared. It does not validate whether what was declared is correct.
+
+This boundary is stated explicitly because it is the most common source
+of misuse: treating enforcement of declared rules as a guarantee that
+the rules themselves are correct.
+
+### 49.13 — Closure
+
+Safety is not defined by successful execution.
+
+It is defined by the closure of all failure paths.
+
+The system does not assume correct input.
+It does not assume correct evaluation.
+It does not assume correct intent.
+
+It assumes pressure — and enforces that pressure cannot produce
+unauthorized state transitions.
+
+Security is not achieved by predicting behavior.
+
+It is achieved by making invalid transitions structurally impossible.
+
+The invariants in §49.8 are not features. They are the minimum
+conditions under which the system is safe.
+
+They hold regardless of what the advisory pipeline recommends,
+regardless of what the control plane submits, and regardless of
+what the input contains.
+
+They hold because of what the architecture prevents.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
