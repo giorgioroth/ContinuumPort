@@ -10182,6 +10182,204 @@ state transitions.
 
 ---
 
+## Chapter 51 — Control Plane and Temporal Guarantees
+
+The execution kernel operates on a single cycle.
+
+It guarantees correctness within that cycle.
+
+This chapter defines what happens across cycles — where time, ordering,
+and persistence introduce properties that the execution model does not
+express and cannot enforce.
+
+### 51.1 — Scope of the Control Plane
+
+The control plane (Ch. 38) exists outside the execution model.
+
+It is responsible for:
+
+- submission of cycles
+- sequencing across cycles
+- retry and replay decisions
+- capsule storage and restoration
+- interpretation of execution results over time
+
+The execution model does not maintain history between cycles.
+Temporal behavior is defined entirely by the control plane.
+
+### 51.2 — Absence of Temporal Semantics in the Kernel
+
+The execution kernel has no notion of time, ordering between cycles,
+identity persistence, replay detection, or idempotency.
+
+Each cycle is evaluated independently:
+
+    ∀ cycles c₁, c₂ : execute(c₁) ⟂ execute(c₂)
+
+No state is carried between cycles except what is explicitly passed as
+input state. The kernel does not know it is cycle N. It does not know
+what happened in cycle N-1.
+
+This is not a gap. It is the property that makes the kernel stateless,
+deterministic, and independent of orchestration history.
+
+### 51.3 — Replay Semantics
+
+The execution model permits replay:
+
+    execute(s, a) → s'
+    execute(s, a) again → s'   (same result)
+
+Replay does not accumulate hidden effects. This is a direct consequence
+of determinism (Ch. 39.1), atomicity (Ch. 39.2), and controlled state
+mutation (Ch. 39.9).
+
+Replay safety is guaranteed by the kernel.
+Replay prevention is not.
+
+If the same (s, a) pair is submitted twice, the kernel executes it
+twice and produces the same result twice. It has no mechanism to detect
+that the pair was already submitted.
+
+### 51.4 — Idempotency as External Property
+
+The kernel does not enforce idempotency.
+
+An action may or may not be idempotent in its effects. The kernel does
+not distinguish these cases. Detection of duplicate submissions requires
+action identity, historical tracking, and comparison across cycles —
+none of which exist in the execution model.
+
+The control plane may define idempotency keys and deduplication logic.
+This is outside the execution model boundary.
+
+### 51.5 — Ordering and Causality
+
+The execution model does not enforce ordering across cycles.
+
+    execute(a₁) then execute(a₂)
+
+is not guaranteed to produce the same result as:
+
+    execute(a₂) then execute(a₁)
+
+unless the state transitions are order-independent by nature, or the
+control plane enforces a specific ordering before submission.
+
+Causal dependencies, serialization constraints, and sequencing rules
+belong to the control plane. The kernel evaluates each cycle against
+current state. It does not reason about prior or future cycles.
+
+### 51.6 — Capsule as Temporal Boundary
+
+Capsules (Appendix A) provide state snapshot, integrity verification,
+and optional authority binding.
+
+They do not provide history, ordering guarantees, or replay protection.
+
+A capsule represents a point in time, not a timeline.
+
+Reconstructing from a capsule initializes the environment from a
+validated state. It does not restore execution history, cycle identity,
+or any record of what preceded the capsule. This is by design: continuity
+is a property of the state, not the agent (Ch. 40).
+
+### 51.7 — Interaction with Failure Composition
+
+Failure composition (Ch. 49) applies within a cycle.
+
+Invariants I1–I7 hold per cycle:
+
+    ∀ cycle c : invariants(c) hold
+
+But invariants across cycles do not compose automatically:
+
+    invariants(c₁) ∧ invariants(c₂) ⇏ invariants(c₁ followed by c₂)
+
+A sequence of individually correct cycles can produce incorrect
+cross-cycle behavior if the control plane submits them in the wrong
+order, replays them, or skips error handling between them.
+
+Temporal correctness is not derived from per-cycle correctness.
+It must be constructed above the execution model.
+
+### 51.8 — Interaction with Semantic Alignment
+
+Semantic alignment (Ch. 50) is evaluated per cycle.
+
+Across cycles, D3 divergence (semantic mismatch between f and F) may
+accumulate if the apply function drifts from execution semantics over
+time — for example, when execution capabilities are updated but the
+simulation function is not.
+
+The execution model does not detect this pattern. The control plane
+is responsible for monitoring alignment across cycles and triggering
+updates to the apply function when persistent divergence is observed.
+
+### 51.9 — Temporal Failure Modes
+
+Failures specific to cross-cycle behavior include replay flooding,
+stale proposals based on outdated state, out-of-order execution,
+duplicated submissions, and lost cycles.
+
+These are not failures of execution. They are failures of orchestration.
+
+The execution model reports what happened within each cycle accurately.
+It does not detect that a cycle was duplicated, reordered, or missed.
+That detection belongs to the control plane.
+
+### 51.10 — Control Plane Responsibilities
+
+If temporal guarantees are required, the control plane must provide:
+
+- submission identity (idempotency keys per cycle)
+- ordering constraints (sequence numbers or causal tokens)
+- retry policies (when to resubmit a failed cycle)
+- replay limits (maximum resubmissions per action)
+- divergence monitoring (detecting persistent D3 across cycles)
+
+The execution model provides correct execution, correct rejection,
+and correct state transitions — per cycle. The control plane ensures
+these are used correctly over time.
+
+The separation is strict. The kernel does not depend on temporal
+correctness to function. It executes what it receives, correctly,
+regardless of whether the sequence was appropriate.
+
+### 51.11 — Non-Guarantees
+
+The system does not guarantee:
+
+- replay prevention across cycles
+- global ordering of cycles
+- exactly-once execution of non-idempotent actions
+- temporal consistency across sessions
+- convergence of state over time
+- absence of duplicate effects from repeated submission
+
+These require persistent state, coordination primitives, and sequence
+tracking — none of which are part of the execution model.
+
+They are explicitly out of scope (Ch. 39.13, RFC-002 §7 N4).
+
+### 51.12 — Closure
+
+The execution model is safe within a cycle.
+
+Time introduces complexity that the kernel deliberately excludes.
+The control plane reintroduces time under explicit, external control.
+
+Correctness does not extend automatically across cycles.
+It must be constructed by the layer responsible for orchestration.
+
+The kernel does not assume correct sequencing.
+It enforces correct execution regardless of sequence.
+
+Temporal safety is not a property of execution.
+It is a property of orchestration.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
