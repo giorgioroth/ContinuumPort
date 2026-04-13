@@ -103,6 +103,21 @@ Not the implementation.
 
 ---
 
+## Request Access
+
+This repository demonstrates enforcement.
+
+Verification requires the full compliance layer.
+
+If your system executes, but cannot prove validity,  
+it will fail under ContinuumPort.
+
+Request access:
+
+→ continuumport@gmail.com
+
+---
+
 ## Access
 
 The compliance layer (adapter interface, adversarial suite, and conformance tests)
@@ -174,6 +189,4 @@ Nothing outside the invariants is allowed to execute.
 
 Gh. Rotaru (Giorgio Roth)
 Independent researcher
-
-[continuumport@gmail.com](mailto:continuumport@gmail.com)
 
