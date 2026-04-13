@@ -1,4 +1,3 @@
-
 # ContinuumPort
 
 **Execution is not implicit. It is enforced.**
@@ -9,58 +8,49 @@ Most systems execute.
 
 They cannot prove that execution is still valid.
 
-They drift.
-They partially apply.
+They drift.  
+They partially apply.  
 They continue after divergence.
 
 ContinuumPort makes these failure modes unexecutable.
 
-It does not decide what is correct.
+It does not decide what is correct.  
 It makes invalid execution impossible.
 
 ---
 
-## Run this
+## Demonstration (adversarial)
 
-```bash
-git clone https://github.com/giorgioroth/ContinuumPort
-cd ContinuumPort
+The system is validated against adversarial implementations that appear correct but violate execution invariants.
 
-# runs in seconds
+Each implementation fails for a different reason.
 
-# Linux / macOS
-REGEN_SIGNING_KEY=demo-key python -m compliance.demo
+<img width="2376" height="1624" alt="adversarial demo" src="https://github.com/user-attachments/assets/6351e8c8-7bc5-42ba-99a7-1d083fa504d1" />
 
-# Windows PowerShell
-$env:REGEN_SIGNING_KEY="demo-key"; python -m compliance.demo
-```
+**Observed failures:**
 
-```
-Regen Compliance — adversarial demo
-============================================
+* atomicity violation (partial state persists)  
+* non-deterministic execution  
+* snapshot isolation breach  
+* simulation / execution mismatch  
 
-[FAIL] FaultyAdapter_Partial
-  → I4 — atomicity_on_failure
+All are detected.
 
-[FAIL] FaultyAdapter_NonDeterministic
-  → I5 — determinism
+---
 
-[FAIL] FaultyAdapter_SnapshotAlias
-  → I4 — snapshot_isolation
+## Real-time enforcement
 
-[FAIL] FaultyAdapter_D3
-  → Ch.50 — d3_semantic_alignment
+Execution is not evaluated after the fact.
 
-============================================
-4/4 adapters FAILED (expected)
-All adversarial cases detected.
-Regen Engine: COMPLIANT — invariants enforced
-```
+It is enforced at runtime.
 
-Four plausible implementations. All fail.
-Each violates a different invariant.
-The tests are the arbiter.
-Not the implementation.
+<img width="2378" height="1256" alt="runtime enforcement" src="https://github.com/user-attachments/assets/3607139a-ab0c-49dd-bda3-d9d28b2719d9" />
+
+**Observed behavior:**
+
+* valid transitions commit  
+* invalid transitions are rejected  
+* divergence halts execution  
 
 ---
 
@@ -68,90 +58,78 @@ Not the implementation.
 
 ContinuumPort is an execution validity protocol.
 
-It enforces that state transitions cannot violate declared invariants,
-even across models, sessions, and environments.
-
-It ensures that state transitions remain enforceable across time,
+It enforces that state transitions cannot violate declared invariants across time,  
 even when execution spans multiple models, sessions, or environments.
-
-It does not decide what is correct.
-It ensures that invalid execution is rejected before commit.
 
 ---
 
 ## Core mechanism
 
-ContinuumPort defines continuity of state.
+ContinuumPort defines continuity of state.  
 Regen Engine enforces execution of that state.
 
 Every transition must satisfy:
 
-* **atomicity** — commit or rollback, nothing in between
-* **determinism** — same input → same output
-* **isolation** — no external mutation through snapshots
-* **semantic alignment** — simulate(state, action) ≡ execute(state, action)
+* **atomicity** — commit or rollback  
+* **determinism** — same input → same output  
+* **isolation** — no external mutation  
+* **semantic alignment** — simulate ≡ execute  
 
 If any invariant is violated:
 
-```
-execution is rejected (no state transition occurs)
-```
+```text
+execution is rejected
+````
 
 ---
 
-## Or: real-time enforcement
+## Verification model
 
-```bash
-# Linux / macOS
-REGEN_SIGNING_KEY=demo-key python -m compliance.mini_loop_demo
+Validation is invariant-based, not behavior-based:
 
-# Windows PowerShell
-$env:REGEN_SIGNING_KEY="demo-key"; python -m compliance.mini_loop_demo
+* invariant-based testing (not behavioral testing)
+* adversarial scenarios
+* semantic alignment checks
+
+```text
+651 tests passed
+0 invariant violations
 ```
 
-This shows execution being:
+<img width="2382" height="1256" alt="test suite" src="https://github.com/user-attachments/assets/829a1c5e-102d-48ee-a464-43dbf8ac95d1" />
 
-* accepted
-* rejected (geometry violation)
-* halted (epistemic divergence)
+The tests are the arbiter.
+Not the implementation.
 
 ---
 
-## Test your own system
+## Access
 
-If your system claims correctness:
+The compliance layer (adapter interface, adversarial suite, and conformance tests)
+is not part of the public repository.
 
-```bash
-python compliance/runner.py your_adapter.py
-```
+It is required to:
 
-If it passes → it is Regen-Compliant.
-If it fails → it violates a formal invariant.
+* verify external systems
+* perform conformance testing
+* certify execution correctness
 
-**Partial compliance does not exist.**
-
----
-
-## Invariants
-
-| ID    | Guarantee                               |
-| ----- | --------------------------------------- |
-| I2    | Atomicity — no partial state            |
-| I4    | Snapshot isolation                      |
-| I5    | Determinism                             |
-| Ch.50 | Semantic alignment (simulate ≡ execute) |
+Access is provided upon request.
 
 ---
 
 ## What cannot happen
 
-The following are structurally impossible under enforcement:
+Under enforcement, the following are structurally impossible:
 
 * partial execution
 * non-deterministic outcomes
-* state mutation outside the gate
-* simulation/execution divergence
+* state mutation outside control
+* simulation / execution divergence
 * invalid transitions committing
+
+These are not runtime checks.
+They are enforced properties of the execution model.
 
 ---
 
@@ -169,47 +147,12 @@ Undeclared risks are not blocked.
 
 ---
 
-## Structure
-
-```
-compliance/
-  adapter/
-    interface.py
-    regen_adapter.py
-    faulty_adapter.py
-  tests/
-    invariants.py
-  runner.py
-  demo.py
-  mini_loop_demo.py
-
-execution/
-tests/
-```
-
----
-
-## Status
-
-```
-651 tests passed.
-0 invariant violations.
-```
----
-
-<img width="2382" height="1256" alt="image" src="https://github.com/user-attachments/assets/829a1c5e-102d-48ee-a464-43dbf8ac95d1" />
-
-
----
-
 ## Final
 
 The system does not assume.
 It enforces.
-Nothing outside the invariants executes.
 
-
-
+Nothing outside the invariants is allowed to execute.
 
 ---
 
@@ -221,19 +164,16 @@ Nothing outside the invariants executes.
 
 ## Links
 
-- Blog: https://gi0rgioroth.blogspot.com/
-- Site: https://continuumport.com/
-- Repository: https://github.com/giorgioroth/ContinuumPort
+* Blog: [https://gi0rgioroth.blogspot.com/](https://gi0rgioroth.blogspot.com/)
+* Site: [https://continuumport.com/](https://continuumport.com/)
+* Repository: [https://github.com/giorgioroth/ContinuumPort](https://github.com/giorgioroth/ContinuumPort)
 
 ---
 
 ## Author
 
-Gh. Rotaru (Giorgio Roth)  
+Gh. Rotaru (Giorgio Roth)
 Independent researcher
 
 [continuumport@gmail.com](mailto:continuumport@gmail.com)
-
-
-
 
