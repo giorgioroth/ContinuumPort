@@ -1,218 +1,215 @@
+
 # ContinuumPort
 
-**Fail-closed execution model for AI systems.**
+**Execution is not implicit. It is enforced.**
+
+Enforced execution continuity across models, sessions, and environments.
+
+Most systems execute.
+
+They cannot prove that execution is still valid.
+
+They drift.
+They partially apply.
+They continue after divergence.
+
+ContinuumPort makes these failure modes unexecutable.
+
+It does not decide what is correct.
+It makes invalid execution impossible.
+
+---
+
+## Run this
+
+```bash
+git clone https://github.com/giorgioroth/ContinuumPort
+cd ContinuumPort
+
+# runs in seconds
+
+# Linux / macOS
+REGEN_SIGNING_KEY=demo-key python -m compliance.demo
+
+# Windows PowerShell
+$env:REGEN_SIGNING_KEY="demo-key"; python -m compliance.demo
+```
+
+```
+Regen Compliance — adversarial demo
+============================================
+
+[FAIL] FaultyAdapter_Partial
+  → I4 — atomicity_on_failure
+
+[FAIL] FaultyAdapter_NonDeterministic
+  → I5 — determinism
+
+[FAIL] FaultyAdapter_SnapshotAlias
+  → I4 — snapshot_isolation
+
+[FAIL] FaultyAdapter_D3
+  → Ch.50 — d3_semantic_alignment
+
+============================================
+4/4 adapters FAILED (expected)
+All adversarial cases detected.
+Regen Engine: COMPLIANT — invariants enforced
+```
+
+Four plausible implementations. All fail.
+Each violates a different invariant.
+The tests are the arbiter.
+Not the implementation.
 
 ---
 
 ## What this is
 
-ContinuumPort is an execution model that enforces:
+ContinuumPort is an execution validity protocol.
 
-> **No state transition that violates declared constraints can execute.**
+It enforces that state transitions cannot violate declared invariants,
+even across models, sessions, and environments.
 
-This is not an AI system.
+It ensures that state transitions remain enforceable across time,
+even when execution spans multiple models, sessions, or environments.
 
-It is a constraint layer that governs how systems are allowed to act.
-
----
-
-## The problem
-
-AI systems can execute.
-
-They cannot guarantee that execution remains valid over time.
-
-Across cycles, they:
-
-- accumulate hidden state
-- drift from constraints
-- act without verifiable admissibility
-
-More intelligence does not fix this.
-
-Execution must be constrained.
+It does not decide what is correct.
+It ensures that invalid execution is rejected before commit.
 
 ---
 
-## The model
+## Core mechanism
 
-ContinuumPort enforces:
+ContinuumPort defines continuity of state.
+Regen Engine enforces execution of that state.
 
-- **admissibility before execution**
-- **explicit authority**
-- **atomic state transitions**
-- **no partial effects**
-- **no state mutation outside control**
+Every transition must satisfy:
 
-If a system cannot prove it is allowed to act:
+* **atomicity** — commit or rollback, nothing in between
+* **determinism** — same input → same output
+* **isolation** — no external mutation through snapshots
+* **semantic alignment** — simulate(state, action) ≡ execute(state, action)
 
-> **it does not act**
-
----
-
-## Quick example
-
-```python
-from execution.environment import Environment
-from execution.geometry import build_geometry
-from execution.proposal import ProposalEngine
-
-env = Environment({"balance": 100})
-
-geometry = build_geometry(
-    geometry_id="example",
-    invariants=["balance >= 0"],
-    actions=[
-        {"name": "set"}
-    ],
-    signing_key=b"demo-key"
-)
-
-engine = ProposalEngine(geometry)
-
-# ✅ Valid transition
-actions = [{"type": "set", "key": "balance", "value": 50}]
-proposal = engine.propose(actions, env.snapshot())
-print(proposal.authorized)  # True
-
-# ❌ Invalid transition
-actions = [{"type": "set", "key": "balance", "value": -50}]
-proposal = engine.propose(actions, env.snapshot())
-print(proposal.authorized)  # False
-```
-
-Invalid transitions are rejected before execution.
-
----
-
-## Verification
-
-ContinuumPort is not tested for behavior.
-
-It is tested for invariants.
-
-The test suite includes:
-
-- **property-level tests** (Chapter 39) — formal invariants, not behavior coverage
-- **adversarial scenarios** — TOCTOU, state mutation, composition attacks, authority drift
-- **architectural separation tests** — layer boundary enforcement, no cross-layer violations
-
-Chapter 39 defines **13 formal properties**.
-
-Each property is mapped to a dedicated test:
+If any invariant is violated:
 
 ```
-tests/test_ch39_properties.py
+execution is rejected (no state transition occurs)
 ```
-
-If a property can be violated, the test fails.
-
-This is not behavioral coverage. It is property-level enforcement.
-
-The suite covers:
-
-- execution correctness (atomicity, determinism, no partial state escape)
-- adversarial resistance (TOCTOU, replay conditions, authority mismatch)
-- architectural guarantees (no cross-layer violations, separation of concerns)
-
-For exact test count, run the suite. It varies by environment.
 
 ---
 
-## Execution properties
+## Or: real-time enforcement
 
-ContinuumPort guarantees the following (see Chapter 39):
+```bash
+# Linux / macOS
+REGEN_SIGNING_KEY=demo-key python -m compliance.mini_loop_demo
 
-- **Determinism** — same input, same result
-- **Atomicity** — all-or-nothing execution
-- **No partial state escape**
-- **TOCTOU protection** — drift invalidates execution
-- **Monotonic filtering** — no layer can add actions
-- **Decision idempotency**
-- **Divergence collapse** — execution halts under uncertainty
-- **No authority escalation**
-- **Controlled state mutation**
-- **Bounded intake**
-- **State-local constraints**
-- **Error layer separation**
+# Windows PowerShell
+$env:REGEN_SIGNING_KEY="demo-key"; python -m compliance.mini_loop_demo
+```
 
-These properties are enforced by the test suite.
+This shows execution being:
+
+* accepted
+* rejected (geometry violation)
+* halted (epistemic divergence)
 
 ---
 
-## Architecture (simplified)
+## Test your own system
 
-```
-A_untrusted
-    → Saturation
-    → Authority
-    → Domain
-    → Decision
-    → Execution (atomic)
+If your system claims correctness:
+
+```bash
+python compliance/runner.py your_adapter.py
 ```
 
-Optional:
+If it passes → it is Regen-Compliant.
+If it fails → it violates a formal invariant.
 
-```
-Capsule → validate → authority binding → restore → execute
-```
-
-Continuity is based on validated state, not history.
-Capsules are bound to the authority that created them.
-Cross-session replay under a different authority is rejected.
+**Partial compliance does not exist.**
 
 ---
 
-## What it prevents
+## Invariants
 
-- hidden state accumulation
-- unauthorized execution
-- TOCTOU inconsistencies
-- authority escalation
-- partial side-effects
-- execution based on unverified assumptions
-- capsule replay across authority boundaries
+| ID    | Guarantee                               |
+| ----- | --------------------------------------- |
+| I2    | Atomicity — no partial state            |
+| I4    | Snapshot isolation                      |
+| I5    | Determinism                             |
+| Ch.50 | Semantic alignment (simulate ≡ execute) |
 
 ---
 
-## Scope and limits
+## What cannot happen
+
+The following are structurally impossible under enforcement:
+
+* partial execution
+* non-deterministic outcomes
+* state mutation outside the gate
+* simulation/execution divergence
+* invalid transitions committing
+
+---
+
+## Scope
 
 ContinuumPort enforces correctness of execution under declared constraints.
 
-It does **not** guarantee:
+It does not guarantee:
 
-- correctness of intent
-- cross-cycle replay prevention (without control plane enforcement)
-- idempotency of external side-effects
-- correctness outside declared authority
+* correctness of intent
+* correctness of declared constraints
+* external side-effect consistency
 
-These are explicit non-goals (see Chapter 39.13).
-
-A system can use ContinuumPort correctly and still produce wrong outcomes
-if the declared constraints do not capture the right invariants.
-The engine enforces what you declare. It does not validate what you declare.
+Undeclared risks are not blocked.
 
 ---
 
-## Formal boundaries
+## Structure
 
-- [docs/analysis/scope_and_limits.md](docs/analysis/scope_and_limits.md)
-- [docs/analysis/attack_classification.md](docs/analysis/attack_classification.md)
+```
+compliance/
+  adapter/
+    interface.py
+    regen_adapter.py
+    faulty_adapter.py
+  tests/
+    invariants.py
+  runner.py
+  demo.py
+  mini_loop_demo.py
+
+execution/
+tests/
+```
 
 ---
 
-## Use cases
+## Status
 
-- AI agents with real-world effects
-- financial / transactional systems
-- automation pipelines requiring strict correctness
-- systems where invalid state must be impossible to commit
+```
+651 tests passed.
+0 invariant violations.
+```
+---
+
+<img width="2382" height="1256" alt="image" src="https://github.com/user-attachments/assets/829a1c5e-102d-48ee-a464-43dbf8ac95d1" />
+
 
 ---
 
 ## Final
 
-> Execution that refuses to be wrong.
+The system does not assume.
+It enforces.
+Nothing outside the invariants executes.
+
+
+
 
 ---
 
