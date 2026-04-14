@@ -114,7 +114,7 @@ it will fail under ContinuumPort.
 
 Request access:
 
-→ continuumport@gmail.com
+→ access@continuumport.com
 
 ---
 
