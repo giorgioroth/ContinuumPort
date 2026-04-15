@@ -19,6 +19,10 @@ It makes invalid execution impossible.
 
 ---
 
+→  Download [Whitepaper](https://continuumport.com/wp-content/uploads/2026/04/ContinuumPort.pdf) (PDF)
+
+---
+
 ## Demonstration (adversarial)
 
 The system is validated against adversarial implementations that appear correct but violate execution invariants.
