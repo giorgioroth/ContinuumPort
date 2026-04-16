@@ -751,7 +751,7 @@ Possible future versions may explore:
 For questions, issues, or contributions:
 
 GitHub: https://github.com/giorgioroth/ContinuumPort  
-@continuumport
+access@continuumport.com
 
 © 2025 Gh. Rotaru (Giorgio Roth) · Licensed under CC-BY-4.0
 ```
