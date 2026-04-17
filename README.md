@@ -4,57 +4,63 @@
 
 Enforced execution continuity across models, sessions, and environments.
 
-Most systems execute.
+---
 
-They cannot prove that execution is still valid.
+## The problem
 
-They drift.  
-They partially apply.  
-They continue after divergence.
+Most systems execute. They cannot prove that execution remains valid after failure.
 
-ContinuumPort makes these failure modes unexecutable.
+When a batch of actions partially succeeds and then fails, most systems leave
+the partial result committed. There is no rollback. There is no structural detection.
+The system continues from a state it cannot justify.
 
-It does not decide what is correct.  
-It makes invalid execution impossible.
+This is not a bug in any one implementation. It is the default behavior when
+execution correctness is not structurally enforced.
+
+ContinuumPort makes these failure modes unexecutable under enforcement.
 
 ---
 
-→  Download [Whitepaper](https://continuumport.com/wp-content/uploads/2026/04/ContinuumPort.pdf) (PDF)
+## Run this
 
----
+```bash
+git clone https://github.com/giorgioroth/ContinuumPort
+cd ContinuumPort/quickstart
+python run.py
+```
 
-## Demonstration (adversarial)
+Runs in seconds. No dependencies.
 
-The system is validated against adversarial implementations that appear correct but violate execution invariants.
+**Output:**
 
-Each implementation fails for a different reason.
+```
+============================================================
+CONTINUUMPORT — EXECUTION INVARIANT DEMO
+Invariant: I4 — No partial state escape
+============================================================
 
-<img width="2376" height="1624" alt="adversarial demo" src="https://github.com/user-attachments/assets/6351e8c8-7bc5-42ba-99a7-1d083fa504d1" />
+Scenario: a batch of two actions is submitted.
+Action 1 succeeds. Action 2 fails.
+A compliant system must behave atomically: all or nothing.
 
-**Observed failures:**
+  [FaultyAdapter    — no rollback]
+  Committed   : False
+  State before: {'account': 'active', 'balance': 100}
+  State after : {'account': 'active', 'balance': 100, 'processed': True}
+  ✗ I4 VIOLATED — partial state escaped (key 'processed' leaked into state)
 
-* atomicity violation (partial state persists)  
-* non-deterministic execution  
-* snapshot isolation breach  
-* simulation / execution mismatch  
+  [ReferenceAdapter — atomic rollback]
+  Committed   : False
+  State before: {'account': 'active', 'balance': 100}
+  State after : {'account': 'active', 'balance': 100}
+  ✓ I4 ENFORCED — rollback complete, state identical to pre-execution
+```
 
-All are detected.
+The faulty adapter *looks* correct — it reports `committed: False`. The state
+disagrees. ContinuumPort detects this class of failure structurally.
 
----
-
-## Real-time enforcement
-
-Execution is not evaluated after the fact.
-
-It is enforced at runtime.
-
-<img width="2378" height="1256" alt="runtime enforcement" src="https://github.com/user-attachments/assets/3607139a-ab0c-49dd-bda3-d9d28b2719d9" />
-
-**Observed behavior:**
-
-* valid transitions commit  
-* invalid transitions are rejected  
-* divergence halts execution  
+Execution failure is not the problem.
+Invalid state after failure is.
 
 ---
 
@@ -62,78 +68,81 @@ It is enforced at runtime.
 
 ContinuumPort is an execution validity protocol.
 
-It enforces that state transitions cannot violate declared invariants across time,  
-even when execution spans multiple models, sessions, or environments.
+It enforces that state transitions cannot violate declared invariants across
+time, even when execution spans multiple models, sessions, or environments.
 
----
-
-## Core mechanism
-
-ContinuumPort defines continuity of state.  
-Regen Engine enforces execution of that state.
+**ContinuumPort defines continuity of state.
+Regen Engine enforces that continuity at execution time.**
 
 Every transition must satisfy:
 
-* **atomicity** — commit or rollback  
-* **determinism** — same input → same output  
-* **isolation** — no external mutation  
-* **semantic alignment** — simulate ≡ execute  
+- **I1 — No unauthorized execution** — authority verified before execution is considered
+- **I2 — No out-of-domain execution** — only declared action types can execute
+- **I3 — No invalid state transition** — preconditions must hold or execution is rejected
+- **I4 — No partial state escape** — commit or rollback, never partial
+- **I5 — Deterministic outcome** — same input produces same state
 
-If any invariant is violated:
+If any invariant is violated, execution is rejected. Not logged. Not warned. Rejected.
 
-```text
-execution is rejected
-````
+---
+
+## Compliance interface
+
+Any execution engine can be tested against these invariants
+through a minimal interface:
+
+```python
+class RegenAdapter(ABC):
+    def reset(self, state: dict) -> None: ...
+    def snapshot(self) -> dict: ...
+    def execute(self, actions: list[dict]) -> ExecutionResult: ...
+    def simulate(self, state: dict, action: dict) -> dict: ...
+```
+
+Run the full invariant suite against your implementation:
+
+```python
+from compliance.tests.invariants import run_invariant_tests
+
+report = run_invariant_tests(your_adapter)
+print(report.summary())
+```
+
+The tests are the arbiter. Not the implementation.
+
+---
+
+## What the tests cover
+
+651 tests. 0 invariant violations (reference implementation under adversarial conditions).
+
+The test suite includes:
+
+- **Adversarial scenarios** — implementations that appear correct but violate invariants
+- **TOCTOU detection** — state drift between proposal and commit
+- **Atomicity under failure** — partial effects never persist
+- **Authority enforcement** — no execution path outside declared authority
+- **Epistemic veto** — execution halts when state alignment is unknown
+- **Vulnerability suite** — replay attacks, geometry swaps, authority flooding
+
+```
+tests/test_adversarial.py          — gate bypass, snapshot isolation, rollback
+tests/test_adversarial_http.py     — HTTP capability invariants
+tests/test_ch27_kernel.py          — authority + execution kernel
+tests/test_ch28_epistemic.py       — epistemic veto and divergence detection
+tests/test_vulnerability_suite.py  — V1–V7 structural attack scenarios
+tests/test_ch39_properties.py      — formal properties (P1–P13)
+```
 
 ---
 
 ## Verification model
 
-Validation is invariant-based, not behavior-based:
+Validation is invariant-based, not behavior-based.
 
-* invariant-based testing (not behavioral testing)
-* adversarial scenarios
-* semantic alignment checks
-
-```text
-651 tests passed
-0 invariant violations
-```
-
-<img width="2382" height="1256" alt="test suite" src="https://github.com/user-attachments/assets/829a1c5e-102d-48ee-a464-43dbf8ac95d1" />
-
-The tests are the arbiter.
-Not the implementation.
-
----
-
-## Request Access
-
-This repository demonstrates enforcement.
-
-Verification requires the full compliance layer.
-
-If your system executes, but cannot prove validity,  
-it will fail under ContinuumPort.
-
-Request access:
-
-→ access@continuumport.com
-
----
-
-## Access
-
-The compliance layer (adapter interface, adversarial suite, and conformance tests)
-is not part of the public repository.
-
-It is required to:
-
-* verify external systems
-* perform conformance testing
-* certify execution correctness
-
-Access is provided upon request.
+The compliance layer tests observable behavior against declared invariants.
+It does not inspect internals. An implementation passes when its outputs
+satisfy the invariants under all test conditions — including adversarial ones.
 
 ---
 
@@ -141,56 +150,85 @@ Access is provided upon request.
 
 Under enforcement, the following are structurally impossible:
 
-* partial execution
-* non-deterministic outcomes
-* state mutation outside control
-* simulation / execution divergence
-* invalid transitions committing
+- partial execution committed as valid state
+- non-deterministic outcomes from identical input
+- state mutation outside the declared authority model
+- execution continuing after divergence
+- invalid transitions bypassing the proposal gate
 
-These are not runtime checks.
-They are enforced properties of the execution model.
+These are enforced properties of the execution model, not runtime checks.
 
 ---
 
-## Scope
+## Scope and limits
 
 ContinuumPort enforces correctness of execution under declared constraints.
 
 It does not guarantee:
 
-* correctness of intent
-* correctness of declared constraints
-* external side-effect consistency
+- correctness of intent
+- correctness of declared constraints
+- external side-effect consistency
 
 Undeclared risks are not blocked.
 
 ---
 
-## Final
+## Compliance layer
 
-The system does not assume.
-It enforces.
+The full compliance layer — adapter interface, adversarial suite, and
+conformance tests — is included in this repository under `compliance/`.
 
-Nothing outside the invariants is allowed to execute.
+The Regen Engine execution kernel is proprietary.
+
+It is the only known implementation that satisfies all invariants
+under adversarial testing.
+
+Third-party implementations can be validated against the same invariants
+by implementing `RegenAdapter`.
+
+Access to the Regen Engine kernel: [access@continuumport.com](mailto:access@continuumport.com)
 
 ---
+
+## Repository structure
+
+```
+compliance/
+  adapter/
+    interface.py          — RegenAdapter contract
+    regen_adapter.py      — reference adapter (wraps Regen Engine)
+    faulty_adapter.py     — intentionally faulty adapters (demo use)
+  tests/
+    invariants.py         — portable invariant test suite (I1–I5)
+  runner.py               — compliance runner
+
+quickstart/
+  run.py                  — demo, no dependencies
+
+docs/
+  specs/RFC-001-execution-contract.md
+  specs/DEPENDENCY_RULES.md
+```
+
+---
+
 
 [![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](LICENSE)
 [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
 [![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
 
+
 ---
 
 ## Links
 
-* Blog: [https://gi0rgioroth.blogspot.com/](https://gi0rgioroth.blogspot.com/)
-* Site: [https://continuumport.com/](https://continuumport.com/)
-* Repository: [https://github.com/giorgioroth/ContinuumPort](https://github.com/giorgioroth/ContinuumPort)
+- [Site](https://continuumport.com/)
+- [Blog](https://gi0rgioroth.blogspot.com/)
+- [Whitepaper](https://continuumport.com/wp-content/uploads/2026/04/ContinuumPort.pdf)
 
 ---
 
 ## Author
 
-Gh. Rotaru (Giorgio Roth)
-Independent researcher
-
+Gh. Rotaru (Giorgio Roth) — Independent researcher
