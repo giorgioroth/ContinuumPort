@@ -26,12 +26,13 @@ ContinuumPort makes these failure modes unexecutable under enforcement.
 ```bash
 git clone https://github.com/giorgioroth/ContinuumPort
 cd ContinuumPort/quickstart
-python run.py
+python run.py              # I4 — atomicity
+python run_determinism.py  # I5 — determinism
 ```
 
 Runs in seconds. No dependencies.
 
-**Output:**
+**Output — I4 (partial state escape):**
 
 ```
 ============================================================
@@ -62,6 +63,30 @@ disagrees. ContinuumPort detects this class of failure structurally.
 Execution failure is not the problem.
 Invalid state after failure is.
 
+**Output — I5 (deterministic outcome):**
+
+```
+============================================================
+CONTINUUMPORT — DETERMINISM DEMO
+Invariant: I5 — Deterministic outcome
+============================================================
+
+Scenario: identical input is executed twice from identical state.
+Declared order: set x=1, then set x=2.
+Expected result: x=2 (order must be preserved deterministically).
+A compliant system must produce identical, correct outputs.
+
+  [FaultyAdapter    — order-dependent execution]
+  Run 1 result: {'x': 2}  (expected: x=2)
+  Run 2 result: {'x': 1}  (expected: x=2)
+  ✗ I5 VIOLATED — same input, different outputs across executions
+
+  [ReferenceAdapter — declared order enforced]
+  Run 1 result: {'x': 2}  (expected: x=2)
+  Run 2 result: {'x': 2}  (expected: x=2)
+  ✓ I5 ENFORCED — identical correct output across executions
+```
+
 ---
 
 ## What this is
@@ -76,7 +101,7 @@ Regen Engine enforces that continuity at execution time.**
 
 Every transition must satisfy:
 
-- **I1 — No unauthorized execution** — authority verified before execution is considered
+- **I1 — No unauthorized execution** — authority must be verified before execution
 - **I2 — No out-of-domain execution** — only declared action types can execute
 - **I3 — No invalid state transition** — preconditions must hold or execution is rejected
 - **I4 — No partial state escape** — commit or rollback, never partial
@@ -114,7 +139,16 @@ The tests are the arbiter. Not the implementation.
 
 ## What the tests cover
 
-651 tests. 0 invariant violations (reference implementation under adversarial conditions).
+Full invariant suite (651 tests):
+
+---
+
+<img width="2382" height="1256" alt="image" src="https://github.com/user-attachments/assets/5203ac69-b41f-460f-aae5-8a18fcbfb8d6" />
+
+
+---
+
+0 invariant violations (reference implementation under adversarial conditions).
 
 The test suite includes:
 
@@ -204,7 +238,8 @@ compliance/
   runner.py               — compliance runner
 
 quickstart/
-  run.py                  — demo, no dependencies
+  run.py                  — I4 demo, no dependencies
+  run_determinism.py      — I5 demo, no dependencies
 
 docs/
   specs/RFC-001-execution-contract.md
@@ -213,11 +248,9 @@ docs/
 
 ---
 
-
 [![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](LICENSE)
 [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
 [![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
-
 
 ---
 
