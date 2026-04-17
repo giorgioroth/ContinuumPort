@@ -125,7 +125,7 @@ The question Volume II answers is the last one Volume I raises:
 
 ## *If it doesn’t constrain execution, it doesn’t persist as D.*
 
-### *Persistence*
+### *PERSISTENCE*
 
 ### 1. **If you don’t know what persists, you don’t understand the system.**
 
@@ -139,7 +139,7 @@ The question Volume II answers is the last one Volume I raises:
 
 ### 6. **Bounded memory is not less memory — it is enforced responsibility.**
 
-### *Authority & Governance*
+### *AUTHORITY & GOVERNANCE*
 
 ### 7. **A boundary that cannot refuse is not a boundary.**
 
@@ -163,7 +163,7 @@ The question Volume II answers is the last one Volume I raises:
 
 ### 17. **Stable systems live between domination and paralysis.**
 
-### *Execution & Direction*
+### *EXECUTION & DIRECTION*
 
 ### 18. **Approval is not execution — infrastructure decides what actually happens.**
 
@@ -181,6 +181,86 @@ It is the constraint that limits what the next valid action can be.***
 ### 23. **When direction is lost, only authority — not automation — can decide what continues.**
 
 ### 24. **Control exists only where unauthorized execution is impossible.**
+
+### *ENFORCEMENT*
+
+### 25. **A gate that can be bypassed has already failed.**
+
+### 26. **Execution is not what the system does. It is what the system allows to become real.**
+
+### 27. **Permission without a registry is assumption. A registry without a gate is decoration.**
+
+### *OBSERVATION & RECOVERY*
+
+### 28. **A system that cannot detect divergence does not know where it is.**
+
+### 29. **Recovery is not the reversal of failure. It is the restoration of the permission to act.**
+
+### 30. **Alignment is not assumed after execution. It is measured.**
+
+### *DECISION & LOOP*
+
+### 31. **Under uncertainty, the correct answer is fewer actions, not more.**
+
+### 32. **A system that initiates its own cycles is not governed — it governs.**
+
+### *INTAKE & DOMAIN*
+
+### 33. **Volume is an attack. Bounded intake is not a limit — it is a defense.**
+
+### 34. **Authority establishes that input may exist. It does not establish what input may do.**
+
+### 35. **A key is not a capability.**
+
+### *COMPOSITION & TIME*
+
+### 36. **A sequence of individually valid actions is not a valid sequence.**
+
+### 37. **The system knows what the state is. It does not know how it got there.**
+
+### *CONTROL PLANE*
+
+### 38. **The control plane decides intent. The execution model enforces possibility. Neither substitutes for the other.**
+
+### *SYSTEM PROPERTIES*
+
+### 39. **A system is verified not when it passes tests, but when its violations are structurally impossible.**
+
+### *ADVISORY PIPELINE*
+
+### 40. **A goal that cannot be evaluated against state is not a goal — it is a wish.**
+
+### 41. **What is desired and what is permitted are different questions.**
+
+### 42. **Structure is the first filter. Everything else comes after.**
+
+### 43. **Simulation is not execution. A candidate that satisfies a goal under simulation may fail under enforcement.**
+
+### 44. **A system with no declared selection policy has a hidden one.**
+
+### 45. **Advisory output narrows what is attempted. Enforcement decides what occurs.**
+
+### *AUTHORITY & INTEGRITY*
+
+### 46. **Origin is not taken from the payload. It is derived from what the payload cannot forge.**
+
+### 47. **A boundary that carries context is not a boundary — it is a channel.**
+
+### *THREAT & FAILURE*
+
+### 48. **Security does not come from prediction. It comes from enforcement.**
+
+### 49. **Safety is conjunctive, not additive. One layer's failure is enough.**
+
+### *ALIGNMENT & TIME*
+
+### 50. **Two transition functions over the same state will diverge. Separation is what makes that safe.**
+
+### 51. **Correctness within a cycle does not compose into correctness across cycles.**
+
+### *LIMITS*
+
+### 52. **A system is not incomplete because it has limits. It is incomplete only if those limits are implicit.**
 
 ---
 
