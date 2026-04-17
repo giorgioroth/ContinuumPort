@@ -103,6 +103,24 @@ AI merely made this architecture impossible to ignore.
 
 ---
 
+**A Note on Structure**
+
+This book contains two volumes in one.
+
+**Volume I — Chapters 1–23** is a conceptual framework. It establishes what persists, how persistence shapes authority, and why execution fails when it is not structurally constrained. It is written for anyone who designs, evaluates, or decides about systems that do not reset. No implementation experience is required.
+
+**Volume II — Chapters 24–52** is a formal specification. It defines an execution model: enforcement primitives, formal properties, adversarial surface, and structural limits. It is written for those who build or audit systems where execution correctness is not optional. It assumes familiarity with Volume I.
+
+The two volumes are not independent.
+
+Volume I establishes the problem. Volume II makes failure structurally impossible within a defined model.
+
+The question Volume II answers is the last one Volume I raises:
+
+*What actually controls execution in a system that never stops running?*
+
+---
+
 ## Operational Principles of Persistent Systems
 
 ## *If it doesn’t constrain execution, it doesn’t persist as D.*
