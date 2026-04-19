@@ -254,7 +254,8 @@ If your system executes, test it.
 
 ## Links
 
-- [Site](https://continuumport.com/)
+- [continuumport.com](https://continuumport.com/)
+- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md)
 - [Blog](https://gi0rgioroth.blogspot.com/)
 - [Whitepaper](https://continuumport.com/wp-content/uploads/2026/04/ContinuumPort.pdf)
 
