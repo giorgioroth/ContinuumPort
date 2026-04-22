@@ -10689,6 +10689,209 @@ crossed implicitly.
 
 ---
 
+# Chapter 53 — Reconciliation
+
+*When Execution Completes but Reality Remains Uncertain*
+
+---
+
+### 53.1 — The Limit of Correct Execution
+
+All prior chapters establish a system that can execute correctly.
+
+Given a valid domain (*D*), admissible actions (*A*), and verified authority (*Auth*), the system guarantees that execution is deterministic, atomic, and constrained. If execution fails, state is preserved. If execution succeeds, state is transformed exactly as defined.
+
+This closes the execution problem.
+
+But it does not close the system.
+
+Because execution does not guarantee that reality reflects the result.
+
+---
+
+### 53.2 — The Missing Question
+
+Until now, the system answers:
+
+*Can this transition be executed?*
+
+Reconciliation introduces a different question:
+
+*Did the world actually become what was executed?*
+
+This question cannot be answered by the execution layer. Execution produces an expected state. Reality produces an observed state. The system must compare the two — and decide what to do with the difference.
+
+---
+
+### 53.3 — Divergence Is Not an Error
+
+The comparison yields three possible outcomes:
+
+`ALIGNED` — observed matches expected.
+`DIVERGED` — observed contradicts expected.
+`UNKNOWN` — observed is incomplete or unavailable.
+
+These are not execution results. They are epistemic states. They describe what the system knows about reality after execution has occurred.
+
+The critical distinction:
+
+Failure belongs to execution. Divergence belongs to reality.
+
+A system can execute without error and still diverge. The two conditions are independent.
+
+---
+
+### 53.4 — Divergence as a First-Class Signal
+
+Divergence is not a side condition. It is not logging. It is not monitoring.
+
+It is a control signal.
+
+No state-mutating decision in cycle *n+1* is valid without first establishing the divergence status of cycle *n*. This is not a best-effort check. It is a structural dependency. The execution result alone is insufficient. The system must carry:
+
+*(expected state, observed state) → divergence status*
+
+This becomes a structural part of every cycle.
+
+---
+
+### 53.5 — The Epistemic Boundary
+
+The system cannot assume complete visibility of reality.
+
+Therefore `UNKNOWN` is a valid and necessary state. It does not mean failure. It does not imply divergence. It means the system does not have sufficient information to determine alignment.
+
+This constraint is not optional. Any system that collapses `UNKNOWN` into either `ALIGNED` or `DIVERGED` introduces false certainty — which is more dangerous than acknowledged ignorance.
+
+---
+
+### 53.6 — From Observation to Decision
+
+Reconciliation introduces a new layer between observation and execution:
+
+*(DivergenceStatus × Context) → Outcome*
+
+Context includes the epistemic state of the system (blocked or clear), the retry count for the current cycle, applicable policy constraints, and the current execution mode.
+
+Outcome is one of five values:
+
+`CONTINUE` — proceed to the next cycle.
+`RETRY` — attempt execution again under defined conditions.
+`ESCALATE` — delegate the decision to an external authority.
+`SKIP` — record and move forward without acting.
+`HALT` — stop execution.
+
+Outcome is binding for the next cycle. It is not a recommendation. It is a constraint on what execution may attempt.
+
+This is not execution logic. It is decision logic under uncertainty. The two must remain structurally separate.
+
+---
+
+### 53.7 — Default Invariant: Fail-Closed
+
+In the absence of an explicit policy, the system defaults to:
+
+`DIVERGED` → `HALT`
+`UNKNOWN` → `SKIP`
+`ALIGNED` → `CONTINUE`
+
+This is not arbitrary. It encodes a principle: uncertainty must not produce irreversible state transitions. A system that continues acting under unresolved divergence is not robust — it is reckless. The conservative default forces the decision surface outward, to human judgment or explicit policy, rather than absorbing it silently into automation.
+
+---
+
+### 53.8 — Epistemic Veto
+
+When `DIVERGED` is detected, the system enters a blocked state.
+
+While blocked, no further execution is permitted.
+
+This is not a safety feature layered on top of the architecture. It is a logical necessity embedded in it. If the system cannot trust its own state, it cannot justify further transitions. The veto is not a pause — it is a structural refusal.
+
+The blocked state is not advisory. It is enforced at the execution boundary.
+
+Policy cannot override the epistemic veto implicitly. Override requires explicit design and explicit justification. A system that silently bypasses this constraint has not solved the problem. It has concealed it.
+
+The veto is cleared only through deliberate external action. The system does not define when that action is appropriate. It only enforces that, without it, execution does not resume.
+
+---
+
+### 53.9 — The Reconciliation Cycle
+
+A full system cycle now consists of six stages:
+
+1. Propose actions (simulation against current state)
+2. Execute (atomic commit or full rollback)
+3. Observe reality (acquire the observed state)
+4. Assess divergence (compare expected and observed)
+5. Apply reconciliation policy (determine the outcome)
+6. Record the cycle (produce a CycleRecord)
+
+The CycleRecord is immutable and timestamped. It contains the actions proposed, the expected state after execution, the observed state, the divergence status, the policy outcome, and the full context at the moment of decision.
+
+CycleRecord is not an audit artifact. It is part of the system state boundary. It participates in the correctness of the system, not merely in its observability.
+
+The system is now traceable not only in what it executed, but in what it decided — and why.
+
+---
+
+### 53.10 — Separation of Concerns
+
+Reconciliation does not modify execution. Execution MUST NOT depend on reconciliation outcomes.
+
+Execution remains pure, deterministic, and authority-bound. It answers one question: was this transition valid?
+
+Reconciliation is interpretive, contextual, and policy-driven. It answers a different question: can the result be trusted?
+
+This separation is not a convenience. It is a structural requirement. A system that conflates execution correctness with epistemic certainty has no mechanism to detect the gap between them — which is precisely where silent failure lives.
+
+---
+
+### 53.11 — The System After Reconciliation
+
+Before reconciliation, the system is an execution engine. It transforms state under constraint.
+
+After reconciliation, the system controls not only execution but the continuity of execution. It determines not only what can be done, but whether it is legitimate to continue doing it.
+
+The system now knows what it intended, what it executed, what actually happened, whether it can trust the result, and what to do next.
+
+---
+
+### 53.12 — The Structural Shift
+
+This chapter changes the nature of the system.
+
+It is no longer only a machine that transforms state correctly. It becomes a system that reasons about the relationship between its own execution and external reality.
+
+That reasoning is bounded and formal. It does not introduce interpretation into execution. It introduces a separate, structured layer whose sole purpose is to evaluate alignment and constrain what follows.
+
+---
+
+### 53.13 — What Remains Open
+
+Reconciliation does not resolve how to recover from divergence once `HALT` has been reached. It does not define how to re-plan when the cause of divergence is unknown. It does not address how multiple systems with conflicting observations reconcile their respective views of reality. It does not specify how epistemic state should persist or degrade across cycles.
+
+These are not extensions of reconciliation. They are new problems, requiring new layers.
+
+One limit that reconciliation itself does not solve: the reconciliation policy can be incorrectly configured. A policy that maps `DIVERGED` to `CONTINUE` does not produce a failure in the execution layer — it produces a failure of judgment. The system enforces what is declared. It does not validate whether what was declared is sound.
+
+Who reconciles the reconciler remains an open question.
+
+---
+
+### 53.14 — Closing
+
+Execution answers: *what can be done.*
+
+Reconciliation answers: *what can be trusted.*
+
+A system without execution cannot act. A system without reconciliation cannot know whether its actions produced the reality it intended — or something else entirely.
+
+The gap between those two is not an edge case.
+
+It is where systems fail silently, accumulate invisible divergence, and eventually produce outcomes that no single execution step caused, but that the absence of epistemic awareness made possible.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
