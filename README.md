@@ -1,169 +1,201 @@
 # ContinuumPort
 
-**Execution is not implicit. It is enforced.**
+Your system failed.
 
-Enforced execution continuity across models, sessions, and environments.
-
----
-
-## The problem
-
-Most systems execute. They cannot prove that execution remains valid after failure.
-
-When a batch of actions partially succeeds and then fails, most systems leave
-the partial result committed. There is no rollback. There is no structural detection.
-The system continues from a state it cannot justify.
-
-This is not a bug in any one implementation. It is the default behavior when
-execution correctness is not structurally enforced.
-
-ContinuumPort makes these failure modes unexecutable under enforcement.
+What guarantees that nothing changed?
 
 ---
 
-## Run this
+Most systems can't answer that.
+
+ContinuumPort can.
+
+```
+Failure should not change state.
+In most systems, it does.
+We made that structurally impossible.
+```
+
+---
+
+## What this means in practice
+
+A batch of actions runs. Action 1 succeeds. Action 2 fails.
+
+**Default behavior:** Action 1 is committed. The state is now partially modified. The system continues from a state it cannot justify.
+
+**ContinuumPort:** Full rollback. The state is identical to what it was before the batch started. No residue. No residual state.
+
+This is not convention. It is enforcement.
+
+---
+
+## Run locally
 
 ```bash
 git clone https://github.com/giorgioroth/ContinuumPort
 cd ContinuumPort/quickstart
 
-# I2 — domain integrity (invalid input never becomes executable)
-python run_address_invariant.py
-
-# I4 — atomicity (no partial state escape)
+# No partial state escape
 python run.py
 
-# I5 — determinism (same input → same output)
+# Same input → same output, always
 python run_determinism.py
-````
 
-Runs in seconds. No dependencies.
+# Invalid input never becomes executable
+python run_address_invariant.py
+```
+
+No dependencies. Runs in seconds.
 
 ---
 
-## Output — I2 (domain integrity)
+## What the output shows
+
+**I4 — No partial state escape**
 
 ```
-============================================================
-CONTINUUMPORT — ADDRESS INVARIANT DEMO
-Invariant: I2 — Domain Integrity
-============================================================
+[FaultyAdapter — no rollback]
+State after failure: {'account': 'active', 'balance': 100, 'processed': True}
+✗ VIOLATED — partial state escaped
 
-Scenario: an address is submitted for execution.
-One is valid. One contains a minimal corruption — a single uppercase character.
-
-  [NaiveSystem — superficial validation]
-  valid_addr     accepted: True
-  corrupted_addr accepted: True
-  ✗ I2 VIOLATED — structurally invalid address entered execution domain
-
-  [StrictSystem — structural validation]
-  valid_addr     accepted: True
-  corrupted_addr accepted: False
-  ✓ I2 ENFORCED — corrupted address removed from execution domain
+[ContinuumPort — atomic rollback]
+State after failure: {'account': 'active', 'balance': 100}
+✓ ENFORCED — rollback complete
 ```
 
----
-
-**invalid address → execution never becomes admissible**
-
-The system does not reject the action.
-The action does not exist.
-
----
-
-## Output — I4 (partial state escape)
+**I5 — Determinism**
 
 ```
-============================================================
-CONTINUUMPORT — EXECUTION INVARIANT DEMO
-Invariant: I4 — No partial state escape
-============================================================
+[FaultyAdapter]
+Run 1: {'x': 2}   Run 2: {'x': 1}
+✗ VIOLATED — same input, different outputs
 
-Scenario: a batch of two actions is submitted.
-Action 1 succeeds. Action 2 fails.
-A compliant system must behave atomically: all or nothing.
-
-  [FaultyAdapter    — no rollback]
-  Committed   : False
-  State before: {'account': 'active', 'balance': 100}
-  State after : {'account': 'active', 'balance': 100, 'processed': True}
-  ✗ I4 VIOLATED — partial state escaped
-
-  [ReferenceAdapter — atomic rollback]
-  Committed   : False
-  State before: {'account': 'active', 'balance': 100}
-  State after : {'account': 'active', 'balance': 100}
-  ✓ I4 ENFORCED — rollback complete
+[ContinuumPort]
+Run 1: {'x': 2}   Run 2: {'x': 2}
+✓ ENFORCED — identical output
 ```
 
-Execution failure is not the problem.
-Invalid state after failure is.
-
----
-
-## Output — I5 (deterministic outcome)
+**I2 — Domain integrity**
 
 ```
-============================================================
-CONTINUUMPORT — DETERMINISM DEMO
-Invariant: I5 — Deterministic outcome
-============================================================
+[NaiveSystem]
+corrupted_addr accepted: True
+✗ VIOLATED — invalid input entered execution
 
-Scenario: identical input is executed twice from identical state.
-
-  [FaultyAdapter    — order-dependent execution]
-  Run 1 result: {'x': 2}
-  Run 2 result: {'x': 1}
-  ✗ I5 VIOLATED — same input, different outputs
-
-  [ReferenceAdapter — declared order enforced]
-  Run 1 result: {'x': 2}
-  Run 2 result: {'x': 2}
-  ✓ I5 ENFORCED — identical output
+[ContinuumPort]
+corrupted_addr accepted: False
+✓ ENFORCED — invalid input never became admissible
 ```
 
 ---
 
-## Structural result
+## Guaranteed properties
 
-Across these three demos:
+Every state transition is enforced against:
 
-* invalid input is accepted
-* execution becomes inconsistent
-* state becomes corrupted
+| Property | Guarantee |
+|---|---|
+| I1 — No unauthorized execution | Authority gate cannot be bypassed |
+| I2 — No out-of-domain execution | Invalid input is structurally inadmissible |
+| I3 — No invalid state transition | Geometry constraints enforced before commit |
+| I4 — No partial state escape | Full rollback or full commit, nothing in between |
+| I5 — Deterministic outcome | Same input + same state = same result, always |
 
-ContinuumPort eliminates all three — structurally.
+If any invariant is violated, execution does not occur.
+
+---
+
+## What the tests confirm
+
+**705 tests. 0 failures (reference implementation).**
+
+Including:
+
+- Concurrent execution under load
+- Replay attacks
+- State drift injection
+- Geometry swap attacks
+- Capability rebinding
+- Hash canonicalization attacks
+- Cross-cycle state traps
+- Authority enforcement under adversarial pressure
+
+These are not unit tests. They are a closed adversarial threat model.
+
+Test suite — 705 passing.
+
+<img width="2789" height="1557" alt="image" src="https://github.com/user-attachments/assets/b3027e4f-9952-4d70-a9aa-3130ba831bf9" />
+
+---
+
+## What cannot happen under enforcement
+
+- Partial execution leaving residual state
+- Non-deterministic outcomes from identical inputs
+- Invalid input entering the execution domain
+- State corruption after failure
+- Authority bypass under concurrent load
+- Unauthorized state transitions
+
+These outcomes are not detected.
+They are structurally unreachable.
+
+---
+
+## Scope and limits
+
+ContinuumPort enforces correctness of execution under declared constraints.
+
+It does not guarantee:
+
+- Correctness of intent
+- Correctness of declared constraints
+- External side effects beyond the execution boundary
+
+These limits are explicit and documented.
 
 ---
 
 ## What this is
 
-ContinuumPort is an execution validity protocol.
+ContinuumPort is an execution control kernel for persistent systems.
 
-It enforces that state transitions cannot violate declared invariants across time,
-even when execution spans multiple models, sessions, or environments.
+It enforces that state transitions cannot violate declared invariants — across models, sessions, and environments.
 
-ContinuumPort defines continuity of state.
-Regen Engine enforces that continuity at execution time.
+**Regen Engine** is the enforcement layer. **ContinuumPort** is the protocol.
+
+Execution is formally constrained:
+
+```
+Σ = (D, A, Auth)
+execute(α) ⟺ authorize(G, α)
+```
+
+No state transition exists outside the authorization gate.
 
 ---
 
-## Core invariants
+## Where This Actually Matters
 
-Every transition must satisfy:
+ContinuumPort is not a theoretical construct.
 
-* **I1 — No unauthorized execution**
-* **I2 — No out-of-domain execution**
-* **I3 — No invalid state transition**
-* **I4 — No partial state escape**
-* **I5 — Deterministic outcome**
+It is required wherever incorrect execution produces irreversible consequences.
 
-If any invariant is violated:
+Invalid execution is not rejected. It is unreachable.
 
-```
-execution is rejected
-```
+→ See: [Where Regen Engine Belongs](docs/where_regen_engine_belongs.md)
+
+Concrete domains where structural execution control is not optional:
+
+- autonomous systems — no recovery from invalid execution at speed
+- agentic AI — prevents long-term state corruption
+- industrial / medical systems — no partial failure tolerance
+- neural interfaces — no safe fallback once execution commits
+
+If your system can tolerate incorrect execution, you do not need this.
+
+If it cannot, you already do.
 
 ---
 
@@ -179,70 +211,33 @@ class RegenAdapter(ABC):
 
 ---
 
-## What the tests cover
-
-Full invariant suite (651 tests):
-
----
-
-<img width="2382" height="1256" alt="image" src="https://github.com/user-attachments/assets/af421bf5-51cd-4232-8954-a09d683ce67e" />
-
-
-0 invariant violations (reference implementation under adversarial conditions).
-
----
-
-## What cannot happen
-
-Under enforcement:
-
-* partial execution
-* non-determinism
-* invalid input entering execution
-* state corruption after failure
-
-These are structurally impossible.
-
----
-
-## Scope and limits
-
-ContinuumPort enforces correctness of execution under declared constraints.
-
-It does not guarantee:
-
-* correctness of intent
-* correctness of constraints
-* external side effects
-
----
-
 ## Repository structure
 
 ```
-compliance/
-quickstart/
-  run.py
-  run_determinism.py
-  run_address_invariant.py
+regen-engine/     — execution kernel (Python)
+compliance/       — invariant validation suite
+quickstart/       — runnable demos
+docs/             — formal specification
+spec/             — model and properties
+normative/        — canonical definitions
 ```
 
 ---
 
-## Final
+## Further reading
 
-Execution either commits correctly —
-or does not happen.
-
-There is no residual state.
+- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (52 chapters)
+- [Whitepaper](https://continuumport.com/wp-content/uploads/2026/04/ContinuumPort.pdf) — formal model
+- [Blog](https://gi0rgioroth.blogspot.com/) — philosophy and context
+- [continuumport.com](https://continuumport.com)
 
 ---
 
-## Access
+## Contact
 
 If your system executes, test it.
 
-→ [access@continuumport.com](mailto:access@continuumport.com)
+→ access@continuumport.com
 
 ---
 
@@ -250,17 +245,4 @@ If your system executes, test it.
 [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
 [![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
 
----
-
-## Links
-
-- [continuumport.com](https://continuumport.com/)
-- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md)
-- [Blog](https://gi0rgioroth.blogspot.com/)
-- [Whitepaper](https://continuumport.com/wp-content/uploads/2026/04/ContinuumPort.pdf)
-
----
-
-## Author
-
-Gh. Rotaru (Giorgio Roth) — Independent researcher
+*Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026*
