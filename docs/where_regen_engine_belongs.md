@@ -116,4 +116,14 @@ It enforces the consequences of your declarations.
 
 *Giorgio Roth — 2026*
 
-*Related: [Execution Control Paper](https://ssrn.com/abstract=6533358) · [ContinuumPort](https://github.com/giorgioroth/ContinuumPort)*
+---
+
+ *[ContinuumPort](https://github.com/giorgioroth/ContinuumPort)*
+
+*Related: [Execution Control Paper (SSRN)](https://ssrn.com/abstract=6533358)*
+
+*Run it: [github.com/giorgioroth/ContinuumPort/tree/main/quickstart](https://github.com/giorgioroth/ContinuumPort/tree/main/quickstart)*
+
+*Read it: https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md*
+
+
