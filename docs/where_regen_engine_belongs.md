@@ -1,8 +1,8 @@
 # Where Regen Engine Belongs
 
-Regen Engine is not an academic construct.
+Regen Engine is not optional.
 
-It is required wherever incorrect execution produces irreversible consequences.
+It becomes necessary wherever incorrect execution produces irreversible consequences.
 
 ---
 
@@ -10,7 +10,7 @@ It is required wherever incorrect execution produces irreversible consequences.
 
 Any system where incorrect execution produces **irreversible consequences** needs structural execution control — not better error handling, not smarter monitoring, not more robust retry logic.
 
-Structural control. At the geometry level.
+Control must exist at the geometry level — or it does not exist at all.
 
 ---
 
@@ -36,7 +36,9 @@ There is no recovery from invalid execution at 130 km/h.
 
 When an AI agent makes autonomous decisions in persistent systems, the problem is precisely what Regen Engine addresses: partial execution, state drift, incomplete rollback.
 
-Without structural control, the system eventually corrupts itself.
+Without structural control, persistent agents eventually corrupt their own state.
+
+This is not a failure mode. It is an eventual outcome.
 
 CP-Core + Regen Engine as the execution layer means:
 
@@ -95,7 +97,7 @@ Not better error handling.
 Not smarter monitoring.
 Not more robust retry logic.
 
-A system where invalid execution cannot exist.
+A system in which invalid execution is not handled — it is impossible.
 
 ---
 
@@ -108,7 +110,7 @@ Undeclared risks are not blocked.
 The geometry is the responsibility of the engineer who defines it.
 
 The engine does not validate the world.
-It enforces the consequences of what you declare.
+It enforces the consequences of your declarations.
 
 ---
 
