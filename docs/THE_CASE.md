@@ -5,9 +5,9 @@ Your agent executed two actions.
 Action 1 succeeded.  
 Action 2 failed.
 
-**What exactly happened to your state?**
+**What is your system's state now?**
 
-Can you prove it?
+Not what you think. What you can prove.
 
 ---
 
@@ -18,25 +18,26 @@ Can you prove it?
 
 State before: {'account': 'active', 'balance': 100}
 
-Action 1: set processed = True   → OK
-Action 2: transfer funds         → FAILED
+Execution:
+  Action 1: processed = True   → OK
+  Action 2: transfer funds     → FAILED
 
 State after:  {'account': 'active', 'balance': 100, 'processed': True}
 
-✗ VIOLATED — partial state escaped
+✗ VIOLATION — partial state escaped
 ```
 
 The system reported failure.  
-The state changed anyway.
+The state mutated anyway.
 
-You don't know what committed.  
-You don't know what didn't.
+You now have no valid snapshot:
 
-Retry is unsafe.  
-Continuation is unsafe.
+- You cannot assert what committed
+- You cannot safely retry
+- You cannot safely continue
 
-This is not an edge case.  
-This is how most systems behave under failure.
+This is not a corner case.  
+**This is the default failure mode of non-atomic systems.**
 
 ---
 
@@ -47,20 +48,21 @@ This is how most systems behave under failure.
 
 State before: {'account': 'active', 'balance': 100}
 
-Action 1: set processed = True   → OK
-Action 2: transfer funds         → FAILED
+Execution:
+  Action 1: processed = True   → OK
+  Action 2: transfer funds     → FAILED
 
 State after:  {'account': 'active', 'balance': 100}
 
-✓ ENFORCED — rollback complete, state identical to pre-execution
+✓ ENFORCED — state invariance under failure
 ```
 
-Failure happened.  
-Nothing changed.
+Failure occurred.  
+No state transition survived.
 
 Not by retry logic.  
-Not by error handling.  
-State integrity is preserved.
+Not by compensating actions.  
+Not by post-hoc cleanup.
 
 **By construction.**
 
@@ -74,19 +76,19 @@ cd ContinuumPort/quickstart
 python run.py
 ```
 
-No dependencies. Output in seconds.
+No dependencies. Deterministic output in seconds.
 
 ---
 
 ## What this means for your system
 
-When your agent fails mid-task:
+When execution fails mid-task:
 
-- Do you know the exact state after failure?
-- Can you prove nothing partially committed?
-- Can you retry without risk of corruption?
+- Can you reconstruct the exact state?
+- Can you prove absence of partial commits?
+- Can you retry without semantic drift?
 
-If any answer is no — your system is already operating on undefined state.
+If any answer is no — your system is already operating on **undefined state space**.
 
 ---
 
@@ -96,19 +98,24 @@ If any answer is no — your system is already operating on undefined state.
 execute(α) ⟺ authorize(G, α)
 ```
 
-If a transition is not authorized by the declared geometry, it cannot occur.
+A transition exists iff it is permitted by the declared execution geometry.
 
-Not detected after the fact. Not rolled back later. **Not reachable.**
+- Not detected after execution
+- Not corrected after failure
+- **Not reachable**
 
 ---
 
-## If you've already had the incident
+## If you've already seen the failure
 
-You know what partial state costs.
+Then you already know:
+
+Partial state is not a bug.  
+**It is a structural leak.**
 
 → access@continuumport.com  
-→ https://github.com/giorgioroth/ContinuumPort  
-→ Formal model: https://doi.org/10.17605/OSF.IO/AZEC2
+→ [ContinuumPort](https://github.com/giorgioroth/ContinuumPort)  
+→ [Formal model/DOI](https://doi.org/10.17605/OSF.IO/AZEC2)
 
 ---
 
