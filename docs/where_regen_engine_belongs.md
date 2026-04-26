@@ -118,9 +118,11 @@ It enforces the consequences of your declarations.
 
 ---
 
- *[ContinuumPort](https://github.com/giorgioroth/ContinuumPort)*
+> SSRN: https://ssrn.com/abstract=6533358
 
-*Related: [Execution Control Paper (SSRN)](https://ssrn.com/abstract=6533358)*
+> DOI: https://doi.org/10.17605/OSF.IO/AZEC2
+
+> Internet Archive: https://archive.org/details/osf-registrations-azec2-v1
 
 *Run it: [github.com/giorgioroth/ContinuumPort/tree/main/quickstart](https://github.com/giorgioroth/ContinuumPort/tree/main/quickstart)*
 
