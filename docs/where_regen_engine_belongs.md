@@ -118,14 +118,13 @@ It enforces the consequences of your declarations.
 
 ---
 
-> SSRN: https://ssrn.com/abstract=6533358
+- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (53 chapters)
+- [Formal paper — SSRN](https://ssrn.com/abstract=6533358) — peer-accessible preprint
+- [Registered — OSF](https://osf.io/azec2)
+- [DOI: 10.17605/OSF.IO/AZEC2](https://doi.org/10.17605/OSF.IO/AZEC2)
+- [Archived — Internet Archive](https://archive.org/details/osf-registrations-azec2-v1)
+- [Blog](https://gi0rgioroth.blogspot.com/) — philosophy and context
+- [continuumport.com](https://continuumport.com)
 
-> DOI: https://doi.org/10.17605/OSF.IO/AZEC2
-
-> Internet Archive: https://archive.org/details/osf-registrations-azec2-v1
-
-*Run it: [github.com/giorgioroth/ContinuumPort/tree/main/quickstart](https://github.com/giorgioroth/ContinuumPort/tree/main/quickstart)*
-
-*Read it: https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md*
 
 
