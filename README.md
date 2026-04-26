@@ -123,9 +123,9 @@ Including:
 
 These are not unit tests. They are a closed adversarial threat model.
 
-Test suite — 705 passing.
+Test suite — 705 passing
 
-<img width="2789" height="1557" alt="image" src="https://github.com/user-attachments/assets/b3027e4f-9952-4d70-a9aa-3130ba831bf9" />
+<img width="2789" height="1557" alt="image" src="https://github.com/user-attachments/assets/fe536435-afe6-48e8-a2bc-988e75b2896a" />
 
 ---
 
@@ -226,8 +226,11 @@ normative/        — canonical definitions
 
 ## Further reading
 
-- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (52 chapters)
-- [Whitepaper](https://continuumport.com/wp-content/uploads/2026/04/ContinuumPort.pdf) — formal model
+- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (53 chapters)
+- [Formal paper — SSRN](https://ssrn.com/abstract=6533358) — peer-accessible preprint
+- [Registered — OSF](https://osf.io/azec2)
+- [DOI: 10.17605/OSF.IO/AZEC2](https://doi.org/10.17605/OSF.IO/AZEC2)
+- [Archived — Internet Archive](https://archive.org/details/osf-registrations-azec2-v1)
 - [Blog](https://gi0rgioroth.blogspot.com/) — philosophy and context
 - [continuumport.com](https://continuumport.com)
 
