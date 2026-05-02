@@ -10892,6 +10892,250 @@ It is where systems fail silently, accumulate invisible divergence, and eventual
 
 ---
 
+# Chapter 54 — Policy Constraints
+
+*What the system must never do.*
+
+---
+
+### 54.1 — The Remaining Risk
+
+Chapter 53 closes a problem that prior chapters did not ask.
+
+Execution answers: was this transition valid?
+
+Reconciliation answers: can the result be trusted?
+
+But a third question remains unanswered.
+
+Given what the system knows about reality — what is it allowed to do next?
+
+This is not an execution question. It is not a reconciliation question.
+
+It is a constraint on the reactions that uncertainty permits.
+
+Until this constraint exists, the system may detect divergence correctly, assess epistemic state correctly, and still behave dangerously. The failure is no longer in execution. It is in decision.
+
+A system that knows it cannot trust its state, and continues anyway, has not failed to detect a problem. It has failed to respond to one.
+
+---
+
+### 54.2 — Policy as a New Failure Surface
+
+Reconciliation introduces a policy function:
+
+```
+(DivergenceStatus × Context) → Outcome
+```
+
+Chapter 53 defines five possible outcomes: CONTINUE, RETRY, ESCALATE, SKIP, HALT.
+
+It also defines a default mapping — the fail-closed invariant that governs behavior in the absence of explicit configuration. But it does not define which mappings are structurally inadmissible.
+
+The following policy is syntactically valid:
+
+```
+DIVERGED → CONTINUE
+```
+
+It does not violate execution. It does not violate reconciliation. The system detected divergence correctly. The policy simply ignores the detection.
+
+This is not an execution failure. It is a policy failure. And the execution model, as defined through Chapter 53, has no mechanism to prevent it.
+
+Policy is the remaining failure surface.
+
+---
+
+### 54.3 — The Constraint Layer
+
+Policy constraints are not policy.
+
+They are a layer above policy that enforces what any policy must respect — independent of what the policy is configured to do, independent of the current state, and independent of the reconciliation outcome that triggered it.
+
+Constraints do not define what the system should do. They define what the system is not permitted to do.
+
+The distinction is structural. Policy expresses judgment under uncertainty. Constraints express the limits within which all judgment must operate.
+
+A policy that violates a constraint is not wrong in its intent. It is structurally inadmissible. The system rejects it before applying it.
+
+---
+
+### 54.4 — Constraint I1: Divergence Must Not Continue
+
+When the system has confirmed evidence of divergence:
+
+```
+DIVERGED → {HALT, ESCALATE}
+```
+
+The following outcomes are forbidden:
+
+```
+DIVERGED → CONTINUE
+DIVERGED → SKIP
+```
+
+Continuing under known divergence is not optimism. It is state mutation applied to a foundation the system has declared untrusted. The execution layer commits real transitions. A policy that permits this under DIVERGED converts epistemic uncertainty into irreversible effects.
+
+CONTINUE under DIVERGED violates the boundary that reconciliation exists to enforce.
+
+SKIP under DIVERGED is subtler but structurally equivalent. It does not act, but it moves forward. The next cycle begins without resolving the detected contradiction. The divergence is not acknowledged — it is passed over. Over time, this produces the silent accumulation that Chapter 53 was introduced to prevent.
+
+Both are inadmissible.
+
+---
+
+### 54.5 — Constraint I2: Uncertainty Must Propagate Outward
+
+When the system lacks sufficient information to establish alignment:
+
+```
+UNKNOWN → {HALT, SKIP, ESCALATE}
+```
+
+The following outcome is forbidden:
+
+```
+UNKNOWN → CONTINUE
+```
+
+Uncertainty is not a permissive state. It is an epistemic state. The system does not know whether what it executed matches reality. Acting as if it does is not recovery — it is assumption dressed as continuation.
+
+The correct response to UNKNOWN is to move the decision outward. Either halt and wait, skip and record, or escalate to a layer with more information. In none of these cases does the system proceed as if alignment were confirmed.
+
+UNKNOWN must not be absorbed into execution. It must be surfaced.
+
+---
+
+### 54.6 — Constraint I3: Permissiveness Must Not Increase With Uncertainty
+
+A valid policy satisfies a monotonicity condition: as epistemic certainty decreases, the set of allowed outcomes must not expand.
+
+A policy of the form:
+
+```
+ALIGNED → HALT
+UNKNOWN → CONTINUE
+```
+
+is not merely unusual. It is structurally inverted. It responds more cautiously to confirmed alignment than to unresolved uncertainty. This policy cannot be the result of careful judgment — it is the result of misconfiguration, and the system must reject it.
+
+This constraint does not dictate how conservative the policy must be. It only requires that conservatism does not decrease as certainty decreases.
+
+---
+
+### 54.7 — Static Validation
+
+Policy constraints are evaluated before the policy is used.
+
+Validation is structural: it does not execute transitions, observe state, or simulate runtime behavior. It inspects the policy's mapping across known inputs and verifies that no mapping violates I1, I2, or I3.
+
+A policy that fails validation is not applied. The system raises a policy error at construction time, not at execution time.
+
+This is not a runtime guard. It is a pre-admission check. A policy that cannot be admitted cannot cause runtime failures by design — because it never reaches the point where it would be consulted.
+
+The preferred implementation, realized in `policy_constraints.py`, runs this check when a `_ReconciliationPolicy` is constructed. An invalid policy does not exist operationally. It is rejected at the boundary.
+
+---
+
+### 54.8 — Dynamic Enforcement
+
+Static validation eliminates known-bad policies before use. Dynamic enforcement handles what static analysis cannot: policies that are structurally valid in general but produce inadmissible outcomes in specific runtime contexts.
+
+At each cycle, after the policy returns an outcome, the constraint layer verifies:
+
+```
+outcome = policy(status, context)
+assert constraints(outcome, status)
+```
+
+If the outcome violates a constraint:
+
+- execution is halted
+- a policy error is raised
+- no state is mutated
+
+The system does not attempt to correct the outcome. It does not fall back to a default. It refuses to apply what cannot be applied safely, and stops.
+
+This enforcement is realized in `PolicyConstraints.enforce()` in the production system. The function takes the verdict, the context, and the outcome, and raises immediately if any structural invariant is violated. There is no fallback. There is no silent substitution.
+
+---
+
+### 54.9 — Ownership of Policy Errors
+
+Policy errors are not execution errors. They are not geometry errors. They are not authority errors.
+
+They belong to the constraint layer — to the module that defines and enforces what policies are structurally permitted to do.
+
+This ownership is not cosmetic. The error taxonomy of the system (realized in `execution/errors.py`) assigns `PolicyError` to the module that raises it, not to the module where the policy is defined. The constraint layer raises policy errors because it is the enforcement point. The policy definition layer defines the mapping. The constraint layer verifies it.
+
+This separation maintains the invariant established in Chapter 39.12: error type identifies failure origin. A `PolicyError` means the constraint layer rejected an outcome or a policy configuration. It does not mean execution failed. It does not mean reconciliation failed. It means the system refused to act on what it was told to do.
+
+---
+
+### 54.10 — What Constraints Do Not Guarantee
+
+Policy constraints enforce structural safety under uncertainty.
+
+They do not guarantee:
+
+- that the policy is wise
+- that HALT is the right response in a given context
+- that ESCALATE will reach a system capable of resolving the divergence
+- that SKIP is safe in the current business domain
+- that the constraint configuration is complete
+
+The constraints define what the system must never do. They leave open the full space of what it may do within those limits.
+
+Correctness of judgment remains outside the model. This is not a gap — it is a boundary (Ch. 52.3). A system that enforces I1, I2, and I3 under DIVERGED and UNKNOWN is not guaranteed to recover correctly. It is guaranteed not to make things worse by acting blindly.
+
+That is not nothing. It is the difference between a system that fails safely and one that fails silently.
+
+---
+
+### 54.11 — Separation of Concerns
+
+This chapter introduces a fourth distinct concern, below execution and reconciliation and above raw policy:
+
+Execution enforces geometry, authority, and atomicity.
+Reconciliation determines epistemic state.
+Policy determines the next action under that state.
+Policy constraints enforce what reactions to uncertainty are structurally admissible.
+
+Each layer is independent. No layer compensates for the failure of another. A correct execution does not fix a bad policy. A correct reconciliation does not fix an unconstrained policy reaction. The constraint layer does not fix incorrect policies — it refuses them.
+
+The layering is strict. This is what makes it tractable. Each layer has a defined responsibility and cannot acquire the responsibility of another.
+
+---
+
+### 54.12 — Closure
+
+Chapter 53 closed with an open question:
+
+*Who reconciles the reconciler?*
+
+The answer is not another layer of observation. It is not a meta-reconciliation function. It is not a smarter policy.
+
+It is constraint.
+
+The reconciler is not trusted to produce safe outcomes. It is constrained to produce only outcomes that the system has agreed to accept under conditions of uncertainty.
+
+Reconciliation answers: what can be trusted?
+
+Policy answers: what should happen next?
+
+Policy constraints answer: what must never happen?
+
+The system does not guarantee correct decisions.
+
+It guarantees that incorrect decisions cannot violate structural safety.
+
+The reconciler is not reconciled.
+
+It is bounded.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
