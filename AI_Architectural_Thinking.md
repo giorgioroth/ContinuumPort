@@ -11136,6 +11136,172 @@ It is bounded.
 
 ---
 
+## Chapter 55 — Persistence
+
+*What remains after closure.*
+
+---
+
+### 55.1 — The Unresolved Condition
+
+Chapter 54 bounds the admissible reactions to uncertainty.
+
+Execution is bounded. Reconciliation is bounded. Policy is bounded. Constraint is bounded.
+
+The system is not.
+
+The model defines what is allowed within a cycle. It does not define what persists across cycles.
+
+---
+
+### 55.2 — Closure Is Local
+
+Closure applies to a cycle.
+
+A cycle ends. The system continues.
+
+State persists. The next cycle begins from it.
+
+Closure does not prevent continuation.
+
+---
+
+### 55.3 — No Final State
+
+The model defines no terminal state.
+
+HALT is not termination. It is refusal under current conditions.
+
+The system remains capable of further execution.
+
+A halted system is not a completed system.
+
+---
+
+### 55.4 — Correctness Does Not Transfer
+
+A correct transition produces a state.
+
+The next transition starts from it.
+
+Correctness does not transfer.
+
+Each step is evaluated independently. There is no invariant of accumulated correctness.
+
+---
+
+### 55.5 — Guarantees Are Per Cycle
+
+All guarantees in Chapters 27–54 hold within a cycle.
+
+Atomicity. Authority. Reconciliation. Constraint.
+
+They hold at the boundary.
+
+They do not extend beyond it.
+
+The next cycle is a new evaluation.
+
+---
+
+### 55.6 — State Persists. Guarantees Do Not.
+
+State carries forward.
+
+Guarantees do not.
+
+A state produced under valid execution may become misaligned under new context. A state accepted under reconciliation may later diverge.
+
+Persistence preserves state.
+
+It does not preserve alignment.
+
+---
+
+### 55.7 — Risk Is Reintroduced
+
+Each cycle begins under uncertainty.
+
+External conditions change. Internal state accumulates.
+
+Constraints prevent invalid reactions. They do not remove the conditions that produce them.
+
+Risk is not eliminated.
+
+It is re-evaluated.
+
+---
+
+### 55.8 — No Global Reconciliation
+
+Reconciliation is local.
+
+It compares expected and observed state at a boundary.
+
+There is no reconciliation of the system as a whole. No point exists at which the system can assert global alignment.
+
+Such a statement is not defined by the model.
+
+---
+
+### 55.9 — The Model Does Not Run
+
+The model defines constraints, invariants, allowed transitions.
+
+The system executes state mutation, time progression, interaction with external processes.
+
+The model is static. Execution is not.
+
+Correctness in the model does not imply correctness over time.
+
+---
+
+### 55.10 — Execution Exceeds Description
+
+The model is finite.
+
+Execution is not fully captured by the model's scope.
+
+New states arise. New contexts emerge. Prior assumptions become insufficient without becoming false.
+
+The model constrains what it describes.
+
+It does not describe all that occurs.
+
+---
+
+### 55.11 — Time as Adversary
+
+Failure is not introduced only by invalid transitions.
+
+It is introduced by continuation.
+
+Assumptions decay. State accumulates. External systems change.
+
+Time does not violate constraints.
+
+It erodes the conditions under which they were sufficient.
+
+---
+
+### 55.12 — Closure
+
+The model closes.
+
+The system does not.
+
+Each step is bounded. The sequence is not.
+
+Correctness is enforced locally. It is not preserved globally.
+
+What is correct now is not preserved by continuation.
+
+The system is not solved.
+
+It is sustained.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
