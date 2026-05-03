@@ -11470,9 +11470,20 @@ And responsibility cannot be delegated to execution.
 
 ---
 
-**If it can’t prove it, it won’t do it.**
+*This book does not resolve persistent systems.*
 
-— Giorgio Roth
-2026
+*It defines what can be enforced within them.*
+
+*Execution can be constrained. Authority can be bounded. Unsafe reactions can be prevented.*
+
+*What persists cannot be fully governed.*
+
+*The system continues beyond its guarantees.*
+
+*It is not solved.*
+
+***It is sustained.***
+
+Giorgio Roth / 2026
 
 
