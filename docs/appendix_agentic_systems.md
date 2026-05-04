@@ -233,7 +233,8 @@ individual actions.
 In systems of this class, permissions are enforced at the individual tool call
 level. Authority is local — it applies to the action, not to the sequence.
 
-Formally, let A be the set of permitted actions. Authority is enforced such that:
+Formally, let A be the set of permitted actions and let ∘ denote
+sequential composition of actions. Authority is enforced such that:
 
 ```
 ∀a ∈ A: allowed(a)
@@ -248,15 +249,18 @@ However, there exists a sequence (a₁, ..., aₙ) where:
 but:
 
 ```
-composition(a₁, ..., aₙ) ∉ A*
+a₁ ∘ a₂ ∘ ... ∘ aₙ ∉ A*
 ```
 
-where A* denotes admissible state transformations under policy.
+where A* denotes the set of admissible state transformations under policy —
+the closure of permitted behaviors at the system level.
 
 No local permission model can prevent this class of violation without evaluating
-the composed effect of the sequence. Therefore, any authority model defined over
-A that is not closed under composition is insufficient for enforcing global
-constraints. The permission model is not closed under composition.
+the composed effect of the sequence. Therefore, any authority model defined
+purely over atomic actions that is not closed under composition is insufficient
+for enforcing global constraints. This is not a property of a specific policy,
+but of any authority model defined at the action level rather than the sequence
+level. The permission model is not closed under composition.
 
 ### The concrete scenario
 
@@ -311,10 +315,12 @@ The fix is not better validation. Not better rollback. Not better permissions.
 
 - prefix-closure holds: if a sequence is admissible, all its prefixes are admissible
 - admissibility is decidable before execution, not after
+- composition preserves admissibility: if two sequences are individually admissible
+  under the current state, their composition is evaluated for admissibility before commitment
 - no transition produces externally visible state prior to global validation
 
-Restricting execution to such a geometry makes corruption structurally unreachable
-— not prevented, not detected, not recovered.
+Under these constraints, no admissible execution path leads to a corrupted state.
+Corruption becomes structurally unreachable — not prevented, not detected, not recovered.
 
 Unreachable.
 
@@ -330,7 +336,7 @@ class ExecutionBoundary:
         # I2: structural pre-validation against geometry
         assert self.geometry.valid(transition)
         # I5: sequence-level authority evaluation
-        assert self.authority.allowed(context)
+        assert self.authority.allowed_sequence(context)
 
         # I3: stage transition — do not commit yet
         result = self._stage(transition)
