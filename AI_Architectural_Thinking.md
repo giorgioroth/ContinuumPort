@@ -11209,8 +11209,6 @@ Correctness is enforced locally. It is not preserved globally.
 
 What is correct now is not preserved by continuation.
 
-***The system is not solved - It is sustained.***
-
 ---
 
 ## Afterword — Where the Questions Came From
