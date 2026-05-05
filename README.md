@@ -123,9 +123,9 @@ Including:
 
 These are not unit tests. They are a closed adversarial threat model.
 
-Test suite — 705 passing
+Test suite — Tests: 823/823 passing
 
-<img width="2789" height="1557" alt="image" src="https://github.com/user-attachments/assets/fe536435-afe6-48e8-a2bc-988e75b2896a" />
+<img width="2937" height="1584" alt="image" src="https://github.com/user-attachments/assets/3eb7e441-a700-4110-867f-b4bd32cf3ab2" />
 
 ---
 
