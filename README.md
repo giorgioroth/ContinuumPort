@@ -108,7 +108,7 @@ If any invariant is violated, execution does not occur.
 
 ## What the tests confirm
 
-**705 tests. 0 failures (reference implementation).**
+**823 tests. 0 failures (reference implementation).**
 
 Including:
 
