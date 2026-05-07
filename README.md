@@ -226,10 +226,9 @@ normative/        — canonical definitions
 
 ## Further reading
 
-- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (53 chapters)
+- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (55 chapters)
 - [Formal paper — SSRN](https://ssrn.com/abstract=6533358) — peer-accessible preprint
-- [Registered — OSF](https://osf.io/azec2)
-- [DOI: 10.17605/OSF.IO/AZEC2](https://doi.org/10.17605/OSF.IO/AZEC2)
+- [Registered — OSF](https://osf.io/b8sgr/overview)
 - [Archived — Internet Archive](https://archive.org/details/osf-registrations-azec2-v1)
 - [Blog](https://gi0rgioroth.blogspot.com/) — philosophy and context
 - [continuumport.com](https://continuumport.com)
