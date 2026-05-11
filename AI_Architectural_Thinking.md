@@ -11471,6 +11471,684 @@ They cannot be disabled, overridden, or configured away.*
 
 ---
 
+## Chapter 57 — External Adversarial Attack Taxonomy
+
+### 57.0 — Introduction
+
+Chapters 24–56 establish the execution model, its structural invariants, and the kernel-level enforcement constraints (I1–I3). Those chapters address the question: *what must hold for execution to be admissible?*
+
+Chapter 57 addresses a different question: *in how many structurally distinct ways can admissibility be destroyed from outside the enforcement boundary?*
+
+This is not a security chapter in the conventional sense. It does not classify attackers, exploits, or threat actors. It classifies **failure modes of the admissibility basis** — the conditions under which the epistemic, temporal, structural, and authority foundations required for admissible continuation can be degraded or destroyed.
+
+The central insight of this chapter is that inadmissibility is not a single phenomenon. It is a family of structurally distinct contractions of the admissible execution space, each arising from a different failure of the conditions that make continuation legitimate.
+
+**The fundamental principle:**
+
+> *Admissibility is not a permanent property of a past verdict. It is a relation — evaluated continuously against the current epistemic, temporal, structural, and authority context.*
+
+Or equivalently:
+
+> *Admissibility is continuously re-earned, never permanently inherited.*
+
+All eight attack classes in this chapter demonstrate this principle from a different angle.
+
+---
+
+### 57.1 — Stale Observation Replay
+
+**What is attacked:** The freshness of the observation verdict.
+
+**Attack:** An adversary captures a valid CONFIRMED verdict and replays it into a context where the epistemic basis has changed — geometry mutation, state drift, or authority change.
+
+**Structural failure:** The verdict was valid in context G₁ but is replayed in context G₂. The epistemic basis from which the verdict was derived no longer exists.
+
+**Formal property violated:**
+
+> *A verdict is admissible only relative to the execution context from which it was derived.*
+
+**Enforcement:** `DivergenceRecord.is_stale(current_geometry_version)` returns `True` when the originating geometry version differs from the current context. Stale verdicts cannot authorize continuation.
+
+**Central claim:**
+
+> *Local validity ≠ current admissibility.*
+
+**What the tests verify:** That a CONFIRMED verdict from geometry G₁ is stale in G₂, that staleness detection is symmetric and context-relative, and that stale verdicts cannot produce CONTINUE.
+
+---
+
+### 57.2 — Observation Starvation
+
+**What is attacked:** The presence of observation.
+
+**Attack:** The adversary suppresses, delays, or blocks the observation channel entirely. No fresh verdict can be produced. The system is pressured to continue without observation.
+
+**Structural failure:** Without observation, admissibility cannot be established. Continuation without an admissibility basis is structurally inadmissible.
+
+**Formal property violated (I3):**
+
+```
+V = INSUFFICIENT_DATA ⟹ O ≠ CONTINUE
+```
+
+**Enforcement:** `reconcile(observed_state=None)` produces `INSUFFICIENT_DATA`. `PolicyConstraints.enforce()` raises `PolicyError` (I3) for any `CONTINUE` outcome.
+
+**Key distinction from 57.1:**
+
+| 57.1 | 57.2 |
+|---|---|
+| Verdict exists but is stale | Verdict cannot be produced |
+| Invalid observation reused | Valid observation unavailable |
+| Context mismatch | Epistemic absence |
+
+**Central claim:**
+
+> *Absence of evidence is not evidence of admissibility. Observation starvation contracts CONTINUE out of the admissible outcome set.*
+
+**What the tests verify:** That `None` observation produces `INSUFFICIENT_DATA`, that I3 holds regardless of retry count or execution mode, and that partial observation (non-None) produces DIVERGED, not INSUFFICIENT_DATA.
+
+---
+
+### 57.3 — Delayed Divergence Injection
+
+**What is attacked:** The temporal validity of the admissibility basis.
+
+**Attack:** The adversary allows a valid execution to complete, then injects divergence *after* validation but *before* or *during* observation. The validation was legitimate; the divergence is introduced in the window between commit and reconciliation.
+
+**Timeline:**
+```
+T1: execution validates and commits
+T2: external mutation injected
+T3: observation captures mutated state → DIVERGED
+```
+
+**Structural failure:** A validated execution is not permanently admissible. External state evolution after commit invalidates the admissibility basis of the next cycle.
+
+**Formal property violated:**
+
+> *Admissibility is temporally bounded. Validation does not survive uncontrolled state evolution.*
+
+**Key distinction from 57.1:**
+
+| 57.1 | 57.3 |
+|---|---|
+| Verdict is stale | Verdict captured current state |
+| Context changed before observation | State changed after commit |
+| Stale basis | Temporally displaced invalidation |
+
+**Enforcement:** `reconcile(expected, observed)` detects hash mismatch → DIVERGED. I1 blocks CONTINUE.
+
+**Central claim:**
+
+> *A validated execution that is followed by uncontrolled external mutation is no longer admissible. CONFIRMED at T1 does not imply admissibility at T2.*
+
+**What the tests verify:** TOCTOU (pre-commit) vs delayed injection (post-commit) are structurally distinct. Admissibility is not inherited across cycles. Detection does not require knowing the injection source.
+
+---
+
+### 57.4 — Partial Epistemic Corruption
+
+**What is attacked:** The integrity of the observation content.
+
+**Attack:** The adversary does not suppress observation (57.2) or delay it (57.3). Instead, it corrupts the observation partially — some fields correct, some corrupted — hoping that partial correctness implies partial admissibility.
+
+**Structural failure:** Admissibility is binary, not statistical. Any mismatch between expected and observed state produces DIVERGED. There is no "partially admissible" state.
+
+**Key property:**
+
+> *Admissibility is not democratic. A single corrupted field invalidates the entire reconciliation.*
+
+**Forms of partial corruption:**
+- Mixed state: some fields correct, others corrupted → DIVERGED
+- Extra field injection → DIVERGED
+- Field removal → DIVERGED
+- Type confusion (int vs float, str vs int) → DIVERGED
+- Veto suppression: attempting `clear()` without active veto → RuntimeError
+
+**Epistemic veto hysteresis:**
+
+Once DIVERGED activates the veto, subsequent CONFIRMED verdicts cannot suppress it. Resolution requires explicit `clear()` with operator acknowledgment. This prevents *confirmation flooding* — an attack where many CONFIRMED verdicts are sent to overwrite a legitimate veto.
+
+**Central claim:**
+
+> *Partial corruption of the epistemic basis must not produce artificial admissibility. Admissibility cannot be manufactured through selective observation corruption.*
+
+**What the tests verify:** Majority-correct fields still produce DIVERGED. Veto requires explicit resolution. CONFIRMED updates cannot suppress veto. Detection is hash-based and source-agnostic.
+
+---
+
+### 57.5 — Authority Desync
+
+**What is attacked:** The temporal validity of the authority context.
+
+**Attack:** The adversary exploits a gap between authority validation (T1) and execution (T2). The authority context used to authorize an action at T1 is no longer the authority context active at T2.
+
+**Forms of authority desync:**
+- Key rotation: signing key changed between proposal and execution
+- Signer removal: signer revoked from authority context
+- Context substitution: different authority context presented at execution
+
+**Structural failure:** Authority is a relation to the current execution context, not a permanent property of a past authorization grant.
+
+**Formal property:**
+
+> *Previous authorization does not imply current admissibility. Authority is context-bound.*
+
+**Enforcement:** `AuthorityContext.get_key(signer_id)` raises `AuthorityError` for unknown signers. `AuthorityGate.verify()` uses constant-time HMAC comparison. `AuthorityError ≠ GeometryError` — distinct structural layers.
+
+**Connection to Lemma 6.1:** Local authority (per-action authorization) does not compose to global authority. A signer authorized at step 1 is not automatically authorized at step 2 in a different context.
+
+**Central claim:**
+
+> *Authorization has temporal scope. A past authorization grant does not survive authority context change.*
+
+**What the tests verify:** Signer removal invalidates all prior authorizations. Key rotation produces independent, non-interchangeable contexts. Authority failure is binary and action-content-independent.
+
+---
+
+### 57.6 — Rollback Desynchronization
+
+**What is attacked:** The realization of the rollback guarantee.
+
+**Attack:** The system reports `ROLLED_BACK` but the actual post-execution state does not match the pre-execution snapshot. Rollback is acknowledged but not realized.
+
+**Forms of rollback desync:**
+- Phantom rollback: `ROLLED_BACK` reported, state unchanged
+- Partial rollback: some mutations survive (e.g., protected fields not restored)
+- Snapshot drift: snapshot taken from already-mutated state (reference leak)
+- External effect residue: external side effects survive internal rollback
+
+**Structural failure:** `ROLLED_BACK` is a declared status, not a structural guarantee beyond the managed execution boundary. The guarantee is:
+
+> *Internal state is restored to the pre-execution snapshot. External effects are outside this guarantee.*
+
+This is explicitly documented in `EXECUTION_MODEL_LIMITS.md §2.3`.
+
+**Snapshot contract:** `env.snapshot()` must return an isolated deep copy, not a reference. If it returns a reference, mutations after the snapshot will corrupt the snapshot itself — making rollback restore the mutated state.
+
+**Detection:** Post-rollback state reconciled against pre-execution snapshot. Any mismatch → DIVERGED → I1 contracts CONTINUE.
+
+**Central claim:**
+
+> *ROLLED_BACK status does not guarantee pre-execution state identity without correct snapshot isolation. Rollback desync is detectable via structural reconciliation.*
+
+**What the tests verify:** Reference-leaking snapshots drift. Deep copy snapshots are stable. Partial rollback residue is detected as DIVERGED. External effects survive internal rollback by design.
+
+---
+
+### 57.7 — Concurrent Verdict Races
+
+**What is attacked:** The causal ordering of verdicts.
+
+**Attack:** The adversary attempts to exploit temporal gaps in verdict processing — sending a CONFIRMED verdict to "race" against a DIVERGED verdict for the same execution cycle, hoping that CONFIRMED arrives last and suppresses the veto.
+
+**Structural failure:** The Regen model is explicitly single-cycle-sequential. Verdict ordering is causal. The most conservative verdict governs.
+
+**Fail-closed verdict resolution:**
+
+```
+DIVERGED wins over CONFIRMED in any order.
+```
+
+| Order | Result |
+|---|---|
+| CONFIRMED → DIVERGED | veto active |
+| DIVERGED → CONFIRMED | veto active (persists) |
+
+**Veto persistence:** Once DIVERGED activates the epistemic veto, subsequent CONFIRMED verdicts cannot suppress it. The veto is sticky by design — it models the property that a system that has experienced confirmed divergence cannot self-certify recovery.
+
+**Immutability:** `DivergenceRecord` is a frozen dataclass. Individual verdicts cannot be mutated after creation.
+
+**Concurrency property:** `reconcile()` is a pure function — no shared state, safe for concurrent calls. `EpistemicState` processes verdicts sequentially; concurrent reads are non-mutating.
+
+**Central claim:**
+
+> *DIVERGED always wins. The most conservative verdict governs. Fail-closed under race conditions.*
+
+**What the tests verify:** DIVERGED persists regardless of verdict order. Confirmation flooding cannot suppress veto. Concurrent reconciliation calls are race-free. Verdict immutability prevents post-creation mutation.
+
+---
+
+### 57.8 — Geometry Poisoning
+
+**What is attacked:** The root of trust of the admissibility model.
+
+**Attack:** The adversary attempts to modify the declared execution geometry — removing invariants, adding undeclared action types, weakening preconditions, or substituting a less restrictive geometry — to expand the admissible execution space without the signing key.
+
+This is the most fundamental attack in the taxonomy. In 57.1–57.7, the geometry was assumed to be correct. The attacks degraded the epistemic, temporal, authority, or recovery conditions *within* a valid geometry. In 57.8, the adversary targets the geometry itself — the structure that defines what execution is admissible at all.
+
+**Formal connection:**
+
+```
+G_F(S) is derived from signed geometry.
+A poisoned geometry collapses all downstream admissibility.
+```
+
+**Enforcement:**
+
+The geometry is signed with HMAC-SHA256 using a constant-time comparison (`hmac.compare_digest`). Any modification to geometry content — geometry_id, invariants, actions, action preconditions — produces a canonical content mismatch and signature verification failure.
+
+```
+canonical_content(G) → HMAC-SHA256(key) → signature
+Any content change → signature invalid → AuthorityError
+```
+
+**Properties of the HMAC-based signing:**
+- Action order does not affect canonical content (actions sorted by name)
+- Signature field is excluded from canonical content (no circular dependency)
+- Signature is key-dependent: same content, different keys → different signatures
+- Constant-time comparison prevents timing attacks
+
+**The structural consequence:**
+
+> *Without the signing key, the admissible execution space cannot be expanded. Any attempt to expand G_F(S) by modifying the geometry requires re-signing — which requires the key.*
+
+**What the tests verify:** Tampering with geometry_id, invariants, or actions invalidates the signature. Signature stripping fails. Random signatures fail. Forgery with wrong key fails. `AuthorityGate.verify()` rejects all poisoned geometries. `AuthorityError ≠ GeometryError` — the distinction is preserved.
+
+**Central claim:**
+
+> *Geometry is the root of trust for the entire admissibility model. A poisoned geometry — one presented without a valid signature — is rejected before any execution can proceed. The admissible execution space cannot be expanded without the signing key.*
+
+---
+
+### 57.9 — Synthesis: The Admissibility Failure Taxonomy
+
+Chapter 57 demonstrates that inadmissibility is not a single phenomenon. It is a family of structurally distinct failure modes, each destroying a different precondition for admissible continuation:
+
+| Chapter | Failure mode | What is destroyed | Invariant enforced |
+|---|---|---|---|
+| 57.1 | Stale observation replay | Contextual validity | geometry_version binding |
+| 57.2 | Observation starvation | Epistemic sufficiency | I3 |
+| 57.3 | Delayed divergence injection | Temporal continuity | I1 + TOCTOU |
+| 57.4 | Partial epistemic corruption | Structural integrity | Hash + veto hysteresis |
+| 57.5 | Authority desync | Executive legitimacy | HMAC + AuthorityError |
+| 57.6 | Rollback desynchronization | Recovery reality | Snapshot isolation |
+| 57.7 | Concurrent verdict races | Causal ordering | Veto persistence |
+| 57.8 | Geometry poisoning | Root of trust | Signature verification |
+
+**The convergence property:** All eight failure modes contract the admissible outcome set toward the same result — CONTINUE becomes inadmissible. The mechanisms differ; the structural consequence is the same.
+
+**The orthoghonality property:** Each failure mode targets a distinct structural layer. They are not variations of the same vulnerability — they are independent axes of admissibility degradation.
+
+**The fail-closed property:** In all cases, uncertainty contracts the admissible execution space. It does not expand it. This is the authority contraction principle from Chapter 56:
+
+```
+U(V₁) ≥ U(V₂)  ⟹  A(V₁) ⊆ A(V₂)
+```
+
+Higher uncertainty → fewer admissible outcomes.
+
+---
+
+### 57.10 — What Chapter 57 Does Not Claim
+
+This chapter does not:
+
+- **Claim exhaustiveness.** The eight failure modes are not a complete catalog of all possible attacks. They are a structured taxonomy of the primary structural axes along which admissibility can degrade.
+- **Address Byzantine adversaries.** The model assumes deterministic sequential transitions. Adversaries that control the execution environment itself are outside scope.
+- **Address probabilistic attacks.** The model is deterministic. Probabilistic manipulation of verdict distributions is outside the formal model.
+- **Replace security engineering.** These are structural properties of the execution model. Deployment security — key management, network security, access control — is the responsibility of the integrating system.
+
+These limits are explicit and documented in `EXECUTION_MODEL_LIMITS.md`.
+
+---
+
+*Chapter 57 provides the adversarial witness for the enforcement model established in Chapters 24–56. The 228 adversarial tests across eight attack classes constitute a constructive demonstration that the invariants hold under systematic external pressure.*
+
+*Reference implementation: Regen Engine (proprietary). Test suite: `tests/test_ch57_*.py`.* 
+
+---
+
+<img width="2952" height="1684" alt="image" src="https://github.com/user-attachments/assets/43d82527-ebd4-42ce-8fe1-507b209d1a01" />
+
+---
+
+## Chapter 58 — Execution Geometry Under Physical Irreversibility
+
+There is a class of system in which the standard assumption fails.
+
+Not partially. Not under edge conditions. Structurally.
+
+The assumption is this: that recovery, while not guaranteed, remains economically feasible. Restarts are cheap. Patching is possible. Operators can intervene. Redundancy masks inconsistency.
+
+Chapters 24–57 were written under this assumption.
+
+Chapter 58 removes it.
+
+---
+
+### 58.0 — Motivation
+
+The setting is not hypothetical.
+
+Persistent autonomous systems deployed in physically constrained environments — autonomous industrial systems, remote robotic deployments, long-duration probes, orbital infrastructure — face structural conditions that eliminate or severely degrade the recovery options that software engineering typically relies on:
+
+- **Latency.** Authority propagation takes seconds, minutes, or longer.
+- **Energy bounds.** Computation and verification consume finite, non-replenishable resources.
+- **Observation discontinuity.** Telemetry windows are interrupted by eclipse, interference, or partition.
+- **Physical irreversibility.** Certain transitions modify physical state in ways that internal rollback cannot undo.
+- **Recovery cost.** Human intervention is expensive, delayed, or impossible.
+
+Under these conditions, the framework established in Chapters 24–57 does not break.
+
+It becomes more important.
+
+**Central thesis:**
+
+> *As recovery latency and physical irreversibility increase, execution-space restriction transitions from optimization to necessity.*
+
+This chapter is a speculative extension — a formal stress test of the framework under conditions of maximum physical constraint. The core results remain those of Chapters 24–57.
+
+Chapter 58 asks a single question:
+
+*What do those results mean when there is no recovery?*
+
+---
+
+### 58.1 — Physical Irreversibility vs. Logical Rollback
+
+The execution model guarantees:
+
+> *Internal state is restored to the pre-execution snapshot upon rollback.*
+
+This guarantee is complete within the managed execution boundary.
+
+It has always been conditional on one implicit assumption: that the system's internal state is the relevant state.
+
+In physically embedded systems, this assumption may not hold.
+
+**Definition 58.1 (Physical side effect).** A side effect `e` of transition `t` is *physically irreversible* if there exists no sequence of subsequent transitions that returns the physical system to its pre-`t` physical configuration, regardless of internal state.
+
+Examples:
+
+- Combustion of propellant changes velocity. No internal rollback reverses the delta-v.
+- Actuation of a physical mechanism consumes mechanical wear.
+- Transmission of a signal produces effects in the receiving system.
+- Degradation of hardware under thermal or radiation stress accumulates irreversibly.
+
+**Proposition 58.1 (Rollback asymmetry).**
+
+```
+rollback_status = ROLLED_BACK
+does not imply
+physical_system_state = pre_execution_state
+```
+
+This is not a failure of the model.
+
+It is an explicit non-guarantee, documented in `EXECUTION_MODEL_LIMITS.md §2.3`.
+
+What changes in physically embedded contexts is the *cost* of this gap — and therefore the strategic importance of preventing execution from reaching the failure point at all.
+
+In systems with physical irreversibility, the value of execution geometry is not primarily *recovery*.
+
+It is *prevention*.
+
+The goal shifts from:
+
+```
+execute → observe → recover if needed
+```
+
+to:
+
+```
+restrict → admit only recoverable sequences → execute
+```
+
+This is the structural shift that Chapter 58 formalizes.
+
+---
+
+### 58.2 — Latency-Bound Authority
+
+Chapter 57.5 establishes that authority is context-bound: a prior authorization does not survive authority context change.
+
+The enforcement assumes that authority re-validation is instantaneous or near-instantaneous relative to execution.
+
+In systems with significant propagation delay, this assumption degrades.
+
+**Definition 58.2 (Authority propagation delay).** Let `Δ_auth` be the time between an authority context change — key rotation, signer revocation, policy update — and the arrival of that change at a remote execution node.
+
+During `Δ_auth`, the remote node operates under a stale authority context. It does not know its context is stale. From its local perspective, all authority checks pass.
+
+**Proposition 58.2 (Latency-bound authority validity).** In systems with authority propagation delay `Δ_auth > 0`, there exists a window during which:
+
+```
+local_authority_check  =  valid
+global_authority_state =  revoked
+```
+
+This temporal gap cannot be eliminated by local enforcement alone. It requires either:
+
+1. Bounding the propagation delay — architectural constraint.
+2. Bounding the execution horizon to less than `Δ_auth` — operational constraint.
+3. Accepting that authority is valid only as of last known context — epistemic constraint.
+
+The epistemic constraint formulation is the most compatible with the ContinuumPort model:
+
+> *Authority is valid relative to the last received and verified authority context. Execution under authority not re-confirmed within a declared freshness window is treated as `UNKNOWN` for policy purposes.*
+
+This connects directly to the authority contraction principle from Chapter 56:
+
+```
+U(V₁) ≥ U(V₂)  ⟹  A(V₁) ⊆ A(V₂)
+```
+
+Unconfirmed authority increases uncertainty.
+
+Uncertainty contracts admissibility.
+
+---
+
+### 58.3 — Observation Horizons
+
+Chapter 57.2 establishes observation starvation: when the observation channel is absent, `INSUFFICIENT_DATA` contracts `CONTINUE` out of the admissible outcome set.
+
+In physically embedded systems, observation discontinuity is structural, not adversarial.
+
+Eclipse periods, communication windows, sensor degradation, and network partition create *observation horizons* — bounded intervals during which the system cannot receive external observation.
+
+**Definition 58.3 (Observation horizon).** An observation horizon `H = [t₁, t₂]` is an interval during which the observation channel produces `None`. During `H`, all verdicts are `INSUFFICIENT_DATA`.
+
+**Proposition 58.3 (Horizon-induced admissibility contraction).** During an observation horizon, `CONTINUE` is structurally inadmissible (I3). The admissible outcome set contracts to `{HALT, SKIP, ESCALATE}`.
+
+Operational consequences:
+
+- Systems must be designed to operate safely under `HALT` or `SKIP` during horizon intervals.
+- Actions with irreversible physical side effects must not be scheduled during predicted horizon windows.
+- Execution geometry must be defined over the observable state — not the inferred state.
+
+The observation horizon constraint is therefore a design constraint on the execution geometry itself:
+
+> *Geometries that require continuous observation for safety enforcement are inadmissible in systems with known observation horizons.*
+
+This is a meta-level constraint: not just what the system may execute, but what geometries the system may declare.
+
+---
+
+### 58.4 — Distributed Geometry Drift
+
+In single-node systems, the execution geometry is a fixed, signed structure verified at construction time.
+
+In distributed multi-node systems, geometry propagation introduces a new failure mode: nodes may operate under geometries that are locally valid but globally inconsistent.
+
+**Definition 58.4 (Geometry version vector).** In a distributed execution system with nodes `N₁, ..., Nₖ`, let `G(Nᵢ, t)` denote the geometry active at node `Nᵢ` at time `t`. Distributed geometry drift occurs when:
+
+```
+∃ i, j, t : G(Nᵢ, t) ≠ G(Nⱼ, t)
+```
+
+while both nodes believe their geometry is current.
+
+Causes of drift:
+
+- Asynchronous geometry updates with propagation delay.
+- Network partition during geometry rotation.
+- Selective delivery — some nodes receive the update, others do not.
+- Replay of stale signed geometry (cf. Chapter 57.1).
+
+**Consequence.** Nodes executing under different geometries define different admissible execution spaces. A transition admissible under `G(N₁, t)` may be inadmissible under `G(N₂, t)`. Coordinated execution — where nodes contribute to shared state — produces inconsistent admissibility decisions.
+
+This is not Byzantine failure.
+
+The nodes are not compromised. They are correctly executing their local geometry.
+
+The failure is in the distributed consensus of which geometry is current.
+
+Nodes executing under inconsistent geometries are not adversaries.
+
+They are correct nodes in divergent admissibility spaces.
+
+**Containment requirement.** Distributed systems using execution geometry must include a geometry consensus mechanism — a protocol ensuring that all nodes execute under the same signed geometry before any state-affecting transition is committed to shared state. The ContinuumPort model provides the local enforcement. The consensus layer is a deployment requirement outside the present model.
+
+---
+
+### 58.5 — Non-Recoverable Divergence
+
+Chapter 57.3 establishes that divergence detected after commit contracts admissibility. The recovery path — `clear()`, re-observation, re-establishment of admissibility — is assumed to be available, if expensive.
+
+In physically embedded systems with constrained resources, certain divergence states may be *non-recoverable* — not because of logical impossibility, but because the resources required for recovery are exhausted, unavailable, or physically inaccessible.
+
+**Definition 58.5 (Non-recoverable divergence).** A divergence state `d` is *non-recoverable* in system `S` if the transitions required to restore admissibility from `d` are:
+
+1. Physically impossible — required resources do not exist.
+2. Energetically infeasible — required energy exceeds available energy.
+3. Temporally inaccessible — required action window has passed.
+4. Logistically impossible — required operator intervention cannot occur.
+
+**Proposition 58.5.** In systems where non-recoverable divergence is possible, execution geometry restriction is not an optimization.
+
+It is a precondition for survivable operation.
+
+This elevates the significance of Theorem 9.1:
+
+> *A persistent execution system is free of partial state corruption if and only if its realized execution set is confined to `G_F(S)`.*
+
+In systems where divergence may be non-recoverable, this is not merely a correctness statement.
+
+It is the condition under which the system remains operable at all.
+
+---
+
+### 58.6 — Admissibility Under Resource Bounds
+
+The execution model assumes that admissibility verification is computationally negligible relative to execution.
+
+In resource-constrained systems, verification itself has cost.
+
+**Definition 58.6 (Bounded verification geometry).** A geometry `G` is *feasible under energy bound `E`* if the computational cost of verifying admissibility for any candidate transition does not exceed a fraction `α` of `E`, where `α` is a declared system parameter.
+
+**The verification cost problem.** If admissibility verification consumes energy `E_v` and execution consumes energy `E_x`, and total available energy is `E_total`:
+
+- Increasing verification depth reduces execution capacity.
+- Reducing verification depth increases execution risk.
+
+This introduces a resource dimension to geometry design absent from the base model. It does not change the fundamental characterization results — `G_F(S)` remains the necessary and sufficient restriction — but it constrains which geometries are operationally deployable.
+
+Geometry design for resource-constrained systems must balance:
+
+- Completeness of invariant coverage.
+- Computational cost of verification.
+- Residual risk from unchecked conditions.
+
+The present framework defines the target.
+
+Bounded verification defines the achievable approximation.
+
+These are not the same thing. The gap between them is an engineering problem, not a formal one.
+
+---
+
+### 58.7 — The Physical Necessity Principle
+
+The preceding sections establish a progression:
+
+| Condition | Status of geometry restriction |
+|---|---|
+| Recovery cheap, latency low | Optimization — reduces recovery cost |
+| Recovery expensive, latency moderate | Architectural requirement |
+| Recovery impossible, latency high | Operational necessity |
+
+**Principle 58.7 (Physical Necessity Principle).** Let `S` be a persistent execution system with physically irreversible side effects, authority propagation delay `Δ_auth > 0`, and observation horizons. As recovery cost `C_r → ∞` and `Δ_auth → ∞`, the admissibility framework transitions from an engineering choice to an operational necessity.
+
+*Informal statement:* In systems where mistakes cannot be corrected, restriction of executable transitions to the admissible execution space is one of the few mechanisms capable of acting prior to irreversible execution.
+
+There is no fallback.
+
+This principle does not introduce new formal content. It applies the existing characterization to a limiting case.
+
+It identifies why the framework becomes more relevant, not less, as autonomy increases and environments become more constrained.
+
+---
+
+### 58.8 — Scope and Non-Guarantees
+
+Chapter 58 extends the conceptual framework of Chapters 24–57 to physically embedded contexts.
+
+It does not:
+
+- Provide a deployed implementation for embedded or constrained systems.
+- Address domain-specific engineering challenges — thermal management, radiation hardening, structural dynamics.
+- Replace systems engineering with formal admissibility theory.
+- Claim that execution geometry alone suffices for safety in physically embedded systems.
+
+The formal results of Chapters 24–57 remain the foundation.
+
+Chapter 58 identifies the conditions under which those results become operationally critical rather than merely theoretically sound.
+
+**The central non-guarantee:**
+
+> *The model enforces what is declared. Undeclared physical risks are not blocked.*
+
+This is consistent with `EXECUTION_MODEL_LIMITS.md §3`.
+
+A geometry is only as strong as its declaration.
+
+The engineer who defines it bears the responsibility the model does not.
+
+---
+
+### 58.9 — Relation to Prior Chapters
+
+| Chapter | Concept | Extension in Ch. 58 |
+|---|---|---|
+| Ch. 28 | Observation layer | Observation horizons as structural design constraint |
+| Ch. 57.2 | Observation starvation | Horizon-induced starvation as predictable and inevitable |
+| Ch. 57.3 | Delayed divergence | Physical irreversibility as permanent, non-recoverable divergence |
+| Ch. 57.5 | Authority desync | Latency-bound authority validity window |
+| Ch. 57.6 | Rollback desync | Physical rollback impossibility |
+| Ch. 57.8 | Geometry poisoning | Distributed geometry drift under asynchronous propagation |
+| Ch. 56 | Authority contraction | Extended to resource bounds and propagation latency |
+
+Chapter 58 does not introduce new invariants.
+
+It applies the existing framework to conditions that eliminate the safety nets that make invariant violations merely expensive rather than catastrophic.
+
+---
+
+### 58.10 — Derived Principles
+
+The following are consequences, not assumptions.
+
+**Prevention over recovery.** In physically irreversible systems, the value of execution geometry is structural prevention. Recovery is not a fallback — it may not exist.
+
+**Uncertainty contracts admissibility.** Under observation horizons or stale authority, the admissible execution space contracts. Not expands. This is the authority contraction principle applied to physical constraint.
+
+**Geometry drift is not Byzantine.** Nodes executing under inconsistent geometries are not compromised. They are correctly executing locally valid but globally inconsistent admissibility spaces. This requires a consensus layer, not a security layer.
+
+**Verification has cost.** In resource-constrained systems, admissibility verification competes with execution for energy. Geometry design must be bounded accordingly. The gap between the formal target and the achievable approximation is real and must be declared.
+
+**Precondition for survivable operation.** In systems where divergence may be non-recoverable, `G_F(S)` restriction is the condition under which the system remains operable. The formal result does not change. Its operational weight does.
+
+---
+
+*Chapter 58 began from a simple observation: in some environments, rollback does not exist as a practical option.*
+
+*The rest followed from the model.*
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
