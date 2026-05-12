@@ -11805,86 +11805,51 @@ These limits are explicit and documented in `EXECUTION_MODEL_LIMITS.md`.
 
 ## Chapter 58 — Execution Geometry Under Physical Irreversibility
 
-There is a class of system in which the standard assumption fails.
-
-Not partially. Not under edge conditions. Structurally.
-
-The assumption is this: that recovery, while not guaranteed, remains economically feasible. Restarts are cheap. Patching is possible. Operators can intervene. Redundancy masks inconsistency.
-
-Chapters 24–57 were written under this assumption.
-
-Chapter 58 removes it.
-
----
-
 ### 58.0 — Motivation
 
-The setting is not hypothetical.
+Chapters 24–57 develop the execution model, its structural invariants, and a taxonomy of eight failure modes under which admissibility degrades. Throughout, a background assumption holds: that recovery, while not guaranteed, is at least economically feasible. Restarts are cheap. Patching is possible. Operators can intervene. Redundancy masks inconsistency.
 
-Persistent autonomous systems deployed in physically constrained environments — autonomous industrial systems, remote robotic deployments, long-duration probes, orbital infrastructure — face structural conditions that eliminate or severely degrade the recovery options that software engineering typically relies on:
+Chapter 58 examines what happens to the execution model when this assumption fails.
 
-- **Latency.** Authority propagation takes seconds, minutes, or longer.
-- **Energy bounds.** Computation and verification consume finite, non-replenishable resources.
-- **Observation discontinuity.** Telemetry windows are interrupted by eclipse, interference, or partition.
-- **Physical irreversibility.** Certain transitions modify physical state in ways that internal rollback cannot undo.
-- **Recovery cost.** Human intervention is expensive, delayed, or impossible.
+The setting is not hypothetical. Persistent autonomous systems deployed in physically constrained environments — orbital infrastructure, autonomous industrial systems, remote robotic deployments, long-duration probes — face structural conditions that eliminate or severely degrade the recovery options that software engineering typically relies on:
 
-Under these conditions, the framework established in Chapters 24–57 does not break.
+- **Latency**: authority propagation takes seconds, minutes, or longer
+- **Energy bounds**: computation and verification consume finite, non-replenishable resources
+- **Observation discontinuity**: telemetry windows are interrupted by eclipse, interference, or network partition
+- **Physical irreversibility**: certain transitions modify physical state in ways that internal rollback cannot undo
+- **Recovery cost**: human intervention is expensive, delayed, or impossible
 
-It becomes more important.
+Under these conditions, the framework established in Chapters 24–57 does not break. It becomes more important.
 
-**Central thesis:**
+**Central thesis of Chapter 58:**
 
 > *As recovery latency and physical irreversibility increase, execution-space restriction transitions from optimization to necessity.*
 
-This chapter is a speculative extension — a formal stress test of the framework under conditions of maximum physical constraint. The core results remain those of Chapters 24–57.
-
-Chapter 58 asks a single question:
-
-*What do those results mean when there is no recovery?*
-
 ---
 
-### 58.1 — Physical Irreversibility vs. Logical Rollback
+### 58.1 — Physical Irreversibility vs Logical Rollback
 
 The execution model guarantees:
 
 > *Internal state is restored to the pre-execution snapshot upon rollback.*
 
-This guarantee is complete within the managed execution boundary.
-
-It has always been conditional on one implicit assumption: that the system's internal state is the relevant state.
+This guarantee is complete within the managed execution boundary. It has always been conditional on one implicit assumption: that the system's internal state is the relevant state.
 
 In physically embedded systems, this assumption may not hold.
 
-**Definition 58.1 (Physical side effect).** A side effect `e` of transition `t` is *physically irreversible* if there exists no sequence of subsequent transitions that returns the physical system to its pre-`t` physical configuration, regardless of internal state.
+**Definition 58.1 (Physical side effect):** A side effect `e` of transition `t` is *physically irreversible* if there exists no sequence of subsequent transitions that returns the physical system to its pre-`t` physical configuration, regardless of internal state.
 
 Examples:
+- Combustion of propellant changes orbital velocity; no internal rollback reverses the delta-v
+- Actuation of a physical mechanism consumes mechanical wear
+- Transmission of a signal to an external system produces effects in that system
+- Degradation of hardware under thermal or radiation stress accumulates irreversibly
 
-- Combustion of propellant changes velocity. No internal rollback reverses the delta-v.
-- Actuation of a physical mechanism consumes mechanical wear.
-- Transmission of a signal produces effects in the receiving system.
-- Degradation of hardware under thermal or radiation stress accumulates irreversibly.
+**Proposition 58.1 (Rollback asymmetry):** For systems with physically irreversible side effects, `rollback_status = ROLLED_BACK` does not imply `physical_system_state = pre_execution_state`.
 
-**Proposition 58.1 (Rollback asymmetry).**
+This is not a failure of the model. It is an explicit non-guarantee, documented in `EXECUTION_MODEL_LIMITS.md §2.3`. What changes in physically embedded contexts is the *cost* of this gap — and therefore the strategic importance of preventing the execution from reaching the failure point at all.
 
-```
-rollback_status = ROLLED_BACK
-does not imply
-physical_system_state = pre_execution_state
-```
-
-This is not a failure of the model.
-
-It is an explicit non-guarantee, documented in `EXECUTION_MODEL_LIMITS.md §2.3`.
-
-What changes in physically embedded contexts is the *cost* of this gap — and therefore the strategic importance of preventing execution from reaching the failure point at all.
-
-In systems with physical irreversibility, the value of execution geometry is not primarily *recovery*.
-
-It is *prevention*.
-
-The goal shifts from:
+**Consequence:** In systems with physical irreversibility, the value of execution geometry is not primarily *recovery* — it is *prevention*. The goal shifts from:
 
 ```
 execute → observe → recover if needed
@@ -11902,32 +11867,29 @@ This is the structural shift that Chapter 58 formalizes.
 
 ### 58.2 — Latency-Bound Authority
 
-Chapter 57.5 establishes that authority is context-bound: a prior authorization does not survive authority context change.
-
-The enforcement assumes that authority re-validation is instantaneous or near-instantaneous relative to execution.
+Chapter 57.5 establishes that authority is context-bound: a prior authorization does not survive authority context change. The enforcement assumes that authority re-validation is instantaneous or near-instantaneous relative to execution.
 
 In systems with significant propagation delay, this assumption degrades.
 
-**Definition 58.2 (Authority propagation delay).** Let `Δ_auth` be the time between an authority context change — key rotation, signer revocation, policy update — and the arrival of that change at a remote execution node.
+**Definition 58.2 (Authority propagation delay):** Let `Δ_auth` be the time between an authority context change (key rotation, signer revocation, policy update) and the arrival of that change at a remote execution node.
 
-During `Δ_auth`, the remote node operates under a stale authority context. It does not know its context is stale. From its local perspective, all authority checks pass.
+During `Δ_auth`, the remote node operates under a stale authority context. The node does not know its context is stale; from its local perspective, all authority checks pass.
 
-**Proposition 58.2 (Latency-bound authority validity).** In systems with authority propagation delay `Δ_auth > 0`, there exists a window during which:
+**Proposition 58.2 (Latency-bound authority validity):** In systems with authority propagation delay `Δ_auth > 0`, there exists a window during which:
 
 ```
-local_authority_check  =  valid
-global_authority_state =  revoked
+local_authority_check = valid
+global_authority_state = revoked
 ```
 
-This temporal gap cannot be eliminated by local enforcement alone. It requires either:
+This is a temporal gap in the authority model. It cannot be eliminated by local enforcement alone — it requires either:
+1. Bounding the propagation delay (architectural constraint)
+2. Bounding the execution horizon to less than `Δ_auth` (operational constraint)
+3. Accepting that authority is valid only as of last known context (epistemic constraint)
 
-1. Bounding the propagation delay — architectural constraint.
-2. Bounding the execution horizon to less than `Δ_auth` — operational constraint.
-3. Accepting that authority is valid only as of last known context — epistemic constraint.
+**The epistemic constraint formulation** is the most compatible with the ContinuumPort model:
 
-The epistemic constraint formulation is the most compatible with the ContinuumPort model:
-
-> *Authority is valid relative to the last received and verified authority context. Execution under authority not re-confirmed within a declared freshness window is treated as `UNKNOWN` for policy purposes.*
+> *Authority is valid relative to the last received and verified authority context. Execution under authority that has not been re-confirmed within a declared freshness window is treated as `UNKNOWN` for policy purposes.*
 
 This connects directly to the authority contraction principle from Chapter 56:
 
@@ -11935,9 +11897,7 @@ This connects directly to the authority contraction principle from Chapter 56:
 U(V₁) ≥ U(V₂)  ⟹  A(V₁) ⊆ A(V₂)
 ```
 
-Unconfirmed authority increases uncertainty.
-
-Uncertainty contracts admissibility.
+Unconfirmed authority increases uncertainty; uncertainty contracts admissibility.
 
 ---
 
@@ -11945,21 +11905,18 @@ Uncertainty contracts admissibility.
 
 Chapter 57.2 establishes observation starvation: when the observation channel is absent, `INSUFFICIENT_DATA` contracts `CONTINUE` out of the admissible outcome set.
 
-In physically embedded systems, observation discontinuity is structural, not adversarial.
+In physically embedded systems, observation discontinuity is structural, not adversarial. Eclipse periods, communication windows, sensor degradation, and network partition create *observation horizons* — bounded intervals during which the system cannot receive external observation.
 
-Eclipse periods, communication windows, sensor degradation, and network partition create *observation horizons* — bounded intervals during which the system cannot receive external observation.
+**Definition 58.3 (Observation horizon):** An observation horizon `H = [t₁, t₂]` is an interval during which the observation channel produces `None`. During `H`, all verdicts are `INSUFFICIENT_DATA`.
 
-**Definition 58.3 (Observation horizon).** An observation horizon `H = [t₁, t₂]` is an interval during which the observation channel produces `None`. During `H`, all verdicts are `INSUFFICIENT_DATA`.
+**Proposition 58.3 (Horizon-induced admissibility contraction):** During an observation horizon, `CONTINUE` is structurally inadmissible (I3). The admissible outcome set contracts to `{HALT, SKIP, ESCALATE}`.
 
-**Proposition 58.3 (Horizon-induced admissibility contraction).** During an observation horizon, `CONTINUE` is structurally inadmissible (I3). The admissible outcome set contracts to `{HALT, SKIP, ESCALATE}`.
+This has operational consequences:
+- Systems must be designed to operate safely under `HALT` or `SKIP` during horizon intervals
+- Actions with irreversible physical side effects must not be scheduled during predicted horizon windows
+- Execution geometry must be defined over the observable state — not the inferred state
 
-Operational consequences:
-
-- Systems must be designed to operate safely under `HALT` or `SKIP` during horizon intervals.
-- Actions with irreversible physical side effects must not be scheduled during predicted horizon windows.
-- Execution geometry must be defined over the observable state — not the inferred state.
-
-The observation horizon constraint is therefore a design constraint on the execution geometry itself:
+**The observation horizon constraint** is therefore a design constraint on the execution geometry itself:
 
 > *Geometries that require continuous observation for safety enforcement are inadmissible in systems with known observation horizons.*
 
@@ -11969,11 +11926,9 @@ This is a meta-level constraint: not just what the system may execute, but what 
 
 ### 58.4 — Distributed Geometry Drift
 
-In single-node systems, the execution geometry is a fixed, signed structure verified at construction time.
+In single-node systems, the execution geometry is a fixed, signed structure verified at construction time. In distributed multi-node systems, geometry propagation introduces a new failure mode: nodes may operate under geometries that are locally valid but globally inconsistent.
 
-In distributed multi-node systems, geometry propagation introduces a new failure mode: nodes may operate under geometries that are locally valid but globally inconsistent.
-
-**Definition 58.4 (Geometry version vector).** In a distributed execution system with nodes `N₁, ..., Nₖ`, let `G(Nᵢ, t)` denote the geometry active at node `Nᵢ` at time `t`. Distributed geometry drift occurs when:
+**Definition 58.4 (Geometry version vector):** In a distributed execution system with nodes `N₁, ..., Nₖ`, let `G(Nᵢ, t)` denote the geometry active at node `Nᵢ` at time `t`. Distributed geometry drift occurs when:
 
 ```
 ∃ i, j, t : G(Nᵢ, t) ≠ G(Nⱼ, t)
@@ -11981,26 +11936,17 @@ In distributed multi-node systems, geometry propagation introduces a new failure
 
 while both nodes believe their geometry is current.
 
-Causes of drift:
+**Causes of geometry drift:**
+- Asynchronous geometry updates with propagation delay
+- Network partition during geometry rotation
+- Selective delivery (some nodes receive update, others do not)
+- Replay of stale signed geometry (cf. Chapter 57.1)
 
-- Asynchronous geometry updates with propagation delay.
-- Network partition during geometry rotation.
-- Selective delivery — some nodes receive the update, others do not.
-- Replay of stale signed geometry (cf. Chapter 57.1).
+**Consequence:** Nodes executing under different geometries define different admissible execution spaces. A transition admissible under `G(N₁, t)` may be inadmissible under `G(N₂, t)`. Coordinated execution — where nodes contribute to shared state — produces inconsistent admissibility decisions.
 
-**Consequence.** Nodes executing under different geometries define different admissible execution spaces. A transition admissible under `G(N₁, t)` may be inadmissible under `G(N₂, t)`. Coordinated execution — where nodes contribute to shared state — produces inconsistent admissibility decisions.
+**This is not Byzantine failure.** The nodes are not compromised; they are correctly executing their local geometry. The failure is in the distributed consensus of which geometry is current.
 
-This is not Byzantine failure.
-
-The nodes are not compromised. They are correctly executing their local geometry.
-
-The failure is in the distributed consensus of which geometry is current.
-
-Nodes executing under inconsistent geometries are not adversaries.
-
-They are correct nodes in divergent admissibility spaces.
-
-**Containment requirement.** Distributed systems using execution geometry must include a geometry consensus mechanism — a protocol ensuring that all nodes execute under the same signed geometry before any state-affecting transition is committed to shared state. The ContinuumPort model provides the local enforcement. The consensus layer is a deployment requirement outside the present model.
+**Containment requirement:** Distributed systems using execution geometry must include a geometry consensus mechanism — a protocol ensuring that all nodes execute under the same signed geometry before any state-affecting transition is committed to shared state. The ContinuumPort model provides the local enforcement; the consensus layer is a deployment requirement outside the present model.
 
 ---
 
@@ -12008,104 +11954,82 @@ They are correct nodes in divergent admissibility spaces.
 
 Chapter 57.3 establishes that divergence detected after commit contracts admissibility. The recovery path — `clear()`, re-observation, re-establishment of admissibility — is assumed to be available, if expensive.
 
-In physically embedded systems with constrained resources, certain divergence states may be *non-recoverable* — not because of logical impossibility, but because the resources required for recovery are exhausted, unavailable, or physically inaccessible.
+In physically embedded systems with constrained resources, certain divergence states may be *non-recoverable* not because of logical impossibility, but because the resources required for recovery are exhausted, unavailable, or physically inaccessible.
 
-**Definition 58.5 (Non-recoverable divergence).** A divergence state `d` is *non-recoverable* in system `S` if the transitions required to restore admissibility from `d` are:
+**Definition 58.5 (Non-recoverable divergence):** A divergence state `d` is *non-recoverable* in system `S` if the set of transitions required to restore admissibility from `d` is either:
+1. Physically impossible (required resources do not exist)
+2. Energetically infeasible (required energy exceeds available energy)
+3. Temporally inaccessible (required action window has passed)
+4. Logistically impossible (required operator intervention cannot occur)
 
-1. Physically impossible — required resources do not exist.
-2. Energetically infeasible — required energy exceeds available energy.
-3. Temporally inaccessible — required action window has passed.
-4. Logistically impossible — required operator intervention cannot occur.
+**Proposition 58.5 (Non-recoverable divergence necessity):** In systems where non-recoverable divergence is possible, execution geometry restriction is necessary — not as an optimization but as the only mechanism that prevents reaching non-recoverable divergence states.
 
-**Proposition 58.5.** In systems where non-recoverable divergence is possible, execution geometry restriction is not an optimization.
-
-It is a precondition for survivable operation.
-
-This elevates the significance of Theorem 9.1:
+This elevates the significance of the characterization established in Theorem 9.1:
 
 > *A persistent execution system is free of partial state corruption if and only if its realized execution set is confined to `G_F(S)`.*
 
-In systems where divergence may be non-recoverable, this is not merely a correctness statement.
-
-It is the condition under which the system remains operable at all.
+In systems where divergence may be non-recoverable, this is not a correctness guarantee — it is a survivability guarantee.
 
 ---
 
 ### 58.6 — Admissibility Under Resource Bounds
 
-The execution model assumes that admissibility verification is computationally negligible relative to execution.
+The execution model assumes that admissibility verification is computationally free relative to execution. For most software systems, this is approximately true: checking a constraint is negligible compared to executing a database transaction.
 
-In resource-constrained systems, verification itself has cost.
+In resource-constrained systems, verification itself has cost. This introduces a new class of trade-off:
 
-**Definition 58.6 (Bounded verification geometry).** A geometry `G` is *feasible under energy bound `E`* if the computational cost of verifying admissibility for any candidate transition does not exceed a fraction `α` of `E`, where `α` is a declared system parameter.
+**The verification cost problem:** If admissibility verification consumes energy `E_v` and execution consumes energy `E_x`, and total available energy is `E_total`, then:
 
-**The verification cost problem.** If admissibility verification consumes energy `E_v` and execution consumes energy `E_x`, and total available energy is `E_total`:
+- Increasing verification depth reduces execution capacity
+- Reducing verification depth increases execution risk
 
-- Increasing verification depth reduces execution capacity.
-- Reducing verification depth increases execution risk.
+**Definition 58.6 (Bounded verification geometry):** A geometry `G` is *feasible under energy bound `E`* if the computational cost of verifying admissibility for any candidate transition does not exceed a fraction `α` of `E`, where `α` is a declared system parameter.
 
-This introduces a resource dimension to geometry design absent from the base model. It does not change the fundamental characterization results — `G_F(S)` remains the necessary and sufficient restriction — but it constrains which geometries are operationally deployable.
+This introduces a resource dimension to geometry design that is absent from the base model. It does not change the fundamental characterization results — `G_F(S)` remains the necessary and sufficient restriction — but it constrains which geometries are operationally deployable.
 
-Geometry design for resource-constrained systems must balance:
+**Consequence:** Geometry design for resource-constrained systems must balance:
+- Completeness of invariant coverage
+- Computational cost of verification
+- Residual risk from unchecked conditions
 
-- Completeness of invariant coverage.
-- Computational cost of verification.
-- Residual risk from unchecked conditions.
-
-The present framework defines the target.
-
-Bounded verification defines the achievable approximation.
-
-These are not the same thing. The gap between them is an engineering problem, not a formal one.
+This is a deployment engineering problem, not a formal model problem. The present framework defines the target; bounded verification defines the achievable approximation.
 
 ---
 
 ### 58.7 — The Physical Necessity Principle
 
-The preceding sections establish a progression:
+The chapters above establish a progression:
 
 | Condition | Status of geometry restriction |
 |---|---|
 | Recovery cheap, latency low | Optimization — reduces recovery cost |
 | Recovery expensive, latency moderate | Architectural requirement |
-| Recovery impossible, latency high | Operational necessity |
+| Recovery impossible, latency high | Physical necessity |
 
-**Principle 58.7 (Physical Necessity Principle).** Let `S` be a persistent execution system with physically irreversible side effects, authority propagation delay `Δ_auth > 0`, and observation horizons. As recovery cost `C_r → ∞` and `Δ_auth → ∞`, the admissibility framework transitions from an engineering choice to an operational necessity.
+**Theorem 58.7 (Physical Necessity Principle):** Let `S` be a persistent execution system with physically irreversible side effects, authority propagation delay `Δ_auth > 0`, and observation horizons. As the cost of recovery `C_r → ∞` and `Δ_auth → ∞`, the admissibility framework transitions from an engineering choice to a physical necessity.
 
-*Informal statement:* In systems where mistakes cannot be corrected, restriction of executable transitions to the admissible execution space is one of the few mechanisms capable of acting prior to irreversible execution.
+*Informal statement:* In systems where mistakes cannot be corrected, restriction of executable transitions to the admissible execution space is the only available safety mechanism. There is no fallback.
 
-There is no fallback.
-
-This principle does not introduce new formal content. It applies the existing characterization to a limiting case.
-
-It identifies why the framework becomes more relevant, not less, as autonomy increases and environments become more constrained.
+This principle does not introduce new formal content — it applies the existing characterization to a limiting case. But it identifies why the framework becomes more relevant, not less, as autonomy increases and environments become more constrained.
 
 ---
 
 ### 58.8 — Scope and Non-Guarantees
 
-Chapter 58 extends the conceptual framework of Chapters 24–57 to physically embedded contexts.
+Chapter 58 extends the conceptual framework of Chapters 24–57 to physically embedded contexts. It does not:
 
-It does not:
+- **Provide a deployed implementation** for orbital or embedded systems
+- **Address specific engineering challenges** of space systems (thermal management, radiation hardening, etc.)
+- **Replace aerospace systems engineering** with formal admissibility theory
+- **Claim that execution geometry alone suffices** for safety in physically embedded systems
 
-- Provide a deployed implementation for embedded or constrained systems.
-- Address domain-specific engineering challenges — thermal management, radiation hardening, structural dynamics.
-- Replace systems engineering with formal admissibility theory.
-- Claim that execution geometry alone suffices for safety in physically embedded systems.
+The formal results of Chapters 24–57 remain the foundation. Chapter 58 identifies the conditions under which those results become operationally critical rather than merely theoretically sound.
 
-The formal results of Chapters 24–57 remain the foundation.
-
-Chapter 58 identifies the conditions under which those results become operationally critical rather than merely theoretically sound.
-
-**The central non-guarantee:**
+**The central non-guarantee:** Execution geometry restriction prevents logical state corruption within the modeled execution boundary. It does not prevent physical degradation, energy exhaustion, hardware failure, or the physical consequences of transitions that were admitted and executed correctly under the declared geometry.
 
 > *The model enforces what is declared. Undeclared physical risks are not blocked.*
 
 This is consistent with `EXECUTION_MODEL_LIMITS.md §3`.
-
-A geometry is only as strong as its declaration.
-
-The engineer who defines it bears the responsibility the model does not.
 
 ---
 
@@ -12113,39 +12037,55 @@ The engineer who defines it bears the responsibility the model does not.
 
 | Chapter | Concept | Extension in Ch. 58 |
 |---|---|---|
-| Ch. 28 | Observation layer | Observation horizons as structural design constraint |
-| Ch. 57.2 | Observation starvation | Horizon-induced starvation as predictable and inevitable |
-| Ch. 57.3 | Delayed divergence | Physical irreversibility as permanent, non-recoverable divergence |
-| Ch. 57.5 | Authority desync | Latency-bound authority validity window |
+| Ch. 28 | Observation layer | Observation horizons as structural constraint |
+| Ch. 57.2 | Observation starvation | Horizon-induced starvation as design constraint |
+| Ch. 57.3 | Delayed divergence | Physical irreversibility as permanent divergence |
+| Ch. 57.5 | Authority desync | Latency-bound authority validity |
 | Ch. 57.6 | Rollback desync | Physical rollback impossibility |
-| Ch. 57.8 | Geometry poisoning | Distributed geometry drift under asynchronous propagation |
-| Ch. 56 | Authority contraction | Extended to resource bounds and propagation latency |
+| Ch. 57.8 | Geometry poisoning | Distributed geometry drift under async propagation |
+| Ch. 56 | Authority contraction | Extended to resource and latency bounds |
 
-Chapter 58 does not introduce new invariants.
-
-It applies the existing framework to conditions that eliminate the safety nets that make invariant violations merely expensive rather than catastrophic.
+Chapter 58 does not introduce new invariants. It applies the existing framework to conditions that eliminate the safety nets that make invariant violations merely expensive rather than catastrophic.
 
 ---
 
-### 58.10 — Derived Principles
+### 58.10 — A Note on the Model's Disposition
 
-The following are consequences, not assumptions.
+There is an older principle in medicine: *primum non nocere* — first, do no harm.
 
-**Prevention over recovery.** In physically irreversible systems, the value of execution geometry is structural prevention. Recovery is not a fallback — it may not exist.
+The principle does not say "never act." It says: under uncertainty, when the intervention is irreversible, the burden of justification falls on action, not on inaction.
 
-**Uncertainty contracts admissibility.** Under observation horizons or stale authority, the admissible execution space contracts. Not expands. This is the authority contraction principle applied to physical constraint.
+Chapter 58 applies the same disposition to persistent execution:
 
-**Geometry drift is not Byzantine.** Nodes executing under inconsistent geometries are not compromised. They are correctly executing locally valid but globally inconsistent admissibility spaces. This requires a consensus layer, not a security layer.
+```
+INSUFFICIENT_DATA + irreversible transition
+→ CONTINUE inadmissible
+→ HALT
+```
 
-**Verification has cost.** In resource-constrained systems, admissibility verification competes with execution for energy. Geometry design must be bounded accordingly. The gap between the formal target and the achievable approximation is real and must be declared.
+This is not a moral claim. It is a structural consequence of the model under the conditions described in §58.1–§58.6. When observation is absent, authority is stale, rollback is physically impossible, and recovery cost approaches infinity — the capacity to *not* execute becomes more important than the capacity to execute.
 
-**Precondition for survivable operation.** In systems where divergence may be non-recoverable, `G_F(S)` restriction is the condition under which the system remains operable. The formal result does not change. Its operational weight does.
+The medical principle becomes an execution invariant.
+
+This reframes what "safety" means in persistent autonomous systems. Not:
+
+> *"the system behaves responsibly"*
+
+But:
+
+> *"certain transitions are structurally inadmissible under uncertainty, regardless of intent"*
+
+The model does not maximize throughput. It does not assume recovery. It does not glorify autonomous action. It asks, before each transition: *is continuation admissible under current epistemic, temporal, and structural conditions?*
+
+If the answer is uncertain and the effect irreversible — it does not execute.
 
 ---
 
-*Chapter 58 began from a simple observation: in some environments, rollback does not exist as a practical option.*
+<img width="2632" height="1510" alt="image" src="https://github.com/user-attachments/assets/9e8bac77-8fb5-4fe1-8fe2-13da115998ca" />
 
-*The rest followed from the model.*
+---
+
+*This chapter is designated as speculative extension — a formal stress test of the framework under conditions of maximum physical constraint. The core results remain those of Chapters 24–57. Chapter 58 asks: what do those results mean when there is no recovery?*
 
 ---
 
