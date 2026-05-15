@@ -11883,6 +11883,7 @@ global_authority_state = revoked
 ```
 
 This is a temporal gap in the authority model. It cannot be eliminated by local enforcement alone — it requires either:
+
 1. Bounding the propagation delay (architectural constraint)
 2. Bounding the execution horizon to less than `Δ_auth` (operational constraint)
 3. Accepting that authority is valid only as of last known context (epistemic constraint)
@@ -11957,6 +11958,7 @@ Chapter 57.3 establishes that divergence detected after commit contracts admissi
 In physically embedded systems with constrained resources, certain divergence states may be *non-recoverable* not because of logical impossibility, but because the resources required for recovery are exhausted, unavailable, or physically inaccessible.
 
 **Definition 58.5 (Non-recoverable divergence):** A divergence state `d` is *non-recoverable* in system `S` if the set of transitions required to restore admissibility from `d` is either:
+
 1. Physically impossible (required resources do not exist)
 2. Energetically infeasible (required energy exceeds available energy)
 3. Temporally inaccessible (required action window has passed)
@@ -11988,11 +11990,18 @@ In resource-constrained systems, verification itself has cost. This introduces a
 This introduces a resource dimension to geometry design that is absent from the base model. It does not change the fundamental characterization results — `G_F(S)` remains the necessary and sufficient restriction — but it constrains which geometries are operationally deployable.
 
 **Consequence:** Geometry design for resource-constrained systems must balance:
+
 - Completeness of invariant coverage
 - Computational cost of verification
 - Residual risk from unchecked conditions
 
 This is a deployment engineering problem, not a formal model problem. The present framework defines the target; bounded verification defines the achievable approximation.
+
+**Observation 58.6.1 (Informed approximation under bounded verification):** Bounded verification does not produce failure — it produces *informed approximation*. A system operating under finite energy, constrained observation, and incomplete authority confirmation does not guess blindly; it reasons within a declared admissibility boundary. The constraints and decisions that define the geometry are precisely what transforms unrestricted uncertainty into bounded, directed inference.
+
+Informed guessing is not a failure mode under bounded verification. It is the operational consequence of finite observation horizons and constrained admissibility.
+
+*Informed guessing as feature, not bug.*
 
 ---
 
@@ -12018,10 +12027,10 @@ This principle does not introduce new formal content — it applies the existing
 
 Chapter 58 extends the conceptual framework of Chapters 24–57 to physically embedded contexts. It does not:
 
-- **Provide a deployed implementation** for orbital or embedded systems
-- **Address specific engineering challenges** of space systems (thermal management, radiation hardening, etc.)
-- **Replace aerospace systems engineering** with formal admissibility theory
-- **Claim that execution geometry alone suffices** for safety in physically embedded systems
+- Provide a deployed implementation for orbital or embedded systems
+- Address specific engineering challenges of space systems (thermal management, radiation hardening, etc.)
+- Replace aerospace systems engineering with formal admissibility theory
+- Claim that execution geometry alone suffices for safety in physically embedded systems
 
 The formal results of Chapters 24–57 remain the foundation. Chapter 58 identifies the conditions under which those results become operationally critical rather than merely theoretically sound.
 
@@ -12081,11 +12090,11 @@ If the answer is uncertain and the effect irreversible — it does not execute.
 
 ---
 
-<img width="2632" height="1510" alt="image" src="https://github.com/user-attachments/assets/9e8bac77-8fb5-4fe1-8fe2-13da115998ca" />
+*This chapter is designated as speculative extension — a formal stress test of the framework under conditions of maximum physical constraint. The core results remain those of Chapters 24–57. Chapter 58 asks: what do those results mean when there is no recovery?*
 
 ---
 
-*This chapter is designated as speculative extension — a formal stress test of the framework under conditions of maximum physical constraint. The core results remain those of Chapters 24–57. Chapter 58 asks: what do those results mean when there is no recovery?*
+<img width="2632" height="1510" alt="image" src="https://github.com/user-attachments/assets/9e8bac77-8fb5-4fe1-8fe2-13da115998ca" />
 
 ---
 
