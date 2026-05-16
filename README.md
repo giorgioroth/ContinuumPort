@@ -171,7 +171,7 @@ docs/             — formal specification
 ## Further reading
 
 - [Formal paper](https://doi.org/10.17605/OSF.IO/B8SGR) — peer-accessible preprint (OSF)
-- [EXECUTION_MODEL_LIMITS.md](EXECUTION_MODEL_LIMITS.md) — explicit scope boundaries
+- [EXECUTION_MODEL_LIMITS.md](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md) — explicit scope boundaries
 - [Blog](https://gi0rgioroth.blogspot.com) — context and philosophy
 
 ---
