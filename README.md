@@ -139,6 +139,27 @@ Formal model: `GF(S)` — the maximal prefix-closed, failure-free execution spac
 
 ---
 
+## Why "System Kernel"
+
+The Regen Engine functions as a system kernel for execution governance — a non-bypassable enforcement layer through which all state-affecting transitions must pass.
+
+This is not middleware. It is not a validator that can be disabled. It is not a hook that can be skipped.
+
+The distinction matters:
+
+- **Non-bypassable execution governance** — no state-affecting transition can occur outside the enforcement layer. There is no alternative path to execution.
+- **Centralized admissibility enforcement** — all transitions are evaluated against the declared geometry before commitment. Authority, invariants, and epistemic state are verified at a single, mandatory point.
+- **Invariant-preserving state transitions** — the system does not detect violations after the fact. Transitions that would violate declared invariants are structurally inadmissible. They do not execute.
+- **Fail-closed execution semantics** — under uncertainty, divergence, or insufficient data, the system halts. It does not degrade gracefully into permissive behavior. It stops.
+
+A logger can be bypassed. A validator can be disabled. A middleware can be removed.
+
+A kernel cannot be routed around. Every transition passes through it, or the transition does not occur.
+
+This is the architectural property that distinguishes the Regen Engine from advisory systems, monitoring layers, or behavioral guardrails — and why "System Kernel" is the correct term for what it does.
+
+---
+
 ## Compliance interface
 
 ```python
