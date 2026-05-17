@@ -3,7 +3,7 @@
 **Your system failed.**
 **What guarantees that nothing changed?**
 
-Most persistent systems cannot guarantee that structurally. ContinuumPort enforces it explicitly.
+Most persistent systems cannot guarantee that structurally under adversarial or partial-failure conditions. ContinuumPort enforces it explicitly.
 
 ---
 
@@ -92,13 +92,23 @@ This is not convention. It is enforcement.
 
 ## Tests
 
-**823 tests. 0 failures (reference implementation).** 
+**1139 adversarial and invariant-validation tests. 0 failures (reference implementation).**
 
-<img width="2646" height="1268" alt="image" src="https://github.com/user-attachments/assets/2cbf3281-a579-4922-9e47-540988dec554" /> 
+<img width="2632" height="1510" alt="image" src="https://github.com/user-attachments/assets/3eb3c6db-8136-4238-b75e-9fb0b3342cfc" />
 
----
-
-Adversarial scenarios include: replay attacks, state drift injection, geometry swap attacks, capability rebinding, TOCTOU patterns, composition attacks, authority bypass under concurrent load.
+The validation suite includes:
+- replay attacks
+- state drift injection
+- geometry swap attacks
+- capability rebinding
+- TOCTOU patterns
+- composition attacks
+- hash canonicalization failures
+- authority desynchronization
+- rollback desynchronization
+- cross-cycle state trap scenarios
+- malformed capsule reconstruction
+- deterministic integrity verification
 
 Under enforcement, these outcomes are structurally unreachable.
 
@@ -139,9 +149,9 @@ Formal model: `GF(S)` — the maximal prefix-closed, failure-free execution spac
 
 ---
 
-## Why "System Kernel"
+## Why "Execution-Governance Kernel"
 
-The Regen Engine functions as a system kernel for execution governance — a non-bypassable enforcement layer through which all state-affecting transitions must pass.
+The Regen Engine functions as an execution-governance kernel — a non-bypassable enforcement layer through which all state-affecting transitions must pass.
 
 This is not middleware. It is not a validator that can be disabled. It is not a hook that can be skipped.
 
@@ -152,11 +162,11 @@ The distinction matters:
 - **Invariant-preserving state transitions** — the system does not detect violations after the fact. Transitions that would violate declared invariants are structurally inadmissible. They do not execute.
 - **Fail-closed execution semantics** — under uncertainty, divergence, or insufficient data, the system halts. It does not degrade gracefully into permissive behavior. It stops.
 
-A logger can be bypassed. A validator can be disabled. A middleware can be removed.
+Loggers can be bypassed. Validators can be disabled. Middleware can be removed.
 
-A kernel cannot be routed around. Every transition passes through it, or the transition does not occur.
+An execution-governance kernel cannot be routed around. Every transition passes through it, or the transition does not occur.
 
-This is the architectural property that distinguishes the Regen Engine from advisory systems, monitoring layers, or behavioral guardrails — and why "System Kernel" is the correct term for what it does.
+This is the architectural property that distinguishes the Regen Engine from advisory systems, monitoring layers, or behavioral guardrails — and why "Execution-Governance Kernel" is the correct term for what it does.
 
 ---
 
@@ -185,7 +195,7 @@ docs/             — formal specification
 
 [![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](LICENSE)
 [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
-[![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md) 
+[![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
 
 ---
 
@@ -197,6 +207,6 @@ docs/             — formal specification
 
 ---
 
-*Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026* 
+*Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026*
 
-*contact: access@continuumport.com* 
+*contact: access@continuumport.com*
