@@ -1,7 +1,6 @@
 # ContinuumPort
 
-**Your system failed.**
-**What guarantees that nothing changed?**
+**Your system failed. What guarantees that nothing changed?**
 
 Most persistent systems cannot guarantee that structurally under adversarial or partial-failure conditions. ContinuumPort enforces it explicitly.
 
@@ -65,10 +64,7 @@ The engine does not decide what is safe. The declared geometry does.
 
 **Domain integrity**
 
-```
-The system does not reject the action.
-The action does not exist.
-```
+The system does not reject the action. The action does not exist.
 
 Invalid input is structurally inadmissible — it never enters the execution domain.
 
@@ -92,11 +88,18 @@ This is not convention. It is enforcement.
 
 ## Tests
 
-**1139 adversarial and invariant-validation tests. 0 failures (reference implementation).**
+**1830 adversarial and invariant-validation tests. 0 failures. Full suite: 10.88s.**
 
-<img width="2632" height="1510" alt="image" src="https://github.com/user-attachments/assets/3eb3c6db-8136-4238-b75e-9fb0b3342cfc" />
+
+<img width="2958" height="1418" alt="image" src="https://github.com/user-attachments/assets/c6d2be3e-fbe9-4019-9743-238d601a1d92" />
+
+
+Verified cross-platform — Linux and Windows.
+
+The adversarial corpus was developed across 13 batches with the assistance of Claude (Anthropic), ChatGPT (OpenAI), and Gemini (Google) — in that order of contribution. The test suite is the primary research artifact of this project.
 
 The validation suite includes:
+
 - replay attacks
 - state drift injection
 - geometry swap attacks
@@ -109,6 +112,12 @@ The validation suite includes:
 - cross-cycle state trap scenarios
 - malformed capsule reconstruction
 - deterministic integrity verification
+- hostile observation (H1–H5)
+- commitment graph attacks (G1–G6)
+- causal opacity and provenance enforcement (O1–O5)
+- authority laundering (L1–L6)
+- admissibility erosion (E1–E5)
+- concurrent adversarial pressure (C1–C5)
 
 Under enforcement, these outcomes are structurally unreachable.
 
@@ -119,11 +128,12 @@ Under enforcement, these outcomes are structurally unreachable.
 ContinuumPort enforces correctness of execution under declared constraints.
 
 It does not guarantee:
+
 - Correctness of intent
 - Correctness of declared constraints
 - External side effects beyond the execution boundary
 
-**Undeclared risks are not blocked.**
+Undeclared risks are not blocked.
 
 These limits are explicit and documented in `EXECUTION_MODEL_LIMITS.md`.
 
@@ -145,7 +155,7 @@ Commit / Rollback
 
 ContinuumPort defines the constrained execution model. Regen Engine enforces it.
 
-Formal model: `GF(S)` — the maximal prefix-closed, failure-free execution space. Only sequences inside `GF(S)` are admissible for execution. Corrupted states are structurally unreachable, not detected.
+Formal model: GF(S) — the maximal prefix-closed, failure-free execution space. Only sequences inside GF(S) are admissible for execution. Corrupted states are structurally unreachable, not detected.
 
 ---
 
@@ -201,13 +211,17 @@ docs/             — formal specification
 
 ## Further reading
 
-- [Formal paper](https://doi.org/10.17605/OSF.IO/B8SGR) — peer-accessible preprint (OSF) — execution geometry and persistent state governance
-- [Companion paper](https://osf.io/m8ybn) — epistemic admissibility in persistent conversational systems
+- [Paper 1 — OSF](https://osf.io/b8sgr) · [DOI: 10.17605/OSF.IO/B8SGR](https://doi.org/10.17605/OSF.IO/B8SGR) — execution geometry and persistent state governance
+- [Paper 2 — OSF](https://osf.io/m8ybn) · [DOI: 10.17605/OSF.IO/M8YBN](https://doi.org/10.17605/OSF.IO/M8YBN) — epistemic admissibility in persistent conversational systems
+- [Paper 3 — OSF](https://osf.io/qwf8a) · [DOI: 10.17605/OSF.IO/QWF8A](https://doi.org/10.17605/OSF.IO/QWF8A) — execution authority revocation under epistemic divergence
+- [Paper 4 — OSF](https://osf.io/w7q9n) · [DOI: 10.17605/OSF.IO/W7Q9N](https://doi.org/10.17605/OSF.IO/W7Q9N) — adversarial execution governance
+- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (58 chapters)
 - [EXECUTION_MODEL_LIMITS.md](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md) — explicit scope boundaries
-- [Blog](https://gi0rgioroth.blogspot.com) — context and philosophy
+- [Blog](https://gi0rgioroth.blogspot.com/) — context and philosophy
+- [continuumport.com](https://continuumport.com/)
 
 ---
 
 *Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026*
 
-*contact: access@continuumport.com*
+contact: access@continuumport.com
