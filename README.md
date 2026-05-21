@@ -135,7 +135,7 @@ It does not guarantee:
 
 Undeclared risks are not blocked.
 
-These limits are explicit and documented in `EXECUTION_MODEL_LIMITS.md`.
+These limits are explicit and documented in [`EXECUTION_MODEL_LIMITS.md`](https://github.com/giorgioroth/ContinuumPort/blob/848566f15c94f6f092a1a242316f4d7bd5329d2a/docs/EXECUTION_MODEL_LIMITS.md#L4) 
 
 ---
 
