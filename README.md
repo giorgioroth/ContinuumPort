@@ -96,6 +96,8 @@ This is not convention. It is enforcement.
 
 Verified cross-platform — Linux and Windows.
 
+Paper 4 (*Adversarial Execution Governance*) covers Batches 7–12 (1806 tests). Batch 13 (24 concurrent-pressure tests, C1–C5) is included in the repository and may be addressed in follow-up work.
+
 The adversarial corpus was developed across 13 batches with the assistance of Claude (Anthropic), ChatGPT (OpenAI), and Gemini (Google) — in that order of contribution. The test suite is the primary research artifact of this project.
 
 The validation suite includes:
@@ -114,7 +116,8 @@ The validation suite includes:
 - deterministic integrity verification
 - hostile observation (H1–H5)
 - commitment graph attacks (G1–G6)
-- causal opacity and provenance enforcement (O1–O5)
+- causal opacity (O1–O5)
+- provenance enforcement (P1–P5)
 - authority laundering (L1–L6)
 - admissibility erosion (E1–E5)
 - concurrent adversarial pressure (C1–C5)
