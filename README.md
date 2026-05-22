@@ -144,6 +144,8 @@ These limits are explicit and documented in [`EXECUTION_MODEL_LIMITS.md`](https:
 
 ## Architecture
 
+[Architecture diagram](https://giorgioroth.github.io/ContinuumPort/)
+
 ```
 Actions
    ↓
