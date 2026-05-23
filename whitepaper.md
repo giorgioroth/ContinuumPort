@@ -8,7 +8,7 @@ Date: May 2026
 
 *This document describes an ongoing research framework and may evolve.*
 
-Download PDF [Whitepaper](https://continuumport.com/wp-content/uploads/2026/05/Whitepaper_ContinuumPort-1.pdf)
+Download PDF [Whitepaper](https://continuumport.com/wp-content/uploads/2026/05/Whitepaper_ContinuumPort.pdf)
 
 ## Authority, Persistence, and Semantic Handoff
 
