@@ -346,6 +346,22 @@ This specification forms the normative basis for cross-system work continuation 
 Formal characterization of execution admissibility in persistent autonomous systems. 
 → [PreprintOSF](https://osf.io/b8sgr/overview)
 
-**SSRN #6765719** — *Execution Geometry and Persistent State Governance: From Formal Model to Deployed Enforcement*
-→ [papers.ssrn.com/sol3/papers.cfm?abstract_id=6765719](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6765719)   (coming soon)
+**Paper 1** — *Execution Control in Persistent AI Systems*
+Gheorghe Rotaru · Apr 27, 2026
+→ [osf.io/w7q9n](https://osf.io/w7q9n/overview)
 
+**Paper 2** — *On Structural Admission of Partial State Corruption in Unconstrained Persistent Systems*
+Gheorghe Rotaru · May 16, 2026
+→ [osf.io/qwf8a](https://osf.io/qwf8a/overview)
+
+**Paper 3** — *Epistemic Admissibility in Persistent Conversational Systems*
+Gheorghe Rotaru · May 18, 2026
+→ [osf.io/m8ybn](https://osf.io/m8ybn/overview)
+
+**Paper 4** — *Execution Authority Revocation under Epistemic Divergence*
+Gheorghe Rotaru · May 18, 2026
+→ [osf.io/b8sgr](https://osf.io/b8sgr/overview)
+
+**Paper 5** — *Adversarial Execution Governance*
+Gheorghe Rotaru · May 22, 2026
+→ [osf.io/kxdrw](https://osf.io/kxdrw/overview)
