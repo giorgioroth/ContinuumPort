@@ -48,61 +48,22 @@
 
   .page { max-width: 1100px; margin: 0 auto; }
 
-  .header {
-    margin-bottom: 56px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border-bright);
-  }
-  .header-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px; font-weight: 600;
-    letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent-blue); margin-bottom: 12px;
-  }
-  .header-title {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 28px; font-weight: 600;
-    color: var(--text-bright); letter-spacing: -0.5px; margin-bottom: 8px;
-  }
+  .header { margin-bottom: 56px; padding-bottom: 24px; border-bottom: 1px solid var(--border-bright); }
+  .header-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 12px; }
+  .header-title { font-family: 'IBM Plex Mono', monospace; font-size: 28px; font-weight: 600; color: var(--text-bright); letter-spacing: -0.5px; margin-bottom: 8px; }
   .header-sub { font-size: 14px; color: var(--text-dim); font-weight: 300; letter-spacing: 0.3px; }
   .header-stats { display: flex; gap: 32px; margin-top: 20px; }
   .stat { display: flex; flex-direction: column; gap: 3px; }
   .stat-value { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent-green); }
   .stat-label { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
 
-  .section-title {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px; font-weight: 600;
-    letter-spacing: 3px; text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 24px; margin-top: 64px;
-    display: flex; align-items: center; gap: 12px;
-  }
+  .section-title { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 24px; margin-top: 64px; display: flex; align-items: center; gap: 12px; }
   .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* PAPERS GRID — 5 columns */
-  .papers-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    margin-bottom: 48px;
-  }
+  .papers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 48px; }
 
-  .paper-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s;
-    display: flex;
-    flex-direction: column;
-  }
-  .paper-card::before {
-    content: ''; position: absolute;
-    top: 0; left: 0; right: 0; height: 2px;
-  }
+  .paper-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 20px; position: relative; overflow: hidden; transition: border-color 0.2s; display: flex; flex-direction: column; }
+  .paper-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
   .paper-card.p1::before { background: var(--accent-blue); }
   .paper-card.p2::before { background: var(--accent-purple); }
   .paper-card.p3::before { background: var(--accent-cyan); }
@@ -110,31 +71,11 @@
   .paper-card.p5::before { background: var(--accent-red); }
   .paper-card:hover { border-color: var(--border-bright); }
 
-  .paper-num {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px; color: var(--text-dim);
-    letter-spacing: 2px; margin-bottom: 10px;
-  }
-  .paper-title {
-    font-size: 12px; font-weight: 600;
-    color: var(--text-bright); margin-bottom: 8px; line-height: 1.4;
-    flex: 1;
-  }
-  .paper-problem {
-    font-size: 11px; color: var(--text-dim);
-    line-height: 1.5; margin-bottom: 14px;
-  }
-  .paper-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px; padding: 3px 8px;
-    border-radius: 3px; display: inline-block; margin-bottom: 10px;
-  }
-  .paper-link {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px; text-decoration: none;
-    letter-spacing: 0.5px; margin-top: auto;
-    opacity: 0.8; transition: opacity 0.2s;
-  }
+  .paper-num { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 10px; }
+  .paper-title { font-size: 12px; font-weight: 600; color: var(--text-bright); margin-bottom: 8px; line-height: 1.4; flex: 1; }
+  .paper-problem { font-size: 11px; color: var(--text-dim); line-height: 1.5; margin-bottom: 14px; }
+  .paper-tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px; display: inline-block; margin-bottom: 10px; }
+  .paper-link { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-decoration: none; letter-spacing: 0.5px; margin-top: auto; opacity: 0.8; transition: opacity 0.2s; }
   .paper-link:hover { opacity: 1; }
 
   .tag-blue   { background: rgba(74,158,255,0.1);  color: var(--accent-blue);   border: 1px solid rgba(74,158,255,0.2); }
@@ -143,7 +84,8 @@
   .tag-amber  { background: rgba(245,166,35,0.1);  color: var(--accent-amber);  border: 1px solid rgba(245,166,35,0.2); }
   .tag-red    { background: rgba(232,85,85,0.1);   color: var(--accent-red);    border: 1px solid rgba(232,85,85,0.2); }
 
-  /* CORE ARCHITECTURE */
+  .jair-badge { font-family: 'IBM Plex Mono', monospace; font-size: 9px; padding: 2px 7px; border-radius: 3px; background: rgba(61,232,122,0.1); color: var(--accent-green); border: 1px solid rgba(61,232,122,0.2); display: inline-block; margin-bottom: 8px; letter-spacing: 0.5px; }
+
   .arch-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
   .arch-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 22px; }
   .arch-icon { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent-green); margin-bottom: 10px; letter-spacing: 1px; }
@@ -153,13 +95,11 @@
   .prop { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--accent-green); display: flex; align-items: center; gap: 8px; }
   .prop::before { content: '▸'; color: var(--accent-green); opacity: 0.6; }
 
-  /* INVARIANTS */
   .invariants-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
   .inv-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; text-align: center; }
   .inv-id { font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 600; color: var(--accent-cyan); margin-bottom: 6px; }
   .inv-name { font-size: 10px; color: var(--text-dim); line-height: 1.4; text-transform: uppercase; letter-spacing: 0.5px; }
 
-  /* TAXONOMIES */
   .tax-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
   .tax-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 20px; position: relative; }
   .tax-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
@@ -175,7 +115,6 @@
   .tax-class-id { color: var(--text); min-width: 20px; }
   .tax-count { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); }
 
-  /* GAPS */
   .gaps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .gap-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 20px; }
   .gap-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
@@ -185,12 +124,10 @@
   .gap-before { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--accent-red); opacity: 0.8; margin-bottom: 4px; }
   .gap-after  { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--accent-green); }
 
-  /* THESIS */
   .thesis-block { background: var(--surface); border: 1px solid var(--border-bright); border-left: 3px solid var(--accent-amber); border-radius: 6px; padding: 24px 28px; margin-top: 48px; margin-bottom: 48px; }
   .thesis-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent-amber); text-transform: uppercase; margin-bottom: 12px; }
   .thesis-text { font-size: 15px; color: var(--text-bright); line-height: 1.6; font-style: italic; font-weight: 300; }
 
-  /* CORPUS */
   .corpus-block { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 24px; margin-top: 16px; }
   .corpus-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
   .corpus-title { font-size: 13px; font-weight: 600; color: var(--text-bright); }
@@ -202,7 +139,6 @@
   .batch-bar-fill { height: 100%; border-radius: 3px; background: var(--accent-green); opacity: 0.7; }
   .batch-count { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); text-align: right; }
 
-  /* FOOTER */
   .footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
   .footer-left { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 1px; }
   .footer-right { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dim); }
@@ -225,7 +161,7 @@
     </div>
   </div>
 
-  <!-- PAPERS — 5 -->
+  <!-- PAPERS -->
   <div class="section-title">ContinuumPort Series — OSF Preprints</div>
   <div class="papers-grid">
 
@@ -234,15 +170,16 @@
       <div class="paper-title">Execution Control in Persistent AI Systems</div>
       <div class="paper-problem">Core model: admissibility, capsule lifecycle, state geometry, execution authority.</div>
       <span class="paper-tag tag-blue">Foundations</span>
-      <a class="paper-link" href="https://osf.io/w7q9n/overview" target="_blank" rel="noopener" style="color:var(--accent-blue);">osf.io/w7q9n →</a>
+      <a class="paper-link" href="https://osf.io/kxdrw/overview" target="_blank" rel="noopener" style="color:var(--accent-blue);">osf.io/kxdrw →</a>
     </div>
 
     <div class="paper-card p2">
       <div class="paper-num">PAPER 02</div>
       <div class="paper-title">On Structural Admission of Partial State Corruption</div>
-      <div class="paper-problem">Passive failure governance: authority contraction, revocation, generation binding.</div>
-      <span class="paper-tag tag-purple">Governance</span>
-      <a class="paper-link" href="https://osf.io/qwf8a/overview" target="_blank" rel="noopener" style="color:var(--accent-purple);">osf.io/qwf8a →</a>
+      <div class="paper-problem">Formal execution geometry: GF(S), policy layers, corruption-free characterization.</div>
+      <div class="jair-badge">JAIR #22885</div>
+      <span class="paper-tag tag-purple">Geometry · Formal</span>
+      <a class="paper-link" href="https://osf.io/b8sgr/overview" target="_blank" rel="noopener" style="color:var(--accent-purple);">osf.io/b8sgr →</a>
     </div>
 
     <div class="paper-card p3">
@@ -258,7 +195,7 @@
       <div class="paper-title">Execution Authority Revocation under Epistemic Divergence</div>
       <div class="paper-problem">Formal conditions for authority revocation when epistemic state diverges from ground truth.</div>
       <span class="paper-tag tag-amber">Authority · Epistemic</span>
-      <a class="paper-link" href="https://osf.io/b8sgr/overview" target="_blank" rel="noopener" style="color:var(--accent-amber);">osf.io/b8sgr →</a>
+      <a class="paper-link" href="https://osf.io/qwf8a/overview" target="_blank" rel="noopener" style="color:var(--accent-amber);">osf.io/qwf8a →</a>
     </div>
 
     <div class="paper-card p5">
@@ -266,7 +203,7 @@
       <div class="paper-title">Adversarial Execution Governance</div>
       <div class="paper-problem">Five adversarial taxonomies, three design gaps closed. 1830 enforcement checks.</div>
       <span class="paper-tag tag-red">Adversarial · v0.6</span>
-      <a class="paper-link" href="https://osf.io/kxdrw/overview" target="_blank" rel="noopener" style="color:var(--accent-red);">osf.io/kxdrw →</a>
+      <a class="paper-link" href="https://osf.io/w7q9n/overview" target="_blank" rel="noopener" style="color:var(--accent-red);">osf.io/w7q9n →</a>
     </div>
 
   </div>
@@ -423,8 +360,8 @@
 
   <!-- RUNTIME FLOW -->
   <div class="section-title">Runtime Execution Flow</div>
-  <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 32px; margin-bottom: 16px;">
-    <div style="display: flex; align-items: stretch; gap: 0; overflow-x: auto;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:32px;margin-bottom:16px;">
+    <div style="display:flex;align-items:stretch;gap:0;overflow-x:auto;">
       <div style="flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;gap:12px;">
         <div style="background:rgba(74,158,255,0.08);border:1px solid rgba(74,158,255,0.2);border-radius:6px;padding:16px 12px;width:100%;text-align:center;">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--accent-blue);margin-bottom:6px;letter-spacing:1px;">REGISTER</div>
@@ -500,7 +437,7 @@
 
   <!-- FOOTER -->
   <div class="footer">
-    <div class="footer-left">CONTINUUMPORT · PAPER 5 · v0.6 · MAY 2026</div>
+    <div class="footer-left">CONTINUUMPORT · 5 PAPERS · MAY 2026</div>
     <div class="footer-right">Execution governance research artifact</div>
   </div>
 
