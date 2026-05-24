@@ -12098,6 +12098,118 @@ If the answer is uncertain and the effect irreversible — it does not execute.
 
 ---
 
+## Chapter 59 — Persistence Without Direction
+
+*Where Chapter 58 establishes what must not execute under uncertainty, this chapter observes what continues to execute — correctly — yet without leading.*
+
+### 59.1 — A Distinct Failure Mode
+
+The preceding chapters address failures of correctness: partial state corruption, authority bypass, invalid transitions, epistemic divergence, inadmissible execution.
+
+This chapter names a different class — one that violates none of the invariants I1–I7.
+
+The system no longer produces direction.
+
+It reacts. It preserves state. It enforces geometry. But it no longer shapes the future in any non-trivial way.
+
+This is persistence without direction.
+
+### 59.2 — The Phenomenon
+
+Direction is not the presence of a declared goal.
+
+Direction is the accumulated bias that historical trajectory exerts on future admissible action.
+
+A system with direction is one in which prior decisions continue to narrow, color, or bias the character of what becomes admissible next.
+
+A system without direction is one in which yesterday no longer changes tomorrow in any structurally detectable way — even though all rules continue to hold.
+
+The structure persists.
+The correctness persists.
+The agency decays.
+
+### 59.3 — Recognition Rather Than Measurement
+
+From inside the system, the recognition test is simple:
+
+Does accumulated history still bias the first admissible action?
+
+If the next reasonable step would look essentially the same whether the system carried years of trajectory or had been reset to a clean declarative state, then directional continuity has weakened or disappeared.
+
+This is not a metric. No vitality calculus is proposed. No formal theorem is asserted.
+
+This chapter identifies a recognizable structural phenomenon rather than a solved mathematical property.
+
+Premature formalization creates the illusion of rigor while importing obligations the model cannot honestly satisfy. A deterministic execution substrate cannot casually inherit stochastic semantics merely because they sound mathematically respectable.
+
+Refusal to formalize prematurely is itself an act of rigor.
+
+### 59.4 — Examples
+
+**Legacy Codebase.** The codebase compiles. Tests pass. Security constraints hold. Yet every decision collapses toward the safest local modification. The accumulated architecture no longer generates preference or momentum — it only constrains violation.
+
+The code is operationally alive. The direction is gone.
+
+**Corporate Process.** Meetings happen. Tickets move. Compliance remains perfect. But strategic trajectory no longer emerges from accumulated institutional history. The organization reacts continuously without meaningfully steering.
+
+The process persists. The organism becomes purely reactive.
+
+**Persistent Agent.** The agent preserves task state, respects authority boundaries, reconciles observations, maintains admissibility. Yet its next action is shaped almost entirely by the latest input — not by the accumulated record of what previously succeeded or failed. Prior execution exists as log, not as bias. The trajectory is stored but no longer operative.
+
+Continuity exists. Direction does not.
+
+### 59.5 — Orthogonality
+
+This failure mode is orthogonal to correctness.
+
+A system can be fully admissible, fully reconciled, structurally safe — and still directionally inert.
+
+Safety prevents bad execution. Direction makes execution matter.
+
+Correctness guarantees that transitions remain legitimate. It does not guarantee that history continues to exert meaningful force on the future.
+
+A perfectly safe system can still become a sophisticated archive.
+
+This distinction becomes increasingly important in long-lived systems optimized aggressively for reconciliation, governance, and invariant preservation. Over time, architectures may become extraordinarily resistant to violation while simultaneously losing the capacity to produce non-trivial direction.
+
+The result is not corruption. It is sclerosis.
+
+### 59.6 — Architectural Implications
+
+If persistence without direction is possible, then correctness and safety alone are insufficient as complete descriptions of long-lived system health.
+
+Architectures focused exclusively on invariants may eventually converge toward highly reliable preservation mechanisms that continue operating indefinitely while losing direction.
+
+This chapter does not propose a remedy. How to detect, measure, preserve, or restore direction remains outside the scope of the current model.
+
+The phenomenon is acknowledged here as real, operationally recognizable, and architecturally important — not as formally solved.
+
+That boundary is intentional. A framework that attempts to explain every adjacent phenomenon eventually dissolves its own authority.
+
+### 59.7 — Your Turn
+
+Take a system you work with, maintain, or depend on.
+
+Does accumulated structure still shape the *character* of future execution — or only its legality?
+
+Name the system. Name the moment, if you can locate it.
+
+---
+
+### Compression
+
+A system can remain persistent, correct, reconciled, and fully compliant while gradually losing direction.
+
+The rules continue to hold. Execution continues. History remains stored.
+
+But history no longer meaningfully shapes what comes next.
+
+Continuity becomes archive.
+
+And a perfectly governed system may slowly transform into a structure that preserves itself flawlessly while no longer leading anywhere at all.
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
