@@ -208,18 +208,18 @@ docs/             — formal specification
 
 ---
 
-[![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](LICENSE)
-[![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
-[![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md)
+[![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](LICENSE) 
+[![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md) 
+[![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md) 
+
 
 ---
 
+[![PRINCIPLES](https://img.shields.io/badge/PRINCIPLES%20-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md)
+
+
 ## Further reading
 
-- [Paper 1 — OSF](https://osf.io/b8sgr) · [DOI: 10.17605/OSF.IO/B8SGR](https://doi.org/10.17605/OSF.IO/B8SGR) — execution geometry and persistent state governance
-- [Paper 2 — OSF](https://osf.io/m8ybn) · [DOI: 10.17605/OSF.IO/M8YBN](https://doi.org/10.17605/OSF.IO/M8YBN) — epistemic admissibility in persistent conversational systems
-- [Paper 3 — OSF](https://osf.io/qwf8a) · [DOI: 10.17605/OSF.IO/QWF8A](https://doi.org/10.17605/OSF.IO/QWF8A) — execution authority revocation under epistemic divergence
-- [Paper 4 — OSF](https://osf.io/w7q9n) · [DOI: 10.17605/OSF.IO/W7Q9N](https://doi.org/10.17605/OSF.IO/W7Q9N) — adversarial execution governance
 - [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (58 chapters)
 - [EXECUTION_MODEL_LIMITS.md](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md) — explicit scope boundaries
 - [Blog](https://gi0rgioroth.blogspot.com/) — context and philosophy
