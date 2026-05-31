@@ -103,21 +103,31 @@ AI merely made this architecture impossible to ignore.
 
 ---
 
-**A Note on Structure**
+## A Note on Structure
 
-This book contains two volumes in one.
+This book contains three volumes.
 
 **Volume I — Chapters 1–23** is a conceptual framework. It establishes what persists, how persistence shapes authority, and why execution fails when it is not structurally constrained. It is written for anyone who designs, evaluates, or decides about systems that do not reset. No implementation experience is required.
 
-**Volume II — Chapters 24–52** is a formal specification. It defines an execution model: enforcement primitives, formal properties, adversarial surface, and structural limits. It is written for those who build or audit systems where execution correctness is not optional. It assumes familiarity with Volume I.
+**Volume II — Chapters 24–59** is a formal specification. It defines an execution model: enforcement primitives, formal properties, adversarial surface, and structural limits. It is written for those who build or audit systems where execution correctness is not optional. It assumes familiarity with Volume I.
 
-The two volumes are not independent.
+**Volume III** begins where the previous volumes stop.
 
-Volume I establishes the problem. Volume II makes failure structurally impossible within a defined model.
+The three volumes are not independent. Each begins with a question left open by the one before it.
+
+Volume I asks what persists. Volume II asks how persistent execution can be constrained. Volume III asks what it means to claim a guarantee about either.
+
+—
+
+Volume I establishes the problem. Volume II makes failure structurally impossible within a defined model. Volume III examines the boundary between guarantee and assumption.
 
 The question Volume II answers is the last one Volume I raises:
 
 *What actually controls execution in a system that never stops running?*
+
+The question Volume III asks is the one Volume II cannot answer from within itself:
+
+*What does it mean to claim that execution is controlled?*
 
 ---
 
@@ -3465,6 +3475,9 @@ Direction is not a technical property.
 
 ---
 
+# Volume II — Chapters 24–59
+
+---
 
 ## Chapter 24 — Execution Authority as Enforcement Primitive
 
@@ -12207,6 +12220,138 @@ But history no longer meaningfully shapes what comes next.
 Continuity becomes archive.
 
 And a perfectly governed system may slowly transform into a structure that preserves itself flawlessly while no longer leading anywhere at all.
+
+---
+
+# Volume III — Trust Boundaries in Persistent Execution Systems
+
+---
+
+## Chapter 1 — What a Guarantee Actually Claims
+
+There is a sentence near the end of Volume II that deserves more attention than it received.
+
+It appears in the analysis of the audit layer — `audit/log.py`, 122 lines, zero dedicated test coverage — and it reads: *deterministic replay guarantee*. The phrase is embedded in documentation, not in code. No test verifies it. No proof establishes it. The claim exists because the designers wrote it, and the design makes it plausible, and no one has yet demonstrated otherwise.
+
+The claim may be true. The guarantee is not.
+
+This distinction — between a property being true and a property being guaranteed — is the subject of Volume III. It is not a philosophical distinction. It has direct consequences for how systems are built, how they are audited, and how the claims they make about themselves should be read.
+
+---
+
+Chapter 59 ended with a question it refused to answer: what happens when a persistent system continues executing correctly while gradually losing direction? The chapter named the phenomenon. It declined to explain it. That refusal was deliberate — and it pointed toward the territory Volume III intends to explore.
+
+Because the inability to explain persistence without direction is not a gap in the execution model. It is a symptom of something deeper: the execution model is very good at answering whether a transition is admissible, and not equipped to answer whether the system's claims about itself remain valid over time.
+
+Those are different questions. Volume I established that local verification cannot guarantee trajectory integrity. Volume II showed what trajectory drift looks like in practice. Volume III begins where both volumes stopped: not at the limits of verification, but at the limits of what can legitimately be *claimed* about a system that persists.
+
+---
+
+### Three Properties, Three Epistemic Statuses
+
+Return to the coverage analysis that appears in the session notes from May 30, 2026. The finding was initially read as a problem: three modules with zero test coverage, including the signer, the transaction authority, and the audit log. The instinct was to catalog these as gaps — uncovered code, untested claims, potential vulnerabilities.
+
+That reading was corrected. `security/signer.py` fails closed at import if the signing key is not present. The behavior is not verified by a test because it is structurally impossible for the module to initialize incorrectly — the constraint is encoded in the construction. The zero coverage is not a gap. It is a design.
+
+But the correction revealed something more interesting than the original error.
+
+What the coverage numbers actually map is not quality. They map *epistemic status*. A covered module has properties that are demonstrated by running code against expected behavior. An uncovered module has properties that are either assumed by architecture or guaranteed by mathematics. These are not the same kind of property, and treating them as equivalent — whether to praise or to criticize — is a category error.
+
+The execution model across Volumes I and II implicitly contains three kinds of property:
+
+**Properties that are formally demonstrated.** The Composition Lemma establishes, through mathematical argument, that local verification cannot guarantee trajectory integrity. The Execution Geometry characterizes the space of admissible state transitions. These results do not depend on implementation. They hold at a level of abstraction above the code, and their truth is not contingent on tests.
+
+**Properties that are empirically validated.** The Transaction Authority's all-or-nothing commit protocol is tested. The audit replay mechanism is exercised. 1,830 tests pass. These properties are known to hold for the cases the test suite exercises, and the assumption — reasonable but not certain — is that untested cases behave consistently.
+
+**Properties that are assumed by construction.** The signer fails closed. The audit log produces deterministic replay. These claims are encoded in intent, in architecture, in the choices of data structures and initialization sequences. They have not been falsified. They have not been demonstrated. They are the trusted computing base — the layer of assumption on which everything else rests.
+
+This is the triad that emerges from the coverage analysis when you look at it correctly. Not a list of bugs. A map of epistemological terrain.
+
+---
+
+### The Discovery That Matters
+
+Demonstrability is not the same as correctness.
+
+A system can be correct without its correctness being demonstrable. These are two separate properties, and the gap between them is not a rounding error.
+
+The audit log may produce deterministic replay. The claim is plausible, the design supports it, and no evidence contradicts it. But *the guarantee exists only in the documentation*. If the implementation drifts — if an edge case in the serialization produces non-deterministic output under specific conditions — the guarantee does not catch the drift. The test suite does not catch the drift. The architecture does not catch the drift. The drift accumulates silently, exactly as Chapter 22 describes trajectory drift accumulating, until something downstream depends on replay and the dependency fails.
+
+This is not a criticism of the system. It is a description of what every non-trivial system contains: a layer of correct-by-construction, assumed-by-design properties that are genuine but unverifiable through the same mechanisms that verify everything else.
+
+The question Volume III asks is: what does it mean to *claim* such a property?
+
+---
+
+### What a Guarantee Claims
+
+A guarantee is not a statement that something is true. It is a statement about the *basis* on which truth can be asserted.
+
+When a specification says *deterministic replay guarantee*, it is making an implicit claim about the epistemic status of that property. The word "guarantee" implies that the property holds not merely because the designers intended it and the implementation appears consistent with that intent — but that there is some mechanism, some demonstration, some structural argument that establishes it independent of observation.
+
+That implicit claim is almost always wrong. Most guarantees in most systems are actually *claims of assumed correctness* — properties that the system assumes hold, expressed in language that suggests they are demonstrated.
+
+This matters because the language of guarantees propagates. A specification that claims a guarantee becomes the input to another system's design. That system depends on the guarantee. Its own correctness may be conditional on the guarantee holding. And if the guarantee was actually an assumption — if the epistemic basis was weaker than the language implied — then every downstream dependency inherits an unacknowledged fragility.
+
+Volume I demonstrated this structurally: local verification cannot close the gap that the Composition Lemma identifies. What Volume III begins to examine is the epistemic version of the same problem. A system that cannot establish trajectory integrity through local verification also cannot establish the validity of its own guarantee claims through local inspection.
+
+The execution model enforces what is declared. It does not validate whether what was declared accurately represents the basis on which the claim rests.
+
+---
+
+### Why This Is Not a Solvable Problem
+
+It would be satisfying to conclude that the solution is more tests, or formal proofs, or richer specification languages. That conclusion would be wrong.
+
+More tests move empirically validated properties from one part of the triad to another. They do not collapse the triad. The signer's fail-closed behavior is not testable in the ordinary sense because it prevents the system from reaching a state where incorrect behavior could be observed — the test would prove only that the system cannot be instantiated without a key, not that the constraint holds under all possible initialization sequences.
+
+Formal proofs establish properties with certainty — but they establish properties of a model, not of an implementation. Even the strongest formally verified systems — seL4, CompCert, verified cryptographic implementations — retain a trusted computing base. Verification reduces the size of that base. It does not eliminate it. The Composition Lemma is true. Whether the implementation faithfully instantiates the formal model is a separate question, and one that formal proof cannot answer about itself.
+
+The triad is not a symptom of insufficient rigor. It is a structural feature of any system complex enough to be worth building.
+
+What changes with this recognition is not the system. What changes is the language in which we describe it.
+
+---
+
+### The Question Volume III Asks
+
+Volume I asked: what cannot be guaranteed by local verification?
+
+Volume II asked: how does this limitation manifest in real systems?
+
+Volume III asks something prior to both: what does it mean to claim a guarantee at all?
+
+Not as a rhetorical question. As a structural one. When a system asserts that a property holds — when documentation, specification, or code comments use the word "guarantee" — what is the implicit claim being made about the epistemic basis for that assertion? Is the property demonstrated, validated, or assumed? Does the language used to describe it accurately reflect that basis? And what are the consequences, downstream and over time, of the mismatch between the two?
+
+These questions do not have simple answers. Some properties can be moved between categories — a property assumed by construction can be made empirically validated through dedicated tests, or formally demonstrated through proof. But no system can fully demonstrate all of its own properties from within itself. There is always a trusted computing base. There is always a layer of assumption.
+
+The question is not how to eliminate that layer. The question is whether we are honest about where it is.
+
+---
+
+### A Map of the Territory
+
+The experiment with cp-core that preceded this volume — the session notes, the JSON handoff, the new instance that reconstructed direction without history — produced an observation worth carrying forward. It is not offered as a demonstration of the guarantee problem, but as the moment where the problem became visible.
+
+*cp-core is an artifact of semantic state, not an artifact of trajectory.*
+
+It transmits what can be understood without the history of how it came to be understood. The direction survives compression. The justification does not.
+
+This is where the guarantee problem first became concrete. A specification transmits what a system is claimed to do. It does not transmit the epistemic basis on which those claims rest. The claim survives documentation. The demonstration does not.
+
+Volume III will examine what it would mean to document guarantees differently — to describe not only what holds, but *how we know it holds*, and what it would mean for it to fail to hold. To map the trusted computing base not as a hidden assumption but as an explicit architectural declaration.
+
+This is harder than it sounds. It requires distinguishing, in practice, between three kinds of claim that are typically expressed in identical language. It requires building systems that can be honest about the basis of their own properties.
+
+It requires, in short, applying to guarantees the same epistemic discipline that Volumes I and II applied to verification.
+
+---
+
+The chapters that follow attempt to build that discipline.
+
+Not as a solved problem. As an ongoing one.
+
+The map is not the territory — but a map that marks its own uncertain regions is more useful than one that doesn't.
 
 ---
 
