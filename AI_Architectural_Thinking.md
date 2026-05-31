@@ -131,6 +131,10 @@ The question Volume III asks is the one Volume II cannot answer from within itse
 
 ---
 
+# Volume I — Chapters 1–23
+
+---
+
 ## Chapter 1 — Regimes, Not Features
 
 ### 1. The Mistake Almost Everyone Makes
@@ -12352,6 +12356,10 @@ The chapters that follow attempt to build that discipline.
 Not as a solved problem. As an ongoing one.
 
 The map is not the territory — but a map that marks its own uncertain regions is more useful than one that doesn't.
+
+---
+
+<img width="2952" height="1677" alt="image" src="https://github.com/user-attachments/assets/9b85ab61-0faf-4a20-8b1a-ba7d6322651b" />
 
 ---
 
