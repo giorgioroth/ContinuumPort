@@ -12363,6 +12363,460 @@ The map is not the territory — but a map that marks its own uncertain regions 
 
 ---
 
+## Chapter 2 — The Migration of Justification
+
+
+### 2.1 — Claims Do Not Move. Justifications Do.
+
+Chapter 1 introduced a distinction between three epistemic states:
+
+* demonstrated,
+* empirically validated,
+* assumed.
+
+The distinction is often misunderstood.
+
+These categories do not describe properties.
+
+They do not even describe systems.
+
+They describe our present basis for asserting that a claim holds.
+
+A property may remain unchanged while its epistemic status changes.
+
+The code may be identical.
+
+The architecture may be identical.
+
+The claim may be identical.
+
+Only the justification changes.
+
+This chapter examines that movement.
+
+---
+
+### 2.2 — The Error of Static Classification
+
+Documentation encourages a misleading habit.
+
+Claims appear as static objects.
+
+A property is described.
+
+A guarantee is declared.
+
+A reader encounters a finished statement.
+
+What disappears is the history by which confidence in that statement was acquired.
+
+As a result, epistemic status is often treated as a label attached permanently to a claim.
+
+It is not.
+
+Status is the current position of a claim within an ongoing process of justification.
+
+The distinction matters because systems evolve.
+
+Evidence accumulates.
+
+Tests are written.
+
+Proofs are discovered.
+
+Assumptions fail.
+
+What appears static in documentation is frequently dynamic in reality.
+
+---
+
+### 2.3 — A Simple Example
+
+Consider a property initially supported only by architectural reasoning.
+
+No dedicated tests exist.
+
+No formal proof exists.
+
+The property is assumed by construction.
+
+Now suppose targeted tests are added.
+
+The implementation has not changed.
+
+The claim has not changed.
+
+The property itself has not changed.
+
+Only the justification has changed.
+
+The claim has migrated from assumption toward empirical validation.
+
+This migration did not occur naturally.
+
+It occurred because work was performed.
+
+Justification does not evolve automatically.
+
+It must be produced.
+
+---
+
+### 2.3a — Migration Is Not Binary
+
+The previous example is too clean.
+
+It suggests a claim moves, in one step, from *assumed* to *validated*.
+
+Real migration is rarely so tidy.
+
+Consider a single documented guarantee: *deterministic replay*. Stated as one
+property, it appears to be one claim with one epistemic status. Under
+examination it separates into two distinct sub-claims:
+
+* **that execution is deterministic** — the same configuration and the same
+  action sequence produce the same final state;
+* **that the replay mechanism reconstructs that execution from its own
+  recorded log.**
+
+These are not the same claim. They can hold or fail independently. And — as the
+next finding describes — they can occupy *different* epistemic positions at the
+same moment.
+
+When a defining experiment was finally constructed, the first sub-claim
+migrated from *assumed* to *empirically validated*. The second did not. It
+remained assumed, because the artifact intended to validate it had drifted out
+of alignment with the system it was meant to exercise.
+
+One documented property. Two sub-claims. Two different epistemic statuses, after
+the same act of investigation.
+
+This is the ordinary shape of migration. A claim does not move as a block. It
+decomposes under scrutiny, and its parts move at different rates — or fail to
+move at all.
+
+---
+
+### 2.4 — The Three Questions
+
+Every claimed property should answer three questions.
+
+**How was this property established?**
+
+**What observation would count as evidence that it no longer holds?**
+
+**Who is responsible for observing that evidence?**
+
+These questions are not documentation requirements.
+
+They are instruments of attack.
+
+Their purpose is not to defend a claim.
+
+Their purpose is to expose its weak points.
+
+A claim that cannot answer the first question lacks an identifiable basis.
+
+A claim that cannot answer the second lacks a failure condition.
+
+A claim that cannot answer the third lacks accountability.
+
+In each case, confidence exceeds evidence.
+
+---
+
+### 2.5 — Applying the Questions
+
+Consider a property for which no dedicated monitoring mechanism exists.
+
+The claim may still be supported by design reasoning.
+
+It may still be supported by observation.
+
+It may still be true.
+
+But if no mechanism exists to detect failure, the answer to the third question is not administrative.
+
+It is substantive.
+
+No one is currently responsible.
+
+This does not invalidate the claim.
+
+It identifies a boundary of the current justification.
+
+The distinction is important.
+
+The purpose of the triad is not to classify systems as good or bad.
+
+The purpose is to reveal where confidence is supported and where it is merely inherited.
+
+---
+
+### 2.6 — Trusted Computing Bases
+
+A Trusted Computing Base is often described as the place where proof ends and trust begins.
+
+This is useful but incomplete.
+
+Different elements of a trusted base may occupy different epistemic positions.
+
+Some may be formally demonstrated.
+
+Some may be empirically validated.
+
+Some may remain assumptions.
+
+A TCB is therefore not a single epistemic object.
+
+It is an epistemic landscape.
+
+The important question is not whether trust exists.
+
+The important question is whether the location of trust is visible.
+
+---
+
+### 2.7 — What This Chapter Does Not Claim
+
+This chapter is not about legitimacy.
+
+It is not about provenance.
+
+It is not about whether a state was reached through an admissible history.
+
+Those questions require a different dimension of analysis.
+
+This chapter addresses only the migration of justification.
+
+It asks how claims acquire, lose, strengthen, or weaken the basis upon which they are asserted.
+
+The legitimacy of the trajectory that produced those claims remains a separate problem.
+
+---
+
+### 2.8 — Closing
+
+Chapter 1 established that claims occupy different epistemic states.
+
+This chapter argues that those states are not fixed labels.
+
+They are positions within a process.
+
+Justification is not a property.
+
+It is a trajectory.
+
+The chapters that follow will examine what happens when those trajectories diverge from the histories that produced the systems they describe.
+
+
+---
+
+## Epistemic Audit Finding J1
+
+### Stalled Justification — and Validation Drift
+
+*ContinuumPort · Volume III Working Documents · 2026*
+
+---
+
+### Finding
+
+A claim may acquire the appearance of empirical validation when a sufficient
+density of compatible evidence accumulates around it, even when the defining
+validation experiment has not been specified or executed.
+
+This phenomenon does not require fraud, negligence, implementation defects,
+or incorrect reasoning.
+
+Tests may pass.  
+Coverage may increase.  
+Adjacent mechanisms may behave exactly as expected.  
+Confidence may rise for legitimate reasons.
+
+Yet the experiment that would directly validate the claim itself may remain
+undefined.
+
+In such cases, the trajectory of justification has not failed.
+
+It has stalled.
+
+---
+
+### The Danger
+
+The danger is not that the claim becomes false.
+
+The danger is that the accumulation of compatible evidence can obscure the
+absence of the defining step required for validation.
+
+A stalled trajectory of justification may therefore become indistinguishable,
+in practice, from a completed one.
+
+---
+
+### Scope
+
+This finding does not identify a defect in the system under examination.
+
+It identifies a property of epistemic evaluation itself.
+
+The appearance of validation can emerge before validation has actually occurred.
+
+The phenomenon is structural.
+
+---
+
+### Formal Statement
+
+The claim appears to have migrated toward empirical validation, while the
+defining step of that migration remains absent, undefined, or unexecuted.
+
+Compatible evidence is not equivalent to validating evidence.
+
+The accumulation of the former does not constitute the latter.
+
+---
+
+### Origin
+
+This finding emerged from Experiment J1 — an examination of the
+*Deterministic Replay Guarantee* in the ContinuumPort execution model.
+
+The experiment did not discover a defect in the guarantee.
+
+It first discovered that the defining validation experiment for the guarantee
+had not been specified: the contract required *"the same executor
+configuration"* without defining what *same* means operationally.
+
+At the time of the finding, the test suite — 1,854 passing tests, high
+coverage, validated adjacent mechanisms — produced a density of compatible
+evidence sufficient to support a reasonable inference that the guarantee was
+empirically validated.
+
+That inference lacked a directly specified validating experiment.
+
+The tests provided evidence compatible with the guarantee, but did not
+constitute direct validation of the guarantee itself.
+
+The trajectory of justification had stalled at the point where the
+contract's language became wider than the evidence it could support.
+
+*(The figure 1,854 is recorded here as the suite size at the moment of the
+finding. It is deliberately not updated. The tests later written to perform the
+defining experiment cannot be counted among the evidence that produced the
+illusion they were written to dispel — that would be circular. The evidence that
+created the problem cannot include the experiment that addressed it.)*
+
+---
+
+### A Sharper Form: Validation Drift
+
+Subsequent code audit refined the finding into something more precise than a
+stalled trajectory.
+
+The defining experiment was not merely unspecified. A mechanism intended to
+perform it already existed in the codebase — a `replay()` function whose
+documented purpose was exactly this validation: replay the recorded log and
+confirm that each transaction reproduces its recorded final state hash.
+
+But that function could no longer execute.
+
+It had been written against an earlier interface, invoking the transaction
+manager with a single argument. The current transaction manager requires an
+authorized proposal as well. The validation artifact and the system it was meant
+to validate had continued to evolve — on separate trajectories.
+
+This is not stalled justification in its simple form. The mechanism did not fail
+to exist. It existed, and ceased to fit the thing it described.
+
+Call this **validation drift**: the validating artifact and the validated system
+diverge over time, until the artifact can no longer exercise the system whose
+correctness it claims to certify.
+
+It is a subtler condition than the absence of a mechanism. Absence is visible.
+Drift is not — the mechanism is present, documented, and plausible, and only an
+attempt to run it reveals that it has come loose from its referent.
+
+When the defining experiment was finally constructed — against the current
+system interface, leaving the drifted artifact in place as evidence — it passed.
+Execution is deterministic: the same configuration and the same sequence
+reproduce the same final state hash, step by step. A negative control confirmed
+the hash discriminates between different sequences.
+
+This validated the *first* sub-claim of deterministic replay — that execution is
+deterministic. It did **not** validate the second — that the original `replay()`
+mechanism reconstructs execution from its own log — because that mechanism
+remains drifted. Repairing it was deliberately deferred, so that the drift would
+remain documented rather than silently erased.
+
+One documented guarantee. One investigation. One sub-claim migrated to
+empirically validated; the other left, knowingly, in assumed — with the reason
+for its position now explicit.
+
+---
+
+### Relation to the Triad
+
+This finding does not introduce a fourth epistemic category alongside
+*demonstrated*, *empirically validated*, and *assumed by construction*.
+
+It describes two conditions that can occur within the transition between
+*assumed* and *empirically validated*:
+
+* **Stalled justification** — the defining step of the transition is absent or
+  undefined; compatible evidence accumulates without completing the migration.
+* **Validation drift** — a mechanism for the defining step exists but has
+  diverged from the system it targets, so the migration cannot complete through
+  the documented path without reconciliation.
+
+The triad remains the correct classification framework.  
+Both are failure modes of the migration process, not new positions within it.
+
+---
+
+### Consequence for Documentation
+
+When a claim is described as empirically validated, documentation should
+be able to identify:
+
+1. The experiment whose execution constitutes direct validation of the claim.
+2. The conditions under which that experiment would produce a negative result.
+3. The party responsible for executing and monitoring that experiment.
+
+If any of these three cannot be specified, the claim has not completed
+its migration toward empirical validation.
+
+And if the experiment is specified but the mechanism that performs it has
+drifted from the current system, the documentation describes a validation that
+can no longer occur as written.
+
+It may still be true.  
+It may still be well-supported.  
+But its trajectory of justification has stalled — or drifted.
+
+---
+
+### Closing
+
+Justification is not a property.
+
+It is a trajectory.
+
+A stalled trajectory does not look like an incomplete one.
+
+It looks like a finished one.
+
+And a drifted one looks, until you try to run it, like a working one.
+
+---
+
+*This finding is a working document for Volume III of*  
+*AI Architectural Thinking: A Structural Framework for Persistence,*  
+*Governance, and Continuity.*
+
+---
+
 ## Afterword — Where the Questions Came From
 
 This book did not begin as a book.
