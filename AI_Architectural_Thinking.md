@@ -12226,12 +12226,15 @@ Continuity becomes archive.
 And a perfectly governed system may slowly transform into a structure that preserves itself flawlessly while no longer leading anywhere at all.
 
 ---
+---
 
 # Volume III — Trust Boundaries in Persistent Execution Systems
 
 ---
+---
 
 ## Chapter 1 — What a Guarantee Actually Claims
+
 
 There is a sentence near the end of Volume II that deserves more attention than it received.
 
@@ -12365,6 +12368,7 @@ The map is not the territory — but a map that marks its own uncertain regions 
 
 ## Chapter 2 — The Migration of Justification
 
+*Volume III — The Guarantee Problem*
 
 ### 2.1 — Claims Do Not Move. Justifications Do.
 
@@ -12814,6 +12818,391 @@ And a drifted one looks, until you try to run it, like a working one.
 *This finding is a working document for Volume III of*  
 *AI Architectural Thinking: A Structural Framework for Persistence,*  
 *Governance, and Continuity.*
+
+---
+
+## Chapter 3 — The Authority of a Norm
+
+*Volume III — The Guarantee Problem*
+
+
+### Epistemic Warning
+
+This chapter does not claim that normative authority is relational as a new
+discovery. That observation predates this work and appears across several
+philosophical traditions. The claim made here is narrower: the distinction
+between *generating* a norm and *entitling* a norm reappears as an operational
+boundary inside a persistent execution system that was never built to
+investigate philosophy. The contribution is not the structure. It is the
+discovery of that structure through executable mechanisms, adversarial attack,
+and implementation-level analysis — and the place where a philosophical
+boundary becomes a design constraint.
+
+---
+
+### 3.1 — What Persists Becomes a Condition of Execution
+
+The previous volumes established a chain. Volume I asked what persists. Volume
+II asked how persistent execution can be constrained. Both stayed inside the
+domain of claims and the evidence for them.
+
+But persistence does something quieter than accumulate data. *What persists
+becomes a condition of future execution.* A stored state shapes which
+transitions are possible next. A retained rule narrows what may follow. Repeated
+influence becomes constraint; constraint that is never questioned becomes, in
+effect, authority — long before anyone names it governance.
+
+And once something exercises authority over execution, one question can no
+longer be deferred:
+
+> By what right does this rule bind, rather than another?
+
+Chapter 2 ended on a stalled trajectory of *justification* — the basis on which
+a claim is asserted. This chapter takes up the question Chapter 2 set aside: not
+whether a claim is justified, but whether the *norm* under which it is judged has
+any authority to judge. This is where justification ends and something prior is
+exposed.
+
+---
+
+### 3.2 — Two Nodes, One State
+
+The question arrives not as argument but as a fact found in code.
+
+In the execution system examined throughout this work, a *commitment* may
+declare the prior commitments it rests on. A commitment with no declared
+dependencies is a *genesis* — a beginning, a root. Consider two such roots:
+
+* a **legitimate genesis** — a node that genuinely is a beginning;
+* an **orphan** — a node whose ancestry genuinely exists, but was never declared.
+
+The system was inspected directly. The two are bit-for-bit identical in every
+internal field: same status, no dependencies, no dependents, a clean ancestry
+closure. No operation over their internal representation tells them apart.
+
+This is not a defect. The system rigorously enforces that *declared* lineage is
+consistent — no cycles, no phantom ancestors, no silent resurrection of
+invalidated nodes. What it cannot do is detect ancestry that was never declared.
+The orphan is consistent precisely because the hidden history is absent from the
+declaration.
+
+The legitimate genesis and the orphan are the same state, wearing two names. The
+system observes state. The distinction lives in history.
+
+---
+
+### 3.3 — D1: Provenance Is Not a Property of State
+
+The trivial reading stops here: identical states cannot be distinguished, and
+that is true of every property, not only provenance. That reading mistakes the
+result.
+
+The result is stronger, and it is not about insufficient information:
+
+> **Provenance legitimacy is not a property of a state. It is a relation between
+> the state and a norm of admissible origin — and the second term of that
+> relation lies outside the state.**
+
+A function of an object cannot compute the object's relation to something the
+object does not contain. The problem is not that the information is hidden. The
+problem is a *category mismatch*: the thing sought — a relation to an external
+standard — is not the kind of thing a state holds. No amount of internal
+inspection recovers it, because there is nothing internal to inspect.
+
+This is the same shape as the central result of the earlier volumes. There,
+local verification of states could not guarantee a global property of the
+trajectory. Here, local inspection of a state cannot recover a relational
+property of its origin. The same form, one level up: from execution to
+legitimacy.
+
+---
+
+### 3.4 — Six Escapes, and Why Each Relocates the Problem
+
+The limit invites attack. Six independent mechanisms were built and followed to
+where each terminated. None was argued into failure; each was run.
+
+**Structure** — inspect the ancestry graph. *Stopped:* hidden ancestry is, by
+definition, not in the graph. There is no edge to read that was never drawn.
+
+**Time** — trust order of registration. *Stopped:* the substrate records
+dependency structure, not time; and an adversary registers first. Trust moves to
+the clock.
+
+**Trust lists** — approve valid roots. *Stopped:* the list is the external
+authority, not a substitute for it. It cannot populate itself from internal
+information — to know which roots are legitimate, you must already know.
+
+**Cryptography** — require a signed origin proof. *Stopped:* the signature
+proves a key was used, not that the key was legitimately held. A stolen key
+signs valid proofs. Trust moves to the key authority.
+
+**Behaviour** — infer origin from activity over time. *Stopped:* behaviour is
+mimicable, and "normal" is defined by someone. The definition is the imported
+norm.
+
+**Cost** — require proof-of-work. *Stopped, with a twist:* this one produces an
+*internally checkable* fact — did this root pay? — with no trusted key. For a
+moment it looks like a door. Then a well-resourced adversary pays too. The proof
+separates *paid* from *unpaid*, not *legitimate* from *illegitimate*. The
+legitimacy that blockchains rely on is not the cost but the *consensus* that the
+longest costly chain is canonical — and "which consensus?" has no internal
+answer. Trust moves into the consensus.
+
+Each mechanism either fails to distinguish genesis from orphan, or relocates the
+trust to a source it cannot itself verify. The reader should, by now, feel the
+pattern before it is named: *every solution moves the trust somewhere else.*
+
+---
+
+### 3.5 — The Trusted Provenance Base
+
+That pattern has a name, and it is the center of this chapter.
+
+> **Trusted Provenance Base (TPB):** the set of origins a system accepts without
+> internal verification of their legitimacy, because it cannot verify them.
+
+Execution systems have a Trusted Computing Base — the layer where proof ends and
+trust begins. The provenance axis has its exact analogue. The Trusted Computing
+Base is where verification of *correctness* ends. The Trusted Provenance Base is
+where verification of *legitimacy* ends.
+
+The TPB cannot be eliminated. It can only be relocated. Trust lists relocate it.
+Certificates relocate it. Consensus relocates it. Economic cost relocates it. No
+mechanism in this work removes it. In the system examined here it is open by
+design: any node declaring no dependencies joins it. That is not a gap to be
+patched. It is a boundary to be mapped — and the value lies in mapping it
+honestly rather than pretending it is not there.
+
+---
+
+### 3.6 — Changing What a Node Is
+
+One objection remains, and it is the one any engineer raises first: stop reading
+the node, and change it. Attach a provenance witness, a derivation certificate,
+a signed declaration of origin.
+
+A witness can take only one of two forms.
+
+If it is **computed from what the node already holds**, it adds nothing. The two
+roots share an identical base state, so any pure function of that state yields
+the same witness for both. The orphan computes it as readily as the genesis.
+
+If it is **unforgeable from inside** — so the orphan cannot produce one — it must
+be bound to something the orphan lacks: a secret, an issuing authority. That is
+the cryptographic mechanism under a new field name. Trust moves to the issuer,
+who is itself an unverified root; and a stolen issuing key produces a perfectly
+valid witness for the orphan.
+
+There is no third form, and the reason is exact: making a witness
+unforgeable-from-inside *means* binding it to something outside. But the attack
+pays for itself, because pushed to its end it sharpens the limit. Even a
+well-formed, correctly-signed witness only *represents* a history. The system
+can check that the representation is well-formed. It cannot check that the
+representation *corresponds* to what actually happened — because what actually
+happened is, by construction, not in the system.
+
+> Provenance can be **represented** internally. The **correspondence** of that
+> representation to actual history cannot be verified internally.
+
+A photograph of a passport is not citizenship. A witness of provenance is not
+provenance. The system can hold the photograph and confirm it is well-made.
+Whether the passport it depicts was ever real remains outside the frame.
+
+---
+
+### 3.7 — The Modeling Fork
+
+At this point a more radical attack appears: stop solving the problem, and
+redefine it. Two branches open.
+
+**Branch A** — hidden ancestry exists; undeclared history remains a fact of the
+matter. Consequence: silent corruption — execution that fails and yet mutates
+state — remains meaningful, and in principle detectable.
+
+**Branch B** — only represented ancestry exists; what is not declared does not
+exist for the system. Consequence: the orphan disappears, because there is no
+hidden history beneath the record. The record *is* the history. D1 dissolves.
+
+Branch B genuinely escapes the limit. But the escape has a price, and the price
+is decisive. A system in which "the record is the history" cannot express silent
+corruption — because nothing unrepresented can occur. If reality can diverge from
+the record, Branch B is blind to it; it has given up the very distinction
+between representation and reality that would let it see the divergence.
+
+The two capabilities are mutually exclusive: a system can detect silent
+corruption, or it can escape D1, but not both. They are the same distinction seen
+from two sides. And this project's founding premise — *the real world has no undo
+button; execution can fail and still mutate state* — places it, necessarily, in
+Branch A. The D1 limit is therefore not incidental to the work. It is entailed by
+the reason the work exists.
+
+Branch B is a real door. It opens onto a room where the problem this book was
+written to address does not exist. Escaping D1 that way is not a path around the
+limit. It is the exit from the model that gives the limit meaning.
+
+---
+
+### 3.8 — Generation Is Not Authority
+
+The attacks force a distinction that was implicit until they made it sharp.
+
+A system *can* author its own admissibility norm internally — reserve a node that
+holds the rules, let the system govern itself by its own encoded standard.
+Nothing forbids this. So the tempting conclusion is that legitimacy has become
+internal: the system generates its norm, therefore the norm is the system's own,
+therefore authority is endogenous.
+
+That is the error, and it is worth preserving as a visible instance of a specific
+slip. From *the system produced this norm* it concludes *this norm is the one
+that ought to bind.* But "authority" is doing too much work in that sentence.
+Unpack it, and it holds three things at once:
+
+* **Enforcement** — the power to make the norm bind: nothing executes except
+  through it. This *is* endogenous. A system gives it to its own norm with no
+  external input.
+* **Correctness** — whether the norm is the right one. This is not authority at
+  all; it is a truth claim about the norm, requiring a standard outside it.
+* **Entitlement** — the right to oblige: that one *ought* to follow this norm
+  rather than another. This is not endogenous, and no internal fact supplies it.
+
+The proposition survives for exactly one of these, and it is the
+non-operational one. So the repaired claim, stated without the compressed word:
+
+> A system can generate a norm and **enforce** it — both endogenous. What it
+> cannot generate from within is the norm's **entitlement**: that the norm it
+> enforces is the one it ought to enforce. Enforcement is an *is*. Entitlement is
+> an *ought*. No internal fact bridges them.
+
+A self-amending constitution is still a constitution. That it wrote itself does
+not establish why it should hold.
+
+---
+
+### 3.9 — An Old Shape, Met From an Unfamiliar Direction
+
+This is not new. Honesty requires naming where it already lives — and the
+closest home is more specific than Hume.
+
+Hume observed that no set of factual premises entails a normative conclusion
+without a normative premise already present: one cannot derive an *ought* from
+an *is*. That is the broad backdrop. But the sharper precedent is John Searle's
+1964 argument *How to Derive "Ought" from "Is"* and the sixty years of debate it
+opened on *constitutive rules* — rules of the form "X counts as Y in context C,"
+which do not merely regulate but create the very facts they govern. Promising,
+on this account, generates an obligation from within an institution.
+
+The relevant point is where that debate stalled, because it stalled exactly
+where this chapter's mechanisms stall. Searle's constitutive rules iterate
+recursively — one "counts-as" built atop another, indefinitely — which is
+precisely the regress the attack mechanisms hit: who authorizes the authority
+that authorizes. Searle himself held that the derivation succeeds: that from the
+institutional fact of promising, an obligation follows. But the subsequent
+debate showed something narrower. The gap can be *traversed within* an
+institution — promising yields obligation, *given* the institution of promising
+— without the institution's own authority being self-grounding. The traversal
+relies on a background acceptance that the institution does not itself generate.
+Generation is endogenous to the institution; entitlement rests on that
+background. The constitutive-rule program located this dependency and did not
+dissolve it.
+
+So the distinction in §3.8 is not a discovery. It is the standing open problem
+of social ontology — generation versus entitlement — and the contribution here
+is narrow and exact: an *executable instance* of it. The recursive "counts-as"
+regress that Searle described in prose appears, on running code, as the
+provenance regress of an execution system. Each mechanism that tries to ground a
+genesis internally reproduces Searle's iteration and terminates where his debate
+terminates — at a background acceptance the system cannot generate from within.
+A Trusted Provenance Base is what that background looks like when it is forced to
+the surface by an attempt to remove it.
+
+Wittgenstein's rule-following remarks circle a neighbouring but distinct problem
+— not whether a system has authority for its rule, but what fixes *what the rule
+requires* in a new case. That is adjacent, not identical, and is cited here only
+as a caution. Brandom's account of normative authority as instituted through
+mutual recognition is the natural next reference, and like Searle must be read in
+the original before it is leaned on, not invoked from memory.
+
+The execution system did not set out to enter this debate. It reproduced its
+central unsolved structure anyway, in code, because the structure is general —
+and that reproduction, not the structure, is the claim.
+
+---
+
+### 3.10 — Where the Boundary Becomes a Design Constraint
+
+This is not only a philosophical observation. It is, increasingly, an
+engineering one — and it is worth naming where the boundary touches systems being
+built right now.
+
+Recent work on embedding authorization directly into a model's reasoning —
+rather than expressing it as a system-prompt instruction — addresses a real and
+measured failure: a permission written as text can be talked around, while a
+permission made a causal prerequisite of the response cannot. The reported drop
+in adversarial success is dramatic. This is enforcement done right, and it is the
+same move the execution system in this book makes: push control below the layer
+where it can be argued with, into the structure of what is possible at all.
+
+But notice what such a system assumes and does not establish. It presumes the
+identity is legitimate, the permissions are legitimate, the relation between them
+is legitimate. It *uses* these; it does not *justify* them. Solve "is this user
+authorized?" perfectly, and the next question is untouched:
+
+> On what basis is the authorizing norm itself entitled?
+
+That is D1, arriving the moment enforcement succeeds. Enforcement and entitlement
+are different layers. A system may enforce a norm flawlessly and that fact alone
+establishes nothing about the norm's legitimacy. The better the enforcement, the
+sharper the remaining question — because once execution can no longer be argued
+with, the only thing left to ask is who set the rule, and by what right.
+
+---
+
+### 3.11 — What This Chapter Does Not Claim
+
+It does not claim that authority being relational is a new philosophical result.
+It is old.
+
+It does not claim the limit is a theorem. It is a candidate boundary, attacked
+from four independent reasoning architectures and surviving in sharpened form,
+with one of its sub-claims correctly weakened by the attack. Survival under
+attack is evidence, not proof.
+
+It does not claim a system cannot generate its own norms. It can. The claim is
+narrower and harder to escape: a system cannot establish, from its own
+represented state, the *entitlement* of the norm it generates and enforces.
+
+And it does not claim this is solved. Like everything in this volume, it is
+sustained rather than closed — held open precisely because the honest position is
+to mark where justification ends, rather than to pretend it reaches further than
+it does.
+
+---
+
+### 3.12 — Closing
+
+A state may be correct and still lack legitimate origin.
+
+A witness may be valid and still fail to establish correspondence.
+
+A norm may be enforced and still lack the entitlement to bind.
+
+These are not three observations. They are one boundary, seen three times — the
+boundary between representation and legitimacy, between execution and
+entitlement, between generation and authority.
+
+The map may contain the rule. The map cannot derive why the rule deserves to
+bind. That remainder is not a defect of the system. It is the point at which
+justification ends — and, for any system that persists long enough to accumulate
+authority, the point that can no longer be left unexamined.
+
+---
+
+*Working draft for adversarial refinement across architectures before promotion
+to canon. The literature positioning — primarily Searle's constitutive-rules
+argument and the social-ontology debate it opened, with Hume as backdrop and
+Wittgenstein and Brandom adjacent — must be verified against primary sources, not
+accepted as stated here.*
 
 ---
 
