@@ -13179,6 +13179,10 @@ it does.
 
 ---
 
+<img width="2946" height="1575" alt="image" src="https://github.com/user-attachments/assets/3f833136-48f0-498d-9a41-c256e02c8ef4" />
+
+---
+
 ### 3.12 — Closing
 
 A state may be correct and still lack legitimate origin.
