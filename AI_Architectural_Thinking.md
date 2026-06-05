@@ -18,6 +18,10 @@ AI merely made this architecture impossible to ignore.
 
 ---
 
+[![PRINCIPLES](https://img.shields.io/badge/PRINCIPLES%20-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md)
+
+---
+
 ### *Foreword — Why DATA Was Wrong About One Thing*
 
 *DATA was my hero.*
