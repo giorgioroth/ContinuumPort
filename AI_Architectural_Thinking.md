@@ -1,4 +1,5 @@
 # AI Architectural Thinking
+
 ## A Structural Framework for Persistence, Governance, and Continuity
 
 ---
@@ -43,7 +44,7 @@ AI merely made this architecture impossible to ignore.
 
 ---
 
-*Real AI systems do not possess subjective experience.*
+*As far as we can establish, real AI systems do not possess subjective experience.*
 *They do not live continuity.*
 *They do not suffer reset.*
 *They lose nothing ontological when a session ends.*
@@ -79,7 +80,7 @@ AI merely made this architecture impossible to ignore.
 
 *It was supposed to be five chapters. A professor explaining things to students.*
 
-*It became twenty.*
+*It became twenty. Then it became three volumes.*
 
 *The concepts grew organically.*
 
@@ -130,9 +131,10 @@ The question Volume III asks is the one Volume II cannot answer from within itse
 *What does it mean to claim that execution is controlled?*
 
 ---
-
+---
 # Volume I — Chapters 1–23
 
+---
 ---
 
 ## Chapter 1 — Regimes, Not Features
@@ -3478,9 +3480,11 @@ Direction is not a technical property.
 **It is a responsibility.**
 
 ---
+---
 
 # Volume II — Chapters 24–59
 
+---
 ---
 
 ## Chapter 24 — Execution Authority as Enforcement Primitive
@@ -3540,6 +3544,7 @@ Validation is informative. Authority is decisive.
 A system is controlled not by what it can evaluate, but by what it can refuse to execute.
 
 ---
+
 ### 3. Geometry as Root of Trust
 
 In the model introduced across earlier chapters:
