@@ -1,8 +1,8 @@
 # ContinuumPort
 
-**Your system failed. What guarantees that nothing changed?**
+Your system failed. What does that leave intact?
 
-Most persistent systems cannot guarantee that structurally under adversarial or partial-failure conditions. ContinuumPort enforces it explicitly.
+Most persistent systems cannot guarantee structural integrity under adversarial or partial-failure conditions. ContinuumPort enforces it explicitly — within a declared execution boundary.
 
 ---
 
@@ -70,19 +70,21 @@ Invalid input is structurally inadmissible — it never enters the execution dom
 
 ---
 
-## Structural guarantees
+## Invariants and their enforcement basis
 
-| Property | Guarantee |
+The five invariants do not have the same epistemic status. The distinction matters.
+
+| Property | Enforcement basis |
 |---|---|
-| I1 — No unauthorized execution | Authority gate cannot be bypassed |
-| I2 — No out-of-domain execution | Invalid input is structurally inadmissible |
-| I3 — No invalid state transition | Geometry constraints enforced before commit |
-| I4 — No partial state escape | Full rollback or full commit, nothing in between |
-| I5 — Deterministic outcome | Same input + same state = same result, always |
+| I1 — No unauthorized execution | Formally demonstrated: authority gate is a necessary condition in GF(S); no admissible sequence bypasses it |
+| I2 — No out-of-domain execution | Formally demonstrated: domain boundary is encoded in the geometry; out-of-domain input has no image in the execution space |
+| I3 — No invalid state transition | Formally demonstrated: geometry constraints are enforced before commitment; violating transitions are inadmissible by construction |
+| I4 — No partial state escape | Formally demonstrated: atomic commit/rollback is enforced at the execution layer; no intermediate state is observable |
+| I5 — Deterministic outcome | Empirically validated: 1830 adversarial and invariant-validation tests, 0 failures; audit replay mechanism assumed by construction (no test independently verifies replay determinism across all adapter implementations) |
 
-If any invariant is violated, execution does not proceed.
+Violations of I1–I4 are structurally inadmissible: they do not reach execution. I5 is continuously validated through adversarial testing; the audit replay assumption is documented in the invariant table above.
 
-This is not convention. It is enforcement.
+This is not convention. It is enforcement — within the declared execution boundary, by a well-behaved adapter. The FaultyAdapter demos above show what enforcement looks like when the boundary condition is not met.
 
 ---
 
@@ -122,7 +124,7 @@ The validation suite includes:
 - admissibility erosion (E1–E5)
 - concurrent adversarial pressure (C1–C5)
 
-Under enforcement, these outcomes are structurally unreachable.
+Under enforcement, these attack patterns are blocked by the declared geometry or fail the admissibility check. Finite exhaustion of a test corpus demonstrates coverage of enumerated patterns — it does not establish structural impossibility for categories that extend beyond the formal model (see Scope and limits).
 
 ---
 
@@ -138,7 +140,7 @@ It does not guarantee:
 
 Undeclared risks are not blocked.
 
-These limits are explicit and documented in [`EXECUTION_MODEL_LIMITS.md`](https://github.com/giorgioroth/ContinuumPort/blob/848566f15c94f6f092a1a242316f4d7bd5329d2a/docs/EXECUTION_MODEL_LIMITS.md#L4) 
+These limits are explicit and documented in [`EXECUTION_MODEL_LIMITS.md`](https://github.com/giorgioroth/ContinuumPort/blob/848566f15c94f6f092a1a242316f4d7bd5329d2a/docs/EXECUTION_MODEL_LIMITS.md#L4)
 
 ---
 
@@ -160,26 +162,26 @@ Commit / Rollback
 
 ContinuumPort defines the constrained execution model. Regen Engine enforces it.
 
-Formal model: GF(S) — the maximal prefix-closed, failure-free execution space. Only sequences inside GF(S) are admissible for execution. Corrupted states are structurally unreachable, not detected.
+Formal model: GF(S) — the maximal prefix-closed, failure-free execution space. Only sequences inside GF(S) are admissible for execution. Corrupted states are structurally inadmissible, not merely detected after the fact.
 
 ---
 
 ## Why "Execution-Governance Kernel"
 
-The Regen Engine functions as an execution-governance kernel — a non-bypassable enforcement layer through which all state-affecting transitions must pass.
+The Regen Engine functions as an execution-governance kernel — a non-bypassable enforcement layer through which all state-affecting transitions must pass, provided the adapter implementing the compliance interface is well-behaved.
 
 This is not middleware. It is not a validator that can be disabled. It is not a hook that can be skipped.
 
 The distinction matters:
 
-- **Non-bypassable execution governance** — no state-affecting transition can occur outside the enforcement layer. There is no alternative path to execution.
+- **Non-bypassable execution governance** — no state-affecting transition can occur outside the enforcement layer. There is no alternative path to execution for a compliant adapter.
 - **Centralized admissibility enforcement** — all transitions are evaluated against the declared geometry before commitment. Authority, invariants, and epistemic state are verified at a single, mandatory point.
 - **Invariant-preserving state transitions** — the system does not detect violations after the fact. Transitions that would violate declared invariants are structurally inadmissible. They do not execute.
 - **Fail-closed execution semantics** — under uncertainty, divergence, or insufficient data, the system halts. It does not degrade gracefully into permissive behavior. It stops.
 
 Loggers can be bypassed. Validators can be disabled. Middleware can be removed.
 
-An execution-governance kernel cannot be routed around. Every transition passes through it, or the transition does not occur.
+An execution-governance kernel cannot be routed around by a compliant adapter. Every transition passes through it, or the transition does not occur.
 
 This is the architectural property that distinguishes the Regen Engine from advisory systems, monitoring layers, or behavioral guardrails — and why "Execution-Governance Kernel" is the correct term for what it does.
 
@@ -220,7 +222,7 @@ docs/             — formal specification
 
 ## Further reading
 
-- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (58 chapters)
+- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (62 chapters)
 - [EXECUTION_MODEL_LIMITS.md](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md) — explicit scope boundaries
 - [Blog](https://gi0rgioroth.blogspot.com/) — context and philosophy
 - [continuumport.com](https://continuumport.com/)
