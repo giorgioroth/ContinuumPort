@@ -12362,7 +12362,9 @@ The map is not the territory — but a map that marks its own uncertain regions 
 
 ---
 
-<img width="2952" height="1677" alt="image" src="https://github.com/user-attachments/assets/9b85ab61-0faf-4a20-8b1a-ba7d6322651b" />
+<img width="2952" height="1677" alt="image" src="https://github.com/user-attachments/assets/9b85ab61-0faf-4a20-8b1a-ba7d6322651b" /> 
+
+---
 
 ## Chapter 2 — The Migration of Justification
 
