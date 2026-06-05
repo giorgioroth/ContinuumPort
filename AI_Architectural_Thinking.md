@@ -122,7 +122,7 @@ The three volumes are not independent. Each begins with a question left open by 
 
 Volume I asks what persists. Volume II asks how persistent execution can be constrained. Volume III asks what it means to claim a guarantee about either.
 
-—
+───
 
 Volume I establishes the problem. Volume II makes failure structurally impossible within a defined model. Volume III examines the boundary between guarantee and assumption.
 
