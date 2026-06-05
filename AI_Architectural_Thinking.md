@@ -18,7 +18,7 @@ AI merely made this architecture impossible to ignore.
 
 ---
 
-[![PRINCIPLES](https://img.shields.io/badge/PRINCIPLES%20-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md)
+[![PRINCIPLES](https://img.shields.io/badge/PRINCIPLES%20-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md) [![PRINCIPLES](https://img.shields.io/badge/PRINCIPLES%20-purple)](https://continuumport.com/12-principles/) 
 
 ---
 
