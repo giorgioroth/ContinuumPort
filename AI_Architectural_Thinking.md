@@ -12254,7 +12254,7 @@ Those are different questions. Volume I established that local verification cann
 
 ---
 
-### Three Properties, Three Epistemic Statuses
+### Three Epistemic Statuses
 
 Return to the coverage analysis that appears in the session notes from May 30, 2026. The finding was initially read as a problem: three modules with zero test coverage, including the signer, the transaction authority, and the audit log. The instinct was to catalog these as gaps — uncovered code, untested claims, potential vulnerabilities.
 
@@ -12262,15 +12262,15 @@ That reading was corrected. `security/signer.py` fails closed at import if the s
 
 But the correction revealed something more interesting than the original error.
 
-What the coverage numbers actually map is not quality. They map *epistemic status*. A covered module has properties that are demonstrated by running code against expected behavior. An uncovered module has properties that are either assumed by architecture or guaranteed by mathematics. These are not the same kind of property, and treating them as equivalent — whether to praise or to criticize — is a category error.
+What the coverage numbers actually map is not quality. They map *epistemic status*. A covered module has properties that are demonstrated by running code against expected behavior. An uncovered module has properties that are either assumed by architecture or guaranteed by mathematics. These claims do not occupy the same epistemic status, and treating them as equivalent — whether to praise or to criticize — is a category error.
 
-The execution model across Volumes I and II implicitly contains three kinds of property:
+The execution model across Volumes I and II implicitly rests on claims that occupy three distinct epistemic statuses:
 
-**Properties that are formally demonstrated.** The Composition Lemma establishes, through mathematical argument, that local verification cannot guarantee trajectory integrity. The Execution Geometry characterizes the space of admissible state transitions. These results do not depend on implementation. They hold at a level of abstraction above the code, and their truth is not contingent on tests.
+**Formally demonstrated.** The Composition Lemma establishes, through mathematical argument, that local verification cannot guarantee trajectory integrity. The Execution Geometry characterizes the space of admissible state transitions. These results do not depend on implementation. They hold at a level of abstraction above the code, and their truth is not contingent on tests.
 
-**Properties that are empirically validated.** The Transaction Authority's all-or-nothing commit protocol is tested. The audit replay mechanism is exercised. 1,830 tests pass. These properties are known to hold for the cases the test suite exercises, and the assumption — reasonable but not certain — is that untested cases behave consistently.
+**Empirically validated.** The Transaction Authority's all-or-nothing commit protocol is tested. 1,854 tests pass. These claims are known to hold for the cases the test suite exercises, and the assumption — reasonable but not certain — is that untested cases behave consistently.
 
-**Properties that are assumed by construction.** The signer fails closed. The audit log produces deterministic replay. These claims are encoded in intent, in architecture, in the choices of data structures and initialization sequences. They have not been falsified. They have not been demonstrated. They are the trusted computing base — the layer of assumption on which everything else rests.
+**Assumed by construction.** The signer fails closed. The audit log produces deterministic replay. These claims are encoded in intent, in architecture, in the choices of data structures and initialization sequences. They have not been falsified. They have not been demonstrated. They are the trusted computing base — the layer of assumption on which everything else rests. (Chapter 2 returns to the replay guarantee directly: under examination it proves not to move as a single block — see Finding J1.)
 
 This is the triad that emerges from the coverage analysis when you look at it correctly. Not a list of bugs. A map of epistemological terrain.
 
@@ -12310,7 +12310,7 @@ The execution model enforces what is declared. It does not validate whether what
 
 It would be satisfying to conclude that the solution is more tests, or formal proofs, or richer specification languages. That conclusion would be wrong.
 
-More tests move empirically validated properties from one part of the triad to another. They do not collapse the triad. The signer's fail-closed behavior is not testable in the ordinary sense because it prevents the system from reaching a state where incorrect behavior could be observed — the test would prove only that the system cannot be instantiated without a key, not that the constraint holds under all possible initialization sequences.
+More tests move claims from one epistemic status to another. They do not collapse the triad. The signer's fail-closed behavior is not testable in the ordinary sense because it prevents the system from reaching a state where incorrect behavior could be observed — the test would prove only that the system cannot be instantiated without a key, not that the constraint holds under all possible initialization sequences.
 
 Formal proofs establish properties with certainty — but they establish properties of a model, not of an implementation. Even the strongest formally verified systems — seL4, CompCert, verified cryptographic implementations — retain a trusted computing base. Verification reduces the size of that base. It does not eliminate it. The Composition Lemma is true. Whether the implementation faithfully instantiates the formal model is a separate question, and one that formal proof cannot answer about itself.
 
@@ -12363,8 +12363,6 @@ The map is not the territory — but a map that marks its own uncertain regions 
 ---
 
 <img width="2952" height="1677" alt="image" src="https://github.com/user-attachments/assets/9b85ab61-0faf-4a20-8b1a-ba7d6322651b" />
-
----
 
 ## Chapter 2 — The Migration of Justification
 
@@ -13031,7 +13029,11 @@ the record, Branch B is blind to it; it has given up the very distinction
 between representation and reality that would let it see the divergence.
 
 The two capabilities are mutually exclusive: a system can detect silent
-corruption, or it can escape D1, but not both. They are the same distinction seen
+corruption, or it can escape D1, but not both. The fork is exhaustive because it
+turns on a single binary question — whether history unrepresented in the record
+can exist at all — and any "partial representation" still answers yes, landing it
+in Branch A; there is no third branch that both escapes D1 and preserves the
+divergence that silent corruption requires. They are the same distinction seen
 from two sides. And this project's founding premise — *the real world has no undo
 button; execution can fail and still mutate state* — places it, necessarily, in
 Branch A. The D1 limit is therefore not incidental to the work. It is entailed by
@@ -13138,10 +13140,10 @@ built right now.
 Recent work on embedding authorization directly into a model's reasoning —
 rather than expressing it as a system-prompt instruction — addresses a real and
 measured failure: a permission written as text can be talked around, while a
-permission made a causal prerequisite of the response cannot. The reported drop
-in adversarial success is dramatic. This is enforcement done right, and it is the
-same move the execution system in this book makes: push control below the layer
-where it can be argued with, into the structure of what is possible at all.
+permission made a causal prerequisite of the response cannot. This is enforcement
+done right, and it is the same move the execution system in this book makes: push
+control below the layer where it can be argued with, into the structure of what
+is possible at all.
 
 But notice what such a system assumes and does not establish. It presumes the
 identity is legitimate, the permissions are legitimate, the relation between them
