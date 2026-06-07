@@ -18,8 +18,8 @@ AI merely made this architecture impossible to ignore.
 
 ---
 
-[![PRINCIPLES](https://img.shields.io/badge/PRINCIPLES%20-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md) [![PRINCIPLES](https://img.shields.io/badge/PRINCIPLES%20-purple)](https://continuumport.com/12-principles/) 
-
+[![7 CORE PRINCIPLES](https://img.shields.io/badge/7%20CORE%20PRINCIPLES-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md)
+[![12 ARCHITECTURAL PRINCIPLES](https://img.shields.io/badge/12%20ARCHITECTURAL%20PRINCIPLES-purple)](https://continuumport.com/12-principles/)
 ---
 
 ### *Foreword — Why DATA Was Wrong About One Thing*
@@ -122,7 +122,7 @@ The three volumes are not independent. Each begins with a question left open by 
 
 Volume I asks what persists. Volume II asks how persistent execution can be constrained. Volume III asks what it means to claim a guarantee about either.
 
-───
+─────────
 
 Volume I establishes the problem. Volume II makes failure structurally impossible within a defined model. Volume III examines the boundary between guarantee and assumption.
 
@@ -143,7 +143,7 @@ The question Volume III asks is the one Volume II cannot answer from within itse
 
 ## Chapter 1 — Regimes, Not Features
 
-### 1. The Mistake Almost Everyone Makes
+### 1.1 The Mistake Almost Everyone Makes
 
 Most discussions about AI focus on features.
 
@@ -157,7 +157,7 @@ Architectural thinking begins when we ask a different question:
 
 A system is not defined by what it does once. It is defined by what it must preserve to do it again.
 
-### 2. A Harder Question
+### 1.2 A Harder Question
 
 Two systems can produce identical answers today.
 
@@ -167,7 +167,7 @@ From the outside, they look the same. Structurally, they are not.
 
 Architectural thinking begins when you stop evaluating outputs and start evaluating persistence.
 
-### 3. The First Structural Distinction
+### 1.3 The First Structural Distinction
 
 When interacting with an adaptive AI system, two distinct forms of continuity may exist:
 
@@ -177,7 +177,7 @@ When interacting with an adaptive AI system, two distinct forms of continuity ma
 
 These are different structural commitments. One concerns the problem. The other concerns you.
 
-### 4. Why This Is Not Cosmetic
+### 1.4 Why This Is Not Cosmetic
 
 If a system preserves relational continuity, then it accumulates agent-specific conditioning, generates governance obligations, creates switching cost, and introduces path dependence.
 
@@ -185,7 +185,7 @@ If it preserves only task continuity: it can be replaced without relational loss
 
 These are not UX differences. They are regime differences.
 
-### 5. The First Architectural Reflex
+### 1.5 The First Architectural Reflex
 
 Before evaluating any AI system, ask:
 
@@ -195,7 +195,7 @@ Before evaluating any AI system, ask:
 
 If you cannot answer these clearly, you are evaluating features, not architecture.
 
-### 6. Exercise — Structural Classification
+### 1.6 Exercise — Structural Classification
 
 Take a real system. Classify it:
 
@@ -207,7 +207,7 @@ Be precise. Avoid abstract language.
 
 If you struggle to separate the two forms of persistence, you have just identified the architectural entanglement.
 
-### 7. A Warning
+### 1.7 A Warning
 
 Personalization feels like improvement.
 
@@ -215,7 +215,7 @@ But every persistent adaptation is a structural commitment.
 
 Architectural thinking is not about maximizing capability. It is about deciding what kinds of persistence are acceptable.
 
-### 8. Closing
+### 1.8 Closing
 
 AI systems differ not only in intelligence, but in what they are allowed to remember.
 
@@ -225,7 +225,7 @@ That choice defines the regime. And regimes define consequences.
 
 ## Chapter 2 — Two Kinds of Memory
 
-### 1. Imagine Two Notebooks
+### 2.1 Imagine Two Notebooks
 
 Imagine you are working on a project with an AI assistant. You keep two notebooks.
 
@@ -235,7 +235,7 @@ Imagine you are working on a project with an AI assistant. You keep two notebook
 
 Both notebooks contain "memory." But they are not the same kind of memory.
 
-### 2. The First Notebook
+### 2.2 The First Notebook
 
 If you give Notebook 1 to another engineer, they can continue your project.
 
@@ -243,7 +243,7 @@ They may implement things differently. They may write code in another style. But
 
 This notebook contains what must persist for the task to move forward. We call this **Declarative Task State (D)**. It is about the problem. Not about you.
 
-### 3. The Second Notebook
+### 2.3 The Second Notebook
 
 If you give Notebook 2 to another engineer, they will know how you like to work. But they will not know what you are building.
 
@@ -251,7 +251,7 @@ This notebook contains what accumulates because the system adapts to you. We cal
 
 Within a given session or task scope, we refer to this as **A_local** — the agent-specific adaptive memory accumulated through direct interaction with a particular user. A_local is the operationally relevant portion of A: it is what disappears on reset, what creates path dependence, and what generates governance obligations when it persists.
 
-### 4. The Simplest Distinction
+### 2.4 The Simplest Distinction
 
 D answers: *What are we building?*
 
@@ -259,13 +259,13 @@ A answers: *How do we work together?*
 
 They often appear together. But they are structurally different.
 
-### 5. Why This Is Hard to See
+### 2.5 Why This Is Hard to See
 
 Most AI systems mix both. When you use a tool for months, it remembers your style, your projects, your patterns. All of this feels like "continuity."
 
 But inside the system, two different types of persistence are operating. One is necessary for the task. The other is optional for execution, but powerful for experience.
 
-### 6. The Critical Question
+### 2.6 The Critical Question
 
 If tomorrow the system is replaced:
 
@@ -274,7 +274,7 @@ If tomorrow the system is replaced:
 
 If you cannot separate these two, you are still thinking in features. If you can, you are now thinking structurally.
 
-### 7. Minimal Mental Model
+### 2.7 Minimal Mental Model
 
 We can compress everything into one line:
 
@@ -1291,6 +1291,14 @@ but by where execution can be refused.
 ---
 
  ## Chapter 13 — Authority Drift
+
+ ───────── 
+ 
+ **Terminological Note**
+
+*In most contemporary usages, "authority drift" describes the transfer of authority between otherwise fixed parties. In the present chapter, it refers instead to changes in the topology of authority itself — the locations at which execution can be permitted or refused.*
+
+─────────
 
 Chapter 12 described authority as a topology of veto points.
 
