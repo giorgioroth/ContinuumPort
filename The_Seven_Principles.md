@@ -1,8 +1,8 @@
-# Seven Principles: A Discipline for Working Intelligently with AI 
+# Seven Principles · A Discipline for Working Intelligently with AI 
 
-[![7 CORE PRINCIPLES](https://img.shields.io/badge/7%20CORE%20PRINCIPLES-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md)
+[![7 CORE PRINCIPLES](https://img.shields.io/badge/7%20CORE%20PRINCIPLES-purple)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md)
 
-### Preface
+### Foreword
 
 ---
 
