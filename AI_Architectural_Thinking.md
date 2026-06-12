@@ -21,7 +21,7 @@ AI merely made this architecture impossible to ignore.
 [![12 ARCHITECTURAL PRINCIPLES](https://img.shields.io/badge/12%20ARCHITECTURAL%20PRINCIPLES-purple)](https://continuumport.com/12-principles/)
 ---
 
-### *Foreword — Why DATA Was Wrong About One Thing*
+### *Preface — Why DATA Was Wrong About One Thing*
 
 *DATA was my hero.*
 
