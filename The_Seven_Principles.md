@@ -1259,7 +1259,11 @@ The mapping below identifies which engine behaviors correspond to which principl
 
 Principles 1 and 5 are not mapped to engine tests. Principle 1 — portability — is an architectural property of how artifacts are serialized, not of execution behavior. Principle 5 — continuity signals — describes user inference about platforms, which is outside the scope of engine-level testing.
 
-Fifteen tests pass in approximately 0.13 seconds.
+Fifteen tests pass in approximately 0.13 seconds. 
+
+
+<img width="2954" height="798" alt="image" src="https://github.com/user-attachments/assets/bb0416df-d95d-445a-8bbb-a8fbc6fdfa09" />
+
 
 ---
 
