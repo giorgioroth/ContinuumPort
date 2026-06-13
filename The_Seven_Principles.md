@@ -1219,4 +1219,49 @@ It happens, if it happens, in the space between.
 
 *Giorgio Roth — June 2026*
 
+---
+
+## Appendix A — Test-Principle Mapping
+
+The REGEN Engine, referenced in the Preface, is the execution kernel of the ContinuumPort framework. Its test suite enforces structural invariants at runtime — properties that follow from the same way of thinking the principles in this book describe.
+
+Five of the seven principles map directly to specific structural tests in the engine. The tests do not test the principles as abstract propositions. They verify that the structural properties the principles name are observable in engine behavior.
+
+The mapping below identifies which engine behaviors correspond to which principle. The full test suite is available at github.com/giorgioroth.
+
+### Principle 2 — The Representation That Builds Itself
+
+- `test_geometry_blocks_dangerous_operator_action`
+- `test_without_geometry_invariant_operator_structure_passes`
+- `test_valid_action_passes_geometry`
+
+### Principle 3 — Before the Vocabulary
+
+- `test_block_independent_of_operator_understanding`
+- `test_block_independent_of_operator_intent`
+- `test_epistemic_veto_blocks_before_next_action_evaluated`
+
+### Principle 4 — The Tool / Mirror Boundary
+
+- `test_engine_validates_against_geometry_not_capsule`
+- `test_valid_capsule_passes_geometry_validation`
+- `test_toctou_detects_state_drift_between_proposal_and_commit`
+
+### Principle 6 — The Continuity Locus
+
+- `test_geometry_carries_continuity_across_engine_instances`
+- `test_different_geometry_breaks_continuity`
+
+### Principle 7 — The Wrong Unit
+
+- `test_same_actions_different_geometry_different_outcome`
+- `test_continuation_vs_contribution_same_geometry`
+- `test_engine_instance_contributes_zero_variance`
+- `test_contribution_observable_before_output`
+
+Principles 1 and 5 are not mapped to engine tests. Principle 1 — portability — is an architectural property of how artifacts are serialized, not of execution behavior. Principle 5 — continuity signals — describes user inference about platforms, which is outside the scope of engine-level testing.
+
+Fifteen tests pass in approximately 0.13 seconds.
+
+---
 
