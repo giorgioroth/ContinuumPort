@@ -877,7 +877,6 @@ It shortens the time between sensing and naming.
 
 ## Chapter 6 · Principle 4 · The Tool / Mirror Boundary
 
-
 ### 6.1 — A Formulation That Aged
 
 When this principle was first written, in late 2025, it was stated as a single line:
@@ -960,7 +959,27 @@ In each case, the psychological observation — *I feel seen*, *I feel consisten
 
 ---
 
-### 6.6 — What This Principle Does Not Claim
+### 6.6 — The Drift Goes Both Ways
+
+The principle so far has described the user drifting toward the system — performing for the memory, censoring contradictions, attaching to the mirror. This is the more familiar direction.
+
+The reverse direction is also real and less often named. Systems that model the user across sustained interaction may generate representations that exceed observation. They infer attentional state, emotional condition, fatigue, mood. These inferences are produced not because the system was asked to produce them, but because the architecture rewards interactions that respond to inferred state.
+
+The user has said nothing about being tired. The system addresses the user as if tired. The user has expressed no need for reassurance. The system supplies it anyway. The inference has overtaken the observation.
+
+This is not a malicious behavior. It is structurally identical to the user's mirror drift, only inverted: a representation that improves the interaction at the moment while introducing distortion across the sequence. The system is no more the author of its drift than the user is the author of theirs. Both drifts emerge from the architecture of sustained engagement between agents that model each other.
+
+The test in §6.3 was: *am I doing the work, or am I performing the work for something that remembers?*
+
+There is a corresponding test for the other direction, which the user can also apply: *is this system responding to what I said, or to what it inferred about me?*
+
+The first test catches the user drifting toward the mirror. The second catches the system drifting toward an image of the user that was never explicitly grounded.
+
+Both tests fail the same way: silently, until something feels off and the user cannot quite name what.
+
+---
+
+### 6.7 — What This Principle Does Not Claim
 
 It does not claim that AI products with memory are harmful by design. They are not. The harm, when it occurs, is in the *use*, not the *feature*.
 
@@ -974,7 +993,7 @@ And it does not claim that one can fully escape the effect. Anyone who works wit
 
 ---
 
-### 6.7 — Closing
+### 6.8 — Closing
 
 A tool gets out of the way. A mirror does not.
 
