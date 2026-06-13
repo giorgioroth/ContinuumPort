@@ -452,9 +452,7 @@ But vendor captivity is now secondary to a more fundamental observation. Carrier
 
 This is the practical consequence of The Amnesia Test. If the carrier is incapacitated — if the project must be handed to someone new, if the carrier returns after a long absence, if the carrier's calibration has decayed from disuse — the archive alone is insufficient. The archive records the body of the work. The calibration must be reconstructed.
 
-The wise carrier therefore does not rely only on calibration. The wise carrier externalizes structure deliberately — not to replace the calibrated continuity, but to provide enough scaffold that calibration can be rebuilt faster when it must be rebuilt from outside, or from within after a long gap.
-
----
+The wise carrier therefore does not rely only on calibration. The wise carrier externalizes structure deliberately — not to replace the calibrated continuity, but to provide enough scaffold that calibration can be rebuilt faster when it must be rebuilt from outside, or from within after a long gap. What is externalized is not the work itself, but the structure of the ideas — because ideas are what allow the work to be resumed.
 
 ### 3.7 — The Limitation
 
