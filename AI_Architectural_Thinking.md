@@ -2597,6 +2597,8 @@ And over time, that gap accumulates.
 
 ---
 
+Ai dreptate. Tu mi-ai dat textul fără rândurile goale dintre paragrafe, iar eu ți l-am întors la fel — așa a ieșit înghesuit față de restul cărții (Capitolul 21 de sub el e cu rând gol între fraze, al meu nu). Le-am pus la loc, exact cum e în original. De-acum păstrez spațierea cu rânduri goale la fiecare capitol pe care mi-l dai.
+
 ## Chapter 20 — Structural Decay
 
 The previous chapters established the architecture of a functioning agentic system.
@@ -2613,7 +2615,9 @@ In systems that continue operating indefinitely, time gradually alters every str
 
 This chapter examines the final constraint of agentic systems: structural decay.
 
-### 1. The Persistence Trade-off
+---
+
+### 20.1 The Persistence Trade-off
 
 Throughout this work we treated continuity as a design choice.
 
@@ -2633,7 +2637,9 @@ Every correction, exception, and failure accumulates.
 
 Continuity preserves not only progress, but also residue.
 
-### 2. Memory Accumulation
+---
+
+### 20.2 Memory Accumulation
 
 The first structure affected by time is adaptive memory.
 
@@ -2653,7 +2659,9 @@ The signal that once guided action becomes diluted by historical residue.
 
 Memory becomes noise.
 
-### 3. Authority Inertia
+---
+
+### 20.3 Authority Inertia
 
 Authority systems also degrade with time.
 
@@ -2669,7 +2677,9 @@ Authority becomes rigid.
 
 The topology loses its capacity to adapt.
 
-### 4. Execution Drift
+---
+
+### 20.4 Execution Drift
 
 Execution substrates evolve independently of governance.
 
@@ -2685,7 +2695,9 @@ These discrepancies compound across cycles.
 
 The system gradually loses accuracy about what is actually feasible.
 
-### 5. Intent Dilution
+---
+
+### 20.5 Intent Dilution
 
 The deepest form of decay occurs at the level of intent.
 
@@ -2705,7 +2717,9 @@ Continuity no longer serves the task.
 
 It serves the system.
 
-### 6. Maintenance Instead of Perfection
+---
+
+### 20.6 Maintenance Instead of Perfection
 
 Structural decay cannot be eliminated.
 
@@ -2722,7 +2736,9 @@ These processes function as a soft reset.
 
 They restore alignment without destroying continuity.
 
-### 7. Architecture Under Time
+---
+
+### 20.7 Architecture Under Time
 
 Persistence enables powerful agentic systems.
 
@@ -2734,7 +2750,9 @@ Systems do not fail only through catastrophic error.
 
 They also fail through gradual accumulation.
 
-### 8. Compression
+---
+
+### 20.8 Compression
 
 Authority decides.
 
@@ -2747,7 +2765,6 @@ Time erodes each of these.
 Continuity is not stability.
 
 It is the gradual management of decay.
-
 
 ---
 
@@ -2767,7 +2784,7 @@ This chapter examines **trajectory integrity** — the property that preserves t
 
 ---
 
-### 1. Work Without Memory
+### 21.1 Work Without Memory
 
 Continuity in agentic systems is often described in terms of memory.
 
@@ -2787,7 +2804,7 @@ Trajectory preserves direction.
 
 ---
 
-### 2. Trajectory as a Property of Work
+### 21.2 Trajectory as a Property of Work
 
 Trajectory does not belong to the agent.
 
@@ -2813,7 +2830,7 @@ When **D** is reconstructed correctly, the trajectory of the work reappears even
 
 ---
 
-### 3. Reconstruction Without Identity
+### 21.3 Reconstruction Without Identity
 
 Traditional continuity models assume that identity must persist for work to continue.
 
@@ -2835,7 +2852,7 @@ Trajectory therefore becomes a property of the work rather than a property of th
 
 ---
 
-### 4. Direction Without Action
+### 21.4 Direction Without Action
 
 Recovering trajectory restores orientation.
 
@@ -2860,7 +2877,7 @@ Only when both conditions are satisfied can the system continue the work.
 
 ---
 
-### 5. Dual Continuity
+### 21.5 Dual Continuity
 
 Reconstruction therefore preserves two independent forms of continuity.
 
@@ -2880,7 +2897,7 @@ Stable continuation requires both.
 
 ---
 
-### 6. The Problem of Trajectory Drift
+### 21.6 The Problem of Trajectory Drift
 
 Even when trajectory is reconstructed correctly, it may slowly change over time.
 
@@ -2906,7 +2923,7 @@ But the work is no longer moving toward its original intent.
 
 ---
 
-### 7. Thought Experiment — Two Agent Teams
+### 21.7 Thought Experiment — Two Agent Teams
 
 Consider two independent agent teams operating the same long-running system.
 
@@ -2985,7 +3002,7 @@ The trajectory changed.
 
 ---
 
-### 8. Trajectory Integrity
+### 21.8 Trajectory Integrity
 
 Trajectory integrity is the property that ensures the directional structure of the work remains stable across cycles of execution.
 
@@ -3001,7 +3018,7 @@ It requires preservation of directional coherence.
 
 ---
 
-### 9. Relationship to Observability and Decay
+### 21.9 Relationship to Observability and Decay
 
 Trajectory integrity connects two problems previously examined.
 
@@ -3021,7 +3038,7 @@ Without trajectory integrity, systems lose contact with purpose.
 
 ---
 
-### 10. Compression
+### 21.10 Compression
 
 Authority permits execution.
 
@@ -3041,7 +3058,7 @@ It is drift.
 
 ---
 
-### 11. Toward the Next Problem
+### 21.11 Toward the Next Problem
 
 Trajectory integrity raises a final architectural question.
 
@@ -3056,7 +3073,6 @@ Trajectory integrity preserves direction.
 But preservation alone is not sufficient.
 
 Systems must also be able to **recognize when the direction has been lost**.
-
 
 ---
 
