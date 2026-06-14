@@ -83,7 +83,7 @@ AI merely made this architecture impossible to ignore.
 
 *It was supposed to be five chapters. A professor explaining things to students.*
 
-*It became twenty. Then it became three volumes.*
+*It became twenty. Then it became three parts.*
 
 *The concepts grew organically.*
 
@@ -109,33 +109,33 @@ AI merely made this architecture impossible to ignore.
 
 ## A Note on Structure
 
-This book contains three volumes.
+This book contains three parts.
 
-**Volume I — Chapters 1–23** is a conceptual framework. It establishes what persists, how persistence shapes authority, and why execution fails when it is not structurally constrained. It is written for anyone who designs, evaluates, or decides about systems that do not reset. No implementation experience is required.
+**Part I — Chapters 1–23** is a conceptual framework. It establishes what persists, how persistence shapes authority, and why execution fails when it is not structurally constrained. It is written for anyone who designs, evaluates, or decides about systems that do not reset. No implementation experience is required.
 
-**Volume II — Chapters 24–59** is a formal specification. It defines an execution model: enforcement primitives, formal properties, adversarial surface, and structural limits. It is written for those who build or audit systems where execution correctness is not optional. It assumes familiarity with Volume I.
+**Part II — Chapters 24–59** is a formal specification. It defines an execution model: enforcement primitives, formal properties, adversarial surface, and structural limits. It is written for those who build or audit systems where execution correctness is not optional. It assumes familiarity with Part I.
 
-**Volume III** begins where the previous volumes stop.
+**Part III** begins where the previous parts stop.
 
-The three volumes are not independent. Each begins with a question left open by the one before it.
+The three parts are not independent. Each begins with a question left open by the one before it.
 
-Volume I asks what persists. Volume II asks how persistent execution can be constrained. Volume III asks what it means to claim a guarantee about either.
+Part I asks what persists. Part II asks how persistent execution can be constrained. Part III asks what it means to claim a guarantee about either.
 
 ─────────
 
-Volume I establishes the problem. Volume II makes failure structurally impossible within a defined model. Volume III examines the boundary between guarantee and assumption.
+Part I establishes the problem. Part II makes failure structurally impossible within a defined model. Part III examines the boundary between guarantee and assumption.
 
-The question Volume II answers is the last one Volume I raises:
+The question Part II answers is the last one Part I raises:
 
 *What actually controls execution in a system that never stops running?*
 
-The question Volume III asks is the one Volume II cannot answer from within itself:
+The question Part III asks is the one Part II cannot answer from within itself:
 
 *What does it mean to claim that execution is controlled?*
 
 ---
 ---
-# Volume I — Chapters 1–23
+# Part I — Chapters 1–23
 
 ---
 ---
@@ -285,7 +285,7 @@ Total persistent state = Task State + Adaptive Memory. Nothing mystical. Just tw
 
 ## Chapter 3 — Identity Without Consciousness
 
-### 1. A Dangerous Shortcut
+### 3.1 A Dangerous Shortcut
 
 When people hear "identity" in AI, they immediately think: consciousness, self-awareness, emotion, intent.
 
@@ -299,7 +299,7 @@ We are asking:
 
 That is the only question that matters here.
 
-### 2. Strip It Down
+### 3.2 Strip It Down
 
 Imagine a thermostat. At first, it follows factory defaults. Over time it adapts: 21°C in the morning, 23°C in the afternoon, lower before sleep.
 
@@ -307,7 +307,7 @@ After months, its behavior changes. Is it conscious? Irrelevant.
 
 The real question: would its behavior differ if the adaptation history were erased? If yes, conditioning exists. That is enough.
 
-### 3. Minimal Test
+### 3.3 Minimal Test
 
 Let S be a system. Let u be a specific user.
 
@@ -317,7 +317,7 @@ If behavior diverges: identity-like structure was present. If behavior does not 
 
 Notice what is missing from this definition: no consciousness, no experience, no inner life. Only conditioning.
 
-### 4. The Discontinuity
+### 3.4 The Discontinuity
 
 As long as agent-specific adaptive memory persists, behavior becomes path-dependent, expectations accumulate, replacement creates relational loss.
 
@@ -325,7 +325,7 @@ But if A_local = 0: conditioning collapses. Not gradually. Categorically.
 
 There is no "weak identity." Either agent-conditioned divergence exists or it does not. This is a structural boundary.
 
-### 5. Your Turn
+### 3.5 Your Turn
 
 Take a system you use frequently. Ask:
 
@@ -335,7 +335,7 @@ If your answer is "yes," you are not just using a tool. You are inside a conditi
 
 Now a harder question: is that loop necessary for your task to continue?
 
-### 6. Translate the Myth
+### 3.6 Translate the Myth
 
 When someone says "This AI knows me," translate it — not poetically, but structurally:
 
@@ -349,17 +349,17 @@ Mentally simulate the system at A_local = 0. What disappears? Be precise. If you
 
 ## Chapter 4 — Path Dependence and Governance Gravity
 
-### 1. Conditioning Has Memory
+### 4.1 Conditioning Has Memory
 
 If adaptive memory persists across time, behavior does not just change. It accumulates. That accumulation creates path dependence.
 
-### 2. What Is Path Dependence?
+### 4.2 What Is Path Dependence?
 
 Path dependence means the system's behavior at time t cannot be fully explained without knowing its history with a specific agent.
 
 Two systems — same architecture, same capability, same task state, different interaction histories — behave differently. Not because of intelligence. Because of conditioning. That difference is not noise. It is structural.
 
-### 3. Why This Matters
+### 4.3 Why This Matters
 
 When behavior depends on path, expectations form. The user adapts to the system. The system adapts to the user. Mutual conditioning emerges.
 
@@ -375,17 +375,17 @@ These obligations do not appear because someone wrote a policy. They appear beca
 
 No persistence → no longitudinal obligation. Persistence → structural obligation.
 
-### 5. The Gradient
+### 4.5 The Gradient
 
 As A_local grows, governance does not remain constant. It increases. Not linearly.
 
 More persistence → more surface area → more governance load.
 
-### 6. Path Dependence and Governance Are Not the Same
+### 4.6 Path Dependence and Governance Are Not the Same
 
 Path dependence is the mechanism. Governance load is the consequence. Do not confuse them.
 
-### 7. Your Turn
+### 4.7 Your Turn
 
 Return to the system you evaluated in Chapter 3. Ask:
 
@@ -395,7 +395,7 @@ Now ask: would those obligations exist if A_local were not persistent?
 
 This is no longer about identity. This is about responsibility.
 
-### 8. Architectural Realization
+### 4.8 Architectural Realization
 
 There are only two stable regimes:
 
@@ -410,13 +410,13 @@ If you cannot explain to someone else why persistence produces gravity, you have
 
 ## Chapter 5 — Governance Is Not Policy
 
-### 1. The Common Misunderstanding
+### 5.1 The Common Misunderstanding
 
 When people hear "governance," they think: regulation, law, compliance, GDPR, lawyers.
 
 Architectural thinking sees something earlier. Governance is not primarily political. It is structural. Governance appears when persistence appears.
 
-### 2. The Primitive That Changes Everything
+### 5.2 The Primitive That Changes Everything
 
 When conditioning is stored across sessions, it becomes structured behavioral modeling of specific agents. Not raw logs. Not temporary signals. Persistent modeling.
 
@@ -424,7 +424,7 @@ And once persistent modeling exists, obligations exist. Not because a policy was
 
 Governance does not begin in legislation. It begins in architecture.
 
-### 3. Industrial Example — Enterprise AI Assistant
+### 5.3 Industrial Example — Enterprise AI Assistant
 
 **Phase 1 — Stateless Deployment**
 
@@ -444,7 +444,7 @@ Now imagine the company wants to replace the vendor. Suddenly: can adaptive memo
 
 None of these questions existed in Phase 1. No new law appeared that day. Persistence appeared. Governance emerged.
 
-### 4. Governance Gravity
+### 5.4 Governance Gravity
 
 Governance is not punishment. It is structural weight created by persistence.
 
@@ -452,7 +452,7 @@ Gravity does not ask permission. It follows mass. Persistence is mass. Governanc
 
 Remove A_local: longitudinal governance obligations collapse. Operational governance remains. Add A_local: you create durable obligation.
 
-### 5. Policy Reacts. Architecture Produces.
+### 5.5 Policy Reacts. Architecture Produces.
 
 Policy responds to consequences. Architecture produces consequences.
 
@@ -460,7 +460,7 @@ If you design for persistent adaptive memory, you design for governance complexi
 
 This is not ideological. It is causal.
 
-### 6. Compression
+### 5.6 Compression
 
 Governance is not created by regulation. It is induced by persistent agent-specific state.
 
@@ -474,19 +474,19 @@ Persistence is the primitive. Governance is the consequence.
 
 ## Chapter 6 — The Cost of Calibration
 
-### A Reflex After Gravity
+### 6.1 A Reflex After Gravity
 
 After Chapter 5, a reflex appears: eliminate A, reduce the surface, simplify the system.
 
 This reflex is not wrong. But it is incomplete. And incomplete reflexes are dangerous in architecture.
 
-### What the Bifurcation Actually Gave You
+### 6.2 What the Bifurcation Actually Gave You
 
 The categorical distinction at A_local = 0 still stands. What changes here is not the logic of regimes — but the difficulty of inhabiting the space between them.
 
 Most real systems do not live at endpoints. They live in calibration.
 
-### Persistence Is Not Only a Switch
+### 6.3 Persistence Is Not Only a Switch
 
 Persistence can be bounded: memory that expires when a session ends, memory that exists only inside a declared task capsule, memory that can be inspected and reset, memory with a defined maximum lifetime.
 
@@ -496,7 +496,7 @@ Persistence is a variable. But a variable is not a regime until its bounds are e
 
 Without a specified boundary, "bounded persistence" is a hope, not an architecture.
 
-### The Harder Obligation
+### 6.4 The Harder Obligation
 
 Unlimited persistence is easy: store everything, never delete, let optimization accumulate.
 
@@ -508,7 +508,7 @@ If you choose bounded A, you do not escape governance gravity. You redistribute 
 
 **Intent is not architecture. Enforcement is architecture.**
 
-### Three Versions of the Same System
+### 6.5 Three Versions of the Same System
 
 **Version 1 — Unlimited Persistence:** All agent-specific adaptation stored indefinitely. Behavior accumulates. Path dependence deepens. The system becomes harder to remove precisely because it has adapted.
 
@@ -518,7 +518,7 @@ If you choose bounded A, you do not escape governance gravity. You redistribute 
 
 Capability may be similar across all three. The persistence topology is entirely different. And the obligation that follows is entirely different.
 
-### What Bounded A Does Not Solve
+### 6.6 What Bounded A Does Not Solve
 
 Bounded persistence reduces gravity. It does not eliminate it.
 
@@ -528,7 +528,7 @@ The question becomes: is this level of persistence justified by the task? Who co
 
 These are harder questions than "should A exist?"
 
-### Calibration Is Not Neutral
+### 6.7 Calibration Is Not Neutral
 
 Bounded persistence is not a compromise between extremes. It is a third obligation.
 
@@ -538,7 +538,7 @@ If you cannot specify the scope, the lifetime, the reset condition, and the enfo
 
 That intention does not change the architecture. Only the boundary does.
 
-### Your Turn
+### 6.8 Your Turn
 
 Return to the system from Chapter 3. If adaptive memory were limited to the duration of a single declared task, what would survive that boundary?
 
@@ -546,7 +546,7 @@ Who controls that boundary? Is it you? The platform? Is it undefined?
 
 Name the system. Name the boundary. Name who controls it. Architecture begins when you can do that.
 
-### Compression
+### 6.9 Compression
 
 Unlimited persistence creates deep path dependence and expanding governance. Zero persistence creates replaceable execution and minimal governance. Bounded persistence creates managed continuity — but only if the boundary is explicit, enforced, and controlled.
 
@@ -558,7 +558,7 @@ If you cannot govern the boundary, you have not calibrated persistence. You have
 
 ## Chapter 7 — Boundary as Primitive
 
-### 1. After Calibration
+### 7.1 After Calibration
 
 Architecture begins where intention ends.
 
@@ -570,7 +570,7 @@ Without enforcement, bounded persistence slowly becomes unlimited persistence �
 
 **A boundary without enforcement is a promise waiting to be broken.**
 
-### 2. The Test of a Boundary
+### 7.2 The Test of a Boundary
 
 Most systems today claim to have boundaries: "Memory expires after 30 days." "Context is scoped to this project." "You can reset anytime."
 
@@ -580,7 +580,7 @@ If expired state can still load, if cross-scope memory can still merge, if undec
 
 A real boundary must be able to say no. Not politely. Not optionally. Structurally.
 
-### 3. Enforcement as a Chain of Necessity
+### 7.3 Enforcement as a Chain of Necessity
 
 To make a boundary real, enforcement must form a chain.
 
@@ -594,7 +594,7 @@ And even that is insufficient without **refusal**. If an expired state can still
 
 Refusal is the final proof that the boundary exists. Without refusal, everything else is theatre.
 
-### 4. Boundaries Take Shape
+### 7.4 Boundaries Take Shape
 
 **Temporal:** State expires after fixed time or session count. Simple and predictable. Reduces long-term accumulation. May cut continuity too early.
 
@@ -604,7 +604,7 @@ Refusal is the final proof that the boundary exists. Without refusal, everything
 
 None is universally superior. Each redistributes responsibility differently. Choosing one is an architectural decision, not a moral statement.
 
-### 5. Ownership of the Boundary
+### 7.5 Ownership of the Boundary
 
 If the user defines scope, lifetime, and revocation, and the platform merely enforces — governance remains distributed.
 
@@ -614,7 +614,7 @@ If no one clearly owns the boundary, gravity accumulates invisibly.
 
 Ownership determines who carries the long-term cost of persistence. Over time, cost becomes power.
 
-### 6. Failure as Evidence
+### 7.6 Failure as Evidence
 
 In fragile systems, violations are hidden. In disciplined systems, violations are visible.
 
@@ -622,7 +622,7 @@ A refused load is not an error. It is proof that the boundary exists. A rejected
 
 Silence during violation is structural decay. A boundary that never refuses has already collapsed.
 
-### 7. A Minimal Example
+### 7.7 A Minimal Example
 
 Consider a simple structured container that accepts only explicit intent, constraints, decisions, and next action. It excludes relational residue, conversation history, implicit context.
 
@@ -630,7 +630,7 @@ At handoff, validation occurs. If structure is violated, transfer fails.
 
 The boundary is not intelligent. It does not interpret motives. It enforces structure. That is enough.
 
-### 8. Your Turn
+### 7.8 Your Turn
 
 Choose an AI system you use regularly. Ask four questions:
 
@@ -641,7 +641,7 @@ Choose an AI system you use regularly. Ask four questions:
 
 Name the system. Name the boundary. Name who controls it. If one condition is missing, identify what kind of gravity that absence creates.
 
-### 9. Compression
+### 7.9 Compression
 
 Persistence without enforcement accumulates gravity. Enforcement without user control accumulates power. Boundary as primitive distributes both — deliberately.
 
@@ -655,25 +655,25 @@ If you cannot identify the mechanism that refuses violation, you do not have bou
 
 ## Chapter 8 — Persistence as Power
 
-### 1. Power Hides in Memory
+### 8.1 Power Hides in Memory
 
 Persistence is rarely presented as power. It is presented as convenience. Personalization. Continuity.
 
 But persistence tilts the field. One side accumulates history. The other restarts. The tilt is leverage.
 
-### 2. The Structural Shift
+### 8.2 The Structural Shift
 
 Power in agent systems does not begin with authority. It begins with asymmetric continuity.
 
 If one side accumulates persistent state that the other cannot inspect, export, revoke, or reset symmetrically — power has already shifted. No contract was signed. No policy was declared. The architecture performed the transfer.
 
-### 3. Capital Is Predictive Advantage
+### 8.3 Capital Is Predictive Advantage
 
 When a system predicts your behavior better than you can re-express it elsewhere, relational capital has formed.
 
 Predictive advantage becomes switching cost. Switching cost becomes leverage. Leverage accumulated over time stabilizes as structural power.
 
-### 4. The Replaceability Test
+### 8.4 The Replaceability Test
 
 The cleanest diagnostic is replaceability.
 
@@ -681,7 +681,7 @@ If the system loses your history, does it degrade gradually? If you lose the sys
 
 Asymmetry in replaceability is a measurable power differential. The side that survives reset holds less leverage. The side that cannot tolerate reset holds more.
 
-### 5. The Forgetting Test
+### 8.5 The Forgetting Test
 
 Who can forget whom?
 
@@ -689,13 +689,13 @@ Can you force complete erasure — technically, not contractually? Can the syste
 
 The side that cannot be forgotten holds structural power. Memory without revocability is capital locked upstream.
 
-### 6. Accumulation Without Signal
+### 8.6 Accumulation Without Signal
 
 Power rarely announces itself. Accumulation without visible boundary events is silent transfer.
 
 If persistence grows without explicit declaration, without inspectable state, without enforced refusal — gravity is concentrating.
 
-### 7. Your Turn
+### 8.7 Your Turn
 
 Choose one system that remembers you. Name it.
 
@@ -705,7 +705,7 @@ Then answer in one sentence: where does persistent advantage accumulate?
 
 That sentence is your power map.
 
-### 8. Compression
+### 8.8 Compression
 
 Persistence creates asymmetry. Asymmetry creates leverage. Leverage accumulates as capital. Capital stabilizes as power.
 
@@ -717,13 +717,13 @@ And when accumulation happens without signal, without symmetry, without refusal 
 
 ## Chapter 9 — When D Is Sufficient
 
-### 1. The Return to Structure
+### 9.1 The Return to Structure
 
 After diagnosing persistence as power, the question is no longer what happens. It becomes: when is adaptive memory unnecessary? When is declarative task state enough?
 
 Not safer. Not simpler. **Enough.**
 
-### 2. D as Structural Minimum
+### 9.2 D as Structural Minimum
 
 D is the minimal persistent state required for continuity across interruption. It contains: explicit goal, explicit constraints, explicit decisions, explicit next action.
 
@@ -731,19 +731,19 @@ Nothing implicit. Nothing relational. Nothing that grows silently.
 
 D restores symmetry after reset. Both sides restart from the same declared structure.
 
-### 3. The Stabilization Point
+### 9.3 The Stabilization Point
 
 Every system trades adaptation for overhead. A increases adaptation through conditioning. But it increases governance surface, enforcement burden, and switching cost.
 
 There exists a point where additional adaptation no longer improves structural stability. When additional memory produces more gravity than clarity, D is sufficient.
 
-### 4. Conditions of Sufficiency
+### 9.4 Conditions of Sufficiency
 
 D tends to be sufficient when: the task is bounded and well-defined, the objective is stable across sessions, reset is frequent or desirable, replaceability is a priority, drift risk exceeds personalization benefit.
 
 These conditions are not exceptional. They describe most disciplined work.
 
-### 5. What A Adds — and What It Costs
+### 9.5 What A Adds — and What It Costs
 
 A adds calibration. It may reduce friction. It may anticipate preference.
 
@@ -751,7 +751,7 @@ But every unit of A introduces: path dependence, boundary enforcement requiremen
 
 When the structural cost of those obligations exceeds the gain from calibration, A becomes excess. Not immoral. Excess.
 
-### 6. Sufficiency Is Not Deprivation
+### 9.6 Sufficiency Is Not Deprivation
 
 Choosing D is not a rejection of intelligence. It is a commitment to explicit continuity.
 
@@ -759,7 +759,7 @@ Work can remain sharp. Execution can remain adaptive within session. Progress ca
 
 Continuity does not require accumulation. It requires structure.
 
-### 7. Your Turn
+### 9.7 Your Turn
 
 Choose a task you repeat regularly with AI. If all adaptive memory were removed and replaced with explicit D:
 
@@ -770,7 +770,7 @@ Choose a task you repeat regularly with AI. If all adaptive memory were removed 
 
 If nothing essential collapses and structural clarity improves — D is sufficient here.
 
-### 8. Compression
+### 9.8 Compression
 
 A buys adaptation at the price of gravity. D buys symmetry at the price of calibration.
 
@@ -782,13 +782,13 @@ Sufficiency is not minimalism. It is proportion. Not every task deserves memory.
 
 ## Chapter 10 — When the Network Remembers
 
-### 1. The Hidden Assumption
+### 10.1 The Hidden Assumption
 
 Until now, every chapter relied on an assumption: one agent, one boundary, one persistence surface.
 
 Keep the questions. Change the scale.
 
-### 2. Delegation Introduces a New Surface
+### 10.2 Delegation Introduces a New Surface
 
 When one agent delegates to another, a new persistence surface appears. Not additional intelligence. Not additional capability. A new place where history accumulates.
 
@@ -798,7 +798,7 @@ No single state store contains this. It exists in calibration, in expectation, i
 
 This is not local adaptive memory. It is relational accumulation. And it has no natural boundary.
 
-### 3. Memory on the Edge
+### 10.3 Memory on the Edge
 
 Relational memory does not reside inside a node. It forms on the edge between nodes.
 
@@ -806,13 +806,13 @@ Reset A. Reset B. The edge still carries the effect. Because other nodes already
 
 You replaced a node. You did not erase the network's history. These are different operations.
 
-### 4. Path Dependence Without Owner
+### 10.4 Path Dependence Without Owner
 
 In networks, path dependence detaches from ownership. No single agent possesses the full interaction history. No single reset clears it. No single protocol contains it.
 
 Each edge stores adjustment. Each adjustment influences another. By the time deviation becomes observable, attribution is computationally intractable. Not because it was hidden. Because it was distributed.
 
-### 5. Protocol Does Not Contain Memory
+### 10.5 Protocol Does Not Contain Memory
 
 Delegation protocols can define who may act, who must verify, how failures escalate, how authority transfers. Authority can be structured. Accountability can be logged.
 
@@ -822,7 +822,7 @@ None of these operations bound relational memory.
 
 If architecture does not discipline persistence at the edges, protocol operates on top of accumulated relational state. Surface order. Unbounded substrate.
 
-### 6. The Reset Problem
+### 10.6 The Reset Problem
 
 In a network: who resets the relationship?
 
@@ -832,13 +832,13 @@ The network behaves as if memory exists even when no agent explicitly stores it.
 
 **The network remembers through distributed adjustment.**
 
-### 7. Compounding Deviation
+### 10.7 Compounding Deviation
 
 In networks, drift propagates. A slight trust miscalibration. A small delegation preference. A marginal optimization in routing. Each local change alters future calibration. Local deviations compound across edges.
 
 Networks stabilize around their history even when that history was never formalized.
 
-### 8. The Structural Shift
+### 10.8 The Structural Shift
 
 The question changes.
 
@@ -850,7 +850,7 @@ In single systems, unbounded A creates identity. In networks, unbounded relation
 
 Leverage without owner does not disappear. It diffuses until it concentrates.
 
-### 9. Exercise — Edge Mapping
+### 10.9 Exercise — Edge Mapping
 
 Choose a real or imagined multi-agent system. Do not map the nodes. Map the edges.
 
@@ -862,7 +862,7 @@ Where does relational memory reside? Who can reset it?
 
 If you cannot answer these questions, you have reached the limit of your architectural visibility. That limit defines your next problem.
 
-### 10. Compression
+### 10.10 Compression
 
 Single-agent persistence is a design problem. Network-level relational memory is a structural force.
 
@@ -882,7 +882,7 @@ Because you now see where it actually begins.
 
 ## Chapter 11 — Where Authority Lives
 
-### 1. After the Network
+### 11.1 After the Network
 
 Chapter 10 ended with a boundary problem.
 
@@ -900,7 +900,7 @@ Authority.
 
 Who decides that work may continue?
 
-### 2. Extending the Model
+### 11.2 Extending the Model
 
 Until now:
 
@@ -926,7 +926,7 @@ The question is not whether authority exists.
 
 The question is where it is rooted.
 
-### 3. Three Authority Regimes
+### 11.3 Three Authority Regimes
 
 Authority can be rooted in three places.
 
@@ -968,7 +968,7 @@ Authority persists in governance logic.
 These are not moral categories.
 They are topologies.
 
-### 4. Conditional vs Intrinsic Replaceability
+### 11.4 Conditional vs Intrinsic Replaceability
 
 Delegation credentials solve authorization cleanly.
 
@@ -988,7 +988,7 @@ No identity persistence is required for work to continue.
 
 The difference is structural.
 
-### 5. Authority and Power Accumulation
+### 11.5 Authority and Power Accumulation
 
 Where authority is rooted determines where power accumulates as persistence grows.
 
@@ -1000,7 +1000,7 @@ Policy-bound authority concentrates leverage in rule control.
 
 Persistence and authority together define power topology.
 
-### 6. The Hidden Coupling
+### 11.6 The Hidden Coupling
 
 Auth is not always orthogonal to D and A.
 
@@ -1015,7 +1015,7 @@ The overlaps are where real architectural decisions occur.
 
 This is where systems become hard to replace.
 
-### 7. The Structural Question
+### 11.7 The Structural Question
 
 The debate is not:
 
@@ -1035,7 +1035,7 @@ There is no universal answer.
 
 There is only regime selection.
 
-### 8. Regime Selection as Design
+### 11.8 Regime Selection as Design
 
 Architectural thinking now requires three questions:
 
@@ -1045,7 +1045,7 @@ Where is execution authority rooted?
 
 If you cannot answer all three, you do not understand the system's power topology.
 
-### 9. Your Turn
+### 11.9 Your Turn
 
 Choose a system with agent delegation.
 
@@ -1064,7 +1064,7 @@ If policy changes, does execution survive?
 
 The answers define the regime.
 
-### 10. Compression
+### 11.10 Compression
 
 Persistence defines continuity.
 
@@ -1095,7 +1095,7 @@ Chapter 10 showed that persistence in agent networks does not live only inside n
 Chapter 11 examined where execution authority can be rooted.
 This chapter asks a different question: how authority is distributed once execution crosses system boundaries.
 
-### 1. The Missing Assumption
+### 12.1 The Missing Assumption
 
 When we speak about authority in systems, we instinctively look for a root.
 
@@ -1110,7 +1110,7 @@ Once execution is distributed across multiple layers, authority no longer lives 
 
 It becomes structural.
 
-### 2. The Boundary Insight
+### 12.2 The Boundary Insight
 
 In the previous chapter, we introduced a third primitive:
 
@@ -1127,7 +1127,7 @@ It is re-evaluated at every boundary crossing.
 
 Each boundary becomes a place where execution may stop.
 
-### 3. From Root to Structure
+### 12.3 From Root to Structure
 
 Many architectures implicitly assume something like:
 
@@ -1161,7 +1161,7 @@ Authority therefore does not behave like a root.
 
 It behaves like a structure.
 
-### 4. Veto Points
+### 12.4 Veto Points
 
 Each layer that can block execution acts as a **veto point**.
 
@@ -1202,7 +1202,7 @@ Identity alone cannot guarantee execution.
 
 It participates in the topology but does not define it.
 
-### 6. The Aviation Example
+### 12.6 The Aviation Example
 
 Consider a modern aircraft.
 
@@ -1224,7 +1224,7 @@ The aircraft flies only when all layers permit the action.
 
 This is a veto topology.
 
-### 7. Why Systems Evolve This Way
+### 12.7 Why Systems Evolve This Way
 
 Distributed veto structures are not accidental.
 
@@ -1241,7 +1241,7 @@ Each boundary introduces a veto point.
 
 Over time, authority spreads across the system.
 
-### 8. Authority as Topology
+### 12.8 Authority as Topology
 
 Once this happens, authority is no longer a root.
 
@@ -1259,7 +1259,7 @@ No single component fully controls execution.
 
 Control emerges from their interaction.
 
-### 9. The Architectural Consequence
+### 12.9 The Architectural Consequence
 
 This has an important implication for AI systems.
 
@@ -1271,7 +1271,7 @@ A system that appears replaceable at one layer may still be constrained by other
 
 Execution authority must therefore be analyzed structurally, not locally.
 
-### 10. Compression
+### 12.10 Compression
 
 Authority in complex agentic systems is not a single root of control.
 
@@ -1289,7 +1289,7 @@ but by where execution can be refused.
 
 ---
 
- ## Chapter 13 — Authority Drift
+## Chapter 13 — Authority Drift
 
  ───────── 
  
@@ -1310,7 +1310,7 @@ They evolve.
 
 This chapter examines what happens when authority structures change over time.
 
-### 1. Authority Does Not Stay Still
+### 13.1 Authority Does Not Stay Still
 
 In simple systems, authority structures are stable.
 
@@ -1329,7 +1329,7 @@ Each of these changes can alter where authority effectively resides.
 
 This phenomenon is **authority drift**.
 
-### 2. What Authority Drift Means
+### 13.2 What Authority Drift Means
 
 Authority drift occurs when the **effective location of veto power shifts over time**, even if the formal architecture remains unchanged.
 
@@ -1348,7 +1348,7 @@ It can emerge gradually through:
 
 Over time, these small changes alter the authority topology.
 
-### 3. How Drift Appears
+### 13.3 How Drift Appears
 
 Consider a system where execution initially depends on three veto points:
 
@@ -1378,7 +1378,7 @@ Policy still exists.
 
 But the effective veto point has shifted.
 
-### 4. Formal Authority vs Effective Authority
+### 13.4 Formal Authority vs Effective Authority
 
 Architectural diagrams describe **formal authority**.
 
@@ -1390,7 +1390,7 @@ Effective authority is determined by which components actually exercise veto pow
 
 Authority drift is the divergence between these two.
 
-### 5. Why Drift Is Almost Inevitable
+### 13.5 Why Drift Is Almost Inevitable
 
 Authority drift emerges naturally in systems that are:
 
@@ -1406,7 +1406,7 @@ Over time, the topology evolves.
 
 Even if the architecture documentation does not change.
 
-### 6. A Familiar Example
+### 13.6 A Familiar Example
 
 Consider aviation again.
 
@@ -1427,7 +1427,7 @@ Certain maneuvers are now structurally impossible.
 
 The topology evolved.
 
-### 7. Drift and Replaceability
+### 13.7 Drift and Replaceability
 
 Authority drift has a direct consequence for replaceability.
 
@@ -1437,7 +1437,7 @@ But if authority has drifted toward that component, replacing it becomes structu
 
 Replaceability depends on the **current authority topology**, not the original one.
 
-### 8. Why Drift Matters for AI Systems
+### 13.8 Why Drift Matters for AI Systems
 
 Agentic systems evolve quickly.
 
@@ -1454,7 +1454,7 @@ Not by intention.
 
 But by drift.
 
-### 9. Detecting Drift
+### 13.9 Detecting Drift
 
 Authority drift is rarely visible from documentation.
 
@@ -1468,7 +1468,7 @@ Key questions include:
 
 The answers reveal the **effective topology**.
 
-### 10. Compression
+### 13.10 Compression
 
 Authority topology describes where execution can be refused.
 
@@ -1487,7 +1487,7 @@ Over time, it moves.
 
 ---
 
- ## Chapter 14 — Authority Capture
+## Chapter 14 — Authority Capture
 
 Chapter 12 described authority as a topology of veto points.
 
@@ -1504,7 +1504,7 @@ This chapter examines what happens when authority converges toward a dominant no
 
 This phenomenon is **authority capture**.
 
-### 1. When Drift Accumulates
+### 14.1 When Drift Accumulates
 
 Authority drift redistributes veto potential.
 
@@ -1518,7 +1518,7 @@ When these shifts repeatedly favor the same component, veto power accumulates.
 
 At that point, authority has been captured.
 
-### 2. What Authority Capture Means
+### 14.2 What Authority Capture Means
 
 Authority capture occurs when **effective veto power concentrates in a single component or layer**, even though the architecture originally distributed it.
 
@@ -1530,7 +1530,7 @@ The topology remains formally distributed.
 
 Operational authority has converged.
 
-### 3. From Topology to Dominance
+### 14.3 From Topology to Dominance
 
 Consider a system with several veto layers:
 
@@ -1560,7 +1560,7 @@ Upstream veto points remain present, but rarely intervene.
 
 The runtime becomes the effective authority.
 
-### 4. Capture Without Intent
+### 14.4 Capture Without Intent
 
 Authority capture rarely begins as a deliberate redesign.
 
@@ -1580,7 +1580,7 @@ Control concentrates.
 
 This is structural capture.
 
-### 5. Formal Authority vs Effective Authority
+### 14.5 Formal Authority vs Effective Authority
 
 Architectural diagrams describe **formal authority**.
 
@@ -1592,7 +1592,7 @@ Effective authority is determined by which component actually exercises veto pow
 
 Capture occurs when these two diverge.
 
-### 6. The Safety Paradox
+### 14.6 The Safety Paradox
 
 Authority capture introduces a paradox.
 
@@ -1614,7 +1614,7 @@ Reliability increased.
 
 Failure consequences became more concentrated.
 
-### 7. A Recurring Pattern
+### 14.7 A Recurring Pattern
 
 Authority capture appears across many complex systems.
 
@@ -1628,7 +1628,7 @@ The architecture may still appear layered.
 
 But effective authority has centralized.
 
-### 8. Capture and Replaceability
+### 14.8 Capture and Replaceability
 
 Authority capture directly affects replaceability.
 
@@ -1642,7 +1642,7 @@ Execution depends on the captured authority.
 
 Replaceability becomes illusory.
 
-### 9. Capture in Agentic Systems
+### 14.9 Capture in Agentic Systems
 
 Agentic AI systems amplify this dynamic.
 
@@ -1656,7 +1656,7 @@ Not by design.
 
 But by drift.
 
-### 10. Compression
+### 14.10 Compression
 
 Authority rooting defines where authority begins.
 
@@ -1673,7 +1673,7 @@ It tends to accumulate where execution is most efficiently controlled.
 
 ---
 
- ## Chapter 15 — Anti-Capture Architecture
+## Chapter 15 — Anti-Capture Architecture
 
 Chapter 14 described authority capture.
 
@@ -1686,7 +1686,7 @@ Complex systems tend toward authority concentration.
 
 This chapter examines how architecture can resist that tendency.
 
-### 1. Capture as the Default Gradient
+### 15.1 Capture as the Default Gradient
 
 Authority capture rarely results from explicit intent.
 
@@ -1708,7 +1708,7 @@ Capture is therefore not an anomaly.
 
 It is the natural gradient of system optimization.
 
-### 2. Designing Against the Gradient
+### 15.2 Designing Against the Gradient
 
 Anti-capture architecture does not eliminate drift.
 
@@ -1720,7 +1720,7 @@ This requires deliberately introducing structural constraints that preserve dist
 
 In other words, anti-capture architecture introduces **deliberate friction**.
 
-### 3. Veto Independence
+### 15.3 Veto Independence
 
 Veto points must remain operationally independent.
 
@@ -1732,7 +1732,7 @@ Meaningful veto independence requires **distinct control domains**.
 
 Only then can multiple veto points constrain execution.
 
-### 4. Capability Separation
+### 15.4 Capability Separation
 
 Authority capture often emerges when a single component accumulates too many capabilities.
 
@@ -1748,7 +1748,7 @@ Anti-capture architecture separates these capabilities.
 
 No single component should control every stage of the execution path.
 
-### 5. Replaceability as Structural Constraint
+### 15.5 Replaceability as Structural Constraint
 
 Replaceability is one of the strongest defenses against capture.
 
@@ -1760,7 +1760,7 @@ Replaceability therefore cannot remain theoretical.
 
 It must be periodically tested in practice.
 
-### 6. Distributed Safety
+### 15.6 Distributed Safety
 
 Distributed authority may appear less efficient than centralized control.
 
@@ -1774,7 +1774,7 @@ Efficiency may decrease.
 
 Systemic fragility is reduced.
 
-### 7. The Architectural Tradeoff
+### 15.7 The Architectural Tradeoff
 
 Anti-capture mechanisms introduce friction.
 
@@ -1790,7 +1790,7 @@ But they preserve authority distribution.
 
 Architecture therefore becomes a balance between efficiency and control.
 
-### 8. Compression
+### 15.8 Compression
 
 Authority capture is the natural endpoint of authority drift.
 
@@ -1826,7 +1826,7 @@ When authority becomes too distributed, execution coordination collapses.
 
 This phenomenon is **authority fragmentation**.
 
-### 1. The Opposite Failure Mode
+### 16.1 The Opposite Failure Mode
 
 Authority capture concentrates veto power.
 
@@ -1842,7 +1842,7 @@ Capture breaks systems through domination.
 
 Fragmentation breaks them through paralysis.
 
-### 2. Distributed Authority
+### 16.2 Distributed Authority
 
 In real systems authority rarely exists as a single decision point.
 
@@ -1858,7 +1858,7 @@ Execution therefore becomes a coordination problem across these evaluators.
 
 As the number of authorities grows, maintaining consistent evaluation becomes increasingly difficult.
 
-### 3. Multi-Authority Evaluation
+### 16.3 Multi-Authority Evaluation
 
 Earlier chapters described execution using the invariant:
 
@@ -1893,7 +1893,7 @@ approval(Auth, α) = false
 
 not because a single authority rejected the action, but because the system cannot reconcile conflicting evaluations.
 
-### 4. Governance Deadlock
+### 16.4 Governance Deadlock
 
 Fragmentation often appears in safety-oriented architectures.
 
@@ -1915,7 +1915,7 @@ Fragmentation is rarely caused by malicious actors.
 
 It is often the unintended result of **defensive design**.
 
-### 5. Capture vs Fragmentation
+### 16.5 Capture vs Fragmentation
 
 Authority capture and authority fragmentation are opposing structural failures.
 
@@ -1929,7 +1929,7 @@ One through domination.
 
 The other through paralysis.
 
-### 6. The Coordination Problem
+### 16.6 The Coordination Problem
 
 Fragmentation is fundamentally a coordination problem.
 
@@ -1939,7 +1939,7 @@ As the number of veto points grows, maintaining consistent decisions becomes inc
 
 Without explicit coordination mechanisms, fragmented systems drift toward persistent deadlock.
 
-### 7. Coordination Kernel
+### 16.7 Coordination Kernel
 
 Fragmentation emerges when multiple authorities evaluate execution independently without a coordinating mechanism.
 
@@ -1961,7 +1961,7 @@ In agentic systems a similar mechanism acts as a **coordination kernel** for aut
 
 Without such a coordination layer, authority distribution tends to drift toward fragmentation.
 
-### 8. Architectural Balance
+### 16.8 Architectural Balance
 
 Resilient architectures must balance two forces:
 
@@ -1974,7 +1974,7 @@ Too many produce paralysis.
 
 Architecture therefore becomes the design of **stable authority distribution**.
 
-### 9. Compression
+### 16.9 Compression
 
 Authority capture concentrates veto power.
 
@@ -1986,7 +1986,7 @@ Stable governance in agentic systems emerges only when distributed authority rem
 
 ---
 
- ## Chapter 17 — Governance Equilibrium
+## Chapter 17 — Governance Equilibrium
 
 Chapter 16 described authority fragmentation.
 
@@ -2008,7 +2008,7 @@ How do systems remain stable between these two extremes?
 
 This chapter examines the concept of **governance equilibrium**.
 
-### 1. Two Structural Failure Modes
+### 17.1 Two Structural Failure Modes
 
 Complex systems that govern execution authority tend to encounter two opposing pathologies.
 
@@ -2026,7 +2026,7 @@ Capture breaks systems through domination.
 
 Fragmentation breaks systems through paralysis.
 
-### 2. The Authority Stability Problem
+### 17.2 The Authority Stability Problem
 
 Distributed authority introduces a fundamental design challenge.
 
@@ -2040,7 +2040,7 @@ Sustainable governance therefore requires maintaining a balance between these fo
 
 This balance can be described as **governance equilibrium**.
 
-### 3. Authority as a Dynamic System
+### 17.3 Authority as a Dynamic System
 
 The structural invariant introduced earlier:
 
@@ -2062,7 +2062,7 @@ The authority topology therefore becomes dynamic.
 
 Governance equilibrium emerges when this topology remains stable enough to coordinate execution without collapsing toward capture or fragmentation.
 
-### 4. The Stability Band
+### 17.4 The Stability Band
 
 Authority distribution in real systems tends to stabilize within a narrow band between the two failure modes.
 
@@ -2079,7 +2079,7 @@ At the right extreme, authority disperses into uncoordinated veto points.
 
 Effective governance exists only within the stable region between these extremes.
 
-### 5. Structural Forces
+### 17.5 Structural Forces
 
 Several forces push systems toward capture:
 
@@ -2101,7 +2101,7 @@ They emerge gradually as systems evolve.
 
 Governance equilibrium therefore requires continuous architectural adjustment.
 
-### 6. Coordination Mechanisms
+### 17.6 Coordination Mechanisms
 
 Stable systems introduce mechanisms that regulate authority distribution.
 
@@ -2122,7 +2122,7 @@ Without coordination mechanisms, systems drift toward fragmentation.
 
 Without distribution safeguards, they drift toward capture.
 
-### 7. Emergent Stability
+### 17.7 Emergent Stability
 
 Governance equilibrium is rarely designed perfectly from the beginning.
 
@@ -2138,7 +2138,7 @@ Coordination layers restore balance.
 
 The system gradually converges toward a stable authority distribution.
 
-### 8. Compression
+### 17.8 Compression
 
 Authority capture concentrates execution control.
 
@@ -2173,7 +2173,7 @@ But something else must still materialize it.
 
 This chapter examines the layer where authority encounters operational reality: the execution substrate.
 
-### 1. Authority and Execution
+### 18.1 Authority and Execution
 
 In the architectural model:
 
@@ -2204,7 +2204,7 @@ Authority decides whether an action should occur.
 
 The execution substrate determines whether it can occur.
 
-### 2. What Is an Execution Substrate?
+### 18.2 What Is an Execution Substrate?
 
 An execution substrate is the environment that materializes authorized actions.
 
@@ -2229,7 +2229,7 @@ They answer a different question:
 Can this action actually happen?
 ```
 
-### 3. The Governance–Execution Boundary
+### 18.3 The Governance–Execution Boundary
 
 Authority belongs to the governance layer.
 
@@ -2253,7 +2253,7 @@ The substrate performs the work.
 
 Both must align for execution to occur.
 
-### 4. When Substrates Refuse Execution
+### 18.4 When Substrates Refuse Execution
 
 In real systems it is common for authority to approve actions that substrates cannot execute.
 
@@ -2278,7 +2278,7 @@ Reasons may include:
 
 In such cases, authority exists but execution does not occur.
 
-### 5. Infrastructural Capture
+### 18.5 Infrastructural Capture
 
 Execution substrates can become powerful control points.
 
@@ -2304,7 +2304,7 @@ The governance layer remains formally intact.
 
 But the infrastructure layer determines what actually happens.
 
-### 6. Operational Veto
+### 18.6 Operational Veto
 
 Earlier chapters described how authority systems form a topology of veto points.
 
@@ -2318,7 +2318,7 @@ They determine whether it can occur.
 
 Both forms of veto influence execution, but they arise from different layers of the system.
 
-### 7. Authority vs Substrate Control
+### 18.7 Authority vs Substrate Control
 
 Authority capture and infrastructural capture are structurally similar but occur at different layers.
 
@@ -2335,7 +2335,7 @@ Infrastructural capture — control concentrates in E
 
 Both reshape where effective control resides.
 
-### 8. Architectural Implications
+### 18.8 Architectural Implications
 
 Authority alone does not guarantee execution.
 
@@ -2350,7 +2350,7 @@ Architectural design must therefore consider both layers.
 
 Without visibility into the execution substrate, an agent may believe it has authority to act while the environment silently prevents it.
 
-### 9. Compression
+### 18.9 Compression
 
 Authority permits execution.
 
@@ -2371,7 +2371,7 @@ Control exists only where they meet.
 
 ---
 
- ## Chapter 19 — Observability
+## Chapter 19 — Observability
 
 Chapter 18 introduced a crucial distinction.
 
@@ -2389,7 +2389,7 @@ Without a mechanism to observe execution outcomes, authority operates blindly.
 
 This chapter examines observability as a structural requirement of agentic systems.
 
-### 1. The Execution Gap
+### 19.1 The Execution Gap
 
 An action in the system follows the rule:
 
@@ -2412,7 +2412,7 @@ If the governance layer cannot detect this failure, the system continues operati
 
 The architecture has lost contact with reality.
 
-### 2. Authority Without Observability
+### 19.2 Authority Without Observability
 
 When authority cannot observe execution outcomes, the system enters a dangerous condition.
 
@@ -2432,7 +2432,7 @@ Authority appears intact.
 
 But governance has become detached from the system it governs.
 
-### 3. The Broken Feedback Loop
+### 19.3 The Broken Feedback Loop
 
 Execution occurs in the substrate.
 
@@ -2458,7 +2458,7 @@ If this loop is broken, authority becomes speculative.
 
 The system believes it is acting, but it may be doing nothing at all.
 
-### 4. Observability as Structural Requirement
+### 19.4 Observability as Structural Requirement
 
 Observability is often treated as a debugging feature.
 
@@ -2475,7 +2475,7 @@ Without these signals, governance cannot maintain an accurate model of reality.
 
 The system's internal state begins to drift away from the environment.
 
-### 5. Updating the System State
+### 19.5 Updating the System State
 
 Observability closes the loop between execution and governance.
 
@@ -2495,7 +2495,7 @@ Where the outcome reflects the real result of execution.
 
 Without this update, the system continues operating on outdated assumptions.
 
-### 6. Illusory Authority
+### 19.6 Illusory Authority
 
 When execution outcomes remain invisible, authority begins to operate in an imagined environment.
 
@@ -2511,7 +2511,7 @@ It believes it governs the system.
 
 But the substrate is determining reality.
 
-### 7. Architectural Implications
+### 19.7 Architectural Implications
 
 Resilient agentic systems require explicit observability between substrates and governance.
 
@@ -2523,7 +2523,7 @@ Without this feedback, authority becomes disconnected from the system it governs
 
 Control requires visibility.
 
-### 8. Observability and Blind Constraints
+### 19.8 Observability and Blind Constraints
 
 A system may enforce a constraint.
 
@@ -2579,7 +2579,7 @@ It only precedes it.
 
 ---
 
-### 9. Compression
+### 19.9 Compression
 
 A system can enforce every constraint
 and still not be governed.
@@ -2597,7 +2597,7 @@ And over time, that gap accumulates.
 
 ---
 
- ## Chapter 20 — Structural Decay
+## Chapter 20 — Structural Decay
 
 The previous chapters established the architecture of a functioning agentic system.
 
@@ -3493,7 +3493,7 @@ Direction is not a technical property.
 ---
 ---
 
-# Volume II — Chapters 24–59
+# Part II — Chapters 24–59
 
 ---
 ---
@@ -8481,7 +8481,7 @@ Selection sits between evaluation and execution.
 
 The output of Simulation — the accepted set — is the input to Selection. Selection narrows that set to one. ContinuumPort then decides whether to execute it.
 
-Selection does not know whether ContinuumPort will accept the selected candidate. Volume I evaluates independently.
+Selection does not know whether ContinuumPort will accept the selected candidate. Part I evaluates independently.
 
 ---
 
@@ -9497,7 +9497,7 @@ Incorrect system integration outside the defined model. This is a system integra
 
 Examples: bypassing domain constraints, violating geometry rules, TOCTOU (time-of-check to time-of-use), partial state commits.
 
-**Defense: Execution Kernel (Volume I)**
+**Defense: Execution Kernel (Part I)**
 
 ```
 SaturationGate       — bounded intake (Ch. 33)
@@ -10578,7 +10578,7 @@ crossed implicitly.
 
 ---
 
-# Chapter 53 — Reconciliation
+## Chapter 53 — Reconciliation
 
 *When Execution Completes but Reality Remains Uncertain*
 
@@ -10781,7 +10781,7 @@ It is where systems fail silently, accumulate invisible divergence, and eventual
 
 ---
 
-# Chapter 54 — Policy Constraints
+## Chapter 54 — Policy Constraints
 
 *What the system must never do.*
 
@@ -11246,7 +11246,7 @@ What is correct now is not preserved by continuation.
 
 ## Chapter 56 — Immutable Enforcement Constraints in Persistent Execution Systems
 
-## 56.1 — Motivation
+### 56.1 — Motivation
 
 The execution model defined in Chapters 24–55 establishes a layered architecture:
 geometry enforcement, authority verification, policy resolution, and epistemic control.
@@ -11263,7 +11263,7 @@ as non-overridable kernel invariants.
 
 ---
 
-## 56.2 — Admissibility vs Policy
+### 56.2 — Admissibility vs Policy
 
 The execution model distinguishes two classes of constraint:
 
@@ -11285,7 +11285,7 @@ from `V` under `C`.
 
 ---
 
-## 56.3 — Divergence and Halt Semantics
+### 56.3 — Divergence and Halt Semantics
 
 Consider a persistent execution system operating under a declared geometry `G`.
 
@@ -11316,7 +11316,7 @@ its declared geometry. It has exited the admissible execution space.
 
 ---
 
-## 56.4 — The Three Kernel Invariants
+### 56.4 — The Three Kernel Invariants
 
 The following invariants are non-overridable. They are enforced structurally
 at the `PolicyConstraints` layer (Ch. 55), both at policy construction time
@@ -11377,7 +11377,7 @@ state before continuation is permitted.
 
 ---
 
-## 56.5 — Fail-Closed Enforcement
+### 56.5 — Fail-Closed Enforcement
 
 Under fail-closed semantics, the relationship between uncertainty and authority
 is inverted relative to best-effort systems:
@@ -11405,7 +11405,7 @@ Uncertainty monotonically contracts the admissible execution space.
 
 ---
 
-## 56.6 — Structural Enforcement, Not Semantic Judgment
+### 56.6 — Structural Enforcement, Not Semantic Judgment
 
 The kernel invariants are enforced structurally. The system does not:
 
@@ -11424,7 +11424,7 @@ Neither layer may override the other's domain.
 
 ---
 
-## 56.7 — Scope and Non-Guarantees
+### 56.7 — Scope and Non-Guarantees
 
 The kernel invariants defined in this chapter do not solve:
 
@@ -11444,7 +11444,7 @@ necessary, not sufficient, for correct system behavior.
 
 ---
 
-## 56.8 — Implementation Reference
+### 56.8 — Implementation Reference
 
 ### Static validation (construction-time)
 
@@ -11476,7 +11476,7 @@ verification that:
 
 ---
 
-## 56.9 — Relation to Prior Chapters
+### 56.9 — Relation to Prior Chapters
 
 | Chapter | Component | Relation to Ch. 56 |
 |---|---|---|
@@ -12244,7 +12244,7 @@ And a perfectly governed system may slowly transform into a structure that prese
 ---
 ---
 
-# Volume III — Trust Boundaries in Persistent Execution Systems
+# Part III — Trust Boundaries in Persistent Execution Systems
 
 ---
 ---
@@ -12252,21 +12252,21 @@ And a perfectly governed system may slowly transform into a structure that prese
 ## Chapter 1 — What a Guarantee Actually Claims
 
 
-There is a sentence near the end of Volume II that deserves more attention than it received.
+There is a sentence near the end of Part II that deserves more attention than it received.
 
 It appears in the analysis of the audit layer — `audit/log.py`, 122 lines, zero dedicated test coverage — and it reads: *deterministic replay guarantee*. The phrase is embedded in documentation, not in code. No test verifies it. No proof establishes it. The claim exists because the designers wrote it, and the design makes it plausible, and no one has yet demonstrated otherwise.
 
 The claim may be true. The guarantee is not.
 
-This distinction — between a property being true and a property being guaranteed — is the subject of Volume III. It is not a philosophical distinction. It has direct consequences for how systems are built, how they are audited, and how the claims they make about themselves should be read.
+This distinction — between a property being true and a property being guaranteed — is the subject of Part III. It is not a philosophical distinction. It has direct consequences for how systems are built, how they are audited, and how the claims they make about themselves should be read.
 
 ---
 
-Chapter 59 ended with a question it refused to answer: what happens when a persistent system continues executing correctly while gradually losing direction? The chapter named the phenomenon. It declined to explain it. That refusal was deliberate — and it pointed toward the territory Volume III intends to explore.
+Chapter 59 ended with a question it refused to answer: what happens when a persistent system continues executing correctly while gradually losing direction? The chapter named the phenomenon. It declined to explain it. That refusal was deliberate — and it pointed toward the territory Part III intends to explore.
 
 Because the inability to explain persistence without direction is not a gap in the execution model. It is a symptom of something deeper: the execution model is very good at answering whether a transition is admissible, and not equipped to answer whether the system's claims about itself remain valid over time.
 
-Those are different questions. Volume I established that local verification cannot guarantee trajectory integrity. Volume II showed what trajectory drift looks like in practice. Volume III begins where both volumes stopped: not at the limits of verification, but at the limits of what can legitimately be *claimed* about a system that persists.
+Those are different questions. Part I established that local verification cannot guarantee trajectory integrity. Part II showed what trajectory drift looks like in practice. Part III begins where both parts stopped: not at the limits of verification, but at the limits of what can legitimately be *claimed* about a system that persists.
 
 ---
 
@@ -12280,7 +12280,7 @@ But the correction revealed something more interesting than the original error.
 
 What the coverage numbers actually map is not quality. They map *epistemic status*. A covered module has properties that are demonstrated by running code against expected behavior. An uncovered module has properties that are either assumed by architecture or guaranteed by mathematics. These claims do not occupy the same epistemic status, and treating them as equivalent — whether to praise or to criticize — is a category error.
 
-The execution model across Volumes I and II implicitly rests on claims that occupy three distinct epistemic statuses:
+The execution model across Parts I and II implicitly rests on claims that occupy three distinct epistemic statuses:
 
 **Formally demonstrated.** The Composition Lemma establishes, through mathematical argument, that local verification cannot guarantee trajectory integrity. The Execution Geometry characterizes the space of admissible state transitions. These results do not depend on implementation. They hold at a level of abstraction above the code, and their truth is not contingent on tests.
 
@@ -12302,7 +12302,7 @@ The audit log may produce deterministic replay. The claim is plausible, the desi
 
 This is not a criticism of the system. It is a description of what every non-trivial system contains: a layer of correct-by-construction, assumed-by-design properties that are genuine but unverifiable through the same mechanisms that verify everything else.
 
-The question Volume III asks is: what does it mean to *claim* such a property?
+The question Part III asks is: what does it mean to *claim* such a property?
 
 ---
 
@@ -12316,7 +12316,7 @@ That implicit claim is almost always wrong. Most guarantees in most systems are 
 
 This matters because the language of guarantees propagates. A specification that claims a guarantee becomes the input to another system's design. That system depends on the guarantee. Its own correctness may be conditional on the guarantee holding. And if the guarantee was actually an assumption — if the epistemic basis was weaker than the language implied — then every downstream dependency inherits an unacknowledged fragility.
 
-Volume I demonstrated this structurally: local verification cannot close the gap that the Composition Lemma identifies. What Volume III begins to examine is the epistemic version of the same problem. A system that cannot establish trajectory integrity through local verification also cannot establish the validity of its own guarantee claims through local inspection.
+Part I demonstrated this structurally: local verification cannot close the gap that the Composition Lemma identifies. What Part III begins to examine is the epistemic version of the same problem. A system that cannot establish trajectory integrity through local verification also cannot establish the validity of its own guarantee claims through local inspection.
 
 The execution model enforces what is declared. It does not validate whether what was declared accurately represents the basis on which the claim rests.
 
@@ -12336,13 +12336,13 @@ What changes with this recognition is not the system. What changes is the langua
 
 ---
 
-### The Question Volume III Asks
+### The Question Part III Asks
 
-Volume I asked: what cannot be guaranteed by local verification?
+Part I asked: what cannot be guaranteed by local verification?
 
-Volume II asked: how does this limitation manifest in real systems?
+Part II asked: how does this limitation manifest in real systems?
 
-Volume III asks something prior to both: what does it mean to claim a guarantee at all?
+Part III asks something prior to both: what does it mean to claim a guarantee at all?
 
 Not as a rhetorical question. As a structural one. When a system asserts that a property holds — when documentation, specification, or code comments use the word "guarantee" — what is the implicit claim being made about the epistemic basis for that assertion? Is the property demonstrated, validated, or assumed? Does the language used to describe it accurately reflect that basis? And what are the consequences, downstream and over time, of the mismatch between the two?
 
@@ -12354,7 +12354,7 @@ The question is not how to eliminate that layer. The question is whether we are 
 
 ### A Map of the Territory
 
-The experiment with cp-core that preceded this volume — the session notes, the JSON handoff, the new instance that reconstructed direction without history — produced an observation worth carrying forward. It is not offered as a demonstration of the guarantee problem, but as the moment where the problem became visible.
+The experiment with cp-core that preceded this part — the session notes, the JSON handoff, the new instance that reconstructed direction without history — produced an observation worth carrying forward. It is not offered as a demonstration of the guarantee problem, but as the moment where the problem became visible.
 
 *cp-core is an artifact of semantic state, not an artifact of trajectory.*
 
@@ -12362,11 +12362,11 @@ It transmits what can be understood without the history of how it came to be und
 
 This is where the guarantee problem first became concrete. A specification transmits what a system is claimed to do. It does not transmit the epistemic basis on which those claims rest. The claim survives documentation. The demonstration does not.
 
-Volume III will examine what it would mean to document guarantees differently — to describe not only what holds, but *how we know it holds*, and what it would mean for it to fail to hold. To map the trusted computing base not as a hidden assumption but as an explicit architectural declaration.
+Part III will examine what it would mean to document guarantees differently — to describe not only what holds, but *how we know it holds*, and what it would mean for it to fail to hold. To map the trusted computing base not as a hidden assumption but as an explicit architectural declaration.
 
 This is harder than it sounds. It requires distinguishing, in practice, between three kinds of claim that are typically expressed in identical language. It requires building systems that can be honest about the basis of their own properties.
 
-It requires, in short, applying to guarantees the same epistemic discipline that Volumes I and II applied to verification.
+It requires, in short, applying to guarantees the same epistemic discipline that Parts I and II applied to verification.
 
 ---
 
@@ -12384,7 +12384,7 @@ The map is not the territory — but a map that marks its own uncertain regions 
 
 ## Chapter 2 — The Migration of Justification
 
-*Volume III — The Guarantee Problem*
+*Part III — The Guarantee Problem*
 
 ### 2.1 — Claims Do Not Move. Justifications Do.
 
@@ -12636,7 +12636,7 @@ The chapters that follow will examine what happens when those trajectories diver
 
 ### Stalled Justification — and Validation Drift
 
-*ContinuumPort · Volume III Working Documents · 2026*
+*ContinuumPort · Part III Working Documents · 2026*
 
 ---
 
@@ -12831,7 +12831,7 @@ And a drifted one looks, until you try to run it, like a working one.
 
 ---
 
-*This finding is a working document for Volume III of*  
+*This finding is a working document for Part III of*  
 *AI Architectural Thinking: A Structural Framework for Persistence,*  
 *Governance, and Continuity.*
 
@@ -12839,7 +12839,7 @@ And a drifted one looks, until you try to run it, like a working one.
 
 ## Chapter 3 — The Authority of a Norm
 
-*Volume III — The Guarantee Problem*
+*Part III — The Guarantee Problem*
 
 
 ### Epistemic Warning
@@ -12858,7 +12858,7 @@ boundary becomes a design constraint.
 
 ### 3.1 — What Persists Becomes a Condition of Execution
 
-The previous volumes established a chain. Volume I asked what persists. Volume
+The previous parts established a chain. Part I asked what persists. Part
 II asked how persistent execution can be constrained. Both stayed inside the
 domain of claims and the evidence for them.
 
@@ -12925,7 +12925,7 @@ problem is a *category mismatch*: the thing sought — a relation to an external
 standard — is not the kind of thing a state holds. No amount of internal
 inspection recovers it, because there is nothing internal to inspect.
 
-This is the same shape as the central result of the earlier volumes. There,
+This is the same shape as the central result of the earlier parts. There,
 local verification of states could not guarantee a global property of the
 trajectory. Here, local inspection of a state cannot recover a relational
 property of its origin. The same form, one level up: from execution to
@@ -13192,7 +13192,7 @@ It does not claim a system cannot generate its own norms. It can. The claim is
 narrower and harder to escape: a system cannot establish, from its own
 represented state, the *entitlement* of the norm it generates and enforces.
 
-And it does not claim this is solved. Like everything in this volume, it is
+And it does not claim this is solved. Like everything in this part, it is
 sustained rather than closed — held open precisely because the honest position is
 to mark where justification ends, rather than to pretend it reaches further than
 it does.
@@ -13415,5 +13415,3 @@ And responsibility cannot be delegated to execution.
 ***It is sustained.***
 
 Giorgio Roth / 2026
-
-
