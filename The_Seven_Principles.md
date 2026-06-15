@@ -54,7 +54,7 @@ The system enforces, at runtime, invariants that follow from the same way
 of thinking the principles describe: that continuity must be carried in 
 portable structure, that inference cannot substitute for declared boundaries, 
 that the unit of analysis includes the exchange. At the time of writing, 
-the system passes 1913 invariant tests in approximately ten seconds. The 
+the system passes 1922 invariant tests in under eight seconds. The 
 tests do not test the principles. They demonstrate that the discipline can 
 be made executable.***
 
@@ -1261,9 +1261,8 @@ Principles 1 and 5 are not mapped to engine tests. Principle 1 â€” portability â
 
 Fifteen tests pass in approximately 0.13 seconds. 
 
+<img width="2954" height="798" alt="image" src="https://github.com/user-attachments/assets/4a515844-43cd-4ed1-9d9f-1a2e879858a3" /> 
 
-<img width="2954" height="798" alt="image" src="https://github.com/user-attachments/assets/bb0416df-d95d-445a-8bbb-a8fbc6fdfa09" />
-
+<img width="2948" height="1646" alt="image" src="https://github.com/user-attachments/assets/3da0115d-6cda-434b-b022-9e53d91eb657" /> 
 
 ---
-
