@@ -13124,31 +13124,42 @@ Hume observed that no set of factual premises entails a normative conclusion
 without a normative premise already present: one cannot derive an *ought* from
 an *is*. That is the broad backdrop. But the sharper precedent is John Searle's
 1964 argument *How to Derive "Ought" from "Is"* and the sixty years of debate it
-opened on *constitutive rules* — rules of the form "X counts as Y in context C,"
-which do not merely regulate but create the very facts they govern. Promising,
-on this account, generates an obligation from within an institution.
+opened on *constitutive rules*. In the research program that followed — *Speech
+Acts* (1969), *The Construction of Social Reality* (1995) — these take the form
+"X counts as Y in context C": rules that do not merely regulate but create the
+very facts they govern. Promising, on this account, generates an obligation from
+within an institution.
 
-The relevant point is where that debate stalled, because it stalled exactly
-where this chapter's mechanisms stall. Searle's constitutive rules iterate
-recursively — one "counts-as" built atop another, indefinitely — which is
-precisely the regress the attack mechanisms hit: who authorizes the authority
-that authorizes. Searle himself held that the derivation succeeds: that from the
-institutional fact of promising, an obligation follows. But the subsequent
-debate showed something narrower. The gap can be *traversed within* an
-institution — promising yields obligation, *given* the institution of promising
-— without the institution's own authority being self-grounding. The traversal
-relies on a background acceptance that the institution does not itself generate.
-Generation is endogenous to the institution; entitlement rests on that
-background. The constitutive-rule program located this dependency and did not
-dissolve it.
+The relevant point is not who won that debate but where it runs aground —
+because it runs aground exactly where this chapter’s mechanisms do. Read through
+the lens of provenance, Searle’s systems of constitutive rules can be seen to
+iterate — one “counts-as” resting on another — exhibiting the same regress the
+attack mechanisms hit: who authorizes the authority that authorizes. That this
+iteration forms an *unbounded* regress is the reading taken here, not a claim
+Searle advances. Searle himself held that the derivation succeeds: that from the
+institutional fact of promising, an obligation follows. The debate that followed
+did not converge. One line — Hare’s, among others — holds that accepting the
+institution is itself an evaluative step the facts do not compel, so the gap is
+only *traversed within* an institution whose own authority is not self-grounding.
+Another line, defended by Margaret Gilbert and reconstructed by Frank Hindriks,
+holds the opposite: that collective acceptance *as such* can generate the
+obligation — that the institution can be a genuine source, not merely a conduit.
+That dispute remains open; it was reopened as recently as 2021. This chapter does
+not adjudicate it. Its contribution is narrower and compatible with either side:
+an *executable instance* of the same structure, in which the question of whether
+an institution generates its own entitlement or only transmits it reappears as a
+concrete property of a running system rather than a matter of philosophical
+preference.
 
 So the distinction in §3.8 is not a discovery. It is the standing open problem
 of social ontology — generation versus entitlement — and the contribution here
 is narrow and exact: an *executable instance* of it. The recursive "counts-as"
 regress that Searle described in prose appears, on running code, as the
 provenance regress of an execution system. Each mechanism that tries to ground a
-genesis internally reproduces Searle's iteration and terminates where his debate
-terminates — at a background acceptance the system cannot generate from within.
+genesis internally reproduces Searle’s iteration and runs into the same open
+question his debate did: whether that regress ends at a background acceptance the
+system cannot generate from within, or whether such acceptance is itself
+generative.
 A Trusted Provenance Base is what that background looks like when it is forced to
 the surface by an attempt to remove it.
 
