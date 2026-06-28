@@ -6,7 +6,6 @@ This demonstrates how to create a minimal CP-Core container from task state.
 """
 
 import json
-from datetime import datetime, timezone
 from typing import List, Dict, Any
 
 
@@ -20,9 +19,8 @@ def create_cp_core_container(
     Creates a minimal CP-Core container.
     """
     container = {
-        "cp_core_version": "1.0",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        
+        "cp_version": "1.0.0",
+
         # Core semantic state
         "summary": summary,
         "constraints": constraints,
@@ -44,7 +42,7 @@ def validate_container(container: Dict[str, Any]) -> bool:
     """
     Basic validation that container has required fields.
     """
-    required_fields = ["cp_core_version", "summary", "constraints", "task_state"]
+    required_fields = ["cp_version", "summary", "constraints", "task_state"]
     return all(field in container for field in required_fields)
 
 
@@ -103,6 +101,3 @@ def demo_crypto_bot_scenario():
 
 if __name__ == "__main__":
     demo_crypto_bot_scenario()
-
-```
-
