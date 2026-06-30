@@ -4,6 +4,8 @@
 
 *Code. Culture. Biology. Three clocks. One crisis.*
 
+Giorgio Roth
+
 ---
 
 ## Preface — What Socrates Misnamed
@@ -647,6 +649,11 @@ as betrayal. This is the social face of the same pressure, and it compounds the
 cognitive one: the verdict is not merely cheaper to hold, it is *rewarded* to
 hold, and the suspension of judgment is not merely expensive, it is *punished*.
 
+> **M-07: THE CONSERVATION OF THE RELATIONSHIP**  
+> A held conclusion is socially load-bearing: it positions the speaker
+> within the group, signals loyalty, and earns deployment. Certainty is
+> rewarded and calibration is penalized, independent of either's accuracy.
+
 This is the territory of **M-07** — the conservation of the relationship — read
 from its public side: the held conclusion is socially load-bearing, and to
 withdraw it is to incur a social, not merely an intellectual, cost. Tocqueville
@@ -679,7 +686,15 @@ narrative outcompetes the open one in the struggle to be carried and transmitted
 on a single outcome: the verdict, reached and then held.
 
 The load-bearing word is *often*. It is not *always*, and the gap between the
-two is not a hedge but the precise location of everything that follows. A
+two is not a hedge but the precise location of everything that follows.
+
+> **M-08: THE FALSIFIABILITY CONSTRAINT**  
+> A mechanism that accounts for every outcome accounts for none. A
+> candidate explanation earns its standing only by specifying the
+> conditions under which it fails — a claim immune to disconfirmation
+> is not a claim.
+
+A
 mechanism that explained why verdicts *always* win would, by **M-08**, explain
 nothing — a claim that survives every outcome is not a claim. What gives this
 convergence its standing is exactly that it can be made to fail, and that the
@@ -724,21 +739,28 @@ the cost of changing one's mind is still low.
 **(3) Abandonment of a previously held verdict — the position was taken, and
 then dropped.**
 This is the rare and valuable case, and the chapter should dwell on it, because
-it is the one the other two cannot stand in for. Consider a scene of the kind
-this inquiry draws on. In a public discussion thread, a historian had drawn a
-fine distinction about *how* a matter ought to be judged; one reader collapsed
-that distinction into a verdict — that the historian was *whitewashing* the
-figure under discussion — and then, in the same thread, publicly withdrew it.
-That reader did not decline a position. She *occupied* one and then *left* it.
+it is the one the other two cannot stand in for. The shape of it can be put
+hypothetically, since what matters is the structure, not a particular
+instance: imagine a public discussion thread in which one participant draws a
+fine distinction about *how* a matter ought to be judged, a second collapses
+that distinction into a verdict about the speaker's allegiance, and then —
+this is the part that does the work — the second participant publicly
+withdraws the accusation in the same thread. That second participant would not
+have declined a position. She would have *occupied* one and then *left* it.
 That is not the absence of a verdict; it is
 exit from a verdict already held, already stated, already costed. A theory of
 why positions are stable must account for exit, and exit is precisely what the
 attraction of certainty does not predict. If the verdict were as cheap to hold
 as it was to adopt, there would be no reason ever to pay the higher price of
-leaving it. The chapter's strongest case, then, is not the person who refused a
-verdict but the person who abandoned one: the historian opens the door, but it
-is the reader who withdrew her verdict who obliges the theory to walk into the
-room.
+leaving it. The chapter's strongest case, then, would not be the person who
+refused a verdict but the person who abandoned one — and the book is explicit
+that this is a structural claim awaiting its instance, not a reported
+observation: the public threads this inquiry has drawn on supply Classes 1 and
+2 readily, and supply the *attraction* into Class 3 — the accusation made —
+without yet supplying a documented case of the *exit*. The gap is named rather
+than papered over, because a theory of stability that cannot point to a
+real withdrawal is weaker for the omission, and pretending otherwise would
+repeat, inside the book, the very error the book is about.
 
 The third class is where the chapter's real question begins to surface, because
 it forces a distinction the previous sections were able to leave hidden: the
@@ -937,8 +959,11 @@ cheapest coherent story (M-04) survives: minimum cognitive cost is a property of
 the nervous system, not of the network. The persistence of invariant questions
 (M-05), the conservation of the relationship that rewards the held conclusion
 (M-07), the inner library as temporal counterweight (M-11), the emergence of
-macro effects no agent intended (M-03), and the asymmetry of responsibility that
-follows from it (M-12) — all survive. A printing press at full efficiency would
+macro effects no agent intended (M-03), and the asymmetry of responsibility
+that follows from it (**M-12: diffused causation is not diffused
+accountability — when an outcome is the unintended aggregate of many local
+optimizations, M-03, responsibility for it cannot be located by asking who
+intended the outcome, since no one did**) — all survive. A printing press at full efficiency would
 amplify every one of them. It would put the cheap story in more hands, reward
 more loudly the speaker who concludes, and let local optimizations aggregate into
 effects no one chose, at the scale of a literate nation.
