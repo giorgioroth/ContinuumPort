@@ -2,7 +2,7 @@
 
 ## A Structural Framework for Persistence, Governance, and Continuity
 
----
+
 
 This book is not about artificial intelligence.
 
@@ -16,7 +16,7 @@ When systems persist across time, memory accumulates, authority distributes, and
 
 AI merely made this architecture impossible to ignore.
 
----
+#   
 
 [![12 ARCHITECTURAL PRINCIPLES](https://img.shields.io/badge/12%20ARCHITECTURAL%20PRINCIPLES-purple)](https://continuumport.com/12-principles/)
 ---
@@ -39,13 +39,13 @@ AI merely made this architecture impossible to ignore.
 
 *That question is powerful. It operates below rational thought. It is reinforced by every story that makes us care about a synthetic mind.*
 
----
+# 
 
 *I am not here to argue against those stories.*
 
 *I am here to argue against importing them into infrastructure.*
 
----
+# 
 
 *As far as we can establish, real AI systems do not possess subjective experience.*
 *They do not live continuity.*
@@ -77,7 +77,7 @@ AI merely made this architecture impossible to ignore.
 
 *Out of refusal to let learned emotional reflexes write real architecture.*
 
----
+# 
 
 *This book began as a question asked in live conversations with engineers, researchers, and systems that pushed back.*
 
@@ -97,7 +97,7 @@ AI merely made this architecture impossible to ignore.
 
 *Three primitives. Everything else is a consequence.*
 
----
+# 
 
 *What persists will shape what can be replaced.*
 
@@ -105,7 +105,7 @@ AI merely made this architecture impossible to ignore.
 
 *DATA knew this. He just didn't know it was about him.*
 
----
+# 
 
 ## A Note on Structure
 
@@ -134,11 +134,8 @@ The question Part III asks is the one Part II cannot answer from within itself:
 *What does it mean to claim that execution is controlled?*
 
 ---
----
-# Part I — Chapters 1–23
 
----
----
+# Part I — Chapters 1–23
 
 ## Chapter 1 — Regimes, Not Features
 
@@ -3506,13 +3503,11 @@ Direction is not a technical property.
 
 **It is a responsibility.**
 
----
+
 ---
 
 # Part II — Chapters 24–59
 
----
----
 
 ## Chapter 24 — Execution Authority as Enforcement Primitive
 
@@ -11846,7 +11841,7 @@ These limits are explicit and documented in `EXECUTION_MODEL_LIMITS.md`.
 
 *Reference implementation: Regen Engine (proprietary). Test suite: `tests/test_ch57_*.py`.* 
 
----
+# 
 
 <img width="2952" height="1684" alt="image" src="https://github.com/user-attachments/assets/43d82527-ebd4-42ce-8fe1-507b209d1a01" />
 
@@ -12137,11 +12132,11 @@ The model does not maximize throughput. It does not assume recovery. It does not
 
 If the answer is uncertain and the effect irreversible — it does not execute.
 
----
+# 
 
 *This chapter is designated as speculative extension — a formal stress test of the framework under conditions of maximum physical constraint. The core results remain those of Chapters 24–57. Chapter 58 asks: what do those results mean when there is no recovery?*
 
----
+# 
 
 <img width="2632" height="1510" alt="image" src="https://github.com/user-attachments/assets/9e8bac77-8fb5-4fe1-8fe2-13da115998ca" />
 
@@ -12258,12 +12253,10 @@ Continuity becomes archive.
 And a perfectly governed system may slowly transform into a structure that preserves itself flawlessly while no longer leading anywhere at all.
 
 ---
----
+
 
 # Part III — Trust Boundaries in Persistent Execution Systems
 
----
----
 
 ## Chapter 60 — What a Guarantee Actually Claims
 
@@ -12392,7 +12385,7 @@ Not as a solved problem. As an ongoing one.
 
 The map is not the territory — but a map that marks its own uncertain regions is more useful than one that doesn't.
 
----
+# 
 
 <img width="2952" height="1677" alt="image" src="https://github.com/user-attachments/assets/9b85ab61-0faf-4a20-8b1a-ba7d6322651b" /> 
 
@@ -13224,11 +13217,11 @@ sustained rather than closed — held open precisely because the honest position
 to mark where justification ends, rather than to pretend it reaches further than
 it does.
 
----
+# 
 
 <img width="2946" height="1575" alt="image" src="https://github.com/user-attachments/assets/3f833136-48f0-498d-9a41-c256e02c8ef4" />
 
----
+# 
 
 ### 62.12 — Closing
 
@@ -13247,7 +13240,7 @@ bind. That remainder is not a defect of the system. It is the point at which
 justification ends — and, for any system that persists long enough to accumulate
 authority, the point that can no longer be left unexamined.
 
----
+# 
 
 *Working draft for adversarial refinement across architectures before promotion
 to canon. The literature positioning — primarily Searle's constitutive-rules
