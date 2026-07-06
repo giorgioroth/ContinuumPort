@@ -25,4 +25,12 @@ Five chapters on why the modern crisis is less a failure of technology than a pr
 
 ---
 
+## The Discipline of Thinking
+*From Observation to Conclusion*
+
+A book about the gap between what a mind notices and what it decides — built one transition at a time: observation into interpretation, evidence into a conclusion no bigger than it can carry. Each chapter hands over a tool before naming it. Still being written in the open; only the Preface and the first two chapters exist so far.
+
+[Read on GitHub](https://github.com/giorgioroth/ContinuumPort/blob/main/The_Discipline_of_Thinking.md) 
+
+
 Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026
