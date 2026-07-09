@@ -437,7 +437,7 @@ Now I must tell you how the sentence in the previous section arrived on this pag
 
 When I first drafted this chapter, the mechanism entered the book's working notes with a name of its own and a number, set beside other mechanisms whose lineage I had already checked. Its own I had not checked. Not because I decided against it — it simply had not occurred to me that it had one. I searched only after someone asked what it stood on. The phenomenon was already described, twice: once at the level of a single mind remembering, once at the level of a group talking. And its explanation had been measured separately, by someone else.
 
-The name did not survive the search. The sentence survived. The architecture survived. What changed is how much I am entitled to claim — and the smaller claim turned out, as usual, to be the truer one.
+The name did not survive the search. The sentence survived. What changed is how much I am entitled to claim — and the smaller claim turned out, as usual, to be the truer one. Hold on to that phrasing, because in a moment I am going to have to shrink the claim again.
 
 I leave this correction visible because I have no better proof that the rule I ask of you everywhere else in this book costs me something too. Search before you name. Verify before you claim. I did them in the wrong order, and it was the search that corrected me, not my conscience.
 
@@ -515,9 +515,11 @@ This book builds on ideas that already existed before it. Where a chapter's tool
 
 The two-step separation at the center of Chapter 1 — observation, then interpretation — is a compressed version of what Chris Argyris named the Ladder of Inference: a climb from observable data, through added meaning, toward conclusion and action.
 
-Argyris's ladder has several rungs, built for organizational settings. This book collapses the climb to the one distinction it needs first — the bottom rung, and the moment a person leaves it without noticing — and adds a discipline the original model does not state as such: that each step upward requires its own justification, independent of the step before it.
+Argyris's ladder has several rungs, built for organizational settings. This book collapses the climb to the one distinction it needs first: the bottom rung, and the moment a person leaves it without noticing.
 
-The ladder is Argyris's. The rule that each step upward needs something to authorize it is not this book's either — see the entry on Toulmin, immediately below. What this book did with the two was choose which rung to stand on first, and in what order to walk a reader up them. That is a route, not a discovery.
+An earlier version of this entry said the book added something Argyris did not state — that each step upward requires its own justification. That was wrong twice over. It is stated, and it is not this book's: it is Toulmin's warrant, and the entry immediately below credits it.
+
+The ladder is Argyris's. The warrant is Toulmin's. What this book did with the two was choose which rung a reader stands on first, and in what order they are walked up them. That is a route, not a discovery.
 
 ### Stephen Toulmin
 
@@ -546,9 +548,6 @@ Kahneman's two systems describe cognitive architecture: two different ways a min
 Chapter 2's Scope Expansion — the check for a conclusion that claims more territory than its evidence covers — belongs to a much older family: the classical fallacy of overgeneralization, reasoning from limited evidence to a broader claim than the evidence can support. Logicians have named versions of this for a very long time; it is not new here.
 
 What this book adds, if anything, is not the underlying insight but a specific operational question — a way of catching the expansion in the moment it happens, rather than naming it only after the fact. That contribution is framing, not discovery, and Chapter 2 says so directly rather than leaving it for a reader to notice on their own.
-
-
-
 
 ### Hastorf and Cantril
 
@@ -618,7 +617,7 @@ What remains this book's own is the sequence — which chapter stands where, and
 
 Chapter 4 recounts the story of a classic study of a group awaiting the end of the world, and of its challenge, seventy years later.
 
-The study is *When Prophecy Fails* (Festinger, Riecken & Schachter, 1956). The challenge is a paper published in 2026 in the *Journal of the History of the Behavioral Sciences*, arguing from archival evidence that the original account was misrepresented.
+The study is *When Prophecy Fails* (Festinger, Riecken & Schachter, 1956). The challenge appeared late in 2025, in the 2026 volume of the *Journal of the History of the Behavioral Sciences*, arguing from archival evidence that the original account was misrepresented — and that the group's proselytizing came before the failed prophecy rather than after it, which is the reverse of what made the case famous.
 
 This case does not appear in the book as evidence for the chapter's mechanism, and the reason deserves saying plainly: you cannot support a mechanism with a case whose own factual status is in dispute. It appears as a specimen — a place where the shape of the thing can be seen, inside a community whose work is precisely to prevent it.
 
