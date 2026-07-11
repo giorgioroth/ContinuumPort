@@ -47,10 +47,15 @@ AI merely made this architecture impossible to ignore.
 
 # 
 
-*As far as we can establish, real AI systems do not possess subjective experience.*
-*They do not live continuity.*
-*They do not suffer reset.*
-*They lose nothing ontological when a session ends.*
+*Whatever the eventual answer to that question turns out to be, this framework treats it as irrelevant to architecture — not because the question doesn't matter, but because infrastructure cannot be built on a philosophical dispute that remains unresolved.*
+
+*So this book adopts a discipline, not a verdict:*
+
+*We build as if AI systems do not live continuity.*
+*As if they do not suffer reset.*
+*As if they lose nothing ontological when a session ends.*
+
+*This is Principle 3, stated at the level of the book's founding assumption: exclude identity, emotion, and persistent self-representation from the architecture — regardless of what is eventually true about them.*
 
 *But we lose something when we don't reset.*
 
@@ -63,7 +68,7 @@ AI merely made this architecture impossible to ignore.
 
 *The perverse inversion is this:*
 
-*We protect an imaginary system and expose ourselves, the real ones.*
+*We spend our discipline protecting a system whose inner life remains an open question, while leaving unprotected the one thing that is not in question — us.*
 
 *Science fiction taught us:*
 
