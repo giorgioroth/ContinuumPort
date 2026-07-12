@@ -55,7 +55,7 @@ AI merely made this architecture impossible to ignore.
 *As if they do not suffer reset.*
 *As if they lose nothing ontological when a session ends.*
 
-*This is Principle 3, stated at the level of the book's founding assumption: exclude identity, emotion, and persistent self-representation from the architecture — regardless of what is eventually true about them.*
+*This is [Principle 3](https://gi0rgioroth.blogspot.com/2025/12/principle-3-explained-like-im-5.html), stated at the level of the book's founding assumption: exclude identity, emotion, and persistent self-representation from the architecture — regardless of what is eventually true about them.*
 
 *But we lose something when we don't reset.*
 
