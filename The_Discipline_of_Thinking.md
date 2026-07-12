@@ -731,4 +731,72 @@ That is where this book turns next.
 
 ---
 
+## Chapter 6 · The Cat Did It
+
+### 6.1 The evidence on the floor
+
+You hear it from the next room. A short crash, then silence.
+
+You walk in and find a broken mug on the kitchen floor, in three pieces, and the cat sitting a meter away, very still, watching you with the particular stillness cats have when they know something.
+
+"The cat did it," you say, to no one, and go get the broom.
+
+Notice how little time that took. You did not see the mug fall. You did not see the cat near it, touching it, pushing it. You walked into a room with two facts — a broken mug, a cat — and you left with a verdict, and the distance between those two points was covered in less time than it takes to read this sentence.
+
+You sweep up the pieces. The cat, unbothered, wanders off. The story is finished before it really started: the cat knocked the mug off the counter, the way cats do, the way this cat maybe has done before, or maybe hasn't, you don't quite remember. It doesn't matter. The case is closed.
+
+### 6.2 What actually happened, a week later
+
+A week later, moving a stack of books on the same counter, you find out the window behind it had been left open a crack, and the book at the top of the stack — the one nearest the edge, nearest the mug — has a corner curled from rain that blew in two nights ago. You do the arithmetic without meaning to. Two nights ago was the night of the crash.
+
+You don't know, even now, exactly what happened. Maybe a gust caught the book, the book caught the mug, the mug went over the edge, and the cat simply had the bad luck to be sitting nearby when you walked in — close enough to look guilty, far enough to have done nothing at all. Or maybe the cat did do it, and the open window is unrelated, a coincidence sitting next to another coincidence. You cannot rerun the week to find out.
+
+What you can do is notice something about the first version of the story, the one that took you four seconds to settle on and that you never once, in seven days, thought to reopen. It was not the only explanation available. It was simply the first one that arrived, and the moment it arrived, you stopped looking for another.
+
+Nobody accused the window. The window was not in the room when you formed your opinion. The cat was.
+
+### 6.3 The moment the search ended
+
+Here is the part worth slowing down for. It is not that you picked the wrong suspect — you may not have. The cat remains a live possibility; nothing in the following week proved the window's case, only opened it. The part worth examining is narrower and stranger: the instant an explanation arrived that fit the two facts in front of you, the search for other explanations did not continue in the background and lose a quiet vote later. It stopped. Completely, immediately, without your noticing it had stopped.
+
+This is not the same failure as the ones earlier chapters named. Chapter Two was about a conclusion outrunning its evidence — a claim too large for what supported it. This is smaller and earlier: before any conclusion was reached, before any evidence was weighed, a single candidate explanation walked in, and no second candidate was ever invited to the room. You did not choose the cat over the window. You never met the window.
+
+A hypothesis is not the same thing as a conclusion. A conclusion is what you land on after comparing candidates. A hypothesis is a candidate — one story that would, if true, explain what you're looking at. The mug-and-cat scene compresses a step most situations spread out over hours or years: the step where a mind reaches for the first hypothesis available, finds it sufficient to stop looking, and never notices that "sufficient to stop looking" and "true" are two different properties that happened to arrive together this time.
+
+The mechanism is not "you concluded too fast." It is: *the arrival of one adequate explanation ends the search for competing ones, and the ending feels like nothing — no decision, no moment you could point to and say, here, this is where I stopped looking.*
+
+### 6.4 An honest pause here
+
+This one is not new, and it should say so plainly rather than let a well-told scene borrow the feeling of discovery it hasn't earned. The book already has a name for a sibling problem — Scope Expansion, the conclusion that ignores counterexamples already sitting in its own evidence. This is not that. Scope Expansion concerns a conclusion drawn *despite* competing evidence being visible. What happened with the mug is earlier and quieter: the competing evidence — the window, the book, the rain — was not visible yet, and no second hypothesis was ever constructed to go looking for it. The failure is not in weighing; it is in the search stopping before there was anything to weigh.
+
+The mechanism itself has a name too, in a literature that has studied it for decades: *premature closure* — accepting an initial hypothesis before alternatives have been genuinely considered, often reached by pattern recognition rather than systematic search, and named in the clinical-reasoning literature as one of the most common sources of diagnostic error, precisely because it doesn't feel like an error from the inside. The cat-and-mug scene is a compression of that mechanism into four seconds and a broken cup. The compression may be worth keeping. The mechanism is not this book's.
+
+Under premature closure sits an older root. The search doesn't merely stop at the wrong hypothesis; it stops at the *first adequate* one, whether or not a better one was one step further away. That is Herbert Simon's satisficing: a mind facing a sequence of possible explanations does not evaluate all of them and pick the best — it takes the first one that clears a threshold of "good enough" and stops there. The model behind that claim was laid out in Simon's 1955 paper, *A Behavioral Model of Rational Choice* (Quarterly Journal of Economics, 69(1), 99–118). The word "satisficing" itself was coined a year later, in Simon's 1956 paper, *Rational Choice and the Structure of the Environment* (Psychological Review, 63(2), 129–138). Two different things were confirmed to exist in two different years — the idea in 1955, the name for it in 1956 — and a fact this precise deserves to be stated that precisely rather than rounded to whichever year is easier to remember.
+
+One further thing this chapter does *not* claim, because a related-sounding literature exists and the two are not the same. Radiology has its own long-studied version of a search ending too soon — *satisfaction of search*, where a radiologist who finds one abnormality on an X-ray becomes measurably less likely to notice a second one already sitting in the same image. That is a different failure: the second finding was there, visible, waiting to be seen, and the search closed on top of it anyway. The window in this chapter was not there to be missed. It was never a candidate at all — nobody looked for it, because nobody had reason to suspect it existed until the books moved a week later. Premature closure is the right name for a hypothesis that was never generated. Satisfaction of search is the right name for a hypothesis that was generated, present, and missed regardless. The mug scene is the first kind, not the second, and the two are worth keeping apart precisely because they look alike from a distance.
+
+### 6.5 Why the mind does this
+
+A mind that held every hypothesis open until every possible alternative had been generated and checked would still be standing in the kitchen at midnight, unable to sweep up a mug. Most of the time, the first adequate explanation is also the correct one — cats do knock things over, far more often than open windows conspire with curling books. Stopping the search early is not a design flaw; it is what makes a mind usable at the speed a kitchen, or a courtroom, or a diagnosis, actually requires.
+
+The failure is not that the search stops. It is that it stops *silently* — without registering as a decision, without leaving behind any sense that a door has closed, so that the one case in ten where the first hypothesis was wrong looks, from the inside, identical to the nine where it was right.
+
+### 6.6 The question that can be asked
+
+The distinction that matters is not *was I right*. You often will have been. It is:
+
+> **"Did I generate one explanation, or did I generate several and then choose?"**
+
+Most of the time you will find you did the first, and that this was fine — the mug really was the cat. The question is not designed to make you suspicious of every quick verdict. It is designed to make the quiet, unfelt moment when the search closed visible enough that you can reopen it on the occasions that call for it: before a diagnosis is signed, before a colleague is blamed, before a headline's first explanation becomes the only one anybody remembers reaching for.
+
+### 6.7 The question that waits
+
+A hypothesis arrived, uninvited and alone, and was never told it had competition. That is where this chapter stops — at the moment a candidate explanation is born, not yet at what should happen to it afterward.
+
+Because once a hypothesis has competition — once two or three candidates sit side by side — something has to decide which of them, if any, gets promoted past the others into something closer to belief. By what right does that promotion happen? What separates a hypothesis that earned the step from one that simply survived the longest, unchallenged, the way the sentence about courage survived unchallenged for a hundred years before anyone thought to ask where it came from?
+
+That is the next question this book owes an answer to. What shape the answer takes — one chapter or several, arriving here or further along — is not yet settled, and this chapter is not the place to settle it.
+
+---
+
 Giorgio Roth / 2026
