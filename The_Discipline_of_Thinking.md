@@ -569,23 +569,23 @@ This time the answer is almost entirely the first kind, and I want to say so pla
 
 What is smaller than a discovery, and still mine: the arrangement. This chapter sits after three chapters about how a mind, and then a group, arrives at conclusions too large for their evidence — and it asks a narrower question none of the other three could ask yet. Not *how big is this claim*, but *how did I come to feel sure of it at all*. That placement is a choice, not a finding.
 
-### 5.7 The question that can be asked
+### 5.7 Remember, or only know?
 
 Researchers who work on this have a name for the two ways a memory can announce itself. One comes with a scene attached — you can say where you were, who was talking, what the room looked like. The other comes with nothing attached but a sense that you already know it. The technical names are *remember* and *know*; the difference between them is the entire subject of this chapter, said in two words instead of several pages.
 
-The practical use of that distinction is a deliberate habit some researchers call recall-to-reject: instead of asking *does this feel true*, you make yourself search for the specific occasion, and treat its absence as information rather than as an inconvenience to wave past.[^12] So the question worth carrying out of this chapter is not *am I sure*. It is:
+The practical use of that distinction is a deliberate habit some researchers call recall-to-reject: instead of asking *does this feel true*, you make yourself search for the specific occasion, and treat its absence as information rather than as an inconvenience to wave past.[^12] Which turns the chapter into something you can actually run. Not a test of confidence — confidence is the thing under suspicion here, and it will pass any test you set it. A test of provenance:
 
 > **"Can I name the moment I checked this — or only the many moments I have heard it?"**
 
-Run it against anything you would say fluently, without hesitating, if a stranger asked you to justify it. Most of what survives that question will survive it easily, because most of what you know fluently, you also once verified and simply do not replay the memory every time you use it. That is fine. This question is not asking you to distrust everything. It is asking you to notice the specific cases where the fluency is the *only* thing standing in for the check — where, if someone took the repetition away, nothing would be left.
+Run it against anything you would say fluently, without hesitating, if a stranger asked you to justify it. Most of what survives that question will survive it easily, because most of what you know fluently, you also once verified and simply do not replay the memory every time you use it. That is fine. General suspicion is not the point, and it would not survive a morning. The narrow case is the one worth catching: where fluency is the *only* thing standing in for the check — where, if someone took the repetition away, nothing would be left.
 
-### 5.8 Why the mind does this
+### 5.8 Why fluency is usually right
 
 Fluency is not a foolish thing for a mind to trust. In the world most people actually live in, claims you have encountered many times, from many directions, genuinely are more likely to be true than claims you are hearing for the first time — well-established facts get repeated more than errors do, most of the time, by most of the people around you. The shortcut is wrong exactly when something has been repeated *without* first being checked, and repetition on its own cannot tell you which situation you are in. It feels identical from the inside. That is what makes it a blind spot rather than a mistake you could simply try harder to avoid.
 
 ### 5.9 Not a malfunction
 
-None of this makes you gullible, or your mind unreliable. A mind that demanded a sourced citation before accepting anything it had heard more than once would be paralyzed by lunchtime. The fluency shortcut is doing exactly the job it evolved to do, at the speed it needs to do it. The failure is narrow and specific: it cannot, on its own, distinguish a claim that earned its familiarity from one that only inherited it.
+None of this makes you gullible, or your mind unreliable. Try demanding a source for every sentence that arrives sounding familiar, and you will not finish a conversation — most of what you know, you know fluently, and rechecking all of it would leave room for nothing else. The fluency shortcut is doing exactly the job it evolved to do, at the speed it needs to do it. The failure is narrow and specific: it cannot, on its own, distinguish a claim that earned its familiarity from one that only inherited it.
 
 ### 5.10 The question that waits
 
@@ -1113,8 +1113,10 @@ The fourth criterion was added in 2013, and the committee said why. Authors unde
 The same body names ghostwriting as the case where judgment and responsibility separate, and — this was the surprise in the search — accountability is the specific ground on which medical publishing declines to list AI systems as authors. Not the size of the contribution. That a model cannot be called to answer.
 
 What is not theirs is the four-way sorting the chapter proposes, and the claim that the same test reaches past the journal and into a photograph, a headline, a book. Whether that extension has predecessors of its own, I have not searched.
+
 # 
-**Giorgio Roth / 2026**
+
+Giorgio Roth / 2026
 
 [^1]: This two-step model draws on Chris Argyris's Ladder of Inference. See *Notes on Lineage* for what is borrowed and what is reorganized here.
 [^2]: The fast-gear / slow-gear language is close kin to Daniel Kahneman's System 1 and System 2. See *Notes on Lineage* for the distinction.
