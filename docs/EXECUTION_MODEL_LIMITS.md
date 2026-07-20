@@ -59,6 +59,18 @@ Constraints declared in one execution cycle may drift in interpretation across r
 
 The policy constraint layer (GP(S)) enforces declared policies. It does not verify that those policies are sound, complete, or consistent with each other.
 
+### §2.9 — Adapter Compliance
+
+The guarantees described in this document assume that the execution environment provides a compliant implementation of the RegenAdapter contract.
+
+The execution model does not verify adapter correctness. It cannot determine whether an adapter faithfully implements methods such as reset(), snapshot(), execute(), or simulate(), nor can it detect implementations that intentionally or unintentionally violate the contract.
+
+Consequently, adapter compliance is an engineering responsibility rather than a property established by the formal model. Any adapter that bypasses, misrepresents, or only partially implements the required interface falls outside the guarantees presented in this document.
+
+This limitation is analogous to the trust assumptions commonly made by formal protocol specifications: the protocol can establish properties only for implementations that satisfy the protocol contract.
+
+Compliance testing or certification of adapters is outside the scope of this specification.
+
 ---
 
 ## §3 — Undeclared Risks
