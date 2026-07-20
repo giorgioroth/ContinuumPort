@@ -198,6 +198,8 @@ class RegenAdapter(ABC):
     def simulate(self, state: dict, action: dict) -> dict: ...
 ```
 
+See EXECUTION_MODEL_LIMITS.md §2.9 for the trust assumptions this contract relies on.
+
 ---
 
 ## Repository structure
