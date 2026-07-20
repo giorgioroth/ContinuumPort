@@ -80,7 +80,7 @@ The five invariants do not have the same epistemic status. The distinction matte
 | I2 — No out-of-domain execution | Formally demonstrated: domain boundary is encoded in the geometry; out-of-domain input has no image in the execution space. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), §3–§5 |
 | I3 — No invalid state transition | Formally demonstrated: geometry constraints are enforced before commitment; violating transitions are inadmissible by construction. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1 |
 | I4 — No partial state escape | Formally demonstrated: atomic commit/rollback is enforced at the execution layer; no intermediate state is observable. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1, Corollary 5.4 |
-| I5 — Deterministic outcome | Empirically validated: 1922 adversarial and invariant-validation tests, 0 failures; audit replay mechanism assumed by construction (no test independently verifies replay determinism across all adapter implementations) |
+| I5 — Deterministic outcome | Empirically validated: 1,922 automated tests (adversarial, invariant, authority, provenance, concurrency, and executable-principle validation), 0 failures; audit replay mechanism assumed by construction (no test independently verifies replay determinism across all adapter implementations) |
 
 Violations of I1–I4 are structurally inadmissible: they do not reach execution. I5 is continuously validated through adversarial testing; the audit replay assumption is documented in the invariant table above.
 
@@ -90,18 +90,18 @@ This is not a convention. It is enforcement — **within the declared execution 
 
 ## Tests
 
-**1922 adversarial and invariant-validation tests. 0 failures.**
+**1,922 automated tests across adversarial, invariant, authority, provenance, concurrency, and executable-principle validation. 0 failures.**
 
-Independently reproducible: `pytest` collects and passes all 1922 tests from a clean checkout, no external dependencies required.
+The self-contained quickstart demos above run on a clean checkout of this repository with no dependencies. The full validation suite (1,922 tests) runs against the Regen Engine kernel, which is proprietary (Beta license) and is not included in this public repository. Evaluation access to the suite is available on request (access@continuumport.com).
 
 <img width="2946" height="1634" alt="image" src="https://github.com/user-attachments/assets/8d61a01a-0b25-4324-9725-881b54ef8d14" />
 
 
-Verified on Windows.
+The run shown above was produced in the author's Windows environment.
 
-Paper 4 (*Adversarial Execution Governance*) reports on the cumulative corpus as submitted, once Batches 1–12 were complete: 1806 tests. Batch 13 (24 concurrent-pressure tests, C1–C5) and additional tests added since — including coverage from Part III of *AI Architectural Thinking* — bring the current repository total to 1922. These later additions are not yet reflected in Paper 4's reported figure; the repository total is the authoritative, continuously-verified count.
+Paper 4 (*Adversarial Execution Governance*) reports on the cumulative corpus as submitted, once Batches 1–12 were complete: 1806 tests. Batch 13 (24 concurrent-pressure tests, C1–C5) and additional tests added since — including coverage from Part III of *AI Architectural Thinking* — bring the current suite total to 1922. These later additions are not yet reflected in Paper 4's reported figure; the current suite total is the authoritative, continuously-verified count.
 
-The adversarial corpus was developed across 13 batches with the assistance of Claude (Anthropic), ChatGPT (OpenAI), and Gemini (Google) — in that order of contribution. The test suite is the primary research artifact of this project.
+The adversarial corpus was developed across 13 batches with the assistance of Claude (Anthropic), ChatGPT (OpenAI), and Gemini (Google) — in that order of contribution. The validation suite is the primary empirical research artifact of this project.
 
 The validation suite includes:
 
@@ -202,12 +202,16 @@ class RegenAdapter(ABC):
 
 ## Repository structure
 
+This public repository contains the specification, the self-contained demos, and the published books and essays:
+
 ```
-regen-engine/     — execution kernel (Python)
-compliance/       — invariant validation suite
-quickstart/       — runnable demos
-docs/             — formal specification
+quickstart/       — self-contained runnable demos (no dependencies)
+docs/             — formal specification, scope boundaries, invariant-test documentation
+cp-core/          — CP-Core normative schema and handoff specification
+regen-engine/     — engine demonstrations (attack, side-effects)
 ```
+
+The Regen Engine kernel and the full compliance/validation suite are proprietary (Beta license) and are not included in this public repository. Evaluation access is available on request: access@continuumport.com
 
 ---
 
