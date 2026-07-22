@@ -13,7 +13,7 @@ Within the execution boundary of a declared geometry G over a persistent executi
 - **No partial state corruption.** Any sequence producing a state change followed by execution failure is excluded from the admissible execution space. Corrupting executions are structurally absent, not detected.
 - **Atomic commit semantics.** Atomicity is enforced at the level of the modeled execution state. No partially committed internal execution state becomes admissible.
 - **Geometry enforcement.** Only sequences in G are executed. Sequences outside G are not rejected — they do not exist in the admissible execution space.
-- **Deterministic outcome.** Under the deterministic execution model, identical admissible input from identical state produces identical modeled outcome.
+- **Deterministic outcome.** Under the deterministic execution model, identical admissible input in an identical state produces identical modeled outcome.
 - **Authority enforcement.** Execution is gated by declared authority. Unauthorized transitions are excluded from admissible execution.
 - **TOCTOU detection.** State drift observable within the modeled execution boundary is detected before commit; execution is not committed under detected drift.
 
@@ -101,6 +101,8 @@ The observation layer [Ch. 28](https://github.com/giorgioroth/ContinuumPort/blob
 
 ## §6 — Summary Table
 
+The guarantees below hold conditional on adapter compliance (§2.9). They describe properties of the execution model as specified, not of arbitrary adapter implementations.
+
 | Guarantee | Status |
 |---|---|
 | No partial state corruption (internal) | ✓ Guaranteed under model |
@@ -115,6 +117,7 @@ The observation layer [Ch. 28](https://github.com/giorgioroth/ContinuumPort/blob
 | Concurrent/distributed correctness | ✗ Outside model scope |
 | Semantic identity across cycles | ✗ Future formalization |
 | Byzantine resistance | ✗ Outside model scope |
+| Adapter compliance | Assumed precondition (see §2.9) |
 
 ---
 
