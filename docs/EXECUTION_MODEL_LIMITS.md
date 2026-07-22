@@ -125,7 +125,7 @@ The guarantees below hold conditional on adapter compliance (§2.9). They descri
 
 - [![Formal Paper](https://img.shields.io/badge/Formal%20Paper-OSF%20Preprint-blue)](https://doi.org/10.17605/OSF.IO/B8SGR)
 - [![Repository](https://img.shields.io/badge/Repository-ContinuumPort-yellow)](https://github.com/giorgioroth/ContinuumPort)
-- [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20LICENSE_REGEN.md)
+- [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/3.%20LICENSE_REGEN.md)
 
 ---
 
