@@ -1,4 +1,4 @@
-# Moved
+# Document Relocated
 
 > **Status: non-normative.** Navigational placeholder — no content.
 
