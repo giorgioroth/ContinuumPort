@@ -32,6 +32,15 @@ A book about the gap between what a mind notices and what it decides — built o
 
 [Read on GitHub](https://github.com/giorgioroth/ContinuumPort/blob/main/The_Discipline_of_Thinking.md) | [On Amazon](https://www.amazon.com/dp/B0H7S2G3CJ) 
 
+---
+
+## Parent–Child Relationship Arithmetic
+*How Parents Fail to Update Their Model of a Child Who Has Become an Adult*
+
+Two people age at the same rate, so the difference between their ages is fixed at birth and never moves. The ratio between them collapses — violently in the years no one remembers, and barely at all thereafter. A parent's sense of where a grown child stands was formed when that ratio was enormous; the facts about the child have been revised many times since, and the position has not. The book separates knowing a person from placing a person, builds an instrument for detecting the lag in ordinary speech, and then turns on its own central test — showing where that test cannot distinguish its explanation from a rival one, and repairing the design rather than defending the claim. A register at the back states the status of every load-bearing claim, including the ones still open.
+
+[Read on GitHub](https://github.com/giorgioroth/ContinuumPort/blob/main/Parent-Child_Relationship_Arithmetic.md) | [On Amazon](AMAZON-LINK-PENDING-ASIN)
+
 # 
 
 Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026
