@@ -141,7 +141,7 @@ It does not guarantee:
 
 Undeclared risks are not blocked.
 
-These limits are explicit and documented in [`EXECUTION_MODEL_LIMITS.md`](https://github.com/giorgioroth/ContinuumPort/blob/848566f15c94f6f092a1a242316f4d7bd5329d2a/docs/EXECUTION_MODEL_LIMITS.md#L4)
+These limits are explicit and documented in [`EXECUTION_MODEL_LIMITS.md`](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md)
 
 ---
 
@@ -198,7 +198,7 @@ class RegenAdapter(ABC):
     def simulate(self, state: dict, action: dict) -> dict: ...
 ```
 
-See EXECUTION_MODEL_LIMITS.md §2.9 for the trust assumptions this contract relies on.
+See [`EXECUTION_MODEL_LIMITS.md` §2.9](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md) for the trust assumptions this contract relies on.
 
 ---
 
@@ -214,6 +214,20 @@ regen-engine/     — engine demonstrations (attack, side-effects)
 ```
 
 The Regen Engine kernel and the full compliance/validation suite are proprietary (Beta license) and are not included in this public repository. Evaluation access is available on request: access@continuumport.com
+
+---
+
+## Reading path
+
+The numbered documents at the repository root are meant to be read in order:
+
+1. [PROJECT_STATUS](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md) — where the project stands
+2. [Whitepaper](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20Whitepaper.md) — what it is, technically
+3. [LICENSE_REGEN](https://github.com/giorgioroth/ContinuumPort/blob/main/3.%20LICENSE_REGEN.md) — under what conditions it may be used
+4. [Roadmap](https://github.com/giorgioroth/ContinuumPort/blob/main/4.%20Roadmap.md) — where the project is going
+5. [WHERE_REGEN_ENGINE_BELONGS](https://github.com/giorgioroth/ContinuumPort/blob/main/5.%20WHERE_REGEN_ENGINE_BELONGS.md) — where it applies, and where it does not
+
+Documents 1–4 are normative or contractual. Document 5 is non-normative positioning; where it and the license differ, the license governs.
 
 ---
 
