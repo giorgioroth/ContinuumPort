@@ -42,4 +42,4 @@ Two people age at the same rate, so the difference between their ages is fixed a
 [Read on GitHub](https://github.com/giorgioroth/ContinuumPort/blob/main/Parent-Child_Relationship_Arithmetic.md) | [On Amazon](https://www.amazon.com/dp/B0HBNBR2SF)
 # 
 
-Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026
+Giorgio Roth — Independent researcher
