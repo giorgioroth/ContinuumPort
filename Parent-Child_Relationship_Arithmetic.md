@@ -2,7 +2,7 @@
 
 *How Parents Fail to Update Their Model of a Child Who Has Become an Adult*
 
-# 
+---
 
 ## Preface
 
@@ -15,6 +15,8 @@ A word on how the central idea is offered. It is a candidate, not a law. Where t
 The scope is narrow on purpose. This book explains, at most, one mechanism in one kind of relationship. It does not explain the world, and its narrowness is not a weakness to apologize for — it is the only reason the idea can be tested at all.
 
 The aim, then, is not to judge parents. It is to notice something small and nearly invisible, and to ask an uncomfortable question: not whether our children have grown up, but whether our picture of them has.
+
+---
 
 ## Chapter 1 · The Frozen Image
 
@@ -33,6 +35,8 @@ That is the thing to hold onto, because it is genuinely odd. Two things that oug
 So the question of this book is narrower and stranger than "why are some parents controlling." That question has answers, and they are mostly about the parent — anxiety, habit, the long reflex of protection. This is a different question, and it is not about the parent's motives at all. Something is being held constant that has nothing to do with what the child can do, and the rest of this book is an attempt to find out what that something is.
 
 There is a clue, and it is almost too plain to notice. In this one relationship, among everything that has changed, exactly one number has stayed the same. Perhaps that is where to look.
+
+---
 
 ## Chapter 2 · What the Field Already Knows
 
@@ -59,6 +63,8 @@ That is the crack this book tries to look into. Not the phenomenon — the field
 I want to be honest about the status of that claim, because it is not yet earned, and the discipline of this book is to say so rather than to let momentum carry it. That the phenomenon is real, I am sure of — it is in the field, and it is at the table. That the right way to see it is as a *dissociation between two representations* rather than as a single adjustment scored on one measure — that is a reframing, not a fact, and whether the existing literature has already drawn this distinction somewhere I have not looked is a question I have not fully closed. It is a debt I am carrying forward openly, to be paid before this book makes its strongest claim, not after. What I can say now is only this: the field found the phenomenon, named it, and built a measure that reports it as one number. The rest of this book asks whether it is one thing.
 
 And there is that clue again, the one from the end of the last chapter, which neither of the two maturity factors has any particular use for but which will not leave me alone. Among everything that changed between this parent and this child across forty years, one quantity did not. The next chapter is about that number, and about whether it has anything to do with which of the two representations moves and which one stays.
+
+---
 
 ## Chapter 3 · The Arithmetic
 
@@ -128,6 +134,7 @@ The third level is the measurement. If the position instrument fails — if the 
 
 And one question remains that the ledger cannot answer, because it belongs to the reader. At each prediction in this chapter, ask: *what observation would convince you this model is wrong?* If you cannot name one, you have not been given a model — whatever else you have been given. I have tried to name mine. Until the test is run, the arithmetic remains exactly what the preface said it was: a candidate, on the record, with its kill-line published.
 
+---
 
 ## Chapter 4 · The Markers of Standing
 
@@ -196,6 +203,8 @@ What a book can do for an instrument ends here. What remains is work outside the
 One sentence carries the whole contract, and it is the reason this chapter exists as prose rather than as an appendix: the instrument is fixed before any data exist, and this chapter is the timestamp.
 
 And one last sentence, owed to the invariant this chapter was built under. Whatever the test eventually says about the number from Chapter 1, these pages do not change. A way of seeing who stands where in a family is useful in any world — including the one in which this book's central idea turns out to be wrong.
+
+---
 
 ## Chapter 5 · The Stake
 
@@ -271,7 +280,6 @@ And the retreat, since it belongs in the book and not in a drawer. If measured s
 
 But notice what that outcome would not undo. It would not undo the two channels — capability and position, moving at different speeds, visible apart in the same parent at the same table — because that separation was made in Chapter 1 and scored in Chapter 4, on grounds the stake never contested; the stake explains *why* position might freeze, not *whether* it is a different quantity from capability, and it was never asked to answer that. It would not undo the instrument, which reads conduct and not motive, and does not care which name the underlying mechanism ends up wearing. And it would not undo the design of this chapter's test — a discriminator built so that the stake's own signature, favourability, must come apart from position before either account can claim the result. Losing the mechanism would not mean losing the chapter's work. It would mean the ratio was a lens rather than an engine. A lens precise enough to put a sixty-year-old finding to a real test is not nothing, even on the day it stops being called an engine.
 
-
 ---
 
 ## Epilogue
@@ -282,6 +290,9 @@ If the answer is no, perhaps it is not the child who has stayed behind. Perhaps 
 
 Whether the same thing happens wherever one person's model of another was built early and never rebuilt is a question this book has deliberately not asked; that is a different book.
 
+# 
+
+Giorgio Roth / 2026
 
 ---
 
@@ -327,7 +338,7 @@ The test has not been run. Nothing in this register reports a result, because th
 
 [^v4]: **Instrument verified (2026-07-19) — claim recalibrated. Split into v4a (closed) and v4b (open).** The parental maturity measure is Mendonça & Fontaine's (Portuguese sample, N=343, parents aged 40–68), reported in the *Journal of Adult Development* (2014). Confirmatory factor analysis supports a **two-factor** structure: **Comprehending** (6 items — seeing the child as an independent adult with limits and needs) and **Letting Go** (4 items — releasing control). **v4a (CLOSED, unfavourable):** the earlier "single maturity score" claim is false; the instrument is two-dimensional, and the resolution-asymmetry as originally written is withdrawn. **v4b (OPEN):** whether the literature anywhere models the specific *knowledge-vs-placement* split remains unsettled — the two existing factors are both about parental *adjustment*, not that distinction, but their existence does not prove the distinction is unmodelled elsewhere. Closing v4b requires the lineage audit of parental-representation models, not this instrument.
 
-[^v5]: **CLOSED, favourable (2026-07-25).** Blenkner, M. (1965), "Social work and family relationships in later life, with some thoughts on filial maturity," in Shanas & Streib (Eds.), *Social Structure and the Family: Generational Relations*, pp. 267–287 (USC Press). The first name "Margaret" is verified: Margaret Blenkner (1909–1973), American professor; obituary in *The Gerontologist* 13(4):534, 1973 (Weber & Wasser), DOI 10.1093/geront/13.4.534. The name stands as written.
+[^v5]: **CLOSED, unfavourable — imprint corrected (2026-07-26).** Blenkner, M. (1965), "Social work and family relationships in later life, with some thoughts on filial maturity," in Shanas & Streib (Eds.), *Social Structure and the Family: Generational Relations*, pp. 46–59 (Prentice-Hall, Englewood Cliffs, NJ). An earlier draft read "pp. 267–287 (USC Press)". That imprint belongs to a different work — Brody, E. M. (1979), "Aged parents and aging children," in Ragan (Ed.), *Aging Parents*, pp. 267–287 (University of Southern California Press) — which appears immediately below Blenkner in several reference lists on filial maturity; the two were conflated. The publisher is unambiguous: every secondary source located gives Prentice-Hall, Englewood Cliffs, and none gives USC Press. The page range is the majority reading (six sources give 46–59; two outliers give 117–130 and 469–498) and has not been checked against the physical volume. The first name "Margaret" is separately verified: Margaret Blenkner (1909–1973), American professor; obituary in *The Gerontologist* 13(4):534, 1973 (Weber & Wasser), DOI 10.1093/geront/13.4.534.
 
 [^v6]: **CLOSED, unfavourable — name corrected (2026-07-25).** An earlier draft read "Willard". The expansion of "W. S." is **William**. Verified independently against University of Wisconsin–Madison author listings and the signed byline of Aquilino (2005), *Journal of Family Issues* 26(2):143–167. "Willard" never appeared in any Aquilino citation; it was imported from an unrelated co-author list.
 
