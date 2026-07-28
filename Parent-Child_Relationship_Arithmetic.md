@@ -1,8 +1,6 @@
 # Parent–Child Relationship Arithmetic
 
-*How Parents Fail to Update Their Model of a Child Who Has Become an Adult*
-
----
+***How Parents Fail to Update Their Model of a Child Who Has Become an Adult***
 
 ## Preface
 
@@ -42,6 +40,8 @@ There is a clue, and it is almost too plain to notice. In this one relationship,
 
 Before going any further, I owe the reader an admission and a debt. The admission is that the thing described in the last chapter — a parent whose picture of a grown child stays fixed while the facts move on — is not a discovery of mine. It has been studied, carefully, for sixty years. The debt is to say so plainly, and to lay out what that body of work found, in its strongest form, before I claim that there is anything left to add. A book that introduces its own idea without first showing the reader the field it stands on is not bold. It is merely hoping you have not read the field.
 
+### 2.1 · What the Field Has
+
 The work begins with Margaret Blenkner,[^v5] who in 1965 gave a name to a change she saw in the relationship between aging parents and their adult children. She called it *filial maturity*: the point at which a grown child stops relating to a parent as a child relates to a caretaker, and begins to meet them as one adult meets another — someone with their own history, their own limits, their own needs. It was offered as a developmental stage, a transition that becomes possible when the child is grown, and it named something real that most people feel but few have words for.
 
 For a long time the research followed the child's side of that transition. It described the adult child learning to *de-idealize* the parent — to stop seeing them as the towering figure of early childhood and start seeing a person, fallible and particular. It described *individuation*, the slow work of becoming a self distinct from the family that made you. This is a rich and well-mapped literature, and it is worth saying that it is largely about the direction opposite to the one this book takes. It is about how the child updates their picture of the parent.
@@ -49,6 +49,8 @@ For a long time the research followed the child's side of that transition. It de
 But the field did not stop there, and this is the part that matters most for what follows, because it is the part that comes closest to the subject of this book. Researchers noticed that filial maturity has a counterpart on the other side of the relationship. If the child is learning to see the parent as a person, then there is a parallel task on the parent's side: learning to see the grown child as an autonomous adult rather than as the child they raised. The idea, as the literature summarizes it, is that parents ideally come to accept that a son or daughter is no longer a child but an autonomous individual — a formulation the field attributes to William Aquilino's[^v6] 2006 work on family relationships in emerging adulthood.[^v1] The field went further and built instruments to measure this parental side — a *parental maturity* scale, an attempt to put a number on how fully a given parent has made that adjustment. It has even been described, in the words of one review of the literature, as the *other half of the picture* — the *matched pair* of filial maturity.[^v2] The phenomenon of the last chapter, in other words, is not an unclaimed continent. It has a name and a measure of its own, and it descends from a research tradition six decades deep — though the parent's side of that tradition, the side this book is about, is considerably younger and thinner than the child's, dating from the mid-2000s rather than 1965.
 
 I want to be as fair to this work as I can, because the temptation in a book like this is to describe the existing field weakly so that one's own contribution looks larger by contrast. So let me state the field's account at its strongest. It says: there is a developmental achievement, available to parents of grown children, in which the parent comes to relate to the child as a fellow adult. Parents vary in how fully they reach it. Those who reach it more fully tend to have warmer, more reciprocal relationships with their children; those who reach it less fully tend to have more friction. The achievement is correlated with the health of the relationship, and it can be measured. That is a real finding, honestly earned, and much of what the last chapter described is simply an instance of it. The mother at the restaurant, ordering for her forty-three-year-old daughter, is a parent who — in the field's terms — has not fully reached parental maturity. The field saw her first.
+
+### 2.2 · What Is Left
 
 So what is left? If the phenomenon is claimed, what is this book for?
 
@@ -290,10 +292,6 @@ If the answer is no, perhaps it is not the child who has stayed behind. Perhaps 
 
 Whether the same thing happens wherever one person's model of another was built early and never rebuilt is a question this book has deliberately not asked; that is a different book.
 
-# 
-
-Giorgio Roth / 2026
-
 ---
 
 ## Register of Claims
@@ -306,11 +304,11 @@ It exists because the chapters were written in sequence and each one attacks the
 
 **L1 · The geometry.** That the difference of two ages (Δ, fixed at birth) is constant while their ratio collapses; that the ratio's slope has magnitude Δ/a², where a is the child's age; that a lagging model produces ratio-error proportional to Δ. **Derivation** (§3.1). Neither falsifiable nor confirmable by observation; it falls only if the calculus is wrong. Unchanged since first statement. Its certainty is real and cheap, and §3.6 names the characteristic sin of letting cheap certainty leak sideways into the psychology.
 
-**L2 · The phenomenon.** That a parent's picture of a grown child can stay fixed while the facts move on. **Not mine — closed in the field's favour** (Ch. 2). Studied since 1965 on the child's side and since the mid-2000s on the parent's; named, and measured by a validated instrument. Chapter 2 is a concession, not a claim.
+**L2 · The phenomenon.** That a parent's picture of a grown child can stay fixed while the facts move on. **Not mine — closed in the field's favour** (§2.1). Studied since 1965 on the child's side and since the mid-2000s on the parent's; named, and measured by a validated instrument. Chapter 2 is a concession, not a claim.
 
 **L3 · Two channels.** That capability and position are distinct representations able to update independently. **Open, supported, uncontested** (§3.2; made scorable §4.3; reaffirmed §5.5). An existence claim resting on the scene in Chapter 1 and on the four mismatched people in §4.3. No rival in this book contests it: the stake explains why position might freeze, not whether it is a different quantity from capability, and it was never asked to. This is the claim that survives every adverse outcome listed below.
 
-**L4 · Whether the split is already modelled.** Whether the literature anywhere models knowledge-versus-placement as two representations moving at two speeds. **Open** (Ch. 2; note v4b). The nearest instrument was verified and resolves into two factors — comprehending, and letting go — both of which concern the parent's *adjustment* rather than this distinction; but their existence does not prove the distinction unmodelled elsewhere. Closing this requires a lineage audit of parental-representation models, which has not been done. Carried forward as a debt, to be paid before the book's strongest claim rather than after it.
+**L4 · Whether the split is already modelled.** Whether the literature anywhere models knowledge-versus-placement as two representations moving at two speeds. **Open** (§2.2; note v4b). The nearest instrument was verified and resolves into two factors — comprehending, and letting go — both of which concern the parent's *adjustment* rather than this distinction; but their existence does not prove the distinction unmodelled elsewhere. Closing this requires a lineage audit of parental-representation models, which has not been done. Carried forward as a debt, to be paid before the book's strongest claim rather than after it.
 
 **L5 · The descriptive claim.** That human beings assign relational position by something tracking the ratio. **Falsifiable, untested** (§3.6, second level). Retreat published in advance: if the parent's age has no effect on positioning at fixed child-age, the arithmetic is not a mechanism, and this book's title is an overstatement to be corrected rather than defended.
 
@@ -329,6 +327,8 @@ The test has not been run. Nothing in this register reports a result, because th
 ---
 
 ## Notes
+
+*On method.* This book was written with the help of several AI systems, used as critics rather than as authors. The argument, the instrument, and the errors are mine; what the systems supplied was adversarial pressure — objections, steelmanned versions of positions I was inclined to dismiss, and checks on citations, several of which they got wrong and one of which they caught after I had missed it. Chapter 5 exists because one of them built the rival account better than I had, and the correction to note v5 below came from a machine reading a footnote I had already approved. Nothing here was generated and passed on unread; every sentence was accepted, rewritten, or thrown out by me, and where a claim is still unverified this register says so. The Kindle edition declares the same use in its publication metadata. Readers who want the fuller account of how this way of working is meant to be governed will find it in *Seven Principles*.
 
 [^v1]: Primary-source verification pending. The formulation here is drawn from a secondary summary of Aquilino's 2006 chapter ("Family Relationships and Support Systems in Emerging Adulthood," in Arnett & Tanner, eds., *Emerging Adults in America*, APA, pp. 193–217), not yet from the chapter itself. The exact wording and emphasis are to be checked against the primary text before this passage is frozen.
 
