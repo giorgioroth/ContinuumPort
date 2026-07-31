@@ -6,7 +6,7 @@
 
 **[Boundaries](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/boundaries.md)** — Understanding what is deliberately NOT standardized to protect the RAW intent
 
-**[AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md)** — The book: 58 chapters on structural execution governance for persistent systems
+**[AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md)** — The book: 62 chapters on structural execution governance for persistent systems
 
 ## Research & Formal Results
 
@@ -14,12 +14,8 @@
 Formal characterization of execution admissibility in persistent autonomous systems under uncertainty and irreversibility.
 → Preprint: [osf.io/b8sgr](https://osf.io/b8sgr)
 
-**SSRN #6765719** — *Execution Geometry and Persistent State Governance: From Formal Model to Deployed Enforcement*
-Translating the formal model into deployment implications for persistent AI agent systems.
-→ [papers.ssrn.com/sol3/papers.cfm?abstract_id=6765719](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6765719)
-
 **Regen Engine — System Kernel for Execution Governance**
-1139 adversarial tests · 0 invariant violations · Non-bypassable enforcement layer
+1830 adversarial enforcement checks · 0 invariant violations · Mandatory execution path for adapters that route through it
 
 ## 🌐 The Living Record (Provenance)
 
