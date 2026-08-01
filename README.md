@@ -80,6 +80,180 @@ The five invariants do not have the same epistemic status. The distinction matte
 | I2 — No out-of-domain execution | Formally demonstrated: domain boundary is encoded in the geometry; out-of-domain input has no image in the execution space. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), §3–§5 |
 | I3 — No invalid state transition | Formally demonstrated: geometry constraints are enforced before commitment; violating transitions are inadmissible by construction. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1 |
 | I4 — No partial state escape | Formally demonstrated: atomic commit/rollback is enforced at the execution layer; no intermediate state is observable. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1, Corollary 5.4 |
+| I5 — Deterministic outcome | Empirically validated by the subset of the suite that exercises it directly: repeated execution of the same configuration and sequence, compared for identical final state, with negative controls. The suite total of 1,922 is the size of the corpus, not the count of evidence for this invariant — it also contains negative controls and tests that pass by documenting a limitation rather than by blocking an attack. The audit replay mechanism is assumed by construction: no test independently verifies replay determinism across adapter implementations |
+
+Violations of I1–I4 are structurally inadmissible: they do not reach execution. I5 is continuously validated through adversarial testing; the audit replay assumption is documented in the invariant table above. A passing suite establishes that the cases written were satisfied under the conditions run. It does not establish that the corpus covers the claim set, which is a separate assumption.
+
+This is not a convention. It is enforcement — **within the declared execution boundary, by a compliant adapter enforcing the compliance interface below.** An adapter that either fails to implement that interface, or bypasses it, is outside this guarantee entirely; enforcement applies to compliant adapters, not to arbitrary code. The FaultyAdapter demos above show what enforcement looks like when the boundary condition is not met.
+
+---
+
+## Tests
+
+**1,922 automated tests across adversarial, invariant, authority, provenance, concurrency, and executable-principle validation. 0 failures.**
+
+The self-contained quickstart demos above run on a clean checkout of this repository with no dependencies. The full validation suite (1,922 tests) runs against the Regen Engine kernel, which is proprietary (Beta license) and is not included in this public repository. Evaluation access to the suite is available on request (access@continuumport.com).
+
+<img width="2946" height="1634" alt="image" src="https://github.com/user-attachments/assets/8d61a01a-0b25-4324-9725-881b54ef8d14" />
+
+
+The run shown above was produced in the author's Windows environment.
+
+Paper 4 (*Adversarial Execution Governance*) reports on the cumulative corpus as submitted, once Batches 1–12 were complete: 1806 tests. Batch 13 (24 concurrent-pressure tests, C1–C5) and additional tests added since — including coverage from Part III of *AI Architectural Thinking* — bring the current suite total to 1922. These later additions are not yet reflected in Paper 4's reported figure; the current suite total is the authoritative, continuously-verified count.
+
+The adversarial corpus was developed across 13 batches with the assistance of Claude (Anthropic), ChatGPT (OpenAI), and Gemini (Google) — in that order of contribution. The validation suite is the primary empirical research artifact of this project.
+
+The validation suite includes:
+
+- replay attacks
+- state drift injection
+- geometry swap attacks
+- capability rebinding
+- TOCTOU patterns
+- composition attacks
+- hash canonicalization failures
+- authority desynchronization
+- rollback desynchronization
+- cross-cycle state trap scenarios
+- malformed capsule reconstruction
+- deterministic integrity verification
+- hostile observation (H1–H5)
+- commitment graph attacks (G1–G6)
+- causal opacity (O1–O5)
+- provenance enforcement (P1–P5)
+- authority laundering (L1–L6)
+- admissibility erosion (E1–E5)
+- concurrent adversarial pressure (C1–C5)
+
+Under enforcement, these attack patterns are blocked by the declared geometry or fail the admissibility check. Finite exhaustion of a test corpus demonstrates coverage of enumerated patterns — it does not establish structural impossibility for categories that extend beyond the formal model (see Scope and limits).
+
+---
+
+## Scope and limits
+
+ContinuumPort enforces correctness of execution under declared constraints.
+
+It does not guarantee:
+
+- Correctness of intent
+- Correctness of declared constraints
+- External side effects beyond the execution boundary
+
+Undeclared risks are not blocked.
+
+These limits are explicit and documented in [`EXECUTION_MODEL_LIMITS.md`](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md)
+
+---
+
+## Architecture
+
+[Architecture diagram](https://giorgioroth.github.io/ContinuumPort/)
+
+```
+Actions
+   ↓
+Authority check
+   ↓
+Geometry enforcement
+   ↓
+Execution (atomic)
+   ↓
+Commit / Rollback
+```
+
+ContinuumPort defines the constrained execution model. Regen Engine enforces it.
+
+Formal model: GF(S) — the maximal prefix-closed, failure-free execution space. Only sequences inside GF(S) are admissible for execution. Corrupted states are structurally inadmissible, not merely detected after the fact.
+
+---
+
+## Why "Execution-Governance Kernel"
+
+**This guarantee holds for any adapter implementing the compliance interface below correctly ("compliant"). An adapter that does not implement it, or that bypasses it, is outside this guarantee — there is no enforcement over code that never enters through the kernel.** Within that boundary, the Regen Engine functions as an execution-governance kernel — a non-bypassable enforcement layer through which all state-affecting transitions must pass.
+
+This is not middleware. It is not a validator that can be disabled. It is not a hook that can be skipped.
+
+The distinction matters:
+
+- **Non-bypassable execution governance** — no state-affecting transition can occur outside the enforcement layer, for a compliant adapter. There is no alternative path to execution for a compliant adapter.
+- **Centralized admissibility enforcement** — all transitions are evaluated against the declared geometry before commitment. Authority, invariants, and epistemic state are verified at a single, mandatory point.
+- **Invariant-preserving state transitions** — the system does not detect violations after the fact. Transitions that would violate declared invariants are structurally inadmissible. They do not execute.
+- **Fail-closed execution semantics** — under uncertainty, divergence, or insufficient data, the system halts. It does not degrade gracefully into permissive behavior. It stops.
+
+Loggers can be bypassed. Validators can be disabled. Middleware can be removed.
+
+A compliant adapter cannot route around an execution-governance kernel. Every transition from a compliant adapter passes through it, or the transition does not occur.
+
+This is the architectural property that distinguishes the Regen Engine from advisory systems, monitoring layers, or behavioral guardrails — and why "Execution-Governance Kernel" is the correct term for what it does, within the declared boundary.
+
+---
+
+## Compliance interface
+
+```python
+class RegenAdapter(ABC):
+    def reset(self, state: dict) -> None: ...
+    def snapshot(self) -> dict: ...
+    def execute(self, actions: list[dict]) -> ExecutionResult: ...
+    def simulate(self, state: dict, action: dict) -> dict: ...
+```
+
+See [`EXECUTION_MODEL_LIMITS.md` §2.9](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md) for the trust assumptions this contract relies on.
+
+---
+
+## Repository structure
+
+This public repository contains the specification, the self-contained demos, and the published books and essays:
+
+```
+quickstart/       — self-contained runnable demos (no dependencies)
+docs/             — formal specification, scope boundaries, invariant-test documentation
+cp-core/          — CP-Core normative schema and handoff specification
+regen-engine/     — engine demonstrations (attack, side-effects)
+```
+
+The Regen Engine kernel and the full compliance/validation suite are proprietary (Beta license) and are not included in this public repository. Evaluation access is available on request: access@continuumport.com
+
+---
+
+## Reading path
+
+The numbered documents at the repository root are meant to be read in order:
+
+1. [PROJECT_STATUS](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md) — where the project stands
+2. [Whitepaper](https://github.com/giorgioroth/ContinuumPort/blob/main/2.%20Whitepaper.md) — what it is, technically
+3. [LICENSE_REGEN](https://github.com/giorgioroth/ContinuumPort/blob/main/3.%20LICENSE_REGEN.md) — under what conditions it may be used
+4. [Roadmap](https://github.com/giorgioroth/ContinuumPort/blob/main/4.%20Roadmap.md) — where the project is going
+5. [WHERE_REGEN_ENGINE_BELONGS](https://github.com/giorgioroth/ContinuumPort/blob/main/5.%20WHERE_REGEN_ENGINE_BELONGS.md) — where it applies, and where it does not
+
+Documents 1–4 are normative or contractual. Document 5 is non-normative positioning; where it and the license differ, the license governs.
+
+---
+
+[![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](LICENSE) 
+[![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/3.%20LICENSE_REGEN.md) 
+[![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md) 
+
+
+---
+
+[![PRINCIPLES](https://img.shields.io/badge/PRINCIPLES%20-orange)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md)
+
+
+## Further reading
+
+- [AI Architectural Thinking](https://github.com/giorgioroth/ContinuumPort/blob/main/AI_Architectural_Thinking.md) — the conceptual framework (62 chapters)
+- [EXECUTION_MODEL_LIMITS.md](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md) — explicit scope boundaries
+- [Blog](https://gi0rgioroth.blogspot.com/) — context and philosophy
+- [continuumport.com](https://continuumport.com/)
+
+---
+
+*Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026*
+
+contact: access@continuumport.com| I3 — No invalid state transition | Formally demonstrated: geometry constraints are enforced before commitment; violating transitions are inadmissible by construction. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1 |
+| I4 — No partial state escape | Formally demonstrated: atomic commit/rollback is enforced at the execution layer; no intermediate state is observable. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1, Corollary 5.4 |
 | I5 — Deterministic outcome | Empirically validated: 1,922 automated tests (adversarial, invariant, authority, provenance, concurrency, and executable-principle validation), 0 failures; audit replay mechanism assumed by construction (no test independently verifies replay determinism across all adapter implementations) |
 
 Violations of I1–I4 are structurally inadmissible: they do not reach execution. I5 is continuously validated through adversarial testing; the audit replay assumption is documented in the invariant table above.
