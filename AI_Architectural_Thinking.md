@@ -12756,10 +12756,13 @@ confirm that each transaction reproduces its recorded final state hash.
 
 But that function could no longer execute.
 
-It had been written against an earlier interface, invoking the transaction
-manager with a single argument. The current transaction manager requires an
-authorized proposal as well. The validation artifact and the system it was meant
-to validate had continued to evolve — on separate trajectories.
+It had been written against an earlier interface, and had come loose from it in
+three independent places: it imports the transaction manager from a module path
+that no longer exists, it constructs it without the authority gate the current
+signature requires, and it invokes it with a single argument where the current
+signature requires an authorized proposal as well. The import fails first, so the
+other two are present but never reached. The validation artifact and the system
+it was meant to validate had continued to evolve — on separate trajectories.
 
 This is not stalled justification in its simple form. The mechanism did not fail
 to exist. It existed, and ceased to fit the thing it described.
@@ -12771,6 +12774,12 @@ correctness it claims to certify.
 It is a subtler condition than the absence of a mechanism. Absence is visible.
 Drift is not — the mechanism is present, documented, and plausible, and only an
 attempt to run it reveals that it has come loose from its referent.
+
+The first record of this finding named only the third divergence — the one that
+never executes. The two that fail before it were found later, by running the code
+rather than reading it. Drift conceals its own extent: the first failure masks the
+rest, and a reader who stops at the first traceback learns that the artifact is
+broken, but not how far.
 
 When the defining experiment was finally constructed — against the current
 system interface, leaving the drifted artifact in place as evidence — it passed.
