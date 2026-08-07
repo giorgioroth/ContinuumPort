@@ -10,12 +10,16 @@
 
 ## Research & Formal Results
 
-**JAIR Submission #22885** — *On Structural Admission of Partial State Corruption in Unconstrained Persistent Systems*
-Formal characterization of execution admissibility in persistent autonomous systems under uncertainty and irreversibility.
-→ Preprint: [osf.io/b8sgr](https://osf.io/b8sgr)
+**Trajectory Integrity in Persistent AI Systems: Why Local Verification Is Structurally Insufficient**
+A composition lemma establishes that strictly local authority cannot enforce global invariants under sequential composition. Execution geometry and a fail-closed execution principle are introduced as necessary structural conditions.
+→ Preprint: [osf.io/b8sgr](https://osf.io/b8sgr) · [doi:10.17605/OSF.IO/B8SGR](https://doi.org/10.17605/OSF.IO/B8SGR)
+
+**Adversarial Execution Governance**
+Four failure taxonomies — hostile observation, commitment graph attacks, causal opacity, admissibility erosion. Three structural design gaps documented and closed. Concurrent pressure is out of scope for this paper.
+→ Preprint: [osf.io/w7q9n](https://osf.io/w7q9n) · [doi:10.17605/OSF.IO/W7Q9N](https://doi.org/10.17605/OSF.IO/W7Q9N)
 
 **Regen Engine — System Kernel for Execution Governance**
-1830 adversarial enforcement checks · 0 invariant violations · Mandatory execution path for adapters that route through it
+1830 adversarial enforcement checks as reported in *Adversarial Execution Governance* · 0 invariant violations · Mandatory execution path for adapters that route through it
 
 ## 🌐 The Living Record (Provenance)
 
