@@ -2,7 +2,7 @@
 
 **Normative Constraints on Semantic Continuity**
 
-**Status:** Normative
+**Status:** Normative — LIVING
 **Applies to:** CP-Core, Regen Engines, and all compliant implementations
 
 1. Purpose of This Document
