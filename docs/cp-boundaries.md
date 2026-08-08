@@ -121,6 +121,51 @@ The format provides **no fields** suitable for PII by design.
 
 ---
 
+### 3.7 Implicit Inference
+
+ContinuumPort MUST NOT permit meaning to be inferred from:
+
+* absence,
+* proximity,
+* implication,
+* narrative structure.
+
+Only explicitly declared state is valid. Anything not declared is not
+actionable within the protocol.
+
+This is a rule about the protocol's own reading of a container — not a claim
+about the world. Undeclared history remains a fact of the matter; the protocol
+declines to infer it, and a compliant implementation MUST NOT treat silence as
+information. See *AI Architectural Thinking* §62.7: the project is committed to
+the branch in which hidden ancestry exists, precisely so that execution which
+fails and still mutates state remains detectable. A protocol in which the record
+*is* the history could not express that failure at all.
+
+---
+
+### 3.8 Temporal Anchoring
+
+ContinuumPort MUST NOT encode time as a semantic signal.
+
+CP-Core MUST NOT contain:
+
+* timestamps,
+* creation dates,
+* wall-clock semantics,
+* enforced ordering.
+
+Chronological time belongs to documentation and version control, not to portable
+work state.
+
+Ordering is a property of the input, not of the protocol. Where the order of
+actions is security-relevant, the protocol neither detects nor prevents
+reordering: that responsibility sits with the caller or with the orchestration
+layer above the execution model. See *AI Architectural Thinking* §37.5–37.6.
+This is a declared transfer of responsibility, not a neutral absence, and a
+compliant implementation MUST NOT rely on the protocol to sequence anything.
+
+---
+
 ## 4. Prohibited System-Level Uses
 
 ContinuumPort MUST NOT be used to construct:
@@ -194,7 +239,7 @@ but with what we deliberately refuse to encode.
 ---
 
 **Document Status:** Normative
-**Last Updated:** 2025-12-26
+**Last Updated:** 2026-08-08
 **Maintainer:** Giorgio Roth
 
----
+
