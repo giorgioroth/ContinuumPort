@@ -239,7 +239,9 @@ but with what we deliberately refuse to encode.
 ---
 
 **Document Status:** Normative
+
 **Last Updated:** 2026-08-08
+
 **Maintainer:** Giorgio Roth
 
 
