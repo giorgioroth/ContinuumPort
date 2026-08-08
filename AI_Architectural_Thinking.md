@@ -2599,7 +2599,6 @@ And over time, that gap accumulates.
 
 ---
 
-
 ## Chapter 20 — Structural Decay
 
 The previous chapters established the architecture of a functioning agentic system.
