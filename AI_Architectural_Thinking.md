@@ -2599,7 +2599,6 @@ And over time, that gap accumulates.
 
 ---
 
-Ai dreptate. Tu mi-ai dat textul fără rândurile goale dintre paragrafe, iar eu ți l-am întors la fel — așa a ieșit înghesuit față de restul cărții (Capitolul 21 de sub el e cu rând gol între fraze, al meu nu). Le-am pus la loc, exact cum e în original. De-acum păstrez spațierea cu rânduri goale la fiecare capitol pe care mi-l dai.
 
 ## Chapter 20 — Structural Decay
 
