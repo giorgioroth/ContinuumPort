@@ -2,8 +2,7 @@
 
 [![7 CORE PRINCIPLES](https://img.shields.io/badge/7%20CORE%20PRINCIPLES-purple)](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/PRINCIPLES.md)
 
-### Preface
----
+## Preface
 
 
 ### On the Word, and on the Source
@@ -781,7 +780,7 @@ The interval has several observable properties.
 
 The first is duration. The interval may last seconds. It may last years. Some people recognize the signal immediately. Others never do. The behavior changes regardless.
 
-The second is direction. The modification often tends toward consistency before truth. The question that operates in the interval is not *„is this accurate?"* but *„is this compatible with the version of me that already exists?"* The representation exerts pressure toward coherence, not necessarily toward correctness.
+The second is direction. The modification often tends toward consistency before truth. The question that operates in the interval is not *"is this accurate?"* but *"is this compatible with the version of me that already exists?"* The representation exerts pressure toward coherence, not necessarily toward correctness.
 
 The third is irreversibility. The signal is easiest to see when it first appears. Once missed, it becomes difficult to recover. The behavior can be reconstructed later. The experience itself usually cannot. Recognition often feels obvious in retrospect. The moment itself rarely returns.
 
@@ -1259,10 +1258,10 @@ The mapping below identifies which engine behaviors correspond to which principl
 
 Principles 1 and 5 are not mapped to engine tests. Principle 1 — portability — is an architectural property of how artifacts are serialized, not of execution behavior. Principle 5 — continuity signals — describes user inference about platforms, which is outside the scope of engine-level testing.
 
-Fifteen tests pass in approximately 0.13 seconds. 
+Fifteen tests pass in approximately 0.13 seconds. They run as part of the full invariant suite referenced in the Preface, and the screenshot below shows that suite completing: 1,922 tests in 7.67 seconds. The fifteen principle-mapped tests appear in the upper pane.
 
-<img width="2954" height="798" alt="image" src="https://github.com/user-attachments/assets/4a515844-43cd-4ed1-9d9f-1a2e879858a3" /> 
+<img width="2567" height="2160" alt="image" src="https://github.com/user-attachments/assets/1c09e794-e4ce-4411-944d-319769eef726" />
 
-<img width="2948" height="1646" alt="image" src="https://github.com/user-attachments/assets/3da0115d-6cda-434b-b022-9e53d91eb657" /> 
+
 
 ---
