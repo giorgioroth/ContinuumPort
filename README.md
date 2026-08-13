@@ -80,7 +80,7 @@ The five invariants do not have the same epistemic status. The distinction matte
 | I2 — No out-of-domain execution | Formally demonstrated: domain boundary is encoded in the geometry; out-of-domain input has no image in the execution space. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), §3–§5 |
 | I3 — No invalid state transition | Formally demonstrated: geometry constraints are enforced before commitment; violating transitions are inadmissible by construction. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1 |
 | I4 — No partial state escape | Formally demonstrated: atomic commit/rollback is enforced at the execution layer; no intermediate state is observable. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1, Corollary 5.4 |
-| I5 — Deterministic outcome | Empirically validated by the subset of the suite that exercises it directly: repeated execution of the same configuration and sequence, compared for identical final state, with negative controls. The suite total of 1,922 is the size of the corpus, not the count of evidence for this invariant — it also contains negative controls and tests that pass by documenting a limitation rather than by blocking an attack. The audit replay mechanism is assumed by construction: no test independently verifies replay determinism across adapter implementations |
+| I5 — Deterministic outcome | Empirically validated by the subset of the suite that exercises it directly: repeated execution of the same configuration and sequence, compared for identical final state, with negative controls. The suite total of 1,976 is the size of the corpus, not the count of evidence for this invariant — it also contains negative controls and tests that pass by documenting a limitation rather than by blocking an attack. The audit replay mechanism is assumed by construction: no test independently verifies replay determinism across adapter implementations |
 
 Violations of I1–I4 are structurally inadmissible: they do not reach execution. I5 is continuously validated through adversarial testing; the audit replay assumption is documented in the invariant table above. A passing suite establishes that the cases written were satisfied under the conditions run. It does not establish that the corpus covers the claim set, which is a separate assumption.
 
@@ -90,16 +90,17 @@ This is not a convention. It is enforcement — **within the declared execution 
 
 ## Tests
 
-**1,922 automated tests across adversarial, invariant, authority, provenance, concurrency, and executable-principle validation. 0 failures.**
+**1976 automated tests across adversarial, invariant, authority, provenance, concurrency, control-effect binding, and executable-principle validation. 0 failures.**
 
-The self-contained quickstart demos above run on a clean checkout of this repository with no dependencies. The full validation suite (1,922 tests) runs against the Regen Engine kernel, which is proprietary (Beta license) and is not included in this public repository. Evaluation access to the suite is available on request (access@continuumport.com).
+The self-contained quickstart demos above run on a clean checkout of this repository with no dependencies. The full validation suite (1,976 tests) runs against the Regen Engine kernel, which is proprietary (Beta license) and is not included in this public repository. Evaluation access to the suite is available on request (access@continuumport.com).
 
-<img width="2946" height="1634" alt="image" src="https://github.com/user-attachments/assets/8d61a01a-0b25-4324-9725-881b54ef8d14" />
+<img width="2973" height="1627" alt="image" src="https://github.com/user-attachments/assets/9f726630-922c-4b83-8f2d-5ffa54cfd86b" />
+
 
 
 The run shown above was produced in the author's Windows environment.
 
-Paper 4 (*Adversarial Execution Governance*) reports on the cumulative corpus as submitted, once Batches 1–12 were complete: 1806 tests. Batch 13 (24 concurrent-pressure tests, C1–C5) and additional tests added since — including coverage from Part III of *AI Architectural Thinking* — bring the current suite total to 1922. These later additions are not yet reflected in Paper 4's reported figure; the current suite total is the authoritative, continuously-verified count.
+Paper 4 (*Adversarial Execution Governance*) reports on the cumulative corpus as submitted, once Batches 1–12 were complete: 1806 tests. Batch 13 (24 concurrent-pressure tests, C1–C5) and additional tests added since — including coverage from Part III of *AI Architectural Thinking*, and the control-effect binding work described below — bring the current suite total to 1976. These later additions are not yet reflected in Paper 4's reported figure; the current suite total is the authoritative, continuously-verified count.
 
 The adversarial corpus was developed across 13 batches with the assistance of Claude (Anthropic), ChatGPT (OpenAI), and Gemini (Google) — in that order of contribution. The validation suite is the primary empirical research artifact of this project.
 
@@ -124,6 +125,10 @@ The validation suite includes:
 - authority laundering (L1–L6)
 - admissibility erosion (E1–E5)
 - concurrent adversarial pressure (C1–C5)
+- control-effect binding (the subject validated for admissibility versus the object whose effects commit)
+- fail-closed ordering (refusal before the actuator, not materialization followed by rollback)
+- audit provenance substitution (a caller's description of intent varying the record of what was performed)
+- commit-boundary enumeration (a second, unasserted implementation of a repaired boundary)
 
 Under enforcement, these attack patterns are blocked by the declared geometry or fail the admissibility check. Finite exhaustion of a test corpus demonstrates coverage of enumerated patterns — it does not establish structural impossibility for categories that extend beyond the formal model (see Scope and limits).
 
