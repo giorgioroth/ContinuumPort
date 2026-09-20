@@ -1,4 +1,4 @@
-# External Repository Snapshots
+# Repository Snapshots and Chronology Anchors
 
 **Status:** Informative evidence record
 **Governance or conformance effect:** None
@@ -177,7 +177,14 @@ The recorded author date is repository data, not independent proof of public
 retrievability at that time. The same limitation stated above for external
 repository timestamps applies here without exception.
 
-An earlier repository, referenced in a GitHub notification dated 2025-11-29, was
-deleted and is not recoverable. The present repository is therefore not a
-continuous history from that date, and this record does not establish when the
-underlying work began.
+An earlier public repository state is evidenced by a GitHub notification dated
+2025-11-29 for commit
+`fa803e27b49560636531eeb88b1e37c91eb469e6` at the same repository path.
+That commit is not reachable from the repository that exists today and could
+not be retrieved during this review. The available evidence does not establish
+whether the earlier repository was deleted and recreated or whether its history
+was replaced by another operation.
+
+The current Git graph therefore does not provide continuous history back to
+that notification, and this record does not establish when the underlying work
+began.
