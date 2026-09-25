@@ -13333,7 +13333,7 @@ Three primitives.
 
 Everything else is a consequence of how they interact.
 
-The public context from which some of the ideas in this book emerged is documented at [Blog](https://gi0rgioroth.blogspot.com/2026/05/three-architectures-one-question_12.html)
+The public provenance of these conversations is documented in *[Three Architectures, One Question](https://gi0rgioroth.blogspot.com/2026/05/three-architectures-one-question_12.html)*, published on 12 May 2026.
 
 ---
 
