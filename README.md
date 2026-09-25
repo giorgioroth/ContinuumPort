@@ -1,8 +1,18 @@
 # ContinuumPort
 
+## Status — September 2026
+
+Public development in this repository is paused as of September 2026. The repository is not abandoned.
+
+Work on the execution kernel continues privately. Its source is not published, and this repository does not track that work.
+
+The published specifications, books and documents reflect their state at the time of their last commit. A private review has since narrowed some claims in them, in particular the definition of compliance in `REGEN-COMPLIANCE-v1.md`. Those revisions are not reflected in the public files. Read each published claim as of the commit that contains it.
+
+---
+
 Your system failed. What does that leave intact?
 
-Most persistent systems cannot guarantee structural integrity under adversarial or partial-failure conditions. ContinuumPort enforces it explicitly — within a declared execution boundary.
+Persistent systems need explicit controls to preserve selected invariants under adversarial or partial-failure conditions. ContinuumPort defines and enforces such invariants within a declared execution boundary. It does not claim universal structural integrity.
 
 ---
 
