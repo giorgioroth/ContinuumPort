@@ -1,164 +1,60 @@
+# CP-START — Proposed Successor to CP-NORM-H01
 
+**Status:** DRAFT — NOT CANONICAL — NOT FROZEN  
+**Identifier:** To be assigned by the human author before adoption.  
 
-# CP-NORM-H01 — Semantic Handoff Initiation (CP-START)
-
-**Status**
-**NORMATIVE — CANONICAL — FROZEN — MACHINE-EXECUTABLE BY DESIGNATED ENGINES**
-
----
-
-> **Normative scope notice**
->
-> *For design rationale and contextual reflections, see the author’s blog.*
-> *This repository contains only normative material.*
->
-> This document defines **normative specifications only**.
-> Design rationale, contextual interpretation, historical motivation, or experiential commentary are **explicitly out of scope** and MUST NOT be used to interpret or extend this specification.
->
-> Any interpretation of CP-NORM-H01 MUST rely exclusively on the normative content contained herein.
+This is a proposed replacement for the CP-START normative text. It does not amend the tagged CP-NORM-H01 release or assert that a successor has been adopted. Any adopted successor requires a new CP-NORM identifier and review of the companion handoff artifact.
 
 ---
 
-## Overview
+## Normative Scope
 
-This document defines a **normative, canonical, and machine-executable mechanism** for initiating semantic handoff across execution contexts within ContinuumPort-compliant systems.
+This document specifies conditions under which a semantic handoff is conforming within ContinuumPort. Rationale, examples, and commentary may explain the choice of boundary but do not create additional normative requirements.
 
-The mechanism defined herein establishes a strict boundary between **semantic continuity of work** and **session-level execution**, without reliance on memory, identity, or relational persistence.
+The requirements concern a handoff of work state. They do not establish continuity of a person, a relationship, or an agent's identity.
 
----
+## Execution Boundary
 
-## Normative Clarification — Executability
+CP-START is a declaration that a handoff is requested and a structure for the state to be handed off. The document and its companion JSON artifact do not, by their presence alone, validate semantic content, stop a running process, export or delete data, resume work, or prevent another application path from acting.
 
-The CP-START schema is **declarative and normative only**.
+An implementation claiming enforced handoff conformance MUST show that the required checks are performed on the path it claims to govern. A designated engine such as Regen may perform those checks, but enforcement MUST NOT be inferred from the existence of a CP-START document or payload.
 
-Execution, validation, enforcement, and correctness of semantic handoff require a **Regen Engine** and **cannot be inferred** from the schema itself.
+## Scope of Conformance
 
-The presence of CP-START defines *what must be done*; how it is executed is explicitly outside the scope of this document.
+Within this proposed norm, a conforming handoff MUST be explicitly initiated with CP-START. A continuation that does not use CP-START is non-conforming to this norm, regardless of whether its output appears useful or familiar.
 
----
+This is a rule for conformance within ContinuumPort. It is not a claim that other methods of transferring work state are impossible or invalid outside this norm.
 
-## Scope
+CP-START describes the handoff boundary. Whether a system actually suspends execution, transfers data, terminates the current context, or resumes in another context depends on its implementation and is outside the guarantee of this document.
 
-This document defines the **single valid mechanism** by which a ContinuumPort-compliant system MAY:
+## Permitted Work State
 
-* interrupt semantic work,
-* suspend execution,
-* transfer semantic state,
-* resume work across agents, sessions, or execution contexts.
+A conforming handoff MUST represent task intent, structured working state, and explicit constraints. The companion handoff artifact separates established decisions from actionable open questions, allows blockers to be absent, and calls for one concrete next action. Whether those fields are complete and truthful is a separate validation question.
 
-This mechanism is referred to as **CP-START**.
+The handoff MUST NOT rely on inferred session memory, account state, or a presumed relationship with the user to reconstruct those fields.
 
-No other handoff mechanism is considered valid within **cp-core**.
+The handoff MUST NOT transport personality, emotional state, autobiographical memory, conversational style, or relationship history as a means of recreating the prior user or agent. A task record may still contain sensitive information. Conformance with this norm does not certify that the record is public, anonymous, or safe to disclose; confidentiality and data minimization require separate controls.
 
----
+Exclusion from the handoff does not imply deletion from its source. This norm specifies no source-data deletion procedure.
 
-## Purpose
+## Explicit Constraints
 
-The purpose of CP-NORM-H01 is to ensure that:
+CP-START MAY carry constraints on the continuation, including working language, discourse mode, output format, and execution posture. Such constraints MUST be expressed in the handoff structure; they MUST NOT be inferred from previous conversations, user identity, or account history.
 
-* semantic continuity is **explicitly initiated**, not inferred;
-* continuity is preserved **without reliance** on memory, identity, or relational persistence;
-* any transfer of work state remains **portable, inspectable, and bounded**;
-* interruption is treated as a **first-class operation**, not as failure or loss.
-
----
-
-## Normative Statement
-
-A ContinuumPort-compliant system **MUST** initiate any semantic handoff **exclusively** through the CP-START procedure as defined in this document.
-
-Any attempt to resume, continue, or reconstruct semantic work **without CP-START** is **NON-COMPLIANT**, regardless of apparent functional success.
-
----
-
-## Constraint Semantics
-
-CP-START **MAY** impose explicit semantic constraints governing agent behavior **without introducing** identity, memory, or relational continuity.
-
-Such constraints are treated as **structural parameters of the work**, not as user preferences or conversational context.
-
-Constraint semantics MAY include, but are not limited to:
-
-* Language invariance (e.g., fixed working language);
-* Discourse mode (e.g., non-conversational, non-explanatory);
-* Output restrictions (e.g., JSON-only, no meta-commentary);
-* Execution posture (e.g., extract-and-handoff, terminate-after-export).
-
-These constraints:
-
-* **MUST NOT** be inferred from prior interaction;
-* **MUST NOT** rely on user identity, account state, or session memory;
-* **MUST** be honored solely because they are present in the CP-START structure.
-
-This establishes that behavioral consistency can be achieved **through semantic structure alone**, independent of login state, conversational history, or relational continuity.
-
----
-
-## Position Within cp-core
-
-CP-NORM-H01 is a **core normative component** of **cp-core**.
-
-Without CP-NORM-H01:
-
-* continuity collapses into implicit memory;
-* agent behavior becomes relational or heuristic;
-* semantic reconstruction becomes ambiguous;
-* ContinuumPort invariants cannot be enforced.
-
-Therefore:
-
-> **CP-NORM-H01 defines the only valid boundary between semantic continuity and session execution.**
-
----
-
-## Normative Non-Goals (CP-START)
-
-CP-START defines **only** the conditions under which semantic work may be explicitly handed off across execution contexts.
-
-It does **NOT** define or enable:
-
-* preservation of user identity, personality, or emotional state;
-* conversational or relational continuity;
-* persistent agents, assistants, or interlocutors;
-* reconstruction of presence or lived context;
-* accumulation or replay of session history.
-
-CP-START preserves **only**:
-
-* task intent;
-* structured working state;
-* explicit semantic constraints.
-
-Any interpretation of CP-START as a memory system, digital identity carrier, or presence-preserving mechanism constitutes a **category error** and is **NON-COMPLIANT** with cp-core.
-
-> **Continuity of work MUST NOT be confused with continuity of being.**
-
----
+An implementation claiming to enforce those constraints MUST demonstrate the behavior at its declared execution boundary. The presence of a constraint in a payload is a requirement on a conforming implementation, not evidence that every model or application will follow it.
 
 ## Non-Goals
 
-CP-NORM-H01 does **NOT** define:
+This norm does not define model internals, user interfaces, storage, authentication, confidentiality, deletion, execution architecture, or application-wide mediation. It does not certify that every effect in an application passes through a particular gate.
 
-* how agents are implemented;
-* how models reason internally;
-* how long execution lasts;
-* how outputs are displayed;
-* how users interact with interfaces.
+It does not prohibit informal or personal interaction outside the handoff. It limits the content and authority that may be attributed to a conforming transfer of work state.
 
-It defines **only** the conditions under which semantic work may be safely and correctly handed off.
+## Status of Claims
 
----
+The normative rules define what a conforming handoff must satisfy. Whether a particular implementation satisfies them requires inspection and tests of that implementation, including the paths on which a handoff can be bypassed. A schema or a successful conversational continuation alone does not establish that result.
 
-## Provenance
+Continuity of work MUST NOT be presented as continuity of a person.
 
-ContinuumPort is developed through a **human-led, model-assisted iterative process**.
+## Provenance and Adoption
 
-All normative decisions, scope delimitations, and final formulations are established by the **human author(s)**.
-
-Language models are used as **non-persistent tools** for exploration, drafting, stress-testing, and semantic compression. They do not retain memory across sessions, do not possess authorship, and do not hold agency over the resulting work.
-
-Continuity within the project is achieved exclusively through **explicit, versioned artifacts and schemas**.
-No conversational history, identity, emotional state, or relational context is preserved or transferred.
-
-Each normative document represents a **stable semantic checkpoint** and MAY be continued, revised, or forked **solely through explicit human action**.
-
+The human author decides whether to adopt a successor norm and assigns its identifier. Model-assisted drafting does not confer normative authority on this proposal. Until adoption, the tagged CP-NORM-H01 release remains the published frozen reference for that identifier.
