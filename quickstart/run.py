@@ -4,7 +4,7 @@ Run: python run.py
 
 Shows the compliance interface in action:
   - a faulty implementation that violates execution invariants
-  - the Regen Engine reference implementation that enforces them
+  - a minimal reference adapter that enforces them (not the Regen Engine)
 
 No internals exposed. Only observable behavior tested.
 """
