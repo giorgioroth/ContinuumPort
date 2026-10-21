@@ -10,27 +10,36 @@ prove the plan is right, or that he had the right to change it.
 In this analogy, CP-Core is the portable file within ContinuumPort. Regen
 Engine is the execution gate that checks whether the work may proceed.
 
-## Status — September 2026
+## Status — documentation updated 21 October 2026
 
-Public development in this repository is paused as of September 2026. The repository is not abandoned.
+Public source development in this repository remains paused as of September
+2026. Work on the execution kernel continues privately; its source is not
+published, and this repository does not track that work.
 
-Work on the execution kernel continues privately. Its source is not published, and this repository does not track that work.
+Published specifications, books and documents retain their own dates and
+declared status. This documentation update aligns this README and
+[Where Regen Engine Belongs](https://github.com/giorgioroth/ContinuumPort/blob/main/5.%20WHERE_REGEN_ENGINE_BELONGS.md)
+with the bounded evidence summarized there. It is not a kernel release or a
+repository-wide revision of the specifications. Private review has also
+narrowed claims in other documents, including the definition of compliance
+in `REGEN-COMPLIANCE-v1.md`; those files retain their own scope and status.
 
-The published specifications, books and documents reflect their state at the time of their last commit. A private review has since narrowed some claims in them, in particular the definition of compliance in `REGEN-COMPLIANCE-v1.md`. Those revisions are not reflected in the public files. Read each published claim as of the commit that contains it.
+**Practical comparative advantage is not established.** Reported local
+comparisons support specific observations, not general implementation
+conformance, application-wide protection or a commercial valuation. A useful
+advantage could be additional protection or comparable protection with lower
+total integration, verification and maintenance cost.
 
 The public quickstart demonstrates checks against a declared geometry and
 restoration of managed state after a failed sequence. The private kernel has
-been tested on transitions that enter its declared boundary. It has not been
-shown that every effect in an application reaches that boundary, and this
-does not promise reversal of external effects. The published model does not
-establish governance over replacing one accepted geometry with another;
-that remains an open research problem in the public record.
+been tested on transitions entering its evaluated boundary. It has not been
+shown that every effect in an application reaches that boundary; restoration
+of managed state does not promise reversal of external effects.
 
----
-
-Your system failed. What does that leave intact?
-
-Persistent systems need explicit controls to preserve selected invariants under adversarial or partial-failure conditions. ContinuumPort defines the constrained execution model; the private Regen Engine enforces declared constraints on transitions that reach its boundary. This does not establish application-wide enforcement or universal structural integrity.
+The published model does not establish general governance over replacing one
+accepted geometry with another. Reported private GS observations do not
+ratify a new public succession contract or establish an advantage over a
+conventional solution to that problem.
 
 ---
 
@@ -40,7 +49,9 @@ In persistent systems, execution fails mid-sequence. When it does, the state may
 
 Reactive recovery — rollback, retry, or compensation — addresses failures after execution has begun. For non-invertible transitions or externally visible side effects, restoration cannot be guaranteed.
 
-ContinuumPort addresses this at the execution layer: invalid sequences are excluded from the admissible execution space before any state is committed.
+The formal model describes admissible execution sequences under declared
+constraints. Establishing that an implementation and a complete application
+enforce the modeled boundary requires separate evidence.
 
 ---
 
@@ -88,31 +99,46 @@ Incomplete geometry → authorized=True  → budget=-50
 Complete geometry   → authorized=False → BLOCKED
 ```
 
-The engine does not decide what is safe. The declared geometry does.
+These demos exercise declared constraints. Neither a successful check nor
+the declaration itself certifies that the permitted action is safe in the
+real world. The public demo adapter is not the private Regen Engine.
 
 **Domain integrity**
 
-The system does not reject the action. The action does not exist.
-
-Invalid input is structurally inadmissible — it never enters the execution domain.
+In the formal model, an out-of-domain action is excluded from the admissible
+execution space. That model statement does not establish that arbitrary
+application code cannot reach an effect outside the implemented boundary.
 
 ---
 
 ## Invariants and their enforcement basis
 
-The five invariants do not have the same epistemic status. The distinction matters.
+The five invariants do not have the same evidentiary status. The I1-I5 labels
+below belong to this README's invariant table; they should not be used to
+identify unrelated properties carrying the same numbers elsewhere.
 
-| Property | Enforcement basis |
-|---|---|
-| I1 — No unauthorized execution | Formally demonstrated: authority gate is a necessary condition in GF(S); no admissible sequence bypasses it. Full proof: [Trajectory Integrity in Persistent AI Systems](https://doi.org/10.17605/OSF.IO/B8SGR), §3–§5 |
-| I2 — No out-of-domain execution | Formally demonstrated: domain boundary is encoded in the geometry; out-of-domain input has no image in the execution space. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), §3–§5 |
-| I3 — No invalid state transition | Formally demonstrated: geometry constraints are enforced before commitment; violating transitions are inadmissible by construction. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1 |
-| I4 — No partial state escape | Formally demonstrated within the declared execution boundary: atomic commit/rollback prevents intermediate managed state from escaping under the stated adapter assumptions. This does not cover external effects. Full proof: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1, Corollary 5.4 |
-| I5 — Deterministic outcome | Exercised empirically by the subset of the suite that tests it directly: repeated execution of the same configuration and sequence, compared for identical final state, with negative controls. Other tests document limitations or exercise other properties; a suite total would not be a count of evidence for I5. The audit replay mechanism is assumed by construction: no test independently verifies replay determinism across adapter implementations |
+The published formal basis cited below is
+[*Trajectory Integrity in Persistent AI Systems*](https://doi.org/10.17605/OSF.IO/B8SGR).
+The associated [model limits](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/EXECUTION_MODEL_LIMITS.md)
+exclude concurrent/distributed execution (Section 2.4) and Byzantine or
+adversarial environments (Section 2.6). Adapter compliance is assumed and is
+not verified by the model (Section 2.9). The table records that published
+basis; this documentation update does not independently re-verify the proofs.
 
-Within the declared boundary and adapter assumptions, violations of I1–I4 are structurally inadmissible: they do not reach execution. Recorded tests exercise I5 under their stated conditions; the audit replay assumption is documented in the invariant table above. A passing suite establishes that the cases written were satisfied under the conditions run. It does not establish that the corpus covers the claim set, which is a separate assumption.
+| Property | Published basis and scope |
+| --- | --- |
+| I1 — No unauthorized execution | Model-level claim: authority is required for admissibility under the stated assumptions. Cited formal basis: [Trajectory Integrity in Persistent AI Systems](https://doi.org/10.17605/OSF.IO/B8SGR), Sections 3-5. This is not a proof of application-wide path closure. |
+| I2 — No out-of-domain execution | Model-level claim: the declared domain bounds the admissible execution space. Cited formal basis: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Sections 3-5. Implementation and integration enforcement require separate evidence. |
+| I3 — No invalid state transition | Model-level claim: admissible transitions satisfy the declared constraints. Cited formal basis: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1, under its stated assumptions. |
+| I4 — No partial state escape | Model-level claim within the declared internal-state boundary and adapter assumptions. Cited formal basis: [same source](https://doi.org/10.17605/OSF.IO/B8SGR), Theorem 5.1 and Corollary 5.4. This does not establish rollback of external effects. |
+| I5 — Deterministic outcome | Exercised empirically by the subset of the suite that tests it directly: repeated execution of the same configuration and sequence, compared for identical final state, with negative controls. Other tests document limitations or exercise other properties; a suite total would not be a count of evidence for I5. The audit replay mechanism is assumed by construction: no test independently verifies replay determinism across adapter implementations. |
 
-This is not a convention. It is enforcement — **within the declared execution boundary, by a compliant adapter enforcing the compliance interface below.** An adapter that either fails to implement that interface, or bypasses it, is outside this guarantee entirely; enforcement applies to compliant adapters, not to arbitrary code. The FaultyAdapter demos above show what enforcement looks like when the boundary condition is not met.
+The model results are conditional on their declared boundary and assumptions.
+Concurrency and adversarial implementation probes are empirical evidence
+under their own conditions; they do not extend these formal results. Recorded
+tests exercise I5 as described in the table. A passing suite establishes that
+the written cases were satisfied in the recorded run, not that the cases
+cover every claim or that an arbitrary adapter satisfies the contract.
 
 ---
 
@@ -128,7 +154,30 @@ The screenshot above records a historical run in the author's Windows environmen
 
 Paper 4 (*Adversarial Execution Governance*) reported a historical cumulative corpus of 1,806 tests at submission, after Batches 1–12. A subsequent historical result and its provenance limits are recorded in the private evidence ledger `CP-EVIDENCE-001`, revision 0.5.4, entry `EV-KERNEL-SUITE-001` (reviewed 21 September 2026 UTC). That is the ledger's review date, not an established execution date; the entry also lacks the executed build and suite revision. The canonical ledger is maintained privately and is not synchronized with the historical GitHub copy. It is available on request at access@continuumport.com. This README does not assert a current suite total.
 
+A later maintainer-supplied record reports the following run on **17 October
+2026**, Windows, Python 3.14.4 and pytest 9.0.2:
+
+| Evidence class | Reported result |
+| --- | --- |
+| Existing regression suite | 2,077 test instances and 31 subtests passed |
+| GS property suite | 20 tests passed |
+| Matched injected-fault controls | 15/15 reported assertion failures, with zero test errors |
+
+These are distinct evidence classes, not a combined guarantee count. The
+15 controls are matched to known tests; five GS cases have no corresponding
+fault in that set. The results are reported from private records and were
+not rerun for this README update. They neither date the historical screenshot
+nor establish application-wide protection. See
+[Where Regen Engine Belongs, Section 4](https://github.com/giorgioroth/ContinuumPort/blob/main/5.%20WHERE_REGEN_ENGINE_BELONGS.md#4-reported-verification-record)
+for provenance and sensitivity limits, and Section 5 for the separate
+comparisons, including the reported 30/30 request-binding executions on each
+variant. No difference was observed on that declared comparison set; general
+equivalence and practical advantage remain unestablished.
+
 The adversarial corpus was developed across 13 batches with the assistance of Claude (Anthropic), ChatGPT (OpenAI), and Gemini (Google) — in that order of contribution. The validation suite is the primary empirical research artifact of this project.
+
+Model-family names alone do not establish review independence; roles, prior
+exposure, reused cases and reproduction scope must be recorded separately.
 
 The validation suite includes:
 
@@ -192,32 +241,43 @@ Execution (atomic)
 Commit / Rollback
 ```
 
-ContinuumPort defines the constrained execution model. Regen Engine enforces it.
+The diagram describes the intended governed path. The private implementation
+is evaluated for selected behaviors on that path; the diagram does not prove
+that all effect-capable application paths pass through it.
 
-Formal model: GF(S) — the maximal prefix-closed, failure-free execution space. Only sequences inside GF(S) are admissible for execution. Corrupted states are structurally inadmissible, not merely detected after the fact.
+Formal model: GF(S) — the maximal prefix-closed, failure-free execution space.
+Only sequences inside GF(S) are admissible in the specified model. These
+formal definitions are distinct from proving that a concrete implementation
+and its integration preserve the modeled properties.
 
 ---
 
 ## Why "Execution-Governance Kernel"
 
-**This guarantee holds for an adapter implementing the compliance interface below correctly ("compliant"). An adapter that does not implement it, or that bypasses it, is outside this guarantee — there is no enforcement over code that never enters through the kernel.** Within that boundary, the Regen Engine functions as an execution-governance kernel: governed state-affecting transitions submitted by a compliant adapter must pass through it.
+The name describes the intended role of a commit boundary: checking a
+prepared transition against the applicable authority, state and declared
+constraints before permitting its governed effects. Refusal before an effect
+is different from restoring managed state after that effect has occurred.
 
-This is not middleware. It is not a validator that can be disabled. It is not a hook that can be skipped.
+**Correct routing and adapter compliance are integration preconditions.**
+Defining a compliant adapter as one that routes through the kernel does not
+prove that a deployed adapter is compliant or that no other effect path
+exists. The evaluated setting trusts the host, implementation, adapters,
+keys, authority store and instrumentation. Its local gate is not a
+demonstrated isolation boundary against arbitrary code in that host.
 
-The distinction matters:
+Reported local tests exercise particular checks and refusal paths. They do
+not establish universal fail-closed behavior, complete mediation of an
+application, or general implementation conformance. The April preprint's
+broader non-bypassability claim must be read with the correction recorded in
+[*Evidence That Does Not Reach the Claim*](https://ssrn.com/abstract=7295418);
+the [April preprint](https://ssrn.com/abstract=6533358) remains a historical
+record, not replacement evidence for the withdrawn support.
 
-- **Non-bypassable execution governance** — a compliant adapter routes its governed state-affecting transitions through the enforcement layer. It does not provide an alternative path for those transitions.
-- **Centralized admissibility enforcement** — governed transitions entering that boundary are evaluated against the declared geometry before commitment. Authority, invariants, and epistemic state are checked at that point.
-- **Invariant-preserving state transitions** — the system does not detect violations after the fact. Transitions that would violate declared invariants are structurally inadmissible. They do not execute.
-- **Fail-closed execution semantics** — under uncertainty, divergence, or insufficient data, the system halts. It does not degrade gracefully into permissive behavior. It stops.
-
-Non-bypassability here is a property of the compliant path, defined by the interface. It has not been shown that every effect in a deployed application takes that path; see the status note above.
-
-Loggers can be bypassed. Validators can be disabled. Middleware can be removed.
-
-A compliant adapter cannot route around an execution-governance kernel. Every transition from a compliant adapter passes through it, or the transition does not occur.
-
-This mandatory check within the compliant path distinguishes the Regen Engine from advisory systems, monitoring layers, or behavioral guardrails. Whether a deployed application has any effect path outside it remains a separate question.
+The practical selection question is whether Regen prevents a relevant
+failure, or reduces the total work needed to prevent it, compared with
+competent existing controls under comparable trust assumptions. The name
+"kernel" does not answer that question.
 
 ---
 
@@ -260,13 +320,17 @@ The numbered documents at the repository root are meant to be read in order:
 4. [Roadmap](https://github.com/giorgioroth/ContinuumPort/blob/main/4.%20Roadmap.md) — where the project is going
 5. [WHERE_REGEN_ENGINE_BELONGS](https://github.com/giorgioroth/ContinuumPort/blob/main/5.%20WHERE_REGEN_ENGINE_BELONGS.md) — where it applies, and where it does not
 
-Documents 1–4 are normative or contractual. Document 5 is non-normative positioning; where it and the license differ, the license governs.
+Documents 1–4 address status, design, licensing and roadmap. Their declared
+authority and scope must be read in the documents themselves; their position
+in this list grants no authority. Document 5 is informative positioning and
+grants no rights or conformance status. Applicable license terms and separate
+governing agreements control licensed use.
 
 ---
 
 [![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](LICENSE) 
 [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/3.%20LICENSE_REGEN.md) 
-[![Status](https://img.shields.io/badge/status-normative-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md) 
+[![Status](https://img.shields.io/badge/status-research%20artifact-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md) 
 
 
 ---
@@ -282,6 +346,15 @@ Documents 1–4 are normative or contractual. Document 5 is non-normative positi
 - [continuumport.com](https://continuumport.com/)
 
 ---
+
+## Documentation change record
+
+- **21 October 2026.** Clarified formal-model assumptions and the distinction
+  between a compliant path and demonstrated application-wide mediation.
+  Added the dated, maintainer-reported 17 October counts without replacing
+  historical records; linked the current positioning document and the April
+  claim's self-audit. This is a documentation change, not a kernel release,
+  test rerun, license amendment or ratification of a new specification.
 
 *Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026*
 
