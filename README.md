@@ -1,5 +1,17 @@
 # ContinuumPort
 
+## Latest progress — 26 October 2026
+
+- **Two new private chapters:** Chapter 63 — *From Passing Tests to a Reason for Adoption*; Chapter 64 — *What the Test Actually Establishes*.
+- **Implementation and checks:** reconciliation preserves direct revocations in the tested cases; 20 additional tests cover evaluator behavior and selected GS and legacy execution cases.
+- **Latest recorded Windows run — 25 October:** **2,097 tests and 31 subtests passed**, including those 20 additional tests.
+
+These are maintainer-reported results from private, AI-assisted work, not an independent audit. The public manuscript remains at 62 chapters; the kernel source and complete evidence archives remain private.
+
+[Read the full development update and evidence limits](#private-development-update--26-october-2026).
+
+---
+
 Imagine renovating a house with a builder. The plan, what has been done, and
 what comes next live in a file, so another builder can continue if the first
 one leaves. If the builder wants to knock down a wall or spend money, a note
@@ -10,16 +22,17 @@ prove the plan is right, or that he had the right to change it.
 In this analogy, CP-Core is the portable file within ContinuumPort. Regen
 Engine is the execution gate that checks whether the work may proceed.
 
-## Status — documentation updated 21 October 2026
+## Status — documentation updated 26 October 2026
 
 Public source development in this repository remains paused as of September
 2026. Work on the execution kernel continues privately; its source is not
-published, and this repository does not track that work.
+published, and this repository does not track its source revisions.
 
 Published specifications, books and documents retain their own dates and
-declared status. This documentation update aligns this README and
+declared status. The 21 October documentation update aligned this README and
 [Where Regen Engine Belongs](https://github.com/giorgioroth/ContinuumPort/blob/main/5.%20WHERE_REGEN_ENGINE_BELONGS.md)
-with the bounded evidence summarized there. It is not a kernel release or a
+with the bounded evidence summarized there. The 26 October update adds the
+private development summary below. Neither update is a kernel release or a
 repository-wide revision of the specifications. Private review has also
 narrowed claims in other documents, including the definition of compliance
 in `REGEN-COMPLIANCE-v1.md`; those files retain their own scope and status.
@@ -40,6 +53,30 @@ The published model does not establish general governance over replacing one
 accepted geometry with another. Reported private GS observations do not
 ratify a new public succession contract or establish an advantage over a
 conventional solution to that problem.
+
+---
+
+## Private development update — 26 October 2026
+
+Work continues privately on the manuscript, execution kernel and evaluation tools.
+
+**Two additional chapters have been written for the private continuation of AI Architectural Thinking:**
+
+- **Chapter 63 — From Passing Tests to a Reason for Adoption:** examines what evidence would justify adopting Regen over a conventional implementation.
+- **Chapter 64 — What the Test Actually Establishes:** examines evaluator reliability, positive controls and the conclusions supported by a passing test.
+
+Both chapters are informative and introduce no normative changes. The public manuscript remains at 62 chapters.
+
+**Implementation and verification progress includes:**
+
+- In the tested direct-revocation cases, reconciliation leaves the revocation in force. Removing its direct cause requires an explicit grant accepted by a configured granting authority; other access conditions still apply.
+- Twenty additional automated tests covering evaluator behavior and selected GS and legacy execution cases, including detection of no-op implementations, misleading success reports and test errors mistaken for fault detection.
+- A maintainer-recorded Windows run on **25 October 2026** reporting **2,097 tests and 31 subtests passed**, including those twenty additional tests.
+- Separate GS phases reporting **20 property tests passed** and **15 test–mutant pairs producing the expected assertion failures**, with zero test errors.
+
+The suite includes both regression checks and tests documenting known limitations. These private, AI-assisted results establish outcomes for the exercised cases; they do not establish an independent audit, general implementation conformance or comparative advantage. Work on the formalization and its scope remains under review.
+
+The kernel source, detailed implementation materials and complete evidence archives remain private. This update does not change the public specifications or announce a kernel release.
 
 ---
 
@@ -152,7 +189,7 @@ The self-contained quickstart demos above run on a clean checkout of this reposi
 
 The screenshot above records a historical run in the author's Windows environment. It is not a current suite total; its execution date and source revision are not established by this README.
 
-Paper 4 (*Adversarial Execution Governance*) reported a historical cumulative corpus of 1,806 tests at submission, after Batches 1–12. A subsequent historical result and its provenance limits are recorded in the private evidence ledger `CP-EVIDENCE-001`, revision 0.5.4, entry `EV-KERNEL-SUITE-001` (reviewed 21 September 2026 UTC). That is the ledger's review date, not an established execution date; the entry also lacks the executed build and suite revision. The canonical ledger is maintained privately and is not synchronized with the historical GitHub copy. It is available on request at access@continuumport.com. This README does not assert a current suite total.
+Paper 4 (*Adversarial Execution Governance*) reported a historical cumulative corpus of 1,806 tests at submission, after Batches 1–12. A subsequent historical result and its provenance limits are recorded in the private evidence ledger `CP-EVIDENCE-001`, revision 0.5.4, entry `EV-KERNEL-SUITE-001` (reviewed 21 September 2026 UTC). That is the ledger's review date, not an established execution date; the entry also lacks the executed build and suite revision. The canonical ledger is maintained privately and is not synchronized with the historical GitHub copy. It is available on request at access@continuumport.com. These historical entries do not establish a current suite total; see the dated private development update above for the separate 25 October record.
 
 A later maintainer-supplied record reports the following run on **17 October
 2026**, Windows, Python 3.14.4 and pytest 9.0.2:
@@ -349,6 +386,13 @@ governing agreements control licensed use.
 
 ## Documentation change record
 
+- **26 October 2026.** Added a private development summary covering Chapters
+  63 and 64, tested direct-revocation behavior and the maintainer-reported
+  25 October results. Distinguished regression checks from tests documenting
+  known limitations. Preserved the 17 October results as a historical
+  record. No private source or evidence archive is published by this update;
+  it makes no normative, licensing or kernel-release change.
+
 - **21 October 2026.** Clarified formal-model assumptions and the distinction
   between a compliant path and demonstrated application-wide mediation.
   Added the dated, maintainer-reported 17 October counts without replacing
@@ -359,3 +403,4 @@ governing agreements control licensed use.
 *Gh. Rotaru (Giorgio Roth) — Independent researcher, 2026*
 
 contact: access@continuumport.com
+
