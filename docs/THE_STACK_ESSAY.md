@@ -1,5 +1,7 @@
 # **The Stack Problem: Why ContinuumPort Isn't Building Altered Carbon's Memory System**
 
+> **Author’s note — 20 November 2026.** I still stand by the design choice I made in 2025: a successor should be able to continue the work without having to impersonate the person who did it. The essay went further than that choice warrants. Preserving a record does not, by itself, establish that the same person or the same subjective experience continues. The percentages in Section VI were not measured. I do not claim that this is the only ethical design, or that limiting a handoff to work-related information guarantees privacy or legal compliance.
+
 *A manifesto on semantic continuity, ethical boundaries, and why some science fiction warnings should stay warnings*
 
 ---
