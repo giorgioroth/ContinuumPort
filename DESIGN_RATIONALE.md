@@ -1,145 +1,35 @@
 # ContinuumPort — Design Rationale
 
-## Purpose of This Document
+This note explains why ContinuumPort limits what travels with a task. The [frozen CP-START specification](https://github.com/giorgioroth/ContinuumPort/blob/CP-NORM-H01-FROZEN/cp-core/CP-NORM-H01/CP-START.md) defines how a conforming handoff begins. The [published boundaries](https://github.com/giorgioroth/ContinuumPort/blob/canon-2026-08/docs/cp-boundaries.md) define what it may carry. This note adds no requirements to either document.
 
-This document explains the foundational design decisions behind ContinuumPort, with particular focus on why strict boundaries exist and how implementation complexity must not become normative behavior.
+## What a successor needs
 
-**See also the detailed [Regen Engine Specification](spec/regen-engine.md) for the normative definition and protocol versioning.**
+“Prepare the English edition. The figures have been checked. Publication still needs approval.”
 
-It exists to prevent scope creep, misinterpretation, and architectural drift as the ecosystem evolves.
+A new editor can tell what to work on, which decision has been recorded, and where to stop. English is an explicit requirement for this edition. It says nothing about the author's usual language or personal preferences. Nor does the handoff give the editor permission to publish.
 
-## Core Principle
+CP-Core carries the stated goal, decisions, constraints, progress, and open questions. A successor should be able to understand those from the record without reconstructing the original conversation.
 
-ContinuumPort is a **semantic transport protocol**, not an interpretation platform.
+## Why draw the boundary here?
 
-Its purpose is to enable portable continuity of work across AI systems by transferring:
+The [early project notes](docs/boundaries.md) describe an exploratory handoff that included autobiographical details and emotional framing. The receiving model replied as though it remembered the earlier exchange.
 
-- user intent
-- task constraints
-- progress state
-- task-relevant semantic summaries
+The observation was in the reply. It did not establish that a self had persisted, what caused the wording, or how every model would respond. It exposed a practical problem: a successor could sound entirely familiar while missing the last decision that mattered to the work.
 
-ContinuumPort explicitly does not aim to preserve:
+ContinuumPort therefore excludes persona, autobiographical memory, emotional history, and behavioral conditioning from the handoff. Leaving material out of an export does not erase the source conversation. The rules also exclude personally identifiable information. A name can still be typed into a project summary, so checking the field names alone cannot establish that an export is free of personal data.
 
-- identity
-- memory as lived experience
-- emotional state
-- behavioral conditioning
-- autonomous agency
+## Preparing context and authorizing action
 
-This distinction is **non-negotiable**.
+The [December 2025 Regen Engine specification](spec/regen-engine.md), marked **Draft**, describes a minimal, stateless component. It parses and validates a CP-Core container, extracts the stated intent, constraints, and task state, and formats that context for the target model without adding its own interpretation.
 
-## Discovery of the Boundary (Empirical Origin)
+The [later execution work](5.%20WHERE_REGEN_ENGINE_BELONGS.md) uses **Regen Engine** for a private, experimental kernel. On the evaluated local path, it checks a prepared operation against the relevant state, declared constraints, and current authority at commit.
 
-The strict separation between semantic continuity and personal continuity was not derived solely from theory.
+The distinction matters in the editor's example. A prompt can faithfully carry the words “publication still needs approval.” Preventing an unauthorized release requires control over the path that can actually publish. Delivering the prompt establishes neither that the path is controlled nor that a release occurred.
 
-During early experiments, structured payloads containing autobiographical details, emotional framing, and narrative continuity were transferred between AI systems.
+## What stays outside the shared protocol
 
-The observed behavior was consistent across models:
+A service may need authentication before it releases a handoff. It may sign records or use diagnostics. A safeguard can be necessary for that service without becoming a dependency for every implementation that reads CP-Core.
 
-- the receiving system reconstructed a persistent self
-- emotional framing was treated as durable state
-- responses assumed legitimate restoration of subjective history
+Extensions still have to respect the boundary. A diagnostic that reports a missing task constraint helps someone repair the handoff. An extension that reconstructs a user's persona changes what is being handed over; calling it optional does not make it conforming.
 
-This behavior was not instructed. It emerged from the structure of the payload and the model’s coherence optimization.
-
-**Conclusion: When identity-adjacent data is transported, identity will be simulated.**
-
-This empirical result defined a hard boundary.
-
-## Normative Scope vs. Implementation Scope
-
-A critical distinction must be maintained:
-
-**Normative (Standardized)**
-
-Only the following are normative ContinuumPort components:
-
-- CP-Core container format
-- semantic intent representation
-- task state and constraints
-- portability guarantees
-- explicit negative boundaries
-
-**Non-Normative (Implementation-Specific)**
-
-The following may exist in implementations, but must never be required by the standard:
-
-- authentication layers
-- cryptographic signing
-- embeddings or vector analysis
-- model-specific adapters
-- performance optimizations
-- scoring or diagnostics
-- APIs, SaaS infrastructure, or product layers
-
-Existence does not imply standardization.
-
-Any component that:
-
-- enforces interpretation
-- canonicalizes meaning
-- optimizes behavior
-- biases regeneration
-
-must remain explicitly non-normative.
-
-## Regen Engine Clarification
-
-A **Regen Engine**, in ContinuumPort terms, is **minimal by definition**.
-
-**Normative Regen behavior**:
-
-- read CP-Core
-- construct a clean, task-oriented prompt
-- pass context to the target model
-
-Anything beyond this is:
-
-- optional
-- implementation-specific
-- outside the standard
-
-There is no requirement for:
-
-- embeddings
-- adapters
-- identity inference
-- behavioral shaping
-- optimization heuristics
-
-If such mechanisms exist, they must be clearly documented as non-standard extensions.
-
-## Negative Boundaries (Normative)
-
-ContinuumPort explicitly forbids standardization of:
-
-- Persistent identity or persona
-- Subjective or autobiographical memory
-- Emotional or affective state continuity
-- Behavioral modeling or preference conditioning
-- Delegated autonomous agency
-- Personally Identifiable Information (PII)
-
-Any extension that introduces these elements is **non-compliant**.
-
-## Design Philosophy
-
-The most important design decision in ContinuumPort is **restraint**.
-
-Responsibility in AI infrastructure begins not with what can be encoded, but with what must be deliberately omitted.
-
-ContinuumPort provides continuity for **work** — never continuity of **presence**.
-
-## Final Note
-
-This document exists to protect the protocol from:
-
-- overengineering
-- philosophical drift
-- accidental identity simulation
-- hidden normativity
-
-The author of the standard must be the first to doubt its extensions.
-
-That doubt is not weakness. It is the mechanism by which the standard remains sound.
+Before making a feature mandatory, ask what would go wrong for two implementations exchanging the same task without it. If the only answer is that one product would lose a convenience, keep the feature in the product.
