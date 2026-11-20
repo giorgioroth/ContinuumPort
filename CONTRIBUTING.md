@@ -10,8 +10,8 @@ By contributing, you help us build a "Semantic RAW" format that ensures human so
 
 All contributions must respect the deliberate exclusions defined in [`docs/boundaries.md`](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/boundaries.md). We operate under a strict **Non-Anthropomorphic Constraint**:
 
-* **We standardize the Task (The Stack).**
-* **We never standardize the Persona (The Sleeve).**
+* **We standardize the Task.**
+* **We never standardize the Persona.**
 
 For a deep dive into this distinction, see [`docs/THE_STACK_ESSAY.md`](https://github.com/giorgioroth/ContinuumPort/blob/main/docs/THE_STACK_ESSAY.md).
 
