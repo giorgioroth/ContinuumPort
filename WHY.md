@@ -1,149 +1,37 @@
 # WHY
 
-Most AI systems do not break.
+A system can drift without breaking.
 
-They drift.
+You edit a file and press **Commit changes**. The connection drops before a reply reaches you.
 
----
+The server may have saved your edit. It may never have received it. From your side, both cases look the same.
 
-A task starts with a clear direction.
+“No confirmation arrived” is an accurate record. “Nothing changed” says more than you know. So does “the edit is live.”
 
-Intent is defined.
-Constraints exist.
-Decisions are made.
-
-Everything looks correct.
+The missing reply is not yet drift. Drift begins when someone treats a guess as settled and builds the next step on it.
 
 ---
 
-Then the system moves.
+More memory can preserve the request, the discussion, and the reasons for the edit. Reading them again will not tell you whether the commit landed. Checking the repository can.
 
-One step succeeds.
-Another partially fails.
-
-Nothing catastrophic.
-
-So the system continues.
+Until then, other work can continue. The step that depends on the edit being live should wait for evidence that it is.
 
 ---
 
-State is updated.
+ContinuumPort separates two things that are easy to confuse when work passes from one session or person to another.
 
-But reality is no longer aligned with it.
+**CP-Core carries the state of the work:** the goal, the decisions already made, the constraints that still apply, and the questions left open. A successor can pick up the task without having to impersonate the person who left it.
 
----
+**Regen Engine checks whether a proposed action may proceed** on the execution paths it governs, under the declared constraints and current authority. A handoff can record that publication was approved yesterday. That record alone does not authorize publication today.
 
-From that moment on:
+The [execution model](docs/EXECUTION_MODEL_LIMITS.md) draws a specific boundary: under its stated assumptions, a failed sequence leaves no partially committed change in the internal state it governs. Restoring that state cannot take back a message that has already reached its recipient.
 
-Every next step compounds the error.
-
----
-
-This is not a bug.
-
-It is structural.
+A permitted step can still serve the wrong goal. A project can follow every rule and never finish.
 
 ---
 
-Most systems accept partial truth.
+**What did the last step actually change?**
 
-They allow:
+**What gives us permission to take the next one?**
 
-• incomplete execution
-• silent failure
-• inconsistent state
-
-And they move forward anyway.
-
----
-
-Over time:
-
-Intent is reinterpreted.
-Constraints weaken.
-Decisions lose authority.
-
-The system still runs.
-
-But it is no longer doing what it was meant to do.
-
----
-
-This is drift.
-
----
-
-Adding more memory does not solve it.
-
-Adding more context does not solve it.
-
-Adding more intelligence does not solve it.
-
----
-
-Because the problem is not knowledge.
-
-It is control.
-
----
-
-Continuity is not about remembering more.
-
-It is about allowing less.
-
----
-
-A system that can continue must be constrained.
-
-A system that can act must be limited.
-
-A system that updates state
-must prove that reality changed.
-
----
-
-Otherwise:
-
-It accumulates error
-while appearing correct
-
----
-
-ContinuumPort exists for this reason.
-
----
-
-To ensure that:
-
-What is accepted as real
-is actually real.
-
----
-
-To ensure that:
-
-If execution fails,
-nothing changes.
-
----
-
-To ensure that:
-
-Direction is preserved
-without preserving identity.
-
----
-
-This is not an optimization.
-
-It is a boundary.
-
----
-
-Without it:
-
-Systems execute.
-
-With it:
-
-Systems converge.
+A system can remember the whole conversation and still owe us both answers.
