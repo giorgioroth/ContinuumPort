@@ -365,7 +365,7 @@ governing agreements control licensed use.
 
 ---
 
-[![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](LICENSE) 
+[![CP-Core](https://img.shields.io/badge/CP--Core-Apache%202.0-green)](docs/SPECIFICATION.md) 
 [![Regen Engine](https://img.shields.io/badge/Regen%20Engine-Control%20Layer-critical)](https://github.com/giorgioroth/ContinuumPort/blob/main/3.%20LICENSE_REGEN.md) 
 [![Status](https://img.shields.io/badge/status-research%20artifact-blue)](https://github.com/giorgioroth/ContinuumPort/blob/main/1.%20PROJECT_STATUS.md) 
 
