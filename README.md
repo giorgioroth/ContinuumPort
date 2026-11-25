@@ -1,5 +1,19 @@
 # ContinuumPort
 
+## Corrections to the public documentation
+
+### Chapter 62 — Scope of the D1 comparison
+
+The two nodes had distinct commitment IDs. The D1 test excluded those IDs before comparing `status`, `dependencies`, and `dependents`. Both nodes were active and had no declared dependencies or dependents. The inspected fields matched. A rule using only those fields receives the same input for both nodes. Establishing either node's origin requires evidence linking it to its history.
+
+[Chapter 62, §62.2](AI_Architectural_Thinking.md#622--two-nodes-one-state)
+
+### Historical GS sensitivity results
+
+The maintainer's record dated 17 October 2026 reports one failing assertion in each of 15 mutation runs, with zero test errors. The historical sensitivity figures count reported assertion failures. Crediting a mutation as detected requires evidence that the unmodified test passed, that the mutated path ran, and that the assertion checking the targeted property failed.
+
+[README — Tests](#tests) · [Where Regen Engine Belongs, §4](5.%20WHERE_REGEN_ENGINE_BELONGS.md#4-reported-verification-record)
+
 ## Latest progress — 26 October 2026
 
 - **Two new private chapters:** Chapter 63 — *From Passing Tests to a Reason for Adoption*; Chapter 64 — *What the Test Actually Establishes*.
